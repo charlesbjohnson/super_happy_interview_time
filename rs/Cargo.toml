@@ -1,0 +1,6 @@
+[package]
+name = "super_happy_interview_time"
+version = "0.1.0"
+authors = ["Charles B Johnson <mail@cbjohnson.info>"]
+
+[dependencies]
