@@ -10,5 +10,8 @@ trim_trailing_whitespace = true
 [Makefile]
 indent_style = tab
 
+[{*.rb,Gemfile,Rakefile}]
+indent_size = 2
+
 [*.rs]
 indent_size = 4

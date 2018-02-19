@@ -16,10 +16,16 @@ ifeq ($(shell expr $(words $(MAKECMDGOALS)) \< 2), 1)
 	@echo
 	@echo "Commands:"
 	@echo "  help  Print this help message"
+	@echo "  rb    Run ruby subproject commands"
 	@echo "  rs    Run rust subproject commands"
 else
 	@:
 endif
+
+
+.PHONY: rb
+rb:
+	$(call submake)
 
 
 .PHONY: rs
