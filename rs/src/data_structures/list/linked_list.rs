@@ -1,25 +1,33 @@
-use std::cell::RefCell;
+use std::cell::{Ref, RefCell};
 use std::rc::{Rc, Weak};
 
 struct Node<T> {
     value: T,
-    next: RefCell<Option<Rc<Node<T>>>>,
-    prev: RefCell<Weak<Node<T>>>,
+    next: Option<Rc<RefCell<Node<T>>>>,
+    prev: Weak<RefCell<Node<T>>>,
 }
 
 pub struct LinkedList<T> {
     len: usize,
-    head: Option<Rc<Node<T>>>,
-    tail: Option<Rc<Node<T>>>,
+    head: Option<Rc<RefCell<Node<T>>>>,
+    tail: Option<Rc<RefCell<Node<T>>>>,
+}
+
+pub struct IntoIter<T>(LinkedList<T>);
+
+impl<T> Node<T> {
+    pub fn new(value: T) -> Rc<RefCell<Self>> {
+        Rc::new(RefCell::new(Self {
+            value,
+            next: None,
+            prev: Weak::new(),
+        }))
+    }
 }
 
 impl<T> LinkedList<T> {
     pub fn new() -> Self {
-        Self {
-            len: 0,
-            head: None,
-            tail: None,
-        }
+        Default::default()
     }
 
     pub fn len(&self) -> usize {
@@ -30,90 +38,38 @@ impl<T> LinkedList<T> {
         self.len == 0
     }
 
-    pub fn push_back(&mut self, value: T) {
-        match self.head {
-            None => self.push_front(value),
-            Some(ref node) => {
-                let old = self.tail.take();
-                let old = match old.as_ref() {
-                    Some(node) => node,
-                    None => node,
-                };
-
-                let new = Rc::new(Node {
-                    value,
-                    next: RefCell::new(None),
-                    prev: RefCell::new(Rc::downgrade(old)),
-                });
-
-                *old.next.borrow_mut() = Some(Rc::clone(&new));
-
-                self.tail = Some(new);
-                self.len += 1;
-            }
-        }
-    }
-
-    pub fn pop_back(&mut self) -> Option<T> {
-        match self.tail.take() {
-            None => self.pop_front(),
-            Some(node) => {
-                match node.prev.borrow().upgrade() {
-                    None => self.head = None,
-                    Some(node) => {
-                        node.next.replace(None);
-                        self.tail = Some(node);
-                    }
-                };
-
-                self.len -= 1;
-                match Rc::try_unwrap(node) {
-                    Ok(node) => Some(node.value),
-                    _ => panic!(),
-                }
-            }
-        }
-    }
-
     pub fn push_front(&mut self, value: T) {
-        let old = self.head.take();
-        let new = Rc::new(Node {
-            value,
-            next: RefCell::new(old.as_ref().cloned()),
-            prev: RefCell::new(Weak::new()),
-        });
+        let new = Node::new(value);
 
-        if let Some(ref node) = old {
-            *node.prev.borrow_mut() = Rc::downgrade(&new);
+        match self.head.take() {
+            Some(old) => {
+                old.borrow_mut().prev = Rc::downgrade(&new);
+                new.borrow_mut().next = Some(old);
+            }
+            None => {
+                self.tail = Some(new.clone());
+            }
         }
 
         self.head = Some(new);
-        if self.tail.is_none() {
-            self.tail = old;
-        }
-
         self.len += 1;
     }
 
-    pub fn pop_front(&mut self) -> Option<T> {
-        if self.len == 1 {
-            self.tail = None;
-        }
+    pub fn push_back(&mut self, value: T) {
+        let new = Node::new(value);
 
-        match self.head.take() {
-            None => None,
-            Some(node) => {
-                if let Some(node) = node.next.replace(None) {
-                    self.head = Some(node);
-                }
-
-                self.len -= 1;
-                match Rc::try_unwrap(node) {
-                    Ok(node) => Some(node.value),
-                    _ => panic!(),
-                }
+        match self.tail.take() {
+            Some(old) => {
+                new.borrow_mut().prev = Rc::downgrade(&old);
+                old.borrow_mut().next = Some(new.clone());
+            }
+            None => {
+                self.head = Some(new.clone());
             }
         }
+
+        self.tail = Some(new);
+        self.len += 1;
     }
 
     pub fn insert(&mut self, index: usize, value: T) {
@@ -127,24 +83,53 @@ impl<T> LinkedList<T> {
             return self.push_back(value);
         }
 
-        let new = Rc::new(Node {
-            value,
-            next: RefCell::new(None),
-            prev: RefCell::new(Weak::new()),
-        });
-
+        let new = Node::new(value);
         let prev = self.get(index - 1);
+
         {
-            let next = prev.next.borrow();
-            let next = next.as_ref().cloned().unwrap();
-            *next.prev.borrow_mut() = Rc::downgrade(&new);
-            *new.next.borrow_mut() = Some(next);
+            let next = prev.borrow().next.as_ref().cloned().unwrap();
+            next.borrow_mut().prev = Rc::downgrade(&new);
+            new.borrow_mut().next = Some(next);
         }
 
-        *prev.next.borrow_mut() = Some(Rc::clone(&new));
-        *new.prev.borrow_mut() = Rc::downgrade(&prev);
+        new.borrow_mut().prev = Rc::downgrade(&prev);
+        prev.borrow_mut().next = Some(new);
 
         self.len += 1;
+    }
+
+    pub fn pop_front(&mut self) -> Option<T> {
+        self.head.take().map(|old| {
+            match old.borrow_mut().next.take() {
+                Some(new) => {
+                    new.borrow_mut().prev = Weak::new();
+                    self.head = Some(new);
+                }
+                None => {
+                    self.tail.take();
+                }
+            }
+
+            self.len -= 1;
+            Rc::try_unwrap(old).ok().unwrap().into_inner().value
+        })
+    }
+
+    pub fn pop_back(&mut self) -> Option<T> {
+        self.tail.take().map(|old| {
+            match old.borrow_mut().prev.upgrade() {
+                Some(new) => {
+                    new.borrow_mut().next.take();
+                    self.tail = Some(new);
+                }
+                None => {
+                    self.head.take();
+                }
+            }
+
+            self.len -= 1;
+            Rc::try_unwrap(old).ok().unwrap().into_inner().value
+        })
     }
 
     pub fn remove(&mut self, index: usize) -> T {
@@ -159,31 +144,34 @@ impl<T> LinkedList<T> {
         }
 
         let doomed = self.get(index);
-        let prev = doomed.prev.replace(Weak::new()).upgrade().unwrap();
-        let next = doomed.next.replace(None).unwrap();
+        {
+            let mut doomed = doomed.borrow_mut();
+            let prev = doomed.prev.upgrade().unwrap();
+            let next = doomed.next.take().unwrap();
 
-        *next.prev.borrow_mut() = Rc::downgrade(&prev);
-        *prev.next.borrow_mut() = Some(next);
+            next.borrow_mut().prev = Rc::downgrade(&prev);
+            prev.borrow_mut().next = Some(next);
+        }
+
+        doomed.borrow_mut().next.take();
 
         self.len -= 1;
-        match Rc::try_unwrap(doomed) {
-            Ok(node) => node.value,
-            _ => panic!(),
-        }
+        Rc::try_unwrap(doomed).ok().unwrap().into_inner().value
     }
 
-    pub fn front(&self) -> Option<&T> {
-        self.head.as_ref().map(|node| &node.value)
+    pub fn front(&self) -> Option<Ref<T>> {
+        self.head
+            .as_ref()
+            .map(|cell| Ref::map(cell.borrow(), |node| &node.value))
     }
 
-    pub fn back(&self) -> Option<&T> {
-        match self.tail {
-            None => self.front(),
-            Some(ref node) => Some(&node.value),
-        }
+    pub fn back(&self) -> Option<Ref<T>> {
+        self.tail
+            .as_ref()
+            .map(|cell| Ref::map(cell.borrow(), |node| &node.value))
     }
 
-    fn get(&self, index: usize) -> Rc<Node<T>> {
+    fn get(&self, index: usize) -> Rc<RefCell<Node<T>>> {
         assert!(
             index < self.len,
             "index out of bounds: the len is {} but the index is {}",
@@ -196,18 +184,51 @@ impl<T> LinkedList<T> {
 
         while i < index {
             i += 1;
-            current.take().map(|node| {
-                current = node.next.borrow().as_ref().cloned();
-            });
+            current
+                .take()
+                .map(|node| current = node.borrow().next.as_ref().cloned());
         }
 
         current.unwrap()
     }
 }
 
+impl<T> Default for LinkedList<T> {
+    fn default() -> Self {
+        Self {
+            len: 0,
+            head: None,
+            tail: None,
+        }
+    }
+}
+
 impl<T> Drop for LinkedList<T> {
     fn drop(&mut self) {
         while self.pop_front().is_some() {}
+    }
+}
+
+impl<T> IntoIterator for LinkedList<T> {
+    type Item = T;
+    type IntoIter = IntoIter<T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        IntoIter(self)
+    }
+}
+
+impl<T> Iterator for IntoIter<T> {
+    type Item = T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.pop_front()
+    }
+}
+
+impl<T> DoubleEndedIterator for IntoIter<T> {
+    fn next_back(&mut self) -> Option<Self::Item> {
+        self.0.pop_back()
     }
 }
 
@@ -223,17 +244,6 @@ mod test {
     }
 
     #[test]
-    fn push_back_non_empty() {
-        let mut list = LinkedList::new();
-        for v in 0..3 {
-            list.push_back(v);
-        }
-
-        assert_eq!(list.len(), 3);
-        assert_eq!(list.is_empty(), false);
-    }
-
-    #[test]
     fn push_front_non_empty() {
         let mut list = LinkedList::new();
         for v in 0..3 {
@@ -245,31 +255,39 @@ mod test {
     }
 
     #[test]
-    fn push_back_pop_back() {
+    fn push_back_non_empty() {
         let mut list = LinkedList::new();
-        assert_eq!(list.pop_back(), None);
-        assert_eq!(list.len(), 0);
+        for v in 0..3 {
+            list.push_back(v);
+        }
 
-        list.push_back(0);
-        list.push_back(1);
-
-        assert_eq!(list.pop_back(), Some(1));
-        assert_eq!(list.pop_back(), Some(0));
-        assert_eq!(list.pop_back(), None);
+        assert_eq!(list.len(), 3);
+        assert_eq!(list.is_empty(), false);
     }
 
     #[test]
-    fn push_back_pop_front() {
+    fn into_iter() {
         let mut list = LinkedList::new();
-        assert_eq!(list.pop_front(), None);
-        assert_eq!(list.len(), 0);
+        assert_eq!(list.into_iter().next(), None);
 
-        list.push_back(0);
-        list.push_back(1);
+        list = LinkedList::new();
+        for v in 0..3 {
+            list.push_front(v);
+            list.push_back(v);
+        }
 
-        assert_eq!(list.pop_front(), Some(0));
-        assert_eq!(list.pop_front(), Some(1));
-        assert_eq!(list.pop_front(), None);
+        let mut iter = list.into_iter();
+        assert_eq!(iter.next(), Some(2));
+        assert_eq!(iter.next_back(), Some(2));
+
+        assert_eq!(iter.next(), Some(1));
+        assert_eq!(iter.next_back(), Some(1));
+
+        assert_eq!(iter.next(), Some(0));
+        assert_eq!(iter.next_back(), Some(0));
+
+        assert_eq!(iter.next(), None);
+        assert_eq!(iter.next_back(), None);
     }
 
     #[test]
@@ -301,33 +319,61 @@ mod test {
     }
 
     #[test]
+    fn push_back_pop_back() {
+        let mut list = LinkedList::new();
+        assert_eq!(list.pop_back(), None);
+        assert_eq!(list.len(), 0);
+
+        list.push_back(0);
+        list.push_back(1);
+
+        assert_eq!(list.pop_back(), Some(1));
+        assert_eq!(list.pop_back(), Some(0));
+        assert_eq!(list.pop_back(), None);
+    }
+
+    #[test]
+    fn push_back_pop_front() {
+        let mut list = LinkedList::new();
+        assert_eq!(list.pop_front(), None);
+        assert_eq!(list.len(), 0);
+
+        list.push_back(0);
+        list.push_back(1);
+
+        assert_eq!(list.pop_front(), Some(0));
+        assert_eq!(list.pop_front(), Some(1));
+        assert_eq!(list.pop_front(), None);
+    }
+
+    #[test]
     fn front_back() {
         let mut list = LinkedList::new();
-        assert_eq!(list.front(), None);
-        assert_eq!(list.back(), None);
+        assert!(list.front().is_none());
+        assert!(list.back().is_none());
 
         list.push_front(0);
         list.push_back(1);
-        assert_eq!(list.front(), Some(&0));
-        assert_eq!(list.back(), Some(&1));
+        assert_eq!(*list.front().unwrap(), 0);
+        assert_eq!(*list.back().unwrap(), 1);
 
         list.push_front(2);
         list.push_back(3);
-        assert_eq!(list.front(), Some(&2));
-        assert_eq!(list.back(), Some(&3));
+        assert_eq!(*list.front().unwrap(), 2);
+        assert_eq!(*list.back().unwrap(), 3);
 
         list.pop_front();
         list.pop_back();
-        assert_eq!(list.front(), Some(&0));
-        assert_eq!(list.back(), Some(&1));
+        assert_eq!(*list.front().unwrap(), 0);
+        assert_eq!(*list.back().unwrap(), 1);
 
         list.pop_back();
-        assert_eq!(list.front(), Some(&0));
-        assert_eq!(list.back(), Some(&0));
+        assert_eq!(*list.front().unwrap(), 0);
+        assert_eq!(*list.back().unwrap(), 0);
 
         list.pop_back();
-        assert_eq!(list.front(), None);
-        assert_eq!(list.back(), None);
+        assert!(list.front().is_none());
+        assert!(list.back().is_none());
     }
 
     #[test]
@@ -372,14 +418,14 @@ mod test {
         list.insert(1, 1);
         assert_eq!(list.remove(1), 1);
         assert_eq!(list.len(), 1);
-        assert_eq!(list.front(), Some(&0));
+        assert_eq!(*list.front().unwrap(), 0);
 
         list.insert(1, 1);
         list.insert(2, 2);
         assert_eq!(list.remove(1), 1);
         assert_eq!(list.len(), 2);
-        assert_eq!(list.front(), Some(&0));
-        assert_eq!(list.back(), Some(&2));
+        assert_eq!(*list.front().unwrap(), 0);
+        assert_eq!(*list.back().unwrap(), 2);
 
         assert_eq!(list.remove(0), 0);
         assert_eq!(list.remove(0), 2);
