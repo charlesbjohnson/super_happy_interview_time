@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+# require 'algorithms'
+# require 'ctci'
+# require 'data_structures'
+# require 'epi'
+
 require 'byebug'
 
 require 'minitest/autorun'
