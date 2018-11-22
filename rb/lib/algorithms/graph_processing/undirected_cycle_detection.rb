@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Algorithms
   module GraphProcessing
     class UndirectedCycleDetection
@@ -5,6 +7,8 @@ module Algorithms
 
       def initialize(graph)
         @graph = graph
+        @cycle = nil
+
         execute
       end
 
@@ -32,6 +36,7 @@ module Algorithms
         @marked[from] = true
         @graph.adjacent(from).each do |to|
           return path.push(to) if cycled?(to, came_from)
+
           unless @marked[to]
             result = r_execute(to, from, path.clone.push(to))
             return result unless result.nil?

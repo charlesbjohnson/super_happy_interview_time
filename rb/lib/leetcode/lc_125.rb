@@ -22,6 +22,7 @@ module LeetCode
     # @return {Boolean}
     def palindrome?(s)
       return true if s.length < 2
+
       s = s.downcase.gsub(/[^0-9a-z]/, '')
       s == s.reverse
     end

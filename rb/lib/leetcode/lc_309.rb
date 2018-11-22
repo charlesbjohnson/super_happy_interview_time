@@ -43,6 +43,7 @@ module LeetCode
     # @return {Integer}
     def max_profit(prices)
       return 0 if prices.empty?
+
       max_profit_recurse(prices, 0, nil, buy: {}, sell: {})
     end
   end

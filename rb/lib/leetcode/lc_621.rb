@@ -39,9 +39,7 @@ module LeetCode
         while cooldown <= n
           break if tasks[tasks.length - 1].zero?
 
-          if cooldown < tasks.length && tasks[(tasks.length - 1) - cooldown].positive?
-            tasks[(tasks.length - 1) - cooldown] -= 1
-          end
+          tasks[(tasks.length - 1) - cooldown] -= 1 if cooldown < tasks.length && tasks[(tasks.length - 1) - cooldown].positive?
 
           intervals += 1
           cooldown += 1

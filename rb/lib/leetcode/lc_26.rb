@@ -34,6 +34,7 @@ module LeetCode
         end
 
         break if finder >= list.length
+
         unless list[finder]
           finder += 1
           next

@@ -33,6 +33,7 @@ module LeetCode
         cursor_odds.next = cursor_evens.next
 
         break unless cursor_odds.next
+
         cursor_odds = cursor_odds.next
 
         cursor_evens.next = cursor_odds.next

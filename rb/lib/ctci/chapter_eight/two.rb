@@ -1,136 +1,143 @@
+# frozen_string_literal: true
+
 require 'observer'
 
-module CTCI::ChapterEight
-  module Two
-    # Imagine you have a call center with three levels of employees:
-    # respondent, manager, and director. An incoming telephone call must
-    # be first allocated to a respondent who is free. If the respondent can't
-    # handle the call, he or she must escalate the call to a manager. If the
-    # manager is not free or not able to handle it, then the call should be
-    # escalated to a director. Design the calles and data structures for
-    # this problem. Implement a method dispatchCall() which assigns a call
-    # to the first available employee.
-    class CallCenter
-      def initialize
-        @staff = Hash[StaffMember.roles.map do |r|
-          [r, { available: [], unavailable: [] }]
-        end]
-        @wait_list = []
-      end
+module CTCI
+  module ChapterEight
+    module Two
+      # Imagine you have a call center with three levels of employees:
+      # respondent, manager, and director. An incoming telephone call must
+      # be first allocated to a respondent who is free. If the respondent can't
+      # handle the call, he or she must escalate the call to a manager. If the
+      # manager is not free or not able to handle it, then the call should be
+      # escalated to a director. Design the calles and data structures for
+      # this problem. Implement a method dispatchCall() which assigns a call
+      # to the first available employee.
+      class CallCenter
+        def initialize
+          @staff = Hash[StaffMember.roles.map do |r|
+            [r, { available: [], unavailable: [] }]
+          end]
+          @wait_list = []
+        end
 
-      def dispatch_call(call)
-        support_role_required = StaffMember.roles[call.level]
-        assigned_staff = find_staff_members_for(support_role_required)
+        def dispatch_call(call)
+          support_role_required = StaffMember.roles[call.level]
+          assigned_staff = find_staff_members_for(support_role_required)
 
-        if assigned_staff.nil?
+          if assigned_staff.nil?
+            @wait_list.push(call)
+          else
+            assigned_staff.assign_call(call)
+            mark_unavailable(assigned_staff)
+          end
+        end
+
+        def add_staff(member)
+          @staff[member.support_role][:available].push(member)
+          member.add_observer(self)
+
+          member
+        end
+
+        def update(member, call)
+          mark_available(member)
           @wait_list.push(call)
-        else
-          assigned_staff.assign_call(call)
-          mark_unavailable(assigned_staff)
+          dispatch_call(@wait_list.shift) unless @wait_list.empty?
+        end
+
+        private
+
+        def find_staff_members_for(support_role)
+          @staff[support_role][:available].first
+        end
+
+        def mark_unavailable(staff_member)
+          available = @staff[staff_member.support_role][:available]
+          unavailable = @staff[staff_member.support_role][:unavailable]
+
+          available.delete(staff_member)
+          unavailable.push(staff_member)
+        end
+
+        def mark_available(staff_member)
+          available = @staff[staff_member.support_role][:available]
+          unavailable = @staff[staff_member.support_role][:unavailable]
+
+          unavailable.delete(staff_member)
+          available.push(staff_member)
         end
       end
 
-      def add_staff(member)
-        @staff[member.support_role][:available].push(member)
-        member.add_observer(self)
+      class Call
+        attr_reader :respondent, :level
 
-        member
-      end
+        def initialize
+          @level = 0
+          @respondent = nil
 
-      def update(member, call)
-        mark_available(member)
-        @wait_list.push(call)
-        dispatch_call(@wait_list.shift) unless @wait_list.empty?
-      end
+          yield self if block_given?
+        end
 
-      private
+        def connected?
+          !@respondent.nil?
+        end
 
-      def find_staff_members_for(support_role)
-        @staff[support_role][:available].first
-      end
+        def connect(respondent)
+          @respondent = respondent
+        end
 
-      def mark_unavailable(staff_member)
-        available = @staff[staff_member.support_role][:available]
-        unavailable = @staff[staff_member.support_role][:unavailable]
+        def disconnect
+          @respondent = nil
+        end
 
-        available.delete(staff_member)
-        unavailable.push(staff_member)
-      end
-
-      def mark_available(staff_member)
-        available = @staff[staff_member.support_role][:available]
-        unavailable = @staff[staff_member.support_role][:unavailable]
-
-        unavailable.delete(staff_member)
-        available.push(staff_member)
-      end
-    end
-
-    class Call
-      attr_reader :respondent, :level
-
-      def initialize
-        @level = 0
-        yield self if block_given?
-      end
-
-      def connected?
-        !@respondent.nil?
-      end
-
-      def connect(respondent)
-        @respondent = respondent
-      end
-
-      def disconnect
-        @respondent = nil
-      end
-
-      def escalate_issue
-        @level += 1 if @level < 2
-      end
-    end
-
-    class StaffMember
-      include Observable
-
-      attr_reader :support_role, :current_call
-
-      @roles = %i[respondent manager director].freeze
-      @roles.each do |r|
-        self.class.define_method r do
-          new(r)
+        def escalate_issue
+          @level += 1 if @level < 2
         end
       end
 
-      class << self
-        attr_reader :roles
-        private :new
-      end
+      class StaffMember
+        include Observable
 
-      def initialize(role)
-        @support_role = role
-      end
+        attr_reader :support_role, :current_call
 
-      def assign_call(call)
-        @current_call = call
-        @current_call.connect(self)
-      end
+        @roles = %i[respondent manager director].freeze
+        @roles.each do |r|
+          self.class.define_method r do
+            new(r)
+          end
+        end
 
-      def reassign_call
-        @current_call.escalate_issue
-        @current_call.disconnect
+        class << self
+          attr_reader :roles
+        end
 
-        call = @current_call
-        @current_call = nil
-        notify(self, call)
-      end
+        private_class_method :new
 
-      private
+        def initialize(role)
+          @support_role = role
+        end
 
-      def notify(member, call)
-        changed
-        notify_observers(member, call)
+        def assign_call(call)
+          @current_call = call
+          @current_call.connect(self)
+        end
+
+        def reassign_call
+          @current_call.escalate_issue
+          @current_call.disconnect
+
+          call = @current_call
+          @current_call = nil
+          notify(self, call)
+        end
+
+        private
+
+        def notify(member, call)
+          changed
+          notify_observers(member, call)
+        end
       end
     end
   end

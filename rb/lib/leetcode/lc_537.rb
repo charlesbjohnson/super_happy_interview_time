@@ -12,9 +12,7 @@ module LeetCode
         imaginary = (left.real * right.imaginary) + (left.imaginary * right.real)
 
         real = left.real * right.real
-        if !left.imaginary.zero? && !right.imaginary.zero?
-          real += (left.imaginary * right.imaginary) * -1
-        end
+        real += (left.imaginary * right.imaginary) * -1 if !left.imaginary.zero? && !right.imaginary.zero?
 
         ComplexNumber.new(real, imaginary)
       end

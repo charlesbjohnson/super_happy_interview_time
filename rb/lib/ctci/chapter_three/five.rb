@@ -1,36 +1,41 @@
-module CTCI::ChapterThree
-  class Five
-    # Implement a MyQueue class which implements a queue using two stacks.
-    def initialize
-      @enqueue = DataStructures::Stack.new
-      @dequeue = DataStructures::Stack.new
-    end
+# frozen_string_literal: true
 
-    def size
-      @enqueue.size + @dequeue.size
-    end
+module CTCI
+  module ChapterThree
+    class Five
+      # Implement a MyQueue class which implements a queue using two stacks.
+      def initialize
+        @enqueue = DataStructures::Stack.new
+        @dequeue = DataStructures::Stack.new
+      end
 
-    def peek
-      dump_enqueue
+      def size
+        @enqueue.size + @dequeue.size
+      end
 
-      @dequeue.peek
-    end
+      def peek
+        dump_enqueue
 
-    def enqueue(data)
-      @enqueue.push(data)
-    end
+        @dequeue.peek
+      end
 
-    def dequeue
-      dump_enqueue
+      def enqueue(data)
+        @enqueue.push(data)
+      end
 
-      @dequeue.pop
-    end
+      def dequeue
+        dump_enqueue
 
-    private
+        @dequeue.pop
+      end
 
-    def dump_enqueue
-      return unless @dequeue.size.zero?
-      @dequeue.push(@enqueue.pop) until @enqueue.empty?
+      private
+
+      def dump_enqueue
+        return unless @dequeue.size.zero?
+
+        @dequeue.push(@enqueue.pop) until @enqueue.empty?
+      end
     end
   end
 end

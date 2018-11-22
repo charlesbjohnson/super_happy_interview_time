@@ -11,6 +11,7 @@ module LeetCode
       return false unless valid_bst_recurse(node.left, items)
 
       return false if items.last && node.val <= items.last
+
       items.push(node.val)
 
       return false unless valid_bst_recurse(node.right, items)

@@ -31,6 +31,7 @@ module LeetCode
           next unless (col.zero? && zero_first_col) ||
                       (row.zero? && zero_first_row) ||
                       (matrix[row][0].zero? || matrix[0][col].zero?)
+
           matrix[row][col] = 0
         end
       end

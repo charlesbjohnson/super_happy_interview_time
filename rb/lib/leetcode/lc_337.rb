@@ -28,6 +28,7 @@ module LeetCode
       end
 
       return cache.val.first if robbed_parent
+
       cache.val.max
     end
 

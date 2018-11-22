@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require 'forwardable'
+
 require_relative 'stack'
 require_relative 'single_node'
 

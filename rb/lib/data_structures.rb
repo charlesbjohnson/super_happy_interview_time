@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'data_structures/single_node'
 require_relative 'data_structures/binary_tree'
 

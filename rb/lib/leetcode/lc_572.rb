@@ -12,6 +12,7 @@ module LeetCode
       return false if matching && left.val != right.val
 
       return true if left.val == right.val && subtree_recurse(left.left, right.left, true) && subtree_recurse(left.right, right.right, true)
+
       subtree_recurse(left.left, right, false) || subtree_recurse(left.right, right, false)
     end
 

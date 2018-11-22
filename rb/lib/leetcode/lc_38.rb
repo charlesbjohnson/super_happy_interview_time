@@ -12,9 +12,7 @@ module LeetCode
       while i < chars.length
         cursor = i + 1
 
-        while cursor < chars.length && chars[cursor] == chars[cursor - 1]
-          cursor += 1
-        end
+        cursor += 1 while cursor < chars.length && chars[cursor] == chars[cursor - 1]
 
         result.push((cursor - i).to_s, chars[i])
         i = cursor

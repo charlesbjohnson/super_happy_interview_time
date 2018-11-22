@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DataStructures
   class SingleNode
     attr_accessor :data, :next

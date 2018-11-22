@@ -36,6 +36,7 @@ module LeetCode
     # @return {TreeNode}
     def convert_bst(tree)
       return unless tree
+
       convert_bst_recurse(tree, 0)
       tree
     end

@@ -42,6 +42,7 @@ module LeetCode
       end
 
       return -1 if uniq.empty?
+
       uniq.min
     end
   end

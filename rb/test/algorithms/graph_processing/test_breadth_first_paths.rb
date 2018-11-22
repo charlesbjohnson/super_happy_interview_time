@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'config'
 
 describe Algorithms::GraphProcessing::BreadthFirstPaths do

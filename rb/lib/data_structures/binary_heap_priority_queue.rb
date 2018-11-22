@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DataStructures
   class BinaryHeapPriorityQueue
     include Enumerable

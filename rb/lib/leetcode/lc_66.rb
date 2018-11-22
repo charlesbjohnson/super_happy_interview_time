@@ -13,9 +13,7 @@ module LeetCode
     def plus_one(digits)
       offset = 1
 
-      while offset <= digits.length && digits[digits.length - offset] == 9
-        offset += 1
-      end
+      offset += 1 while offset <= digits.length && digits[digits.length - offset] == 9
 
       if offset > digits.length
         digits.unshift(1)

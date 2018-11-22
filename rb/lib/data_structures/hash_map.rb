@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'linked_list'
 
 module DataStructures
@@ -14,7 +16,7 @@ module DataStructures
     def each(&block)
       enum = Enumerator.new do |y|
         @table.each do |c|
-          c.each { |i| y << i } unless c.nil?
+          c&.each { |i| y << i }
         end
       end
 
@@ -26,7 +28,7 @@ module DataStructures
       return nil if chain.nil?
 
       found = chain.find { |i| i.first == key }
-      found.last unless found.nil?
+      found&.last
     end
 
     def put(key, value)

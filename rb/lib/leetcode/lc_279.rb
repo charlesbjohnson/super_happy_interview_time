@@ -9,6 +9,7 @@ module LeetCode
       (1..n).each.with_object([]) do |v, squares|
         square = v * v
         return squares if square > n
+
         squares.push(square)
       end
     end
@@ -43,6 +44,7 @@ module LeetCode
           squares.each do |square|
             return result if square == v
             break if square > v
+
             tmp.add(v - square)
           end
         end

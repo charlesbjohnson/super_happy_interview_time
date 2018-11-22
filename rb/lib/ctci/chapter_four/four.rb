@@ -1,26 +1,30 @@
-module CTCI::ChapterFour
-  module Four
-    # Given a binary tree, design an algorithm which creates a linked list
-    # of all the nodes at each depth (e.g., if you have a tree with depth D,
-    # you'll have D linked lists).
-    def depth_lists
-      result = []
-      return result if @root.nil?
+# frozen_string_literal: true
 
-      r_depth_lists(@root, 0, result)
-      result
-    end
+module CTCI
+  module ChapterFour
+    module Four
+      # Given a binary tree, design an algorithm which creates a linked list
+      # of all the nodes at each depth (e.g., if you have a tree with depth D,
+      # you'll have D linked lists).
+      def depth_lists
+        result = []
+        return result if @root.nil?
 
-    private
+        r_depth_lists(@root, 0, result)
+        result
+      end
 
-    def r_depth_lists(cursor, depth, result)
-      return if cursor.nil?
+      private
 
-      depth_list = result[depth] ||= []
-      depth_list.push([cursor.key, cursor.value])
+      def r_depth_lists(cursor, depth, result)
+        return if cursor.nil?
 
-      r_depth_lists(cursor.left, depth + 1, result)
-      r_depth_lists(cursor.right, depth + 1, result)
+        depth_list = result[depth] ||= []
+        depth_list.push([cursor.key, cursor.value])
+
+        r_depth_lists(cursor.left, depth + 1, result)
+        r_depth_lists(cursor.right, depth + 1, result)
+      end
     end
   end
 end

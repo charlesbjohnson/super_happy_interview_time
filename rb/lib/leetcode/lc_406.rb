@@ -24,6 +24,7 @@ module LeetCode
       people.sort! do |(left_h, left_k), (right_h, right_k)|
         next 1 if left_h < right_h
         next -1 if left_h > right_h
+
         left_k <=> right_k
       end
 

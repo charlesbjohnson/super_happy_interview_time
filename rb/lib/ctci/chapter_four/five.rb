@@ -1,19 +1,23 @@
-module CTCI::ChapterFour
-  module Five
-    # Implement a function to check if a binary tree is a binary
-    # search tree.
-    def binary_search_tree?(root)
-      r_binary_search_tree?(root, OpenStruct.new(key: nil))
-    end
+# frozen_string_literal: true
 
-    def r_binary_search_tree?(cursor, last)
-      return true if cursor.nil?
-      return false unless r_binary_search_tree?(cursor.left, last)
-      return false if !last.key.nil? && cursor.key < last.key
+module CTCI
+  module ChapterFour
+    module Five
+      # Implement a function to check if a binary tree is a binary
+      # search tree.
+      def binary_search_tree?(root)
+        r_binary_search_tree?(root, OpenStruct.new(key: nil))
+      end
 
-      last.key = cursor.key
+      def r_binary_search_tree?(cursor, last)
+        return true if cursor.nil?
+        return false unless r_binary_search_tree?(cursor.left, last)
+        return false if !last.key.nil? && cursor.key < last.key
 
-      r_binary_search_tree?(cursor.right, last)
+        last.key = cursor.key
+
+        r_binary_search_tree?(cursor.right, last)
+      end
     end
   end
 end

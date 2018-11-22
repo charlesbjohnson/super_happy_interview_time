@@ -51,6 +51,7 @@ module LeetCode
       result = Set.new
 
       return result if candidates.empty? || target.negative?
+
       result.add([target]) if candidates.any? { |v| v == target }
 
       candidates = candidates.sort.reject { |v| v >= target }

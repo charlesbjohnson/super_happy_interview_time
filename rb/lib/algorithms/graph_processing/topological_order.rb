@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Algorithms
   module GraphProcessing
     class TopologicalOrder
@@ -11,6 +13,7 @@ module Algorithms
 
       def order
         return unless acyclic?
+
         @order ||= Algorithms::GraphProcessing::DepthFirstOrder.new(@graph).post.reverse
       end
     end

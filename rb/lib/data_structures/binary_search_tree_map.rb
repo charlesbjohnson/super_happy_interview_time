@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DataStructures
   class BinarySearchTreeMap
     include Enumerable
@@ -63,11 +65,13 @@ module DataStructures
 
     def delete_min
       return if @root.nil?
+
       @root = r_delete_min(@root)
     end
 
     def delete_max
       return if @root.nil?
+
       @root = r_delete_max(@root)
     end
 
@@ -79,6 +83,7 @@ module DataStructures
 
     def r_size(cursor)
       return 0 if cursor.nil?
+
       cursor.count
     end
 
@@ -123,11 +128,13 @@ module DataStructures
 
     def r_min(cursor)
       return cursor if cursor.left.nil?
+
       r_min(cursor.left)
     end
 
     def r_max(cursor)
       return cursor if cursor.right.nil?
+
       r_max(cursor.right)
     end
 

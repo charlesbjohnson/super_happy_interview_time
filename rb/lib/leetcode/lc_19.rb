@@ -53,6 +53,7 @@ module LeetCode
     # @return {ListNode}
     def remove_nth_from_end(list, nth)
       return if nth == 1 && !list.next
+
       remove_nth_from_end_recurse(list, 0, nth)
       list
     end

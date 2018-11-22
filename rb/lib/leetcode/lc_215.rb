@@ -18,6 +18,7 @@ module LeetCode
     # @return {Integer}
     def find_kth_largest(list, k)
       return if k > list.length
+
       list.sort.reverse[k - 1]
     end
   end

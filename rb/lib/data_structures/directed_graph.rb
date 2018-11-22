@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DataStructures
   class DirectedGraph
     def initialize
@@ -15,7 +17,7 @@ module DataStructures
 
     def add_edge(from, to)
       return false unless [from, to].all? { |i| i.is_a?(Numeric) }
-      return false if [from, to].any? { |i| i < 0 }
+      return false if [from, to].any?(&:negative?)
 
       from_vertex = @table[from] ||= []
       from_vertex.push(to)
@@ -26,6 +28,7 @@ module DataStructures
 
     def adjacent(target)
       return unless target.is_a?(Numeric) && target >= 0
+
       @table[target].to_a.clone
     end
 

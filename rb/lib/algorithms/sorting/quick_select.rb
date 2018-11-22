@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module Algorithms
   module Sorting
     module QuickSelect
       def select(i, a)
         return if a.empty? || !(0...a.size).cover?(i)
+
         result = r_select(i, a, 0, a.size.pred)
         result && a[result]
       end

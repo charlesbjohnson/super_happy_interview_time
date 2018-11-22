@@ -32,6 +32,7 @@ module LeetCode
 
         groups.each do |n|
           return result if k.zero?
+
           result.push(n)
           k -= 1
         end

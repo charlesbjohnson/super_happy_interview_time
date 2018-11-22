@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'single_node'
 
 module DataStructures
@@ -20,7 +22,7 @@ module DataStructures
     def [](index)
       cursor = @head.next
       index.times { cursor = cursor.next }
-      cursor.data if cursor
+      cursor&.data
     end
 
     def each(&block)

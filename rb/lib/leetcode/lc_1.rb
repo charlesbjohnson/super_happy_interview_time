@@ -28,6 +28,7 @@ module LeetCode
         sum = list[left].first + list[right].first
 
         return [list[left].last, list[right].last] if sum == target
+
         if sum < target
           left += 1
         else

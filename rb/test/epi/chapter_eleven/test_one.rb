@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
 require 'config'
 
-module EPI::ChapterEleven
-  class TestOne < Minitest::Test
-    # Nothing to test
+module EPI
+  module ChapterEleven
+    class TestOne < Minitest::Test
+      # Nothing to test
+    end
   end
 end

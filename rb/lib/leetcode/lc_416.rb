@@ -10,11 +10,13 @@ module LeetCode
       key_no = [i, sum, :no]
       return cache[key_no] if cache.key?(key_no)
       return true if partition_recurse(list, target, i + 1, sum, cache)
+
       cache[key_no] = false
 
       key_yes = [i, sum, :yes]
       return cache[key_yes] if cache.key?(key_yes)
       return true if partition_recurse(list, target, i + 1, sum + list[i], cache)
+
       cache[key_yes] = false
 
       false
@@ -43,6 +45,7 @@ module LeetCode
     def partition?(list)
       quotient, remainder = list.sum.divmod(2)
       return false if remainder.positive?
+
       partition_recurse(list.sort, quotient, 0, 0, {})
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DataStructures
   class Graph
     def initialize
@@ -14,7 +16,7 @@ module DataStructures
 
     def get(index)
       node = @table[index]
-      node && node.data
+      node&.data
     end
 
     def adjacent(index)

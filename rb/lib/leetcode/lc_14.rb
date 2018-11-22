@@ -6,9 +6,7 @@ module LeetCode
     def common_prefix(left, right)
       cursor = 0
 
-      while cursor < left.length && cursor < right.length && left[cursor] == right[cursor]
-        cursor += 1
-      end
+      cursor += 1 while cursor < left.length && cursor < right.length && left[cursor] == right[cursor]
 
       left[0...cursor]
     end
@@ -21,6 +19,7 @@ module LeetCode
     def longest_common_prefix(list)
       return '' if list.empty?
       return list.first if list.length < 2
+
       (1...list.length).reduce(list[0]) { |prefix, i| common_prefix(prefix, list[i]) }
     end
   end

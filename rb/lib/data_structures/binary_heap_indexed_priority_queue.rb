@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DataStructures
   class BinaryHeapIndexedPriorityQueue
     include Enumerable
@@ -22,7 +24,7 @@ module DataStructures
     end
 
     def insert(index, element)
-      return if index < 0 || include_index?(index)
+      return if index.negative? || include_index?(index)
 
       @heap.push(index)
       @elements[index] = element
@@ -45,11 +47,13 @@ module DataStructures
 
     def element_at(index)
       return unless include_index?(index)
+
       @elements[index]
     end
 
     def change_element_at(index, element)
       return unless include_index?(index)
+
       @elements[index] = element
       inverse_index = @inverse_heap[index]
 
@@ -63,6 +67,7 @@ module DataStructures
 
     def peek_element
       return if empty?
+
       @elements[peek_index]
     end
 

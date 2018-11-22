@@ -7,6 +7,7 @@ module LeetCode
 
     def path_sum_recurse(tree, sum, count, counting)
       return unless tree
+
       count[0] += 1 if (sum - tree.val).zero?
 
       unless counting

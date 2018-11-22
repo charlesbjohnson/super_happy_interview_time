@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 CTCI = Module.new
 
 require_relative 'ctci/chapter_one'

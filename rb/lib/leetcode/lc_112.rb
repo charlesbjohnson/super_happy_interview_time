@@ -28,6 +28,7 @@ module LeetCode
     def path_sum?(tree, sum)
       return false unless tree
       return (sum - tree.val).zero? if !tree.left && !tree.right
+
       path_sum?(tree.left, sum - tree.val) || path_sum?(tree.right, sum - tree.val)
     end
 

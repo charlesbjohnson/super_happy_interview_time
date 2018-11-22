@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # I don't really get how this is a sorting/searching problem.
 # Only way I could think of it was as a dynamic programming problem,
 # very similar to the stacking boxes problem from chapter 10.
@@ -10,89 +12,91 @@
 # standard LIS algorithms incapable.
 #
 # Maybe I'm just dumb though.
-module CTCI::ChapterEleven
-  module Seven
-    # A circus is designing a tower routine consisting of people standing
-    # atop one another's shoulders. For practical and aesthetic reasons,
-    # each person must be both shorter and lighter than the person below him
-    # or her. Given the heights and weights of each person in the circus,
-    # write a method to compute the largest possible number of people in
-    # such a tower.
-    def tallest_human_tower(people)
-      return 0 if people.empty?
-      all_stats = proc { |p| p.respond_to?(:height) && p.respond_to?(:weight) }
-      return 0 unless people.all?(&all_stats)
+module CTCI
+  module ChapterEleven
+    module Seven
+      # A circus is designing a tower routine consisting of people standing
+      # atop one another's shoulders. For practical and aesthetic reasons,
+      # each person must be both shorter and lighter than the person below him
+      # or her. Given the heights and weights of each person in the circus,
+      # write a method to compute the largest possible number of people in
+      # such a tower.
+      def tallest_human_tower(people)
+        return 0 if people.empty?
 
-      r_tallest_human_tower(people.sort.reverse, nil, 0, {})
-    end
+        all_stats = proc { |p| p.respond_to?(:height) && p.respond_to?(:weight) }
+        return 0 unless people.all?(&all_stats)
 
-    class Stats
-      include Comparable
-
-      attr_reader :height, :weight
-
-      def initialize(h, w)
-        @height = h
-        @weight = w
+        r_tallest_human_tower(people.sort.reverse, nil, 0, {})
       end
 
-      def hash
-        [@height, @weight].hash
+      class Stats
+        include Comparable
+
+        attr_reader :height, :weight
+
+        def initialize(h, w)
+          @height = h
+          @weight = w
+        end
+
+        def hash
+          [@height, @weight].hash
+        end
+
+        def ==(other)
+          return false unless self.class == other.class
+
+          same_height = @height == other.height
+          same_weight = @weight == other.weight
+          same_height && same_weight
+        end
+
+        alias eql? ==
+
+        def <=>(other)
+          return unless self.class == other.class
+
+          return -1 if @height < other.height
+          return 1 if @height > other.height
+
+          return -1 if @weight < other.weight
+          return 1 if @weight > other.weight
+
+          0
+        end
       end
 
-      def ==(other)
-        return false unless self.class == other.class
-        same_height = @height == other.height
-        same_weight = @weight == other.weight
-        same_height && same_weight
+      private
+
+      def r_tallest_human_tower(people, top, from, cache)
+        return 0 if from >= people.size
+
+        cursor = people[from]
+        next_i = from.succ
+
+        with = 0
+        if smaller?(cursor, top)
+          with = cache[cursor]
+          with ||= r_tallest_human_tower(people, cursor, next_i, cache) + 1
+          cache[cursor] = with
+        end
+
+        # If we've already got a sequence of some length, don't bother
+        # trying to hunt one down that can only possibly be shorter than
+        # one we've already got
+        without = 0
+        without = r_tallest_human_tower(people, top, next_i, cache) if with < (people.size - next_i)
+        [with, without].max
       end
 
-      alias eql? ==
+      def smaller?(first, second)
+        return true if second.nil?
 
-      def <=>(other)
-        return unless self.class == other.class
-
-        return -1 if @height < other.height
-        return 1 if @height > other.height
-
-        return -1 if @weight < other.weight
-        return 1 if @weight > other.weight
-
-        0
+        shorter = first.height < second.height
+        slimmer = first.weight < second.weight
+        shorter && slimmer
       end
-    end
-
-    private
-
-    def r_tallest_human_tower(people, top, from, cache)
-      return 0 if from >= people.size
-
-      cursor = people[from]
-      next_i = from.succ
-
-      with = 0
-      if smaller?(cursor, top)
-        with = cache[cursor]
-        with ||= r_tallest_human_tower(people, cursor, next_i, cache) + 1
-        cache[cursor] = with
-      end
-
-      # If we've already got a sequence of some length, don't bother
-      # trying to hunt one down that can only possibly be shorter than
-      # one we've already got
-      without = 0
-      if with < (people.size - next_i)
-        without = r_tallest_human_tower(people, top, next_i, cache)
-      end
-      [with, without].max
-    end
-
-    def smaller?(first, second)
-      return true if second.nil?
-
-      shorter = first.height < second.height
-      slimmer = first.weight < second.weight
-      shorter && slimmer
     end
   end
 end
