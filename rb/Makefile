@@ -29,6 +29,7 @@ help:
 	@echo "  console  Run ruby console                  options: OPTS"
 	@echo "  fmt      Run rubocop formatter             options: OPTS"
 	@echo "  lint     Run rubocop linter                options: OPTS"
+	@echo "  refactor Run refactoring tool              options: OPTS"
 	@echo "  test     Run tests                         options: OPTS"
 
 
@@ -55,6 +56,12 @@ fmt:
 .PHONY: lint
 lint:
 	$(Q)bundle exec rubocop $(OPTS)
+
+
+.PHONY: refactor
+refactor:
+	$(Q)bundle exec ruby refactor/main.rb code $(OPTS)
+	$(Q)bundle exec ruby refactor/main.rb file $(OPTS)
 
 
 .PHONY: test
