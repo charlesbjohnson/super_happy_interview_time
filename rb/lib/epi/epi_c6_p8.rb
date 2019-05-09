@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module EPI
-  module ChapterSix
-    module Eight
+  module C6
+    module P8
       # Design an algorithm that takes a sequence of n three-dimensional coordinates to be traversed,
       # and returns the minimum battery capacity needed to complete the journey. The robot begins
       # with the battery fully charged.

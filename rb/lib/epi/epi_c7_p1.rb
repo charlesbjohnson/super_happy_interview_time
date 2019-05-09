@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module EPI
-  module ChapterSeven
-    module One
+  module C7
+    module P1
       # Implement string/integer inter-conversion functions.
       def i_to_s(i)
         i = i.to_i

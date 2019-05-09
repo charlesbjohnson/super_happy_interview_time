@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module EPI
-  module ChapterFive
-    module One
+  module C5
+    module P1
       # How would you compute the parity of a very large number of 64-bit words?
       #
       # Use a cache. Break the 64-bits into smaller (but more) chunks to keep the cache

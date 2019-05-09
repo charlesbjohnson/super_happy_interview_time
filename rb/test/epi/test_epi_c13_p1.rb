@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'epi/epi_c13_p1'
 
 module EPI
-  module ChapterThirteen
-    class TestOne < Minitest::Test
-      include One
+  module C13
+    class TestP1 < Minitest::Test
+      include P1
 
       def test_anagram_sets_returns_groups_of_words_that_are_anagrams
         words = %w[backward rash cats chase rentals calm acts sternal burned clam drawback cast aches antlers]

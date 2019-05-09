@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module EPI
-  module ChapterSix
-    module One
+  module C6
+    module P1
       # Write a function that takes an array A of length n and an index i into A,
       # and rearranges the elements such that all elements less than A[i] appear first,
       # followed by elements equal to a A[i], followed by elements greater than A[i].

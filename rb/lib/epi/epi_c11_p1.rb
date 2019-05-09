@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module EPI
-  module ChapterTen
-    module One
+  module C10
+    module P1
       # Design an algorithm that takes a set of files containing stock trades
       # sorted by increasing trade times, and writes a single file containing
       # the trades appearing in the individual files sorted in the same order.

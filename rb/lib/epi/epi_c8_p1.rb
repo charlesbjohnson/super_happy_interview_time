@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module EPI
-  module ChapterEight
-    module One
+  module C8
+    module P1
       # Let L and F be singly linked lists in which each node holds a number.
       # Assume the numbers in L and F appear in ascending order within the lists.
       # The merge of L and F is a list consisting of the nodes of L and F in which

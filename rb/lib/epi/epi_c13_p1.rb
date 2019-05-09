@@ -3,8 +3,8 @@
 require 'set'
 
 module EPI
-  module ChapterThirteen
-    module One
+  module C13
+    module P1
       # Write a function that takes as input a dictionary of English words,
       # and returns a partition of the dictionary into subsets of words that
       # are all anagrams of each other.

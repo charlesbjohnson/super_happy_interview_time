@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module EPI
-  module ChapterTwelve
-    module One
+  module C12
+    module P1
       # Write a method that takes a sorted array A and a key k and returns the
       # index of the first occurrence of k in A. Return -1 if k does not appear
       # in A.

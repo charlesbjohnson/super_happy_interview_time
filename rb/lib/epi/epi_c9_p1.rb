@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module EPI
-  module ChapterNine
-    module One
+  module C9
+    module P1
       # Design a stack that supports a max operation, which returns the maximum value
       # stored in the stack, and throws an exception if the stack is empty. Assume elements
       # are comparable. All operations must be O(1) time. If the stack contains n elements,

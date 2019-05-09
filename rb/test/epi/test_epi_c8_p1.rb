@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'epi/epi_c8_p1'
 
 module EPI
-  module ChapterEight
-    class TestOne < Minitest::Test
-      include One
+  module C8
+    class TestP1 < Minitest::Test
+      include P1
 
       def setup
         @left_list = DataStructures::LinkedList.new

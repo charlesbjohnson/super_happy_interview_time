@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'epi/epi_c7_p1'
 
 module EPI
-  module ChapterSeven
-    class TestOne < Minitest::Test
-      include One
+  module C7
+    class TestP1 < Minitest::Test
+      include P1
 
       def test_i_to_s_converts_an_integer_to_string
         i = 29

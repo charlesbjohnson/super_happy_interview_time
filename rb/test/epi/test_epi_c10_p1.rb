@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'epi/epi_c10_p1'
 
 module EPI
-  module ChapterTen
-    class TestOne < Minitest::Test
+  module C10
+    class TestP1 < Minitest::Test
       BinarySearchTreeMap = DataStructures::BinarySearchTreeMap.dup.class_exec do
-        include One
+        include P1
       end
 
       def test_balanced_is_implemented
