@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/directed_graph'
 
 describe DataStructures::DirectedGraph do
   subject { DataStructures::DirectedGraph.new }

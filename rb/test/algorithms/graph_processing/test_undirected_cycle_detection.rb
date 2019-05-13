@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/undirected_cycle_detection'
+require 'data_structures/undirected_graph'
+
 describe Algorithms::GraphProcessing::UndirectedCycleDetection do
   subject { Algorithms::GraphProcessing::UndirectedCycleDetection.new(graph) }
 

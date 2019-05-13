@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/topological_order'
+require 'data_structures/directed_graph'
+
 describe Algorithms::GraphProcessing::TopologicalOrder do
   subject { Algorithms::GraphProcessing::TopologicalOrder.new(graph) }
 

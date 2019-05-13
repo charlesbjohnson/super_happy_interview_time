@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/linked_list'
 
 describe DataStructures::LinkedList do
   subject { DataStructures::LinkedList.new }

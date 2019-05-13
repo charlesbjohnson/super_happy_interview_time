@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/depth_first_search'
+require 'data_structures/undirected_graph'
+
 describe Algorithms::GraphProcessing::DepthFirstSearch do
   subject { Algorithms::GraphProcessing::DepthFirstSearch.new(graph, 0) }
 

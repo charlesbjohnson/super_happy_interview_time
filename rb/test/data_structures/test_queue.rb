@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/queue'
 
 describe DataStructures::Queue do
   subject { DataStructures::Queue.new }

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require 'config'
-require_relative 'shared_sorting_behavior'
+require 'algorithms/sorting/quick_sort'
+
+require_relative './shared_sorting_behavior'
 
 module Algorithms
   module Sorting

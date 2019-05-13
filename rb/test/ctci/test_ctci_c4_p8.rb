@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'config'
+
+require 'data_structures/binary_tree'
 require 'ctci/ctci_c4_p8'
 
 module CTCI

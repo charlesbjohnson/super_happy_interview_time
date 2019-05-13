@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/binary_search_tree_map'
 
 describe DataStructures::BinarySearchTreeMap do
   subject { DataStructures::BinarySearchTreeMap.new }

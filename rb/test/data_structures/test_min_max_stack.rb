@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/min_max_stack'
 
 describe DataStructures::MinMaxStack do
   subject { DataStructures::MinMaxStack.new }

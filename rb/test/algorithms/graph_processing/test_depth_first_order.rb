@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/depth_first_order'
+require 'data_structures/undirected_graph'
+
 describe Algorithms::GraphProcessing::DepthFirstOrder do
   subject { Algorithms::GraphProcessing::DepthFirstOrder.new(graph) }
 

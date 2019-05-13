@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/stack'
 
 describe DataStructures::Stack do
   subject { DataStructures::Stack.new }

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/binary_tree'
 
 describe DataStructures::BinaryTree do
   subject { DataStructures::BinaryTree }

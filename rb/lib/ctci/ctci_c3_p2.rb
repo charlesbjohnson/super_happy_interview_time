@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require 'data_structures'
+require 'data_structures/stack'
+require 'data_structures/single_node'
 
 module CTCI
   module C3

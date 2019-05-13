@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/bipartite_detection'
+require 'data_structures/undirected_graph'
+
 describe Algorithms::GraphProcessing::BipartiteDetection do
   subject { Algorithms::GraphProcessing::BipartiteDetection.new(graph) }
 

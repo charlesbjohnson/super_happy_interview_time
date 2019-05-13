@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/strongly_connected_components'
+require 'data_structures/directed_graph'
+
 describe Algorithms::GraphProcessing::StronglyConnectedComponents do
   subject { Algorithms::GraphProcessing::StronglyConnectedComponents.new(graph) }
 

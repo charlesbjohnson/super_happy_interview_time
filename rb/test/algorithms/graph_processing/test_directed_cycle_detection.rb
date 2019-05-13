@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/directed_cycle_detection'
+require 'data_structures/directed_graph'
+
 describe Algorithms::GraphProcessing::DirectedCycleDetection do
   subject { Algorithms::GraphProcessing::DirectedCycleDetection.new(graph) }
 

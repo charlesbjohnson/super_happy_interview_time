@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/breadth_first_paths'
+require 'data_structures/undirected_graph'
+
 describe Algorithms::GraphProcessing::BreadthFirstPaths do
   subject { Algorithms::GraphProcessing::BreadthFirstPaths.new(graph, 0) }
 

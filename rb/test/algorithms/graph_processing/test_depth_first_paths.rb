@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/depth_first_paths'
+require 'data_structures/undirected_graph'
+
 describe Algorithms::GraphProcessing::DepthFirstPaths do
   subject { Algorithms::GraphProcessing::DepthFirstPaths.new(graph, 0) }
 

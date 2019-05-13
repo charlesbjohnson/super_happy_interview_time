@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/binary_heap_indexed_priority_queue'
 
 describe DataStructures::BinaryHeapIndexedPriorityQueue do
   subject { DataStructures::BinaryHeapIndexedPriorityQueue.new(priority) }

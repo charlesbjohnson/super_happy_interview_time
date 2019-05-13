@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/hash_map'
 
 describe DataStructures::HashMap do
   subject { DataStructures::HashMap.new }

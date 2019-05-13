@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'config'
+
+require 'data_structures/binary_search_tree_map'
 require 'epi/epi_c10_p1'
 
 module EPI

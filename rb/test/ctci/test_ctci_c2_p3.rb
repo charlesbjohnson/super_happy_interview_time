@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'config'
+
+require 'data_structures/linked_list'
 require 'ctci/ctci_c2_p3'
 
 module CTCI

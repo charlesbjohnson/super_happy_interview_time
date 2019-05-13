@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/graph'
 
 describe DataStructures::Graph do
   subject { DataStructures::Graph.new }

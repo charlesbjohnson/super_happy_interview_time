@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'config'
+
+require 'data_structures/graph'
 require 'ctci/ctci_c4_p2'
 
 module CTCI

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'config'
+require 'data_structures/undirected_graph'
 
 describe DataStructures::UndirectedGraph do
   subject { DataStructures::UndirectedGraph.new }

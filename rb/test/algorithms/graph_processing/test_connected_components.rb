@@ -2,6 +2,9 @@
 
 require 'config'
 
+require 'algorithms/graph_processing/connected_components'
+require 'data_structures/undirected_graph'
+
 describe Algorithms::GraphProcessing::ConnectedComponents do
   subject { Algorithms::GraphProcessing::ConnectedComponents.new(graph) }
 

@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'algorithms'
-require 'data_structures'
-
 require 'byebug'
 
 require 'minitest/autorun'
