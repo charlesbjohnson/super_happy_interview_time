@@ -1,4 +1,4 @@
-# data_structures
+# `data_structures`
 
 Included are implementations of various data structures, including:
 

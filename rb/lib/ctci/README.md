@@ -1,6 +1,7 @@
-# ctci
+# `ctci`
 
-Included are the solutions for problems from Cracking the Coding Interview.
+Included are the solutions for problems from [Cracking the Coding Interview][0].
+
 The chapters in the book are broken down as follows:
 
 1. Arrays and Strings
@@ -21,3 +22,5 @@ The chapters in the book are broken down as follows:
 16. Threads and Locks
 17. Moderate
 18. Hard
+
+[0]: https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850

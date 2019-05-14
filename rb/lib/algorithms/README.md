@@ -1,4 +1,4 @@
-# algorithms
+# `algorithms`
 
 Included are implementations of algorithms for:
 
