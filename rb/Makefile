@@ -23,11 +23,11 @@ help:
 	@echo "  VERBOSE  Echo recipe commands"
 	@echo
 	@echo "Commands:"
-	@echo "  help     Print this help message"
 	@echo "  build    Install application dependencies  options: OPTS"
 	@echo "  clean    Remove application dependencies"
 	@echo "  console  Run ruby console                  options: OPTS"
 	@echo "  fmt      Run rubocop formatter             options: OPTS"
+	@echo "  help     Print this help message"
 	@echo "  lint     Run rubocop linter                options: OPTS"
 	@echo "  refactor Run refactoring tool              options: OPTS"
 	@echo "  test     Run tests                         options: OPTS"
