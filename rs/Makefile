@@ -24,17 +24,22 @@ help:
 	@echo "  VERBOSE    Echo recipe commands"
 	@echo
 	@echo "Commands:"
-	@echo "  help       Print this help message"
+	@echo "  bench      Run benchmark tests               options: CARGO_OPTS,OPTS"
 	@echo "  build      Compile the application           options: OPTS"
 	@echo "  check      Check the application for errors  options: OPTS"
 	@echo "  clean      Remove compilation artifacts"
+	@echo "  debug      Debug the application or tests    options: OPTS,BIN"
 	@echo "  fmt        Run rustfmt formatter             options: CARGO_OPTS,OPTS"
+	@echo "  help       Print this help message"
+	@echo "  install    Install project dependencies"
 	@echo "  lint       Run clippy linter                 options: CARGO_OPTS,OPTS"
 	@echo "  test       Run tests                         options: CARGO_OPTS,OPTS"
-	@echo "  bench      Run benchmark tests               options: CARGO_OPTS,OPTS"
-	@echo "  debug      Debug the application or tests    options: OPTS,BIN"
-	@echo "  install    Install project dependencies"
 	@echo "  uninstall  Uninstall project dependencies"
+
+
+.PHONY: bench
+bench:
+	$(Q)cargo bench $(CARGO_OPTS) -- $(OPTS)
 
 
 .PHONY: build
@@ -52,35 +57,15 @@ clean:
 	$(Q)cargo clean $(OPTS)
 
 
-.PHONY: fmt
-fmt:
-	$(Q)cargo fmt $(CARGO_OPTS) -- $(OPTS)
-
-
-.PHONY: lint
-lint: clean
-	$(Q)cargo clippy $(CARGO_OPTS) -- $(OPTS)
-
-
-.PHONY: test
-test:
-	$(Q)cargo test $(CARGO_OPTS) -- $(OPTS)
-
-
-.PHONY: bench
-bench:
-	$(Q)cargo bench $(CARGO_OPTS) -- $(OPTS)
-
-
 BIN :=
 .PHONY: debug
 debug: build _test_build
 	$(Q)rust-lldb $(OPTS) $(shell find -L $(TARGET_DEBUG) -maxdepth 1 -perm +111 -name "$(BIN)" -type f | sort | head -n 1)
 
 
-.PHONY: _test_build
-_test_build:
-	$(Q)$(MAKE) --no-print-directory test CARGO_OPTS=--no-run $(CARGO_OPTS)
+.PHONY: fmt
+fmt:
+	$(Q)cargo fmt $(CARGO_OPTS) -- $(OPTS)
 
 
 .PHONY: install
@@ -104,6 +89,21 @@ _install_clippy:
 .PHONY: _install_rustfmt
 _install_rustfmt:
 	$(Q)rustup component add rustfmt-preview
+
+
+.PHONY: lint
+lint: clean
+	$(Q)cargo clippy $(CARGO_OPTS) -- $(OPTS)
+
+
+.PHONY: test
+test:
+	$(Q)cargo test $(CARGO_OPTS) -- $(OPTS)
+
+
+.PHONY: _test_build
+_test_build:
+	$(Q)$(MAKE) --no-print-directory test CARGO_OPTS=--no-run $(CARGO_OPTS)
 
 
 .PHONY: uninstall
