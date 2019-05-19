@@ -60,8 +60,8 @@ lint:
 
 .PHONY: refactor
 refactor:
-	$(Q)bundle exec ruby refactor/main.rb code $(OPTS)
-	$(Q)bundle exec ruby refactor/main.rb file $(OPTS)
+	$(Q)bundle exec ruby lib/refactor/main.rb code $(OPTS)
+	$(Q)bundle exec ruby lib/refactor/main.rb file $(OPTS)
 
 
 .PHONY: test

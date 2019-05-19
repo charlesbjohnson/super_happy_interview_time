@@ -3,7 +3,7 @@
 require_relative './word'
 
 module Refactor
-  module Lib
+  module Util
     class Slug
       CHAPTER_REGEX = /chapter_/i.freeze
       TEST_REGEX    = /test_/i.freeze

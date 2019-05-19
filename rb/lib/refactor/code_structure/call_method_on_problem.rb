@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './base'
-require_relative '../lib/word'
+require_relative '../util/word'
 
 #
 # Before:
@@ -34,7 +34,7 @@ module Refactor
       #
       # (send (const nil :One) :new)
       def match?
-        send_receiver_node_type == :const && Lib::Word.complete_match?(send_receiver_node_name)
+        send_receiver_node_type == :const && Util::Word.complete_match?(send_receiver_node_name)
       end
 
       def execute!
@@ -56,7 +56,7 @@ module Refactor
       end
 
       def rename
-        "P#{Lib::Word.replace(send_receiver_node_name)}"
+        "P#{Util::Word.replace(send_receiver_node_name)}"
       end
 
       def send_receiver_node

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Refactor
-  module Lib
+  module Util
     class Word
       Mapping = Struct.new(:word, :num) do
         def match?(str)

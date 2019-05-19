@@ -5,7 +5,7 @@ require 'pathname'
 require_relative './slug'
 
 module Refactor
-  module Lib
+  module Util
     class Path
       LIB_DIR  = 'lib'
       TEST_DIR = 'test'

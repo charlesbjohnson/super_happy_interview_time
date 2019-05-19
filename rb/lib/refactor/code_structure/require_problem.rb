@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './base'
-require_relative '../lib/path'
+require_relative '../util/path'
 
 #
 # Before:
@@ -51,7 +51,7 @@ module Refactor
       end
 
       def generate_require
-        "\nrequire '#{Lib::Path.for_require(rewriter.path)}'"
+        "\nrequire '#{Util::Path.for_require(rewriter.path)}'"
       end
 
       def send_param_node

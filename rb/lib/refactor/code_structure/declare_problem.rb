@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './base'
-require_relative '../lib/word'
+require_relative '../util/word'
 
 #
 # Before:
@@ -9,31 +9,45 @@ require_relative '../lib/word'
 #   module ChapterOne
 #     module One
 #     end
+#
+#     class Two
+#     end
+#
+#     class TestOne < Minitest::Test
+#       include One
+#     end
 #   end
 #
 # After:
 #
-#   module C1
-#     module One
+#   module ChapterOne
+#     module P1
+#     end
+#
+#     class P2
+#     end
+#
+#     class TestP1 < Minitest::Test
+#       include One
 #     end
 #   end
 #
 module Refactor
   module CodeStructure
-    class DeclareChapter < Base
-      MATCH_REGEX   = /\bchapter[\w]+\b/i.freeze
-      REPLACE_REGEX = /chapter/i.freeze
+    class DeclareProblem < Base
+      MATCH_REGEX   = /\btest[\w]+\b/i.freeze
+      REPLACE_REGEX = /test/i.freeze
 
       def self.register(rewriter)
+        rewriter.add_class_refactor(self)
         rewriter.add_module_refactor(self)
       end
 
       #
-      # (module (const nil :ChapterOne) nil)
+      # (module (const nil :One) nil)
+      # (class (const nil :One) nil nil)
       def match?
-        declaration_node_type == :const \
-          && MATCH_REGEX.match?(declaration_node_name) \
-          && Lib::Word.suffix_match?(declaration_node_name)
+        declaration_node_type == :const && Util::Word.match?(declaration_node_name)
       end
 
       def execute!
@@ -59,7 +73,12 @@ module Refactor
       end
 
       def rename
-        Lib::Word.replace("C#{declaration_node_name.gsub(REPLACE_REGEX, '')}")
+        is_test = MATCH_REGEX.match?(declaration_node_name)
+
+        result = declaration_node_name.gsub(REPLACE_REGEX, '')
+        result = "P#{Util::Word.replace(result)}"
+
+        is_test ? "Test#{result}" : result
       end
 
       def declaration_node
