@@ -13,7 +13,7 @@ module CTCI
         t = 'c ba'
         actual = permutation?(s, t)
 
-        assert_equal(true, actual)
+        assert(actual)
       end
 
       def test_returns_false_when_not_permutation
@@ -21,7 +21,7 @@ module CTCI
         t = 'cba'
         actual = permutation?(s, t)
 
-        assert_equal(false, actual)
+        refute(actual)
       end
 
       def test_returns_false_when_empty_string
@@ -30,8 +30,8 @@ module CTCI
         first_actual = permutation?(s, t)
         second_actual = permutation?(t, s)
 
-        assert_equal(false, first_actual)
-        assert_equal(false, second_actual)
+        refute(first_actual)
+        refute(second_actual)
       end
     end
   end

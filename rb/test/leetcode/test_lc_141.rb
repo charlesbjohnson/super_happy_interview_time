@@ -39,7 +39,7 @@ module LeetCode
     end
 
     define_method(:"test_cycle?_cycle") do
-      assert_equal(true, cycle?(build_cycle))
+      assert(cycle?(build_cycle))
     end
   end
 end

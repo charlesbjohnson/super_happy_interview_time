@@ -13,7 +13,7 @@ module CTCI
         t = 'erbottlewat'
         actual = rotation?(s, t)
 
-        assert_equal(true, actual)
+        assert(actual)
       end
 
       def test_returns_false_if_is_not_rotation
@@ -21,7 +21,7 @@ module CTCI
         t = 'shbotaz'
         actual = rotation?(s, t)
 
-        assert_equal(false, actual)
+        refute(actual)
       end
 
       def test_returns_false_when_given_empty_string
@@ -36,9 +36,9 @@ module CTCI
         second_actual = rotation?(second_s, second_t)
         third_actual = rotation?(third_s, third_t)
 
-        assert_equal(false, first_actual)
-        assert_equal(false, second_actual)
-        assert_equal(false, third_actual)
+        refute(first_actual)
+        refute(second_actual)
+        refute(third_actual)
       end
     end
   end
