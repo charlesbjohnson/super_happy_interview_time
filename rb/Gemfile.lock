@@ -31,6 +31,8 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     rubocop-minitest (0.6.0)
       rubocop (>= 0.74)
+    rubocop-performance (1.5.2)
+      rubocop (>= 0.71.0)
     ruby-progressbar (1.10.1)
     simplecov (0.18.2)
       docile (~> 1.1)
@@ -51,6 +53,7 @@ DEPENDENCIES
   rake (~> 13.0)
   rubocop (~> 0.79)
   rubocop-minitest (~> 0.6)
+  rubocop-performance (~> 1.5)
   simplecov (~> 0.18)
 
 RUBY VERSION
