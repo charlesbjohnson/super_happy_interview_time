@@ -217,9 +217,9 @@ impl<T> LinkedList<T> {
 
         while i < index {
             i += 1;
-            current.take().map(|node| {
+            if let Some(node) = current.take() {
                 current = node.next.as_ref().map(|node| &**node);
-            });
+            }
         }
 
         current.unwrap()
@@ -231,9 +231,9 @@ impl<T> LinkedList<T> {
 
         while i < index {
             i += 1;
-            current.take().map(|node| {
+            if let Some(node) = current.take() {
                 current = node.next.as_mut().map(|node| &mut **node);
-            });
+            }
         }
 
         current.unwrap()

@@ -184,9 +184,9 @@ impl<T> LinkedList<T> {
 
         while i < index {
             i += 1;
-            current
-                .take()
-                .map(|node| current = node.borrow().next.as_ref().cloned());
+            if let Some(node) = current.take() {
+                current = node.borrow().next.as_ref().cloned();
+            }
         }
 
         current.unwrap()
