@@ -1,7 +1,10 @@
+Layout/LineLength:
+  Enabled: false
+
 Metrics:
   Enabled: false
 
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Enabled: false
 
 Style/Documentation:
