@@ -10,8 +10,8 @@ describe Algorithms::GraphProcessing::DepthFirstOrder do
 
   let(:graph) { DataStructures::UndirectedGraph.new }
 
-  it { subject.must_respond_to :pre }
-  it { subject.must_respond_to :post }
+  it { _(subject).must_respond_to :pre }
+  it { _(subject).must_respond_to :post }
 
   describe 'with an undirected graph' do
     let(:edges) do
@@ -35,13 +35,13 @@ describe Algorithms::GraphProcessing::DepthFirstOrder do
 
     describe '#pre' do
       it 'returns vertices in preorder' do
-        subject.pre.must_equal([0, 1, 4, 3, 2, 5, 6])
+        _(subject.pre).must_equal([0, 1, 4, 3, 2, 5, 6])
       end
     end
 
     describe '#post' do
       it 'returns vertices in postorder' do
-        subject.post.must_equal([5, 2, 6, 3, 4, 1, 0])
+        _(subject.post).must_equal([5, 2, 6, 3, 4, 1, 0])
       end
     end
   end
@@ -68,13 +68,13 @@ describe Algorithms::GraphProcessing::DepthFirstOrder do
 
     describe '#pre' do
       it 'returns vertices in preorder' do
-        subject.pre.must_equal([0, 1, 4, 2, 5, 3, 6])
+        _(subject.pre).must_equal([0, 1, 4, 2, 5, 3, 6])
       end
     end
 
     describe '#post' do
       it 'returns vertices in postorder' do
-        subject.post.must_equal([4, 1, 2, 5, 0, 6, 3])
+        _(subject.post).must_equal([4, 1, 2, 5, 0, 6, 3])
       end
     end
   end

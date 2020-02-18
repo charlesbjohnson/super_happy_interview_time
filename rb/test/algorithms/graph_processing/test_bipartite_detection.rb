@@ -10,7 +10,7 @@ describe Algorithms::GraphProcessing::BipartiteDetection do
 
   let(:graph) { DataStructures::UndirectedGraph.new }
 
-  it { subject.must_respond_to :bipartite? }
+  it { _(subject).must_respond_to :bipartite? }
 
   describe '#bipartite?' do
     describe 'when the graph is bipartite' do
@@ -33,7 +33,7 @@ describe Algorithms::GraphProcessing::BipartiteDetection do
       before { edges.each { |from, to| graph.add_edge(from, to) } }
 
       it 'returns true' do
-        subject.bipartite?.must_equal(true)
+        _(subject.bipartite?).must_equal(true)
       end
     end
 
@@ -52,7 +52,7 @@ describe Algorithms::GraphProcessing::BipartiteDetection do
       before { edges.each { |from, to| graph.add_edge(from, to) } }
 
       it 'returns false' do
-        subject.bipartite?.must_equal(false)
+        _(subject.bipartite?).must_equal(false)
       end
     end
   end

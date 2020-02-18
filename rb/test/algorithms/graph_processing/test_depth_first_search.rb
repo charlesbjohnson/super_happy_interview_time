@@ -10,8 +10,8 @@ describe Algorithms::GraphProcessing::DepthFirstSearch do
 
   let(:graph) { DataStructures::UndirectedGraph.new }
 
-  it { subject.must_respond_to :marked? }
-  it { subject.must_respond_to :count }
+  it { _(subject).must_respond_to :marked? }
+  it { _(subject).must_respond_to :count }
 
   describe 'with an undirected graph' do
     let(:edges) do
@@ -35,17 +35,17 @@ describe Algorithms::GraphProcessing::DepthFirstSearch do
 
     describe '#marked?' do
       it 'returns true if the source is connected to the target' do
-        subject.marked?(3).must_equal(true)
+        _(subject.marked?(3)).must_equal(true)
       end
 
       it 'returns false if the source is not connected to the target' do
-        subject.marked?(9).must_equal(false)
+        _(subject.marked?(9)).must_equal(false)
       end
     end
 
     describe '#count' do
       it 'returns the number of vertices connected to the source' do
-        subject.count.must_equal(6)
+        _(subject.count).must_equal(6)
       end
     end
   end
@@ -82,17 +82,17 @@ describe Algorithms::GraphProcessing::DepthFirstSearch do
 
     describe '#marked?' do
       it 'returns true if the source is connected to the target' do
-        subject.marked?(3).must_equal(true)
+        _(subject.marked?(3)).must_equal(true)
       end
 
       it 'returns false if the source is not connected to the target' do
-        subject.marked?(9).must_equal(false)
+        _(subject.marked?(9)).must_equal(false)
       end
     end
 
     describe '#count' do
       it 'returns the number of vertices connected to the source' do
-        subject.count.must_equal(5)
+        _(subject.count).must_equal(5)
       end
     end
   end

@@ -6,7 +6,7 @@ require 'data_structures/binary_tree'
 describe DataStructures::BinaryTree do
   subject { DataStructures::BinaryTree }
 
-  it { subject.must_respond_to :from }
+  it { _(subject).must_respond_to :from }
 
   describe '::from' do
     it 'creates a binary tree from required specified nodes' do

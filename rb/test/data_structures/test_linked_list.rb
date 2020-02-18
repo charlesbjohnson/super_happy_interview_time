@@ -6,27 +6,27 @@ require 'data_structures/linked_list'
 describe DataStructures::LinkedList do
   subject { DataStructures::LinkedList.new }
 
-  it { subject.must_respond_to :size }
-  it { subject.must_respond_to :[] }
-  it { subject.must_respond_to :each }
-  it { subject.must_respond_to :append }
-  it { subject.must_respond_to :insert }
-  it { subject.must_respond_to :remove }
-  it { subject.must_respond_to :delete }
-  it { subject.must_respond_to :index }
+  it { _(subject).must_respond_to :size }
+  it { _(subject).must_respond_to :[] }
+  it { _(subject).must_respond_to :each }
+  it { _(subject).must_respond_to :append }
+  it { _(subject).must_respond_to :insert }
+  it { _(subject).must_respond_to :remove }
+  it { _(subject).must_respond_to :delete }
+  it { _(subject).must_respond_to :index }
 
   let(:foo) { 'foo' }
 
   it 'starts out empty' do
-    subject.size.must_equal(0)
-    subject.must_be :empty?
+    _(subject.size).must_equal(0)
+    _(subject).must_be :empty?
   end
 
   describe '#append' do
     it 'adds to the list' do
       subject.append(foo)
-      subject[0].must_equal(foo)
-      subject.size.must_equal(1)
+      _(subject[0]).must_equal(foo)
+      _(subject.size).must_equal(1)
     end
 
     it 'adds to the end of the list' do
@@ -36,18 +36,18 @@ describe DataStructures::LinkedList do
       subject.append(bar)
       subject.append(baz)
 
-      subject[0].must_equal(foo)
-      subject[1].must_equal(bar)
-      subject[2].must_equal(baz)
-      subject.size.must_equal(3)
+      _(subject[0]).must_equal(foo)
+      _(subject[1]).must_equal(bar)
+      _(subject[2]).must_equal(baz)
+      _(subject.size).must_equal(3)
     end
   end
 
   describe '#insert' do
     it 'adds to the list' do
       subject.insert(0, foo)
-      subject[0].must_equal(foo)
-      subject.size.must_equal(1)
+      _(subject[0]).must_equal(foo)
+      _(subject.size).must_equal(1)
     end
 
     it 'inserts at the end of the list' do
@@ -55,8 +55,8 @@ describe DataStructures::LinkedList do
       subject.insert(0, foo)
       subject.insert(1, bar)
 
-      subject[0].must_equal(foo)
-      subject[1].must_equal(bar)
+      _(subject[0]).must_equal(foo)
+      _(subject[1]).must_equal(bar)
     end
 
     it 'inserts at the beginning of the list' do
@@ -64,8 +64,8 @@ describe DataStructures::LinkedList do
       subject.insert(0, foo)
       subject.insert(0, bar)
 
-      subject[0].must_equal(bar)
-      subject[1].must_equal(foo)
+      _(subject[0]).must_equal(bar)
+      _(subject[1]).must_equal(foo)
     end
 
     it 'inserts at the middle of the list' do
@@ -75,9 +75,9 @@ describe DataStructures::LinkedList do
       subject.insert(1, bar)
       subject.insert(1, baz)
 
-      subject[0].must_equal(foo)
-      subject[1].must_equal(baz)
-      subject[2].must_equal(bar)
+      _(subject[0]).must_equal(foo)
+      _(subject[1]).must_equal(baz)
+      _(subject[2]).must_equal(bar)
     end
   end
 
@@ -86,13 +86,13 @@ describe DataStructures::LinkedList do
 
     it 'takes away from the list' do
       subject.remove
-      subject[0].must_be_nil
-      subject.size.must_equal(0)
+      _(subject[0]).must_be_nil
+      _(subject.size).must_equal(0)
     end
 
     it 'returns the item taken away' do
       removed = subject.remove
-      removed.must_equal(foo)
+      _(removed).must_equal(foo)
     end
 
     it 'removes from the end of the list' do
@@ -101,9 +101,9 @@ describe DataStructures::LinkedList do
       subject.append('baz')
 
       subject.remove
-      subject[0].must_equal(foo)
-      subject[1].must_equal(bar)
-      subject[2].must_be_nil
+      _(subject[0]).must_equal(foo)
+      _(subject[1]).must_equal(bar)
+      _(subject[2]).must_be_nil
     end
   end
 
@@ -112,13 +112,13 @@ describe DataStructures::LinkedList do
 
     it 'takes away from the list' do
       subject.delete(0)
-      subject[0].must_be_nil
-      subject.size.must_equal(0)
+      _(subject[0]).must_be_nil
+      _(subject.size).must_equal(0)
     end
 
     it 'returns the item taken away' do
       deleted = subject.delete(0)
-      deleted.must_equal(foo)
+      _(deleted).must_equal(foo)
     end
 
     it 'deletes from the beginning of the list' do
@@ -126,16 +126,16 @@ describe DataStructures::LinkedList do
       subject.append(bar)
 
       subject.delete(0)
-      subject[0].must_equal(bar)
-      subject[1].must_be_nil
+      _(subject[0]).must_equal(bar)
+      _(subject[1]).must_be_nil
     end
 
     it 'deletes from the end of the list' do
       subject.append('bar')
 
       subject.delete(1)
-      subject[0].must_equal(foo)
-      subject[1].must_be_nil
+      _(subject[0]).must_equal(foo)
+      _(subject[1]).must_be_nil
     end
 
     it 'deletes from the middle of the list' do
@@ -144,9 +144,9 @@ describe DataStructures::LinkedList do
       subject.append(baz)
 
       subject.delete(1)
-      subject[0].must_equal(foo)
-      subject[1].must_equal(baz)
-      subject[2].must_be_nil
+      _(subject[0]).must_equal(foo)
+      _(subject[1]).must_equal(baz)
+      _(subject[2]).must_be_nil
     end
   end
 
@@ -155,11 +155,11 @@ describe DataStructures::LinkedList do
       expected = %w[foo bar baz]
       expected.each { |item| subject.append(item) }
 
-      subject.each.must_be_kind_of(Enumerator)
+      _(subject.each).must_be_kind_of(Enumerator)
 
       actual = []
       subject.each { |item| actual << item }
-      actual.must_equal(expected)
+      _(actual).must_equal(expected)
     end
   end
 
@@ -169,11 +169,11 @@ describe DataStructures::LinkedList do
       subject.append(foo)
       subject.append('baz')
 
-      subject.index(foo).must_equal(1)
+      _(subject.index(foo)).must_equal(1)
     end
 
     it 'returns nil if item does not exist' do
-      subject.index(foo).must_be_nil
+      _(subject.index(foo)).must_be_nil
     end
   end
 end

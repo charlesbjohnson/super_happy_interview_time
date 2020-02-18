@@ -10,8 +10,8 @@ describe Algorithms::GraphProcessing::TopologicalOrder do
 
   let(:graph) { DataStructures::DirectedGraph.new }
 
-  it { subject.must_respond_to :acyclic? }
-  it { subject.must_respond_to :order }
+  it { _(subject).must_respond_to :acyclic? }
+  it { _(subject).must_respond_to :order }
 
   describe 'when the graph is acyclic' do
     let(:edges) do
@@ -38,13 +38,13 @@ describe Algorithms::GraphProcessing::TopologicalOrder do
 
     describe '#acyclic?' do
       it 'returns true' do
-        subject.acyclic?.must_equal(true)
+        _(subject.acyclic?).must_equal(true)
       end
     end
 
     describe '#order' do
       it 'returns a topologically ordered path' do
-        subject.order.must_equal([8, 7, 2, 3, 0, 6, 9, 11, 12, 10, 5, 4, 1])
+        _(subject.order).must_equal([8, 7, 2, 3, 0, 6, 9, 11, 12, 10, 5, 4, 1])
       end
     end
   end
@@ -75,13 +75,13 @@ describe Algorithms::GraphProcessing::TopologicalOrder do
 
     describe '#acyclic?' do
       it 'returns false' do
-        subject.acyclic?.must_equal(false)
+        _(subject.acyclic?).must_equal(false)
       end
     end
 
     describe '#order' do
       it 'returns nil' do
-        subject.order.must_be_nil
+        _(subject.order).must_be_nil
       end
     end
   end

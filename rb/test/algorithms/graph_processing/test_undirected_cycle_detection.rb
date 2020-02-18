@@ -10,8 +10,8 @@ describe Algorithms::GraphProcessing::UndirectedCycleDetection do
 
   let(:graph) { DataStructures::UndirectedGraph.new }
 
-  it { subject.must_respond_to :cycle? }
-  it { subject.must_respond_to :cycle }
+  it { _(subject).must_respond_to :cycle? }
+  it { _(subject).must_respond_to :cycle }
 
   describe 'when there is a cycle' do
     let(:edges) do
@@ -32,13 +32,13 @@ describe Algorithms::GraphProcessing::UndirectedCycleDetection do
 
     describe '#cycle?' do
       it 'returns true' do
-        subject.cycle?.must_equal(true)
+        _(subject.cycle?).must_equal(true)
       end
     end
 
     describe '#cycle' do
       it 'returns the cycle' do
-        subject.cycle.must_equal([6, 7, 8, 6])
+        _(subject.cycle).must_equal([6, 7, 8, 6])
       end
     end
   end
@@ -59,13 +59,13 @@ describe Algorithms::GraphProcessing::UndirectedCycleDetection do
 
     describe '#cycle?' do
       it 'returns false' do
-        subject.cycle?.must_equal(false)
+        _(subject.cycle?).must_equal(false)
       end
     end
 
     describe '#cycle' do
       it 'returns nil' do
-        subject.cycle.must_be_nil
+        _(subject.cycle).must_be_nil
       end
     end
   end
