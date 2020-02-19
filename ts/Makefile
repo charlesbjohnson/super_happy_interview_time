@@ -34,10 +34,12 @@ help:
 .PHONY: build
 build:
 	$(Q)yarn install
+	$(Q)yarn tsc $(OPTS)
 
 
 .PHONY: check
 check:
+	$(Q)yarn tsc --noEmit $(OPTS)
 
 
 .PHONY: clean
@@ -48,7 +50,7 @@ clean:
 
 .PHONY: console
 console:
-	$(Q)yarn node $(OPTS)
+	$(Q)yarn ts-node $(OPTS)
 
 
 .PHONY: fmt

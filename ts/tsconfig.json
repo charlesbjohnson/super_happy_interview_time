@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "outDir": "dist/",
+    "strict": true,
+    "target": "ESNext"
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*"
+  ]
+}
