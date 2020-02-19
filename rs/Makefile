@@ -24,15 +24,15 @@ help:
 	@echo "  VERBOSE    Echo recipe commands"
 	@echo
 	@echo "Commands:"
-	@echo "  bench      Run benchmark tests               options: CARGO_OPTS,OPTS"
-	@echo "  build      Compile the application           options: OPTS"
-	@echo "  check      Check the application for errors  options: OPTS"
-	@echo "  clean      Remove compilation artifacts"
-	@echo "  debug      Debug the application or tests    options: OPTS,BIN"
-	@echo "  fmt        Run rustfmt formatter             options: CARGO_OPTS,OPTS"
-	@echo "  help       Print this help message"
-	@echo "  lint       Run clippy linter                 options: CARGO_OPTS,OPTS"
-	@echo "  test       Run tests                         options: CARGO_OPTS,OPTS"
+	@echo "  bench  Run benchmark tests               options: CARGO_OPTS,OPTS"
+	@echo "  build  Compile the application           options: OPTS"
+	@echo "  check  Check the application for errors  options: OPTS"
+	@echo "  clean  Remove compilation artifacts"
+	@echo "  debug  Debug the application or tests    options: OPTS,BIN"
+	@echo "  fmt    Run the formatter                 options: CARGO_OPTS,OPTS"
+	@echo "  help   Print this help message"
+	@echo "  lint   Run the linter                    options: CARGO_OPTS,OPTS"
+	@echo "  test   Run the tests                     options: CARGO_OPTS,OPTS"
 
 
 .PHONY: bench
