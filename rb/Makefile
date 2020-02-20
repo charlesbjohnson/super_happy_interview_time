@@ -24,6 +24,7 @@ help:
 	@echo
 	@echo "Commands:"
 	@echo "  build     Install application dependencies  options: OPTS"
+	@echo "  check     Check the application for errors  options: OPTS"
 	@echo "  clean     Remove application dependencies"
 	@echo "  console   Run the console                   options: OPTS"
 	@echo "  fmt       Run the formatter                 options: OPTS"
@@ -36,6 +37,11 @@ help:
 .PHONY: build
 build:
 	$(Q)bundle install $(OPTS)
+
+
+.PHONY: check
+check:
+	$(Q)bundle exec srb typecheck $(OPTS)
 
 
 .PHONY: clean
