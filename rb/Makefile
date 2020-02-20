@@ -35,7 +35,7 @@ help:
 
 .PHONY: build
 build:
-	$(Q)bundle install --path $(VENDOR) $(OPTS)
+	$(Q)bundle install $(OPTS)
 
 
 .PHONY: clean

@@ -42,7 +42,7 @@ build-iPhoneSimulator/
 /rdoc/
 
 ## Environment normalization:
-/.bundle/
+# /.bundle/
 /vendor/bundle
 /lib/bundler/man/
 
@@ -60,3 +60,6 @@ build-iPhoneSimulator/
 # .rubocop-https?--*
 
 # End of https://www.gitignore.io/api/ruby
+
+.bundle/*
+!.bundle/config
