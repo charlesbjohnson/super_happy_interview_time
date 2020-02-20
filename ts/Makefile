@@ -67,4 +67,4 @@ lint:
 
 .PHONY: test
 test: build
-	$(Q)yarn ava $(OPTS)
+	$(Q)yarn nyc ava $(OPTS)
