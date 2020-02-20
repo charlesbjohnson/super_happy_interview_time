@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 # A fun one, but really easy to miss bugs. Spent more time debugging

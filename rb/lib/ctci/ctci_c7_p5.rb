@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 # Another ridiculously length one.

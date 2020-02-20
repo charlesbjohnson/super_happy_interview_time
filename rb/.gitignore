@@ -63,3 +63,4 @@ build-iPhoneSimulator/
 
 .bundle/*
 !.bundle/config
+sorbet/rbi/hidden-definitions/errors.txt

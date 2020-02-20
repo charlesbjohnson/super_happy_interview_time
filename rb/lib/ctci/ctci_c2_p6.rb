@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 # had to look this up. pretty tricky but made sense

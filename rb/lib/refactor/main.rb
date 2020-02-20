@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 require_relative './code_structure'
@@ -18,4 +19,4 @@ module Refactor
   end
 end
 
-Refactor::Main.run(ARGV)
+Refactor::Main.run(ARGV) if __FILE__ == $PROGRAM_NAME

@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 # I had the right idea for this one, but didn't know what to do to
