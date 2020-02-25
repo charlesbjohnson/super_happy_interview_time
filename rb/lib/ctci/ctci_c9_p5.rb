@@ -6,7 +6,7 @@ module CTCI
     module P5
       # Write a method to compute all permutations of a string
       def permutations(string)
-        result = ['']
+        result = [""]
         buffer = []
         string.chars.each do |c|
           until result.empty?

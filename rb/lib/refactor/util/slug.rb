@@ -1,21 +1,21 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative './word'
+require_relative "./word"
 
 module Refactor
   module Util
     class Slug
       CHAPTER_REGEX = /chapter_/i.freeze
-      TEST_REGEX    = /test_/i.freeze
+      TEST_REGEX = /test_/i.freeze
 
       #
       # epi chapter_five test_one
       # => epi_c5_p1
       #
       def self.generate(source, chapter, problem)
-        chapter = Word.replace(chapter.gsub(CHAPTER_REGEX, ''))
-        problem = Word.replace(problem.gsub(TEST_REGEX, ''))
+        chapter = Word.replace(chapter.gsub(CHAPTER_REGEX, ""))
+        problem = Word.replace(problem.gsub(TEST_REGEX, ""))
         "#{source}_c#{chapter}_p#{problem}"
       end
 

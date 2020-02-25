@@ -1,8 +1,8 @@
 # typed: strong
 # frozen_string_literal: true
 
-require 'config'
-require 'epi/epi_c11_p1'
+require "config"
+require "epi/epi_c11_p1"
 
 module EPI
   module C11

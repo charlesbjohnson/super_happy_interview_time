@@ -29,11 +29,11 @@ module LeetCode
     # @param t {String}
     # @return {String}
     def custom_sort_string(s, t)
-      to_code = proc { |c| c.ord - 'a'.ord }
+      to_code = proc { |c| c.ord - "a".ord }
 
       codes = s.chars.each
-               .with_object(Array.new(26) { Float::INFINITY })
-               .with_index { |(c, cds), i| cds[to_code.call(c)] = i }
+        .with_object(Array.new(26) { Float::INFINITY })
+        .with_index { |(c, cds), i| cds[to_code.call(c)] = i }
 
       t.chars.sort_by { |c| codes[to_code.call(c)] }.join
     end

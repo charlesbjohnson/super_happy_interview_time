@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_112'
+require "config"
+require "leetcode/lc_112"
 
 module LeetCode
   class TestLC112 < Minitest::Test
@@ -40,7 +40,7 @@ module LeetCode
       [[0, 1, 2, 3, 4, 5, 6], 10, false],
       [[5, 4, 8, 11, nil, 13, 4, 7, 2, nil, nil, nil, 1], 22, true],
       [[0, 10, 1, 10, 10], 1, true],
-      [[0, 10, 2, -9, 10], 1, true]
+      [[0, 10, 2, -9, 10], 1, true],
     ].each.with_index do |(tree, sum, expected), i|
       define_method(:"test_path_sum?_#{i}") do
         assert_equal(expected, path_sum?(build(tree), sum))

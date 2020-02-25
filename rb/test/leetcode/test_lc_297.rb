@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_297'
+require "config"
+require "leetcode/lc_297"
 
 module LeetCode
   class TestLC297 < Minitest::Test
@@ -26,11 +26,11 @@ module LeetCode
     end
 
     [
-      [[1, 2, 3], '1,2,3'],
-      [[1, 2], '1,2'],
-      [[1, nil, 3], '1,,3'],
-      [[1, nil, 3, nil, nil, nil, 4], '1,,3,,4'],
-      [[1, 2, 3, nil, nil, 4, 5], '1,2,3,,,4,5']
+      [[1, 2, 3], "1,2,3"],
+      [[1, 2], "1,2"],
+      [[1, nil, 3], "1,,3"],
+      [[1, nil, 3, nil, nil, nil, 4], "1,,3,,4"],
+      [[1, 2, 3, nil, nil, 4, 5], "1,2,3,,,4,5"],
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_serialize_deserialize_#{i}") do
         assert_equal(expected, serialize(build(tree)))

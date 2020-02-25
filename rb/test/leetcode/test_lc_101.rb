@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_101'
+require "config"
+require "leetcode/lc_101"
 
 module LeetCode
   class TestLC101 < Minitest::Test
@@ -35,7 +35,7 @@ module LeetCode
       [[0, 1, 1, 2, 3, 3, 2], true],
       [[0, 1, 1, 2, 3, 2, 3], false],
       [[0, 1, 1, 2, nil, nil, 2], true],
-      [[0, 1, 1, 2, nil, 2, nil], false]
+      [[0, 1, 1, 2, nil, 2, nil], false],
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_symmetric?_#{i}") do
         assert_equal(expected, symmetric?(build(tree)))

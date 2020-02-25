@@ -9,7 +9,7 @@ module CTCI
       # largest number that have the same number of 1 bits in their
       # binary representation.
       def equal_bits_around(n)
-        { prev: equal_bits_prev(n), next: equal_bits_next(n) }
+        {prev: equal_bits_prev(n), next: equal_bits_next(n)}
       end
 
       private

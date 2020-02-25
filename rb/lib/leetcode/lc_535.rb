@@ -1,13 +1,13 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'digest'
-require 'uri'
+require "digest"
+require "uri"
 
 module LeetCode
   # 535. Encode and Decode TinyURL
   module LC535
-    Store = Struct.new(:value) do
+    Store = Struct.new(:value) {
       def get(k)
         value[k]
       end
@@ -19,7 +19,7 @@ module LeetCode
       def clear
         value.clear
       end
-    end
+    }
 
     SIZE = 6
     REGISTRY = Store.new({})
@@ -42,7 +42,7 @@ module LeetCode
     def encode(url)
       path = Digest::SHA256.hexdigest(url.to_s).slice(0, SIZE)
       REGISTRY.set(path, url)
-      URI::HTTPS.build(host: 'tinyurl.com', path: "/#{path}").to_s
+      URI::HTTPS.build(host: "tinyurl.com", path: "/#{path}").to_s
     end
 
     # @param url {String}

@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
-require 'ctci/ctci_c5_p5'
+require "config"
+require "ctci/ctci_c5_p5"
 
 module CTCI
   module C5
@@ -15,7 +15,7 @@ module CTCI
 
       def test_returns_difference_reversed_order
         assert_equal 4, bit_difference(0b00010000,
-                                       0b10110101)
+          0b10110101)
       end
 
       def test_returns_zero_for_zero

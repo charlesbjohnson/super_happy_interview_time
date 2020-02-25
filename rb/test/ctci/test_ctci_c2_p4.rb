@@ -1,17 +1,17 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'data_structures/linked_list'
-require 'ctci/ctci_c2_p4'
+require "data_structures/linked_list"
+require "ctci/ctci_c2_p4"
 
 module CTCI
   module C2
     class TestP4 < Minitest::Test
-      LinkedList = DataStructures::LinkedList.dup.class_exec do
+      LinkedList = DataStructures::LinkedList.dup.class_exec {
         include P4
-      end
+      }
 
       def setup
         @list = LinkedList.new
@@ -87,13 +87,13 @@ module CTCI
 
       def only_has_values_at_indexes(indexes, includes)
         includes = includes.to_a
-        result = indexes.map do |n|
+        result = indexes.map { |n|
           actual = @list[n]
           exists = includes.include?(actual)
           includes.delete(actual)
 
           exists
-        end
+        }
 
         result.all?
       end

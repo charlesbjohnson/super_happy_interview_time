@@ -5,7 +5,7 @@ module LeetCode
   # 438. Find All Anagrams in a String
   module LC438
     def to_code(char)
-      char.ord - 'a'.ord
+      char.ord - "a".ord
     end
 
     def count_chars(str)

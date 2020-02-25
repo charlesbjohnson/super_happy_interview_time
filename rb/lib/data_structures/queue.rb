@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative 'single_node'
+require_relative "single_node"
 
 module DataStructures
   class Queue
@@ -17,13 +17,13 @@ module DataStructures
     end
 
     def each(&block)
-      enum = Enumerator.new do |y|
+      enum = Enumerator.new { |y|
         cursor = @head
         while cursor.next
           y << cursor.data
           cursor = cursor.next
         end
-      end
+      }
 
       block_given? ? enum.each(&block) : enum
     end

@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'set'
+require "set"
 
 module EPI
   module C13
@@ -14,10 +14,10 @@ module EPI
 
         set_map = Hash.new { |h, k| h[k] = Set.new }
 
-        anagram_set_map = words.each_with_object(set_map) do |e, a|
+        anagram_set_map = words.each_with_object(set_map) { |e, a|
           sorted_word = e.chars.sort.join
           a[sorted_word].add(e)
-        end
+        }
 
         anagram_set_map
           .select { |_, v| v.size > 1 }

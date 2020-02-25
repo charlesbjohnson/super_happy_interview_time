@@ -8,7 +8,7 @@ module LeetCode
     MIN = -(MAX + 1)
 
     def to_code(char)
-      char.ord - '0'.ord
+      char.ord - "0".ord
     end
 
     # Description:
@@ -37,17 +37,17 @@ module LeetCode
       return 0 if s.empty?
 
       start = s[0].match?(/[+-]/) ? 1 : 0
-      is_negative = s[0] == '-'
+      is_negative = s[0] == "-"
       s = s[start..-1]
 
       non_digit = s =~ /[^\d]/
       s = s[0...non_digit] if non_digit
 
-      result = (0...s.length).reverse_each.reduce(0) do |res, i|
+      result = (0...s.length).reverse_each.reduce(0) { |res, i|
         power = 10**(s.length - 1 - i)
         digit = to_code(s[i])
         res + (digit * power)
-      end
+      }
 
       result *= -1 if is_negative
 

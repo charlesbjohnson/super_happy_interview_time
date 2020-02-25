@@ -13,7 +13,7 @@ module LeetCode
       encoded_times_buffer = []
 
       chars.each do |char|
-        if ('0'..'9').cover?(char) && open_brackets.zero?
+        if ("0".."9").cover?(char) && open_brackets.zero?
           encoded_times_buffer.push(char)
 
           unless encoded_buffer.empty?
@@ -24,7 +24,7 @@ module LeetCode
           next
         end
 
-        if char == '['
+        if char == "["
           if open_brackets.zero?
             encoded_times = encoded_times_buffer.join.to_i
             encoded_times_buffer = []
@@ -36,7 +36,7 @@ module LeetCode
           next
         end
 
-        if char == ']'
+        if char == "]"
           if open_brackets == 1
             decoded_buffer.push(decode_string_recurse(encoded_times, encoded_buffer))
             encoded_buffer = []

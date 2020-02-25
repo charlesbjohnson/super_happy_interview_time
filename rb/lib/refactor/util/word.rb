@@ -4,7 +4,7 @@
 module Refactor
   module Util
     class Word
-      Mapping = Struct.new(:word, :num) do
+      Mapping = Struct.new(:word, :num) {
         def match?(str)
           regex.match?(str)
         end
@@ -34,25 +34,25 @@ module Refactor
         def complete_regex
           /\b#{word}\b/i
         end
-      end
+      }
 
       MAPPINGS = [
-        Mapping.new('one', 1),
-        Mapping.new('two', 2),
-        Mapping.new('three', 3),
-        Mapping.new('four', 4),
-        Mapping.new('five', 5),
-        Mapping.new('six', 6),
-        Mapping.new('seven', 7),
-        Mapping.new('eight', 8),
-        Mapping.new('nine', 9),
-        Mapping.new('ten', 10),
-        Mapping.new('eleven', 11),
-        Mapping.new('twelve', 12),
-        Mapping.new('thirteen', 13),
-        Mapping.new('fourteen', 14),
-        Mapping.new('fifteen', 15),
-        Mapping.new('sixteen', 16)
+        Mapping.new("one", 1),
+        Mapping.new("two", 2),
+        Mapping.new("three", 3),
+        Mapping.new("four", 4),
+        Mapping.new("five", 5),
+        Mapping.new("six", 6),
+        Mapping.new("seven", 7),
+        Mapping.new("eight", 8),
+        Mapping.new("nine", 9),
+        Mapping.new("ten", 10),
+        Mapping.new("eleven", 11),
+        Mapping.new("twelve", 12),
+        Mapping.new("thirteen", 13),
+        Mapping.new("fourteen", 14),
+        Mapping.new("fifteen", 15),
+        Mapping.new("sixteen", 16),
       ].freeze
 
       def self.match?(str)

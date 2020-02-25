@@ -1,16 +1,16 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'data_structures/binary_tree'
+require "config"
+require "data_structures/binary_tree"
 
 describe DataStructures::BinaryTree do
   subject { DataStructures::BinaryTree }
 
   it { _(subject).must_respond_to :from }
 
-  describe '::from' do
-    it 'creates a binary tree from required specified nodes' do
+  describe "::from" do
+    it "creates a binary tree from required specified nodes" do
       nodes = [[1, [2, 3]]]
       tree = subject.from(nodes, 1)
 
@@ -19,7 +19,7 @@ describe DataStructures::BinaryTree do
       assert_equal 3, tree.root.right.key
     end
 
-    it 'creates a binary tree to whatever depth specified' do
+    it "creates a binary tree to whatever depth specified" do
       nodes = [[1, [2, 3]], [2, [4, 5]], [3, [6, 7]]]
       tree = subject.from(nodes, 1)
 
@@ -32,14 +32,14 @@ describe DataStructures::BinaryTree do
       assert_equal 7, tree.root.right.right.key
     end
 
-    it 'can create a binary tree with no nodes' do
+    it "can create a binary tree with no nodes" do
       nodes = []
       tree = subject.from(nodes, 1)
 
       assert_nil tree.root
     end
 
-    it 'can create a binary tree with one node' do
+    it "can create a binary tree with one node" do
       nodes = [1]
       tree = subject.from(nodes, 1)
 
@@ -48,7 +48,7 @@ describe DataStructures::BinaryTree do
       assert_nil tree.root.right
     end
 
-    it 'can create an unbalanced binary tree' do
+    it "can create an unbalanced binary tree" do
       nodes = [[1, [2, 3]], [2, [5]], [5, [nil, 8]]]
       tree = subject.from(nodes, 1)
 

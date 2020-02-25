@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative './base'
-require_relative '../util/word'
+require_relative "./base"
+require_relative "../util/word"
 
 #
 # Before:
@@ -36,7 +36,7 @@ require_relative '../util/word'
 module Refactor
   module CodeStructure
     class DeclareProblem < Base
-      MATCH_REGEX   = /\btest[\w]+\b/i.freeze
+      MATCH_REGEX = /\btest[\w]+\b/i.freeze
       REPLACE_REGEX = /test/i.freeze
 
       def self.register(rewriter)
@@ -76,7 +76,7 @@ module Refactor
       def rename
         is_test = MATCH_REGEX.match?(declaration_node_name)
 
-        result = declaration_node_name.gsub(REPLACE_REGEX, '')
+        result = declaration_node_name.gsub(REPLACE_REGEX, "")
         result = "P#{Util::Word.replace(result)}"
 
         is_test ? "Test#{result}" : result

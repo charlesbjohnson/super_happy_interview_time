@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_572'
+require "config"
+require "leetcode/lc_572"
 
 module LeetCode
   class TestLC572 < Minitest::Test
@@ -38,7 +38,7 @@ module LeetCode
       [[0, 1, 2, 3, 4, 5, 6], [2, 5, 6], true],
       [[0, 1, 2, 3, 4, 5, 6], [0, 3, 4], false],
       [[0, 1, 2, 3], [0, 1, 2], false],
-      [[3, 4, 5, 1, nil, 2], [3, 1, 2], false]
+      [[3, 4, 5, 1, nil, 2], [3, 1, 2], false],
     ].each.with_index do |(left, right, expected), i|
       define_method(:"test_subtree?_#{i}") do
         assert_equal(expected, subtree?(build(left), build(right)))

@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_338'
+require "config"
+require "leetcode/lc_338"
 
 module LeetCode
   class TestLC338 < Minitest::Test
@@ -24,7 +24,7 @@ module LeetCode
       [12, [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2]],
       [13, [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3]],
       [14, [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3]],
-      [15, [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4]]
+      [15, [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4]],
     ].each.with_index do |(n, expected), i|
       define_method(:"test_count_bits_#{i}") do
         assert_equal(expected, count_bits(n))

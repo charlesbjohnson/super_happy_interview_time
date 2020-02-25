@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_621'
+require "config"
+require "leetcode/lc_621"
 
 module LeetCode
   class TestLC621 < Minitest::Test
@@ -20,7 +20,7 @@ module LeetCode
       [%w[A B A B A B], 2, 8],
       [%w[A A B B C C], 2, 6],
       [%w[A A B B B C], 2, 7],
-      [%w[A A A B C D E], 2, 7]
+      [%w[A A A B C D E], 2, 7],
     ].each.with_index do |(tasks, n, expected), i|
       define_method(:"test_least_interval_#{i}") do
         assert_equal(expected, least_interval(tasks, n))

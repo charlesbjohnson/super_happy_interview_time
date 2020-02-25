@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_538'
+require "config"
+require "leetcode/lc_538"
 
 module LeetCode
   class TestLC538 < Minitest::Test
@@ -35,7 +35,7 @@ module LeetCode
       [[1, 2, nil], [1, 3, nil]],
       [[1, 2, 3], [4, 6, 3]],
       [[1, 2, 3, nil, nil, 4, nil], [8, 10, 3, nil, nil, 7, nil]],
-      [[1, 2, 3, 4, 5, 6, 7], [17, 24, 10, 28, 22, 16, 7]]
+      [[1, 2, 3, 4, 5, 6, 7], [17, 24, 10, 28, 22, 16, 7]],
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_convert_bst_#{i}") do
         assert_equal(build(expected), convert_bst(build(tree)))

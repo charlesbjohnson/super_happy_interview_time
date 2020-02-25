@@ -1,15 +1,15 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'pathname'
+require "pathname"
 
-require_relative './slug'
+require_relative "./slug"
 
 module Refactor
   module Util
     class Path
-      LIB_DIR  = 'lib'
-      TEST_DIR = 'test'
+      LIB_DIR = "lib"
+      TEST_DIR = "test"
 
       Params = Struct.new(
         :root,
@@ -17,7 +17,7 @@ module Refactor
         :slug,
         :extension,
         :is_test
-      ) do
+      ) {
         def join
           "#{path}#{extension}"
         end
@@ -29,9 +29,9 @@ module Refactor
         end
 
         def prefixed_slug
-          "#{is_test ? 'test_' : ''}#{slug}"
+          "#{is_test ? "test_" : ""}#{slug}"
         end
-      end
+      }
 
       #
       # lib/ctci/chapter_one/one.rb
@@ -51,9 +51,9 @@ module Refactor
       def self.for_require(str)
         params = construct(str)
 
-        params.root      = ''
-        params.extension = ''
-        params.is_test   = false
+        params.root = ""
+        params.extension = ""
+        params.is_test = false
 
         params.join
       end
@@ -68,13 +68,13 @@ module Refactor
       private_class_method def self.construct(str)
         parts = split(str)
 
-        is_lib  = parts.any? { |part| LIB_DIR == part }
+        is_lib = parts.any? { |part| LIB_DIR == part }
         is_test = parts.any? { |part| TEST_DIR == part }
 
-        raise 'given path must specify root' if !is_lib && !is_test
+        raise "given path must specify root" if !is_lib && !is_test
 
-        extension                        = File.extname(str)
-        dir                              = is_lib ? LIB_DIR : TEST_DIR
+        extension = File.extname(str)
+        dir = is_lib ? LIB_DIR : TEST_DIR
         root, (source, chapter, problem) = partition(parts, dir)
 
         Params.new(
@@ -96,8 +96,8 @@ module Refactor
       #
       private_class_method def self.split(path)
         Pathname.new(path)
-                .each_filename
-                .map { |part| File.basename(part, File.extname(part)) }
+          .each_filename
+          .map { |part| File.basename(part, File.extname(part)) }
       end
 
       #

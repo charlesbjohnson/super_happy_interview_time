@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'set'
+require "set"
 
 module LeetCode
   # 202. Happy Number

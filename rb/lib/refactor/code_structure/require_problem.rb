@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative './base'
-require_relative '../util/path'
+require_relative "./base"
+require_relative "../util/path"
 
 #
 # Before:
@@ -26,7 +26,7 @@ module Refactor
       def match?
         send_message == :require \
           && send_param_node_type == :str \
-          && send_param_node_contents == 'config'
+          && send_param_node_contents == "config"
       end
 
       def execute!

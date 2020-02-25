@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_104'
+require "config"
+require "leetcode/lc_104"
 
 module LeetCode
   class TestLC104 < Minitest::Test
@@ -32,7 +32,7 @@ module LeetCode
       [[0, 1, nil], 2],
       [[0, nil, 1], 2],
       [[0, 1, nil, 2, nil, nil, nil, 3, nil], 4],
-      [[3, 9, 20, nil, nil, 15, 7], 3]
+      [[3, 9, 20, nil, nil, 15, 7], 3],
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_max_depth_#{i}") do
         assert_equal(expected, max_depth(build(tree)))

@@ -50,9 +50,9 @@ module CTCI
         private
 
         def shuffle_cards
-          @cards = 4.times.flat_map do |suit|
+          @cards = 4.times.flat_map { |suit|
             (0..12).map { |rank| Card.new(rank, suit) }
-          end.shuffle
+          }.shuffle
         end
       end
 

@@ -30,7 +30,7 @@ module LeetCode
     # @param x {Integer}
     # @return {Integer}
     def reverse(x)
-      reversed = x.to_s.reverse.tap { |s| s.chop!.prepend('-') if s[-1] == '-' }.to_i
+      reversed = x.to_s.reverse.tap { |s| s.chop!.prepend("-") if s[-1] == "-" }.to_i
       reversed = 0 if reversed > MAX || reversed < MIN
       reversed
     end

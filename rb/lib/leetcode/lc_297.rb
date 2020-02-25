@@ -48,7 +48,7 @@ module LeetCode
         queue.push(node.right)
       end
 
-      value.map(&:to_s).join(',').gsub(/,+$/, '')
+      value.map(&:to_s).join(",").gsub(/,+$/, "")
     end
 
     # @param data {String}
@@ -56,7 +56,7 @@ module LeetCode
     def deserialize(data)
       return if data.empty?
 
-      nodes = data.split(',').map { |s| s.empty? ? nil : TreeNode.new(s.to_i) }
+      nodes = data.split(",").map { |s| s.empty? ? nil : TreeNode.new(s.to_i) }
       nodes.reduce(0) do |i, node|
         next i unless node
 

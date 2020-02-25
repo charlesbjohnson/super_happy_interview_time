@@ -61,7 +61,7 @@ module CTCI
       private
 
       def letter(index)
-        (index + 'A'.ord).chr
+        (index + "A".ord).chr
       end
     end
   end

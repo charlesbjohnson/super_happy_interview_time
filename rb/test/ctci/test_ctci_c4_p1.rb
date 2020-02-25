@@ -1,17 +1,17 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'data_structures/binary_search_tree_map'
-require 'ctci/ctci_c4_p1'
+require "data_structures/binary_search_tree_map"
+require "ctci/ctci_c4_p1"
 
 module CTCI
   module C4
     class TestP1 < Minitest::Test
-      BinarySearchTreeMap = DataStructures::BinarySearchTreeMap.dup.class_exec do
+      BinarySearchTreeMap = DataStructures::BinarySearchTreeMap.dup.class_exec {
         include P1
-      end
+      }
 
       def setup
         @tree = BinarySearchTreeMap.new

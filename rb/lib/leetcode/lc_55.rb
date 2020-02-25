@@ -23,7 +23,7 @@ module LeetCode
     def can_jump(list)
       nearest = list.length - 1
 
-      result = list.reverse_each.map.with_index do |v, i|
+      result = list.reverse_each.map.with_index { |v, i|
         next true if i.zero?
 
         i = (list.length - 1) - i
@@ -33,7 +33,7 @@ module LeetCode
         end
 
         false
-      end
+      }
 
       result[result.length - 1]
     end

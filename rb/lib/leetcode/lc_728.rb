@@ -22,7 +22,7 @@ module LeetCode
     # @return {Array<Integer>}
     def self_dividing_numbers(left, right)
       (left..right).reject { |i| /0/ =~ i.to_s }
-                   .select { |i| i.to_s.chars.all? { |c| (i % c.to_i).zero? } }
+        .select { |i| i.to_s.chars.all? { |c| (i % c.to_i).zero? } }
     end
   end
 end

@@ -10,7 +10,7 @@ module CTCI
       # rotation of s using only one call of isSubstring
       # (e.g., "waterbottle" is a rotation of "erbottlewat")
       def rotation?(s, t)
-        if (s == '' || t == '') \
+        if (s == "" || t == "") \
             || (s.length != t.length)
           return false
         end

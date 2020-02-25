@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative 'linked_list'
+require_relative "linked_list"
 
 module DataStructures
   class HashMap
@@ -15,11 +15,11 @@ module DataStructures
     attr_reader :size
 
     def each(&block)
-      enum = Enumerator.new do |y|
+      enum = Enumerator.new { |y|
         @table.each do |c|
           c&.each { |i| y << i }
         end
-      end
+      }
 
       block_given? ? enum.each(&block) : enum
     end

@@ -1,10 +1,10 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'data_structures/min_max_stack'
-require 'epi/epi_c9_p1'
+require "data_structures/min_max_stack"
+require "epi/epi_c9_p1"
 
 module EPI
   module C9

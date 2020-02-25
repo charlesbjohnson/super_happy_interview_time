@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'ctci/ctci_c8_p6'
+require "config"
+require "ctci/ctci_c8_p6"
 
 module CTCI
   module C8
@@ -16,14 +16,14 @@ module CTCI
         it { _(subject).must_respond_to :rows }
         it { _(subject).must_respond_to :solve }
 
-        describe '::new' do
-          it 'creates a 3x3 board by default' do
+        describe "::new" do
+          it "creates a 3x3 board by default" do
             _(subject.unplaced.size).must_equal 9
             _(subject.board.size).must_equal 3
             _(subject.board.first.size).must_equal 3
           end
 
-          it 'creates pieces for each position in the puzzle' do
+          it "creates pieces for each position in the puzzle" do
             subject.unplaced.each { |p| _(p).must_be_kind_of(Piece) }
             _(subject.unplaced.count(&:corner?)).must_equal 4
             _(subject.unplaced.count { |p| p.top.flat? }).must_equal 3
@@ -35,8 +35,8 @@ module CTCI
           end
         end
 
-        describe '#solve' do
-          it 'fills the board so that each piece fits with those around it' do
+        describe "#solve" do
+          it "fills the board so that each piece fits with those around it" do
             subject.solve
 
             _(subject.unplaced).must_be_empty
@@ -87,15 +87,15 @@ module CTCI
         it { _(subject).must_respond_to :corner? }
         it { _(subject).must_respond_to :empty? }
 
-        describe 'piece constructors' do
-          describe '::empty' do
-            it 'creates an empty piece that has no edges, a null Piece object' do
+        describe "piece constructors" do
+          describe "::empty" do
+            it "creates an empty piece that has no edges, a null Piece object" do
               _(Piece.empty.edges.all?(&:none?)).must_equal true
             end
           end
 
-          describe '::that_fits_between' do
-            it 'creates a piece that fits between the given edges' do
+          describe "::that_fits_between" do
+            it "creates a piece that fits between the given edges" do
               edges_around = [Edge.none, nil, Edge.inward, Edge.outward]
               piece = Piece.that_fits_between(edges_around)
               top = piece.top.type
@@ -107,33 +107,33 @@ module CTCI
           end
         end
 
-        describe 'edges' do
-          describe '#edges' do
-            it 'returns edges from the top going clockwise' do
+        describe "edges" do
+          describe "#edges" do
+            it "returns edges from the top going clockwise" do
               _(subject.edges).must_equal edges
             end
           end
 
-          describe '#top' do
+          describe "#top" do
             it { _(subject.top).must_equal edges[0] }
           end
 
-          describe '#right' do
+          describe "#right" do
             it { _(subject.right).must_equal edges[1] }
           end
 
-          describe '#bottom' do
+          describe "#bottom" do
             it { _(subject.bottom).must_equal edges[2] }
           end
 
-          describe '#left' do
+          describe "#left" do
             it { _(subject.left).must_equal edges[3] }
           end
         end
 
-        describe 'piece edge checking' do
-          describe '#corner?' do
-            it 'returns true if two consecutive edges are both flat' do
+        describe "piece edge checking" do
+          describe "#corner?" do
+            it "returns true if two consecutive edges are both flat" do
               # start at top left, going counter clockwise
               _(subject).must_be :corner?
               _(Piece.new(edges.rotate)).must_be :corner?
@@ -141,7 +141,7 @@ module CTCI
               _(Piece.new(edges.rotate(3))).must_be :corner?
             end
 
-            it 'returns false if not a corner piece' do
+            it "returns false if not a corner piece" do
               flat_top_bottom = [1, 2, 1, 3].map { |e| Edge.new(e) }
               _(Piece.new(flat_top_bottom)).wont_be :corner?
 
@@ -155,7 +155,7 @@ module CTCI
             end
           end
 
-          describe '#empty?' do
+          describe "#empty?" do
             it do
               _(Piece.empty).must_be :empty?
               _(subject).wont_be :empty?
@@ -184,17 +184,17 @@ module CTCI
         it { _(subject).must_respond_to :inward? }
         it { _(subject).must_respond_to :outward? }
 
-        describe 'edge constructors' do
-          describe '::none' do
+        describe "edge constructors" do
+          describe "::none" do
             it { _(Edge.none.type).must_equal :none }
           end
 
-          describe '::flat' do
+          describe "::flat" do
             it { _(Edge.flat.type).must_equal :flat }
           end
 
-          describe '::rand_in_out' do
-            it 'returns either an inward or outward edge randomly' do
+          describe "::rand_in_out" do
+            it "returns either an inward or outward edge randomly" do
               r = Array.new(10) { Edge.rand_in_out }
               _(r.all? { |e| e.type == :inward }).must_equal false
               _(r.all? { |e| e.type == :outward }).must_equal false
@@ -203,8 +203,8 @@ module CTCI
             end
           end
 
-          describe '::complement' do
-            it 'returns an edge depending on the type of edge given' do
+          describe "::complement" do
+            it "returns an edge depending on the type of edge given" do
               none_complement = Edge.complement(none).type
               is_inward = none_complement == :inward
               is_outward = none_complement == :outward
@@ -215,14 +215,14 @@ module CTCI
               _(Edge.complement(outward).type).must_equal :inward
             end
 
-            it 'returns a flat edge if no edge or nil given' do
+            it "returns a flat edge if no edge or nil given" do
               _(Edge.complement.type).must_equal :flat
               _(Edge.complement(nil).type).must_equal :flat
             end
           end
         end
 
-        describe '#fits_with?' do
+        describe "#fits_with?" do
           it do
             _(none).must_be :fits_with?, none.clone
             _(none).must_be :fits_with?, inward
@@ -256,8 +256,8 @@ module CTCI
           end
         end
 
-        describe 'edge checking' do
-          describe '#none?' do
+        describe "edge checking" do
+          describe "#none?" do
             it do
               _(none).must_be :none?
               _(flat).wont_be :none?
@@ -266,7 +266,7 @@ module CTCI
             end
           end
 
-          describe '#flat?' do
+          describe "#flat?" do
             it do
               _(none).wont_be :flat?
               _(flat).must_be :flat?
@@ -275,7 +275,7 @@ module CTCI
             end
           end
 
-          describe '#inward?' do
+          describe "#inward?" do
             it do
               _(none).wont_be :inward?
               _(flat).wont_be :inward?
@@ -284,7 +284,7 @@ module CTCI
             end
           end
 
-          describe '#outward?' do
+          describe "#outward?" do
             it do
               _(none).wont_be :outward?
               _(flat).wont_be :outward?

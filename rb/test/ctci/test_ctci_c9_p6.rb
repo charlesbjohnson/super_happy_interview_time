@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
-require 'ctci/ctci_c9_p6'
+require "config"
+require "ctci/ctci_c9_p6"
 
 module CTCI
   module C9

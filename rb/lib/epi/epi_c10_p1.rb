@@ -1,7 +1,7 @@
 # typed: strong
 # frozen_string_literal: true
 
-require 'ctci/ctci_c4_p1'
+require "ctci/ctci_c4_p1"
 
 module EPI
   module C10

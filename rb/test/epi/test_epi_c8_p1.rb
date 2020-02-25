@@ -1,10 +1,10 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'data_structures/linked_list'
-require 'epi/epi_c8_p1'
+require "data_structures/linked_list"
+require "epi/epi_c8_p1"
 
 module EPI
   module C8

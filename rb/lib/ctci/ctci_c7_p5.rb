@@ -19,15 +19,15 @@ module CTCI
           if squares_horizontal?(center_a, center_b)
             # Lefts and rights of each square
             a_intersections = [Point.new([a.top_left.x, center_a.y]),
-                               Point.new([a.top_right.x, center_a.y])]
+                               Point.new([a.top_right.x, center_a.y]),]
             b_intersections = [Point.new([b.top_left.x, center_b.y]),
-                               Point.new([b.top_right.x, center_b.y])]
+                               Point.new([b.top_right.x, center_b.y]),]
           elsif squares_vertical?(center_a, center_b)
             # Tops and bottoms of each square
             a_intersections = [Point.new([center_a.x, a.top_left.y]),
-                               Point.new([center_a.x, a.bottom_left.y])]
+                               Point.new([center_a.x, a.bottom_left.y]),]
             b_intersections = [Point.new([center_b.x, b.top_left.y]),
-                               Point.new([center_b.x, b.bottom_left.y])]
+                               Point.new([center_b.x, b.bottom_left.y]),]
           end
         else
           a_intersections = intersects_at(center_slope, a)
@@ -125,8 +125,8 @@ module CTCI
 
       def farthest(points)
         comparisons(points).map { |fp, tp| [distance(fp, tp), [fp, tp]] }
-                           .max_by(&:first)
-                           .last
+          .max_by(&:first)
+          .last
       end
 
       def comparisons(points)

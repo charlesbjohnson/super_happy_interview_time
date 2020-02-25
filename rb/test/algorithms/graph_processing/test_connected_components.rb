@@ -1,10 +1,10 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'algorithms/graph_processing/connected_components'
-require 'data_structures/undirected_graph'
+require "algorithms/graph_processing/connected_components"
+require "data_structures/undirected_graph"
 
 describe Algorithms::GraphProcessing::ConnectedComponents do
   subject { Algorithms::GraphProcessing::ConnectedComponents.new(graph) }
@@ -23,7 +23,7 @@ describe Algorithms::GraphProcessing::ConnectedComponents do
       [7, 8],
       [9, 10],
       [9, 11],
-      [9, 12]
+      [9, 12],
     ]
   end
 
@@ -33,28 +33,28 @@ describe Algorithms::GraphProcessing::ConnectedComponents do
   it { _(subject).must_respond_to :count }
   it { _(subject).must_respond_to :id }
 
-  describe '#connected?' do
-    describe 'when the vertices are connected' do
-      it 'returns true' do
+  describe "#connected?" do
+    describe "when the vertices are connected" do
+      it "returns true" do
         _(subject.connected?(3, 6)).must_equal(true)
       end
     end
 
-    describe 'when the vertices are not connected' do
-      it 'returns false' do
+    describe "when the vertices are not connected" do
+      it "returns false" do
         _(subject.connected?(2, 8)).must_equal(false)
       end
     end
   end
 
-  describe '#count' do
-    it 'returns the number of component groups for the graph' do
+  describe "#count" do
+    it "returns the number of component groups for the graph" do
       _(subject.count).must_equal(3)
     end
   end
 
-  describe '#id' do
-    it 'returns the id of the component group for the target vertex' do
+  describe "#id" do
+    it "returns the id of the component group for the target vertex" do
       _(subject.id(12)).must_equal(2)
     end
   end

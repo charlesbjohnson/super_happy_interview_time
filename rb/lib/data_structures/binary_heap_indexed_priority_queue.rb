@@ -97,9 +97,9 @@ module DataStructures
 
     def each(&block)
       cloned = clone
-      enum = Enumerator.new do |y|
+      enum = Enumerator.new { |y|
         y.yield([cloned.peek_index, cloned.pop]) until cloned.size.zero?
-      end
+      }
 
       block_given? ? enum.each(&block) : enum
     end

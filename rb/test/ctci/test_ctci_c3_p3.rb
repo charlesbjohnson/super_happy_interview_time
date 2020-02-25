@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
-require 'ctci/ctci_c3_p3'
+require "config"
+require "ctci/ctci_c3_p3"
 
 module CTCI
   module C3
@@ -21,7 +21,7 @@ module CTCI
       end
 
       def test_size_when_over_capacity
-        4.times { @stack.push('foo') }
+        4.times { @stack.push("foo") }
         assert_equal 4, @stack.size
       end
 

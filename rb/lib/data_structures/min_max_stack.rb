@@ -1,10 +1,10 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'forwardable'
+require "forwardable"
 
-require_relative 'stack'
-require_relative 'single_node'
+require_relative "stack"
+require_relative "single_node"
 
 module DataStructures
   class MinMaxStack < Stack

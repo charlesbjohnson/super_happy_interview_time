@@ -42,8 +42,8 @@ module LeetCode
       end
 
       list.each.with_index
-          .select { |v, _i| v.nil? }
-          .map { |_, i| i + 1 }
+        .select { |v, _i| v.nil? }
+        .map { |_, i| i + 1 }
     end
   end
 end

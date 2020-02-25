@@ -30,8 +30,8 @@ module LeetCode
       end
 
       s = s.chars
-           .map.with_index { |c, i| [c, i] }
-           .sort_by { |c, _| c }
+        .map.with_index { |c, i| [c, i] }
+        .sort_by { |c, _| c }
 
       uniq = []
 

@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_560'
+require "config"
+require "leetcode/lc_560"
 
 module LeetCode
   class TestLC560 < Minitest::Test
@@ -29,7 +29,7 @@ module LeetCode
       [[1, 2, 3], 4, 0],
       [[1, 2, 3], 5, 1],
       [[1, 2, 3], 6, 1],
-      [[1, -1, 1, -1, 1], 0, 6]
+      [[1, -1, 1, -1, 1], 0, 6],
     ].each.with_index do |(list, k, expected), i|
       define_method(:"test_subarray_sum_#{i}") do
         assert_equal(expected, subarray_sum(list, k))

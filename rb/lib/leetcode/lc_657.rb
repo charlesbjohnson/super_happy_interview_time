@@ -31,13 +31,13 @@ module LeetCode
 
       moves.chars.each do |move|
         case move
-        when 'R'
+        when "R"
           current.x += 1
-        when 'L'
+        when "L"
           current.x -= 1
-        when 'U'
+        when "U"
           current.y += 1
-        when 'D'
+        when "D"
           current.y -= 1
         end
       end

@@ -1,17 +1,17 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'data_structures/graph'
-require 'ctci/ctci_c4_p2'
+require "data_structures/graph"
+require "ctci/ctci_c4_p2"
 
 module CTCI
   module C4
     class TestP2 < Minitest::Test
-      Graph = DataStructures::Graph.dup.class_exec do
+      Graph = DataStructures::Graph.dup.class_exec {
         include P2
-      end
+      }
 
       def setup
         @graph = Graph.new

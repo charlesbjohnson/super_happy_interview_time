@@ -59,9 +59,9 @@ module CTCI
           [[0, -1, 0, 1],
            [-1, 0, 1, 0],
            [-1, -1, 1, 1],
-           [-1, 1, 1, -1]].each do |r_dec, c_dec, r_inc, c_inc|
+           [-1, 1, 1, -1],].each do |r_dec, c_dec, r_inc, c_inc|
             return true if scan_direction(r, c, r_dec, c_dec, r_inc, c_inc,
-                                          color).any?
+              color).any?
           end
 
           false
@@ -78,9 +78,9 @@ module CTCI
           to_flip = [[0, -1, 0, 1],
                      [-1, 0, 1, 0],
                      [-1, -1, 1, 1],
-                     [-1, 1, 1, -1]].flat_map do |r_dec, c_dec, r_inc, c_inc|
+                     [-1, 1, 1, -1],].flat_map { |r_dec, c_dec, r_inc, c_inc|
             scan_direction(r, c, r_dec, c_dec, r_inc, c_inc, color)
-          end
+          }
 
           to_flip.each { |row, col| token_at(row, col).flip! }
         end
@@ -141,7 +141,7 @@ module CTCI
       end
 
       class Token
-        @k_to_v = { 0 => :none, -1 => :black, 1 => :white }
+        @k_to_v = {0 => :none, -1 => :black, 1 => :white}
         @v_to_k = @k_to_v.invert
         @colors = @k_to_v.values
 

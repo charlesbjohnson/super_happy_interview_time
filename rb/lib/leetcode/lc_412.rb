@@ -35,10 +35,10 @@ module LeetCode
       Array.new(n) do |i|
         i += 1
 
-        s = ''
+        s = ""
 
-        s += 'Fizz' if (i % 3).zero?
-        s += 'Buzz' if (i % 5).zero?
+        s += "Fizz" if (i % 3).zero?
+        s += "Buzz" if (i % 5).zero?
         s += i.to_s if s.empty?
 
         s

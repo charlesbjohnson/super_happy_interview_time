@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_237'
+require "config"
+require "leetcode/lc_237"
 
 module LeetCode
   class TestLC237 < Minitest::Test
@@ -26,7 +26,7 @@ module LeetCode
       [[1, 2, 3], proc { |list| list.next }, [1, 3]],
       [[1, 2, 3], proc { |list| list }, [2, 3]],
       [[1, 2, 2], proc { |list| list }, [2, 2]],
-      [[1, 2, 3, 4], proc { |list| list.next.next }, [1, 2, 4]]
+      [[1, 2, 3, 4], proc { |list| list.next.next }, [1, 2, 4]],
     ].each.with_index do |(list, pointer, expected), i|
       define_method(:"test_delete_node_#{i}") do
         list = build(list)

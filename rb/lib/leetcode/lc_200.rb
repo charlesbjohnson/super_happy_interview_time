@@ -7,9 +7,9 @@ module LeetCode
     def num_islands_recurse(grid, row, col)
       return unless (0...grid.length).cover?(row)
       return unless (0...grid[row].length).cover?(col)
-      return unless grid[row][col] == '1'
+      return unless grid[row][col] == "1"
 
-      grid[row][col] = '0'
+      grid[row][col] = "0"
 
       num_islands_recurse(grid, row + 1, col)
       num_islands_recurse(grid, row - 1, col)
@@ -48,7 +48,7 @@ module LeetCode
 
       (0...grid.length).each do |row|
         (0...grid[row].length).each do |col|
-          if grid[row][col] == '1'
+          if grid[row][col] == "1"
             num_islands_recurse(grid, row, col)
             count += 1
           end

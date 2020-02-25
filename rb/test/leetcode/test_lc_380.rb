@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_380'
+require "config"
+require "leetcode/lc_380"
 
 module LeetCode
   class TestLC380 < Minitest::Test
@@ -12,7 +12,7 @@ module LeetCode
       [[[:insert, 1]], [1], []],
       [[[:insert, 1], [:insert, 1]], [1], []],
       [[[:insert, 1], [:remove, 1]], [], []],
-      [[[:insert, 1], [:insert, 2], [:remove, 1]], [2], [1]]
+      [[[:insert, 1], [:insert, 2], [:remove, 1]], [2], [1]],
     ].each.with_index do |(methods, included, excluded), i|
       define_method(:"test_insert_remove_#{i}") do
         set = RandomizedSet.new
@@ -26,7 +26,7 @@ module LeetCode
       [[[:insert, 1]], 2],
       [[[:insert, 1], [:insert, 2]], 3],
       [[[:insert, 1], [:insert, 2], [:insert, 3]], 5],
-      [[[:insert, 1], [:insert, 2], [:remove, 1]], 2]
+      [[[:insert, 1], [:insert, 2], [:remove, 1]], 2],
     ].each.with_index do |(methods, times), i|
       define_method(:"test_random_#{i}") do
         set = RandomizedSet.new

@@ -25,15 +25,15 @@ module LeetCode
 
       tokens.each do |token|
         case token
-        when '*'
+        when "*"
           stack.push(stack.pop * stack.pop)
-        when '/'
+        when "/"
           right = stack.pop
           left = stack.pop
           stack.push((left / right.to_f).to_i)
-        when '+'
+        when "+"
           stack.push(stack.pop + stack.pop)
-        when '-'
+        when "-"
           right = stack.pop
           left = stack.pop
           stack.push(left - right)

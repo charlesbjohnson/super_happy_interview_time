@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_226'
+require "config"
+require "leetcode/lc_226"
 
 module LeetCode
   class TestLC226 < Minitest::Test
@@ -33,7 +33,7 @@ module LeetCode
       [[0], [0]],
       [[0, 1, nil], [0, nil, 1]],
       [[0, nil, 1], [0, 1, nil]],
-      [[0, 1, 2, 3, 4, 5, 6], [0, 2, 1, 6, 5, 4, 3]]
+      [[0, 1, 2, 3, 4, 5, 6], [0, 2, 1, 6, 5, 4, 3]],
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_invert_tree_#{i}") do
         assert_equal(build(expected), invert_tree(build(tree)))

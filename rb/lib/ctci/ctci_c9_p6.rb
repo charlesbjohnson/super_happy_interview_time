@@ -13,7 +13,7 @@ module CTCI
       # Output: ((())), (()()), (())(), ()(()), ()()()
       def parentheses_combinations(n)
         result = []
-        r_parentheses_combinations((' ' * (n * 2)), n, n, 0, result) if n.positive?
+        r_parentheses_combinations((" " * (n * 2)), n, n, 0, result) if n.positive?
         result
       end
 
@@ -24,12 +24,12 @@ module CTCI
           result.push(s.clone)
         else
           if left.nonzero?
-            s[i] = '('
+            s[i] = "("
             r_parentheses_combinations(s, left.pred, right, i.succ, result)
           end
 
           if right > left
-            s[i] = ')'
+            s[i] = ")"
             r_parentheses_combinations(s, left, right.pred, i.succ, result)
           end
         end

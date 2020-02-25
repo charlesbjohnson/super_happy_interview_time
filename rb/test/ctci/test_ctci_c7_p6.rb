@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
-require 'ctci/ctci_c7_p6'
+require "config"
+require "ctci/ctci_c7_p6"
 
 module CTCI
   module C7
@@ -31,22 +31,22 @@ module CTCI
         pts = [[2.0, 3.0], [-1.0, 5.0], [2.0, 8.0], [2.0, 1.0], [6.25, 4.25]]
         pts.map! { |p| Point.new(p) }
         assert_equal Line.new(Float::INFINITY, Float::NAN, 2.0),
-                     line_of_best_fit(pts)
+          line_of_best_fit(pts)
       end
 
       def test_returns_line_passing_through_horizontal
         pts = [[0.0, 4.0], [-1.0, 3.0], [12.0, 4.0], [6.25, 4.15], [-3.0, 4.0]]
         pts.map! { |p| Point.new(p) }
         assert_equal Line.new(0.0, 4.0),
-                     line_of_best_fit(pts)
+          line_of_best_fit(pts)
       end
 
       def test_returns_line_passing_through_approximate
         pts = [[0.00242, 0.0], [1.001453, 1.0066563], [2.0020214, 2.00223432],
-               [-5.0, 3.0], [-4.0, 2.0]]
+               [-5.0, 3.0], [-4.0, 2.0],]
         pts.map! { |p| Point.new(p) }
         assert_equal Line.new(1.007630678866464, 0.0, 0.0),
-                     line_of_best_fit(pts)
+          line_of_best_fit(pts)
       end
     end
   end

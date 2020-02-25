@@ -16,9 +16,9 @@ module CTCI
 
       def char_count(s)
         s.chars
-         .group_by { |c| c }
-         .map { |k, v| [k, v.length] }
-         .to_set
+          .group_by { |c| c }
+          .map { |k, v| [k, v.length] }
+          .to_set
       end
     end
   end

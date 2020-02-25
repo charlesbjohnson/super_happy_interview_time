@@ -20,10 +20,10 @@ module LeetCode
     # @return {Array<Integer>}
     def top_k_frequent(list, k)
       list = list.each.with_object(Hash.new { 0 }) { |n, counts| counts[n] += 1 }
-      list = list.each.with_object([]) do |(n, count), counts|
+      list = list.each.with_object([]) { |(n, count), counts|
         counts[count] = [] unless counts[count]
         counts[count].push(n)
-      end
+      }
 
       result = []
 

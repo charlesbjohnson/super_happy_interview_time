@@ -12,8 +12,8 @@ module CTCI
 
         result = matrix.dup
         rows_with_zero = result.map
-                               .with_index { |row, i| i if row.include?(0) }
-                               .compact
+          .with_index { |row, i| i if row.include?(0) }
+          .compact
         rows_with_zero.each { |i| result[i] = Array.new(column_length, 0) }
 
         result

@@ -21,7 +21,7 @@ module LeetCode
     def subarray_sum(list, k)
       result = 0
 
-      sums = { 0 => 1 }
+      sums = {0 => 1}
       sum = 0
 
       list.each do |v|

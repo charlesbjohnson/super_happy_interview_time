@@ -1,14 +1,14 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'parser'
-require 'parser/runner/ruby_rewrite'
+require "parser"
+require "parser/runner/ruby_rewrite"
 
-require_relative './code_structure/call_method_on_problem'
-require_relative './code_structure/declare_chapter'
-require_relative './code_structure/declare_problem'
-require_relative './code_structure/include_problem'
-require_relative './code_structure/require_problem'
+require_relative "./code_structure/call_method_on_problem"
+require_relative "./code_structure/declare_chapter"
+require_relative "./code_structure/declare_problem"
+require_relative "./code_structure/include_problem"
+require_relative "./code_structure/require_problem"
 
 module Refactor
   module CodeStructure
@@ -44,9 +44,9 @@ module Refactor
       def initialize(path:)
         @path = path
 
-        @class_refactor_factories  = []
+        @class_refactor_factories = []
         @module_refactor_factories = []
-        @send_refactor_factories   = []
+        @send_refactor_factories = []
 
         CodeStructure::CallMethodOnProblem.register(self)
         CodeStructure::DeclareChapter.register(self)
@@ -85,12 +85,12 @@ module Refactor
       private
 
       def find_and_execute_refactor(factories, node)
-        refactor = factories.reduce(nil) do |found, factory|
+        refactor = factories.reduce(nil) { |found, factory|
           break found if found
 
           refactor = factory.new(self, node)
           refactor if refactor.match?
-        end
+        }
 
         refactor&.execute!
       end

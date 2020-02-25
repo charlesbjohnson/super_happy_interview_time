@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'ctci/ctci_c9_p7'
+require "config"
+require "ctci/ctci_c9_p7"
 
 module CTCI
   module C9
@@ -14,13 +14,13 @@ module CTCI
                   %i[r b b b r],
                   %i[r b r r r],
                   %i[r b b r r],
-                  %i[r r r r r]]
+                  %i[r r r r r],]
 
         expected = [%i[g g g g g],
                     %i[g b b b g],
                     %i[g b g g g],
                     %i[g b b g g],
-                    %i[g g g g g]]
+                    %i[g g g g g],]
 
         paint_fill([0, 0], :g, screen)
         assert_equal expected, screen
@@ -31,13 +31,13 @@ module CTCI
                   %i[r b b b r],
                   %i[r b r b r],
                   %i[r b b r r],
-                  %i[r r r r r]]
+                  %i[r r r r r],]
 
         expected = [%i[g g g g g],
                     %i[g b b b g],
                     %i[g b r b g],
                     %i[g b b g g],
-                    %i[g g g g g]]
+                    %i[g g g g g],]
 
         paint_fill([3, 3], :g, screen)
         assert_equal expected, screen
@@ -48,7 +48,7 @@ module CTCI
                   %i[r b b r r],
                   %i[r b r r r],
                   %i[r r r r r],
-                  %i[r r r r r]]
+                  %i[r r r r r],]
 
         expected = Marshal.load(Marshal.dump(screen))
 

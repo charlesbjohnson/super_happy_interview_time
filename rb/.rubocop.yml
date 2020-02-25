@@ -1,6 +1,7 @@
 ---
 inherit_from:
   - .rubocop.sorbet.yml
+  - .rubocop.standard.yml
 
 require:
   - rubocop-minitest

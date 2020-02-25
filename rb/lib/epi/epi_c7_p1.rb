@@ -8,18 +8,18 @@ module EPI
       def i_to_s(i)
         i = i.to_i
 
-        return '0' if i.zero?
+        return "0" if i.zero?
 
-        result = ''
+        result = ""
         is_negative = i.negative?
         i = i.abs
 
         until i.zero?
           i, digit = i.divmod(10)
-          result = ('0'.ord + digit).chr + result
+          result = ("0".ord + digit).chr + result
         end
 
-        result = '-' + result if is_negative
+        result = "-" + result if is_negative
         result
       end
 
@@ -28,19 +28,19 @@ module EPI
 
         raise "invalid input `#{s}'" if s.empty?
 
-        is_negative = s[0] == '-'
+        is_negative = s[0] == "-"
         start = is_negative ? 1 : 0
 
-        result = (start...s.length).reverse_each.with_index.reduce(0) do |a, (e, i)|
+        result = (start...s.length).reverse_each.with_index.reduce(0) { |a, (e, i)|
           character = s[e]
 
-          raise "invalid character `#{character}'" unless ('0'..'9').cover?(character)
+          raise "invalid character `#{character}'" unless ("0".."9").cover?(character)
 
           power = 10**i
-          digit = character.ord - '0'.ord
+          digit = character.ord - "0".ord
 
           a + digit * power
-        end
+        }
 
         result *= -1 if is_negative
         result

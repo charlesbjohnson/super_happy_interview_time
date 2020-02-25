@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative './code_structure'
-require_relative './file_structure'
+require_relative "./code_structure"
+require_relative "./file_structure"
 
 module Refactor
   class Main
@@ -10,9 +10,9 @@ module Refactor
       type, path = args
 
       case type
-      when 'code'
+      when "code"
         CodeStructure.refactor!(path: path)
-      when 'file'
+      when "file"
         FileStructure.refactor!(path: path)
       end
     end

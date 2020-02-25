@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_108'
+require "config"
+require "leetcode/lc_108"
 
 module LeetCode
   class TestLC108 < Minitest::Test
@@ -33,7 +33,7 @@ module LeetCode
       [[0], [0]],
       [[0, 1], [1, 0]],
       [[0, 1, 2], [1, 0, 2]],
-      [[-10, -3, 0, 5, 9], [0, -3, 9, -10, nil, 5]]
+      [[-10, -3, 0, 5, 9], [0, -3, 9, -10, nil, 5]],
     ].each.with_index do |(list, expected), i|
       define_method(:"test_sorted_array_to_bst_#{i}") do
         assert_equal(build(expected), sorted_array_to_bst(list))

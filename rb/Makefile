@@ -56,6 +56,7 @@ console:
 
 .PHONY: fmt
 fmt:
+	$(Q)bundle exec standardrb $(OPTS)
 	$(Q)bundle exec rubocop --auto-correct $(OPTS)
 
 

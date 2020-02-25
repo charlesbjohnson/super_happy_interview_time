@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_74'
+require "config"
+require "leetcode/lc_74"
 
 module LeetCode
   class TestLC74 < Minitest::Test
@@ -12,63 +12,63 @@ module LeetCode
       [
         [],
         0,
-        false
+        false,
       ],
       [
         [[]],
         0,
-        false
+        false,
       ],
       [
         [
           [1, 2],
-          [3, 4]
+          [3, 4],
         ],
         0,
-        false
+        false,
       ],
       [
         [
           [1, 2],
-          [3, 4]
+          [3, 4],
         ],
         5,
-        false
+        false,
       ],
       [
         [
           [1, 2],
-          [3, 4]
+          [3, 4],
         ],
         1,
-        true
+        true,
       ],
       [
         [
           [1, 2],
-          [3, 4]
+          [3, 4],
         ],
         4,
-        true
+        true,
       ],
       [
         [
           [1, 3, 5, 7],
           [10, 11, 16, 20],
-          [23, 30, 34, 50]
+          [23, 30, 34, 50],
         ],
         3,
-        true
+        true,
       ],
       [
         [
           [1, 3, 5, 7],
           [10, 11, 16, 20],
-          [23, 30, 34, 50]
+          [23, 30, 34, 50],
         ],
         15,
-        false
-      ]
+        false,
+      ],
     ].each.with_index do |(matrix, target, expected), i|
       define_method(:"test_search_matrix_#{i}") do
         assert_equal(expected, search_matrix(matrix, target))

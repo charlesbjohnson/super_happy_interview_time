@@ -19,8 +19,8 @@ module LeetCode
     # @return {Array<Integer>}
     def two_sum(list, target)
       list = list
-             .map.with_index { |n, i| [n, i] }
-             .sort_by { |(n, _)| n }
+        .map.with_index { |n, i| [n, i] }
+        .sort_by { |(n, _)| n }
 
       left = 0
       right = list.length - 1

@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'data_structures/stack'
+require "data_structures/stack"
 
 module CTCI
   module C3

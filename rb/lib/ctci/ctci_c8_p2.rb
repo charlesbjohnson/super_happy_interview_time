@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'observer'
+require "observer"
 
 module CTCI
   module C8
@@ -16,9 +16,9 @@ module CTCI
       # to the first available employee.
       class CallCenter
         def initialize
-          @staff = Hash[StaffMember.roles.map do |r|
-            [r, { available: [], unavailable: [] }]
-          end]
+          @staff = Hash[StaffMember.roles.map { |r|
+            [r, {available: [], unavailable: []}]
+          }]
           @wait_list = []
         end
 

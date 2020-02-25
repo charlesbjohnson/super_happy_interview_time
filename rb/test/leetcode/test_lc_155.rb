@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_155'
+require "config"
+require "leetcode/lc_155"
 
 module LeetCode
   class TestLC155 < Minitest::Test

@@ -29,14 +29,14 @@ module LeetCode
     # @param stones {String}
     # @return {Integer}
     def num_jewels_in_stones(jewels, stones)
-      to_code = proc { |c| c.ord - 'A'.ord }
+      to_code = proc { |c| c.ord - "A".ord }
 
       jewels = jewels.chars.map(&to_code)
       stones = stones.chars.map(&to_code)
 
-      counts = stones.each.with_object(jewels.each.with_object([]) { |j, count| count[j] = 0 }) do |s, count|
+      counts = stones.each.with_object(jewels.each.with_object([]) { |j, count| count[j] = 0 }) { |s, count|
         count[s] += 1 if count[s]
-      end
+      }
 
       counts.reject(&:nil?).sum
     end

@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
-require 'ctci/ctci_c1_p1'
+require "config"
+require "ctci/ctci_c1_p1"
 
 module CTCI
   module C1
@@ -10,21 +10,21 @@ module CTCI
       include P1
 
       def test_returns_true_when_all_characters_unique
-        s = 'abcde'
+        s = "abcde"
         result = unique_chars?(s)
 
         assert(result)
       end
 
       def test_returns_false_when_not_all_characters_unique
-        s = 'abcade'
+        s = "abcade"
         result = unique_chars?(s)
 
         refute(result)
       end
 
       def test_returns_true_when_empty_string
-        s = ''
+        s = ""
         result = unique_chars?(s)
 
         assert(result)

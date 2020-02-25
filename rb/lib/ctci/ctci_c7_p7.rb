@@ -15,9 +15,9 @@ module CTCI
 
         result = nil
         0.upto(k) do
-          possible_minimums = queues.map.with_index do |(_, q), qi|
+          possible_minimums = queues.map.with_index { |(_, q), qi|
             [(q.first || LARGE_NUMBER), qi]
-          end
+          }
 
           minimum = possible_minimums.min
           minimum_value = minimum[0]

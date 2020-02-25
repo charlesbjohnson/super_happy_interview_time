@@ -10,7 +10,7 @@ module Refactor
 
       def initialize(rewriter, node)
         @rewriter = rewriter
-        @node     = node
+        @node = node
       end
 
       def match?

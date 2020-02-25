@@ -1,10 +1,10 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'algorithms/graph_processing/depth_first_search'
-require 'data_structures/undirected_graph'
+require "algorithms/graph_processing/depth_first_search"
+require "data_structures/undirected_graph"
 
 describe Algorithms::GraphProcessing::DepthFirstSearch do
   subject { Algorithms::GraphProcessing::DepthFirstSearch.new(graph, 0) }
@@ -14,7 +14,7 @@ describe Algorithms::GraphProcessing::DepthFirstSearch do
   it { _(subject).must_respond_to :marked? }
   it { _(subject).must_respond_to :count }
 
-  describe 'with an undirected graph' do
+  describe "with an undirected graph" do
     let(:edges) do
       [
         [0, 1],
@@ -28,30 +28,30 @@ describe Algorithms::GraphProcessing::DepthFirstSearch do
         [7, 8],
         [9, 10],
         [9, 11],
-        [9, 12]
+        [9, 12],
       ]
     end
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe '#marked?' do
-      it 'returns true if the source is connected to the target' do
+    describe "#marked?" do
+      it "returns true if the source is connected to the target" do
         _(subject.marked?(3)).must_equal(true)
       end
 
-      it 'returns false if the source is not connected to the target' do
+      it "returns false if the source is not connected to the target" do
         _(subject.marked?(9)).must_equal(false)
       end
     end
 
-    describe '#count' do
-      it 'returns the number of vertices connected to the source' do
+    describe "#count" do
+      it "returns the number of vertices connected to the source" do
         _(subject.count).must_equal(6)
       end
     end
   end
 
-  describe 'with a directed graph' do
+  describe "with a directed graph" do
     let(:graph) { DataStructures::DirectedGraph.new }
     let(:edges) do
       [
@@ -75,24 +75,24 @@ describe Algorithms::GraphProcessing::DepthFirstSearch do
         [9, 11],
         [10, 12],
         [11, 12],
-        [12, 9]
+        [12, 9],
       ]
     end
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe '#marked?' do
-      it 'returns true if the source is connected to the target' do
+    describe "#marked?" do
+      it "returns true if the source is connected to the target" do
         _(subject.marked?(3)).must_equal(true)
       end
 
-      it 'returns false if the source is not connected to the target' do
+      it "returns false if the source is not connected to the target" do
         _(subject.marked?(9)).must_equal(false)
       end
     end
 
-    describe '#count' do
-      it 'returns the number of vertices connected to the source' do
+    describe "#count" do
+      it "returns the number of vertices connected to the source" do
         _(subject.count).must_equal(5)
       end
     end

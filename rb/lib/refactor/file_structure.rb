@@ -1,9 +1,9 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'fileutils'
+require "fileutils"
 
-require_relative './util/path'
+require_relative "./util/path"
 
 module Refactor
   class FileStructure

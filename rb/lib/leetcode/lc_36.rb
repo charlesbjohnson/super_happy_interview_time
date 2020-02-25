@@ -1,32 +1,32 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'set'
+require "set"
 
 module LeetCode
   # 36. Valid Sudoku
   module LC36
     def valid_row?(board, row)
-      !((0...board[row].length).each.with_object(Set.new) do |col, set|
-        next set if board[row][col] == '.'
+      !((0...board[row].length).each.with_object(Set.new) { |col, set|
+        next set if board[row][col] == "."
         return false unless set.add?(board[row][col])
-      end).nil?
+      }).nil?
     end
 
     def valid_column?(board, col)
-      !((0...board.length).each.with_object(Set.new) do |row, set|
-        next set if board[row][col] == '.'
+      !((0...board.length).each.with_object(Set.new) { |row, set|
+        next set if board[row][col] == "."
         return false unless set.add?(board[row][col])
-      end).nil?
+      }).nil?
     end
 
     def valid_region?(board, start_row, start_col, size)
-      !((start_row...(start_row + size)).each.with_object(Set.new) do |row, set|
+      !((start_row...(start_row + size)).each.with_object(Set.new) { |row, set|
         (start_col...(start_col + size)).each do |col|
-          next if board[row][col] == '.'
+          next if board[row][col] == "."
           return false unless set.add?(board[row][col])
         end
-      end).nil?
+      }).nil?
     end
 
     # Description:

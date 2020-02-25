@@ -30,8 +30,8 @@ module LeetCode
       (0...matrix.length).reverse_each do |row|
         (0...matrix[row].length).reverse_each do |col|
           next unless (col.zero? && zero_first_col) ||
-                      (row.zero? && zero_first_row) ||
-                      (matrix[row][0].zero? || matrix[0][col].zero?)
+            (row.zero? && zero_first_row) ||
+            (matrix[row][0].zero? || matrix[0][col].zero?)
 
           matrix[row][col] = 0
         end

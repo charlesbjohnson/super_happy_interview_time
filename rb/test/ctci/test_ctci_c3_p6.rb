@@ -1,10 +1,10 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'data_structures/stack'
-require 'ctci/ctci_c3_p6'
+require "data_structures/stack"
+require "ctci/ctci_c3_p6"
 
 module CTCI
   module C3

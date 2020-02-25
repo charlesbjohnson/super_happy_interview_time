@@ -52,7 +52,7 @@ module LeetCode
     # @param nth {Integer}
     # @return {String}
     def count_and_say(nth)
-      count_and_say_recurse(1, nth, ['1']).join
+      count_and_say_recurse(1, nth, ["1"]).join
     end
   end
 end

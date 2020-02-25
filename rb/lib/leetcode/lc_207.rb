@@ -4,7 +4,7 @@
 module LeetCode
   # 207. Course Schedule
   module LC207
-    Graph = Struct.new(:length) do
+    Graph = Struct.new(:length) {
       def initialize(length)
         self.length = length
         @vertices = Array.new(length) { [] }
@@ -18,7 +18,7 @@ module LeetCode
       def adjacent_to(vertex)
         @vertices[vertex]
       end
-    end
+    }
 
     def cyclic?(graph)
       visited = Array.new(graph.length, false)
@@ -67,9 +67,9 @@ module LeetCode
     # @param prerequisites {Array<Array<Integer>>}
     # @return {Boolean}
     def finishable?(num_courses, prerequisites)
-      !cyclic?(prerequisites.reduce(Graph.new(num_courses)) do |graph, (course, depends_on)|
+      !cyclic?(prerequisites.reduce(Graph.new(num_courses)) { |graph, (course, depends_on)|
         graph.add_edge(course, depends_on)
-      end)
+      })
     end
 
     alias can_finish finishable?

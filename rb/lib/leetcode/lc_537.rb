@@ -4,9 +4,9 @@
 module LeetCode
   # 537. Complex Number Multiplication
   module LC537
-    ComplexNumber = Struct.new(:real, :imaginary) do
+    ComplexNumber = Struct.new(:real, :imaginary) {
       def self.parse(s)
-        new(*s[0..-2].split('+').map(&:to_i))
+        new(*s[0..-2].split("+").map(&:to_i))
       end
 
       def self.mul(left, right)
@@ -21,7 +21,7 @@ module LeetCode
       def to_s
         "#{real}+#{imaginary}i"
       end
-    end
+    }
 
     # Description:
     # Given two strings representing two complex numbers, return a string representing their multiplication.

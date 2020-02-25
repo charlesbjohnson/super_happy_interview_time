@@ -1,10 +1,10 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'data_structures/binary_tree'
-require 'ctci/ctci_c4_p5'
+require "data_structures/binary_tree"
+require "ctci/ctci_c4_p5"
 
 module CTCI
   module C4

@@ -9,23 +9,23 @@ module CTCI
       # cannot be represented accurately in binary with at most 32 characters,
       # print "ERROR".
       def to_binary_s(i)
-        result = ''
+        result = ""
         num = i
 
         until num.zero?
-          return 'ERROR' if result.size > 32
+          return "ERROR" if result.size > 32
 
           r = num * 2
           result += if r >= 1
-                      r -= 1
-                      '1'
-                    else
-                      '0'
-                    end
+            r -= 1
+            "1"
+          else
+            "0"
+          end
           num = r
         end
 
-        '0.' + result
+        "0." + result
       end
     end
   end

@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
-require 'algorithms/sorting/quick_select'
+require "config"
+require "algorithms/sorting/quick_select"
 
 module Algorithms
   module Sorting

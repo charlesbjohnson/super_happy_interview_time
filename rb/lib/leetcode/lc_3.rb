@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'set'
+require "set"
 
 module LeetCode
   # 3. Longest Substring Without Repeating Characters
@@ -34,7 +34,7 @@ module LeetCode
       left = 0
       right = 1
 
-      map = { s[left] => left }
+      map = {s[left] => left}
       max = map.length
 
       while left < s.length - 1 && right < s.length

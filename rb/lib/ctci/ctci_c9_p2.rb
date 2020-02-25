@@ -16,7 +16,7 @@ module CTCI
       # step on them. Design an algorithm to find a path for the robot from
       # the top left to the bottom right.
       def count_robot_paths_to(target)
-        @paths = { target => 1 }
+        @paths = {target => 1}
         r_count_robot_paths_to([0, 0], target)
 
         # Or even simpler...

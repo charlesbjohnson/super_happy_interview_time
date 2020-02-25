@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'data_structures/binary_search_tree_map'
+require "config"
+require "data_structures/binary_search_tree_map"
 
 describe DataStructures::BinarySearchTreeMap do
   subject { DataStructures::BinarySearchTreeMap.new }
@@ -18,20 +18,20 @@ describe DataStructures::BinarySearchTreeMap do
   it { _(subject).must_respond_to :delete }
 
   let(:key) { :key }
-  let(:val) { 'val' }
+  let(:val) { "val" }
 
-  it 'starts out empty' do
+  it "starts out empty" do
     _(subject.size).must_equal(0)
   end
 
-  describe '#get' do
-    it 'returns nil for nonexistent key' do
+  describe "#get" do
+    it "returns nil for nonexistent key" do
       _(subject.get(key)).must_be_nil
     end
   end
 
-  describe '#min' do
-    it 'returns the key value pair with the smallest key' do
+  describe "#min" do
+    it "returns the key value pair with the smallest key" do
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -41,15 +41,15 @@ describe DataStructures::BinarySearchTreeMap do
       _(subject.min).must_equal([a, a.to_s])
     end
 
-    describe 'empty' do
-      it 'returns nil' do
+    describe "empty" do
+      it "returns nil" do
         _(subject.min).must_be_nil
       end
     end
   end
 
-  describe '#max' do
-    it 'returns the key value pair with the largest key' do
+  describe "#max" do
+    it "returns the key value pair with the largest key" do
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -59,24 +59,24 @@ describe DataStructures::BinarySearchTreeMap do
       _(subject.max).must_equal([key, val])
     end
 
-    describe 'empty' do
-      it 'returns nil' do
+    describe "empty" do
+      it "returns nil" do
         _(subject.max).must_be_nil
       end
     end
   end
 
-  describe '#put' do
-    it 'sets the value for a key' do
+  describe "#put" do
+    it "sets the value for a key" do
       subject.put(key, val)
 
       _(subject.get(key)).must_equal(val)
       _(subject.size).must_equal(1)
     end
 
-    describe 'existing key' do
-      it 'changes the value for the key' do
-        subject.put(key, 'foo')
+    describe "existing key" do
+      it "changes the value for the key" do
+        subject.put(key, "foo")
         subject.put(key, val)
 
         _(subject.get(key)).must_equal(val)
@@ -84,8 +84,8 @@ describe DataStructures::BinarySearchTreeMap do
       end
     end
 
-    describe 'multiple' do
-      it 'sets the value for each key' do
+    describe "multiple" do
+      it "sets the value for each key" do
         a = :a
         b = :b
         subject.put(b, b.to_s)
@@ -100,8 +100,8 @@ describe DataStructures::BinarySearchTreeMap do
     end
   end
 
-  describe '#delete_min' do
-    it 'deletes the item with the smallest key' do
+  describe "#delete_min" do
+    it "deletes the item with the smallest key" do
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -116,8 +116,8 @@ describe DataStructures::BinarySearchTreeMap do
       _(subject.size).must_equal(2)
     end
 
-    describe 'multiple' do
-      it 'deletes the items with the smallest keys' do
+    describe "multiple" do
+      it "deletes the items with the smallest keys" do
         a = :a
         b = :b
         subject.put(b, b.to_s)
@@ -134,15 +134,15 @@ describe DataStructures::BinarySearchTreeMap do
       end
     end
 
-    describe 'empty' do
-      it 'does nothing' do
+    describe "empty" do
+      it "does nothing" do
         subject.delete_min
         _(subject.size).must_equal(0)
       end
     end
 
-    describe 'single' do
-      it 'deletes the only item' do
+    describe "single" do
+      it "deletes the only item" do
         subject.put(key, val)
 
         subject.delete_min
@@ -152,8 +152,8 @@ describe DataStructures::BinarySearchTreeMap do
       end
     end
 
-    describe 'unbalanced' do
-      it 'deletes the item with the smallest key' do
+    describe "unbalanced" do
+      it "deletes the item with the smallest key" do
         a = :a
         b = :b
         subject.put(a, a.to_s)
@@ -170,8 +170,8 @@ describe DataStructures::BinarySearchTreeMap do
     end
   end
 
-  describe '#delete_max' do
-    it 'deletes the item with the largest key' do
+  describe "#delete_max" do
+    it "deletes the item with the largest key" do
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -186,8 +186,8 @@ describe DataStructures::BinarySearchTreeMap do
       _(subject.size).must_equal(2)
     end
 
-    describe 'multiple' do
-      it 'deletes the items with the largest keys' do
+    describe "multiple" do
+      it "deletes the items with the largest keys" do
         a = :a
         b = :b
         subject.put(b, b.to_s)
@@ -204,15 +204,15 @@ describe DataStructures::BinarySearchTreeMap do
       end
     end
 
-    describe 'empty' do
-      it 'does nothing' do
+    describe "empty" do
+      it "does nothing" do
         subject.delete_max
         _(subject.size).must_equal(0)
       end
     end
 
-    describe 'single' do
-      it 'deletes the only item' do
+    describe "single" do
+      it "deletes the only item" do
         subject.put(key, val)
 
         subject.delete_max
@@ -222,8 +222,8 @@ describe DataStructures::BinarySearchTreeMap do
       end
     end
 
-    describe 'unbalanced' do
-      it 'deletes the item with the largest key' do
+    describe "unbalanced" do
+      it "deletes the item with the largest key" do
         a = :a
         b = :b
         subject.put(a, a.to_s)
@@ -240,8 +240,8 @@ describe DataStructures::BinarySearchTreeMap do
     end
   end
 
-  describe '#delete' do
-    it 'deletes the item with the matching key' do
+  describe "#delete" do
+    it "deletes the item with the matching key" do
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -256,8 +256,8 @@ describe DataStructures::BinarySearchTreeMap do
       _(subject.size).must_equal(2)
     end
 
-    describe 'multiple' do
-      it 'deletes the items with the matching keys' do
+    describe "multiple" do
+      it "deletes the items with the matching keys" do
         a = :a
         b = :b
         subject.put(b, b.to_s)
@@ -274,15 +274,15 @@ describe DataStructures::BinarySearchTreeMap do
       end
     end
 
-    describe 'with nonexistent key' do
-      it 'does nothing' do
+    describe "with nonexistent key" do
+      it "does nothing" do
         subject.delete(:a)
         _(subject.size).must_equal(0)
       end
     end
 
-    describe 'empty' do
-      it 'does nothing' do
+    describe "empty" do
+      it "does nothing" do
         subject.put(key, val)
 
         subject.delete(:a)
@@ -292,8 +292,8 @@ describe DataStructures::BinarySearchTreeMap do
       end
     end
 
-    describe 'single' do
-      it 'deletes the only item with the matching key' do
+    describe "single" do
+      it "deletes the only item with the matching key" do
         subject.put(key, val)
 
         subject.delete(key)
@@ -303,8 +303,8 @@ describe DataStructures::BinarySearchTreeMap do
       end
     end
 
-    describe 'unbalanced' do
-      it 'deletes the item with the matching key' do
+    describe "unbalanced" do
+      it "deletes the item with the matching key" do
         a = :a
         b = :b
         subject.put(a, a.to_s)
@@ -321,8 +321,8 @@ describe DataStructures::BinarySearchTreeMap do
     end
   end
 
-  describe '#each' do
-    it 'yields each key value pair inorder by default' do
+  describe "#each" do
+    it "yields each key value pair inorder by default" do
       expected = [[:a, 1], [:b, 2], [:c, 3]].shuffle
       expected.each { |key, value| subject.put(key, value) }
 
@@ -333,7 +333,7 @@ describe DataStructures::BinarySearchTreeMap do
       _(actual).must_equal(expected.sort)
     end
 
-    it 'yields each key value pair preorder' do
+    it "yields each key value pair preorder" do
       expected = [[:b, 2], [:a, 1], [:c, 3]]
       expected.each { |key, value| subject.put(key, value) }
 
@@ -344,7 +344,7 @@ describe DataStructures::BinarySearchTreeMap do
       _(actual).must_equal(expected)
     end
 
-    it 'yields each key value pair postorder' do
+    it "yields each key value pair postorder" do
       add = [[:b, 2], [:a, 1], [:c, 3]]
       add.each { |key, value| subject.put(key, value) }
 

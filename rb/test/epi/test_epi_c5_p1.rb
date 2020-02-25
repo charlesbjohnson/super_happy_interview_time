@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
-require 'epi/epi_c5_p1'
+require "config"
+require "epi/epi_c5_p1"
 
 module EPI
   module C5

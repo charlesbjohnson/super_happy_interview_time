@@ -12,9 +12,9 @@ module CTCI
       # Example: abc -> abc
       def compress(s)
         compressed = s.chars
-                      .chunk { |c| c }
-                      .map { |k, v| k + v.length.to_s }
-                      .join
+          .chunk { |c| c }
+          .map { |k, v| k + v.length.to_s }
+          .join
 
         compressed.length > s.length ? s : compressed
       end

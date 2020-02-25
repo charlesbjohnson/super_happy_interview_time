@@ -1,10 +1,10 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'config'
+require "config"
 
-require 'data_structures/binary_tree'
-require 'ctci/ctci_c4_p7'
+require "data_structures/binary_tree"
+require "ctci/ctci_c4_p7"
 
 module CTCI
   module C4
@@ -18,26 +18,26 @@ module CTCI
 
       def test_returns_first_ancestor_root
         assert_equal @tree.root, first_ancestor(@tree.root,
-                                                @tree.root.left.left,
-                                                @tree.root.right)
+          @tree.root.left.left,
+          @tree.root.right)
       end
 
       def test_returns_first_ancestor_subtree
         assert_equal @tree.root.left, first_ancestor(@tree.root,
-                                                     @tree.root.left.left.left,
-                                                     @tree.root.left.right)
+          @tree.root.left.left.left,
+          @tree.root.left.right)
       end
 
       def test_returns_node_if_it_is_ancestor
         assert_equal @tree.root.right, first_ancestor(@tree.root,
-                                                      @tree.root.right.left.right,
-                                                      @tree.root.right)
+          @tree.root.right.left.right,
+          @tree.root.right)
       end
 
       def test_returns_nil_if_node_doesnt_exist_in_tree
         assert_nil first_ancestor(@tree.root,
-                                  @tree.root,
-                                  DataStructures::BinaryTreeNode.new(10))
+          @tree.root,
+          DataStructures::BinaryTreeNode.new(10))
       end
     end
   end

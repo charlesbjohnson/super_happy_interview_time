@@ -5,7 +5,7 @@ module LeetCode
   # 171. Excel Sheet Column Number
   module LC171
     def to_code(s)
-      (s.ord - 'A'.ord) + 1
+      (s.ord - "A".ord) + 1
     end
 
     # Description:

@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'config'
-require 'leetcode/lc_105'
+require "config"
+require "leetcode/lc_105"
 
 module LeetCode
   class TestLC105 < Minitest::Test
@@ -35,33 +35,33 @@ module LeetCode
       [
         [0],
         [0],
-        [0]
+        [0],
       ],
       [
         [0, 1, 2],
         [1, 0, 2],
-        [0, 1, 2]
+        [0, 1, 2],
       ],
       [
         [0, 1, 3, 4, 2, 5, 6],
         [3, 1, 4, 0, 5, 2, 6],
-        [0, 1, 2, 3, 4, 5, 6]
+        [0, 1, 2, 3, 4, 5, 6],
       ],
       [
         [0, 1, 4],
         [1, 4, 0],
-        [0, 1, nil, nil, 4]
+        [0, 1, nil, nil, 4],
       ],
       [
         [3, 9, 20, 15, 7],
         [9, 3, 15, 20, 7],
-        [3, 9, 20, nil, nil, 15, 7]
+        [3, 9, 20, nil, nil, 15, 7],
       ],
       [
         [1, 3, 2, 4],
         [1, 2, 3, 4],
-        [1, nil, 3, nil, nil, 2, 4]
-      ]
+        [1, nil, 3, nil, nil, 2, 4],
+      ],
     ].each.with_index do |(preorder, inorder, expected), i|
       define_method(:"test_build_tree_#{i}") do
         assert_equal(build(expected), build_tree(preorder, inorder))

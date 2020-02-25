@@ -32,14 +32,14 @@ module LeetCode
 
       s.chars.each do |c|
         case c
-        when '(', '[', '{'
+        when "(", "[", "{"
           stack.push(c)
-        when ')'
-          return false if stack.pop != '('
-        when ']'
-          return false if stack.pop != '['
-        when '}'
-          return false if stack.pop != '{'
+        when ")"
+          return false if stack.pop != "("
+        when "]"
+          return false if stack.pop != "["
+        when "}"
+          return false if stack.pop != "{"
         end
       end
 
