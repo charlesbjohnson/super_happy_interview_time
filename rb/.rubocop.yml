@@ -2,7 +2,9 @@
 require:
   - rubocop-minitest
   - rubocop-performance
+  - rubocop-sorbet
 
+# rubocop
 Layout/LineLength:
   Enabled: false
 
@@ -23,3 +25,19 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: true
+
+# sorbet
+Sorbet/EnforceSignatures:
+  Enabled: false
+
+Sorbet/FalseSigil:
+  Enabled: false
+
+Sorbet/StrictSigil:
+  Enabled: false
+
+Sorbet/StrongSigil:
+  Enabled: false
+
+Sorbet/TrueSigil:
+  Enabled: false
