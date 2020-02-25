@@ -1,0 +1,15 @@
+---
+Sorbet/EnforceSignatures:
+  Enabled: false
+
+Sorbet/FalseSigil:
+  Enabled: false
+
+Sorbet/StrictSigil:
+  Enabled: false
+
+Sorbet/StrongSigil:
+  Enabled: false
+
+Sorbet/TrueSigil:
+  Enabled: false
