@@ -22,13 +22,11 @@ GEM
       ast (~> 2.4.0)
     rainbow (3.0.0)
     rake (13.0.1)
-    rexml (3.2.4)
-    rubocop (0.80.0)
+    rubocop (0.79.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
-      rexml
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
     rubocop-minitest (0.6.2)
@@ -45,6 +43,9 @@ GEM
       sorbet-static (= 0.5.5390)
     sorbet-runtime (0.5.5390)
     sorbet-static (0.5.5390-universal-darwin-14)
+    standard (0.1.10)
+      rubocop (~> 0.79.0)
+      rubocop-performance (~> 1.5.1)
     unicode-display_width (1.6.1)
 
 PLATFORMS
@@ -58,13 +59,14 @@ DEPENDENCIES
   minitest-reporters (~> 1.4)
   parser (~> 2.7)
   rake (~> 13.0)
-  rubocop (~> 0.80)
+  rubocop (~> 0.79)
   rubocop-minitest (~> 0.6)
   rubocop-performance (~> 1.5)
   rubocop-sorbet (~> 0.3)
   simplecov (~> 0.18)
   sorbet (~> 0.5)
   sorbet-runtime (~> 0.5)
+  standard (~> 0.1)
 
 RUBY VERSION
    ruby 2.7.0p0
