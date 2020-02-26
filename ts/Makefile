@@ -66,5 +66,5 @@ lint:
 
 
 .PHONY: test
-test: build
+test:
 	$(Q)yarn nyc ava $(OPTS)
