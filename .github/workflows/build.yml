@@ -1,0 +1,38 @@
+---
+on: push
+
+jobs:
+  rb:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+      - run: gem install bundler
+      - run: make rb build
+      - run: make rb check
+      - run: make rb lint
+      - run: make rb test
+
+  rs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+      - run: make rs build
+      - run: make rs check
+      - run: make rs lint
+      - run: make rs test
+
+  ts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '13'
+      - run: make ts build
+      - run: make ts check
+      - run: make ts lint
+      - run: make ts test
