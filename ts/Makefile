@@ -6,8 +6,7 @@ else
 	Q := @
 endif
 
-YARN_OPTS :=
-OPTS      :=
+OPTS :=
 
 
 .PHONY: all
@@ -24,10 +23,11 @@ help:
 	@echo "  VERBOSE  Echo recipe commands"
 	@echo
 	@echo "Commands:"
-	@echo "  build    Compile the application           options: YARN_OPTS,OPTS"
+	@echo "  build    Compile the application           options: OPTS"
 	@echo "  check    Check the application for errors  options: OPTS"
-	@echo "  clean    Remove compilation artifacts and application dependencies"
+	@echo "  clean    Remove artifacts and application dependencies"
 	@echo "  console  Run the console                   options: OPTS"
+	@echo "  deps     Install application dependencies  options: OPTS"
 	@echo "  fmt      Run the formatter                 options: OPTS"
 	@echo "  help     Print this help message"
 	@echo "  lint     Run the linter                    options: OPTS"
@@ -36,7 +36,6 @@ help:
 
 .PHONY: build
 build:
-	$(Q)yarn install $(YARN_OPTS)
 	$(Q)yarn tsc $(OPTS)
 
 
@@ -54,6 +53,11 @@ clean:
 .PHONY: console
 console:
 	$(Q)yarn ts-node $(OPTS)
+
+
+.PHONY: deps
+deps:
+	$(Q)yarn install $(OPTS)
 
 
 .PHONY: fmt
