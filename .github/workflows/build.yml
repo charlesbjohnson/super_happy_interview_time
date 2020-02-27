@@ -9,7 +9,7 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.7'
-      - run: gem install bundler
+      - run: gem install bundler --no-document
       - run: make rb deps OPTS='--frozen --deployment'
       - run: make rb check
       - run: make rb lint
