@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '13'
-      - run: make ts deps OPTS='--immutable --immutable-cache'
+      - run: make ts deps OPTS='--immutable --check-cache'
       - run: make ts build
       - run: make ts check
       - run: make ts lint
