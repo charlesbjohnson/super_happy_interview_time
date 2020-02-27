@@ -9,6 +9,13 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.7'
+      - uses: actions/cache@v1
+        with:
+          path: rb/vendor/bundle
+          key: rb-${{ hashFiles('rb/Gemfile.lock') }}
+          restore-keys: |
+            rb-${{ hashFiles('rb/Gemfile.lock') }}
+            rb-
       - run: gem install bundler --no-document
       - run: make rb deps OPTS='--frozen --deployment'
       - run: make rb check
