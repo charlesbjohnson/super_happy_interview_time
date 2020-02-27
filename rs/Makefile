@@ -21,7 +21,7 @@ help:
 	@echo "  Run development commands for the project"
 	@echo
 	@echo "Options:"
-	@echo "  VERBOSE    Echo recipe commands"
+	@echo "  VERBOSE  Echo recipe commands"
 	@echo
 	@echo "Commands:"
 	@echo "  bench  Run benchmark tests               options: CARGO_OPTS,OPTS"

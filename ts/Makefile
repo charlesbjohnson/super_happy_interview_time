@@ -6,6 +6,8 @@ else
 	Q := @
 endif
 
+OPTS :=
+
 
 .PHONY: all
 all: help
@@ -18,12 +20,12 @@ help:
 	@echo "  Run development commands for the project"
 	@echo
 	@echo "Options:"
-	@echo "  VERBOSE    Echo recipe commands"
+	@echo "  VERBOSE  Echo recipe commands"
 	@echo
 	@echo "Commands:"
 	@echo "  build    Compile the application           options: OPTS"
 	@echo "  check    Check the application for errors  options: OPTS"
-	@echo "  clean    Remove compilation artifacts"
+	@echo "  clean    Remove compilation artifacts and application dependencies"
 	@echo "  console  Run the console                   options: OPTS"
 	@echo "  fmt      Run the formatter                 options: OPTS"
 	@echo "  help     Print this help message"
