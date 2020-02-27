@@ -10,7 +10,7 @@ jobs:
         with:
           ruby-version: '2.7'
       - run: gem install bundler
-      - run: make rb build
+      - run: make rb deps OPTS='--frozen --deployment'
       - run: make rb check
       - run: make rb lint
       - run: make rb test

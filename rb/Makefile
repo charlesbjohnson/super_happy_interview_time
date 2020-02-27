@@ -23,20 +23,15 @@ help:
 	@echo "  VERBOSE  Echo recipe commands"
 	@echo
 	@echo "Commands:"
-	@echo "  build     Install application dependencies  options: OPTS"
 	@echo "  check     Check the application for errors  options: OPTS"
 	@echo "  clean     Remove application dependencies"
 	@echo "  console   Run the console                   options: OPTS"
+	@echo "  deps      Install application dependencies  options: OPTS"
 	@echo "  fmt       Run the formatter                 options: OPTS"
 	@echo "  help      Print this help message"
 	@echo "  lint      Run the linter                    options: OPTS"
 	@echo "  refactor  Run the refactoring tool          options: OPTS"
 	@echo "  test      Run the tests                     options: OPTS"
-
-
-.PHONY: build
-build:
-	$(Q)bundle install $(OPTS)
 
 
 .PHONY: check
@@ -52,6 +47,11 @@ clean:
 .PHONY: console
 console:
 	$(Q)bundle exec rake console $(OPTS)
+
+
+.PHONY: deps
+deps:
+	$(Q)bundle install $(OPTS)
 
 
 .PHONY: fmt
