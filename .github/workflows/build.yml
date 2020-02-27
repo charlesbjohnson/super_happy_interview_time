@@ -50,7 +50,7 @@ jobs:
           restore-keys: |
             ts-${{ hashFiles('ts/yarn.lock') }}
             ts-
-      - run: make ts deps OPTS='--immutable --check-cache'
+      - run: make ts deps OPTS='--immutable'
       - run: make ts build
       - run: make ts check
       - run: make ts lint
