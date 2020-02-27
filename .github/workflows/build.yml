@@ -36,6 +36,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '13'
+      - uses: actions/cache@v1
+        with:
+          path: ts/.yarn/cache
+          key: ts-${{ hashFiles('ts/yarn.lock') }}
+          restore-keys: |
+            ts-${{ hashFiles('ts/yarn.lock') }}
+            ts-
       - run: make ts deps OPTS='--immutable --check-cache'
       - run: make ts build
       - run: make ts check
