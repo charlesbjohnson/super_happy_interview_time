@@ -20,7 +20,7 @@ module LeetCode
       [[1, 2, 5], 5, 1],
       [[1, 2, 5], 11, 3],
       [[2], 3, -1],
-      [[83, 186, 408, 419], 6249, 20],
+      [[83, 186, 408, 419], 6249, 20]
     ].each.with_index do |(coins, amount, expected), i|
       define_method(:"test_coin_change_#{i}") do
         assert_equal(expected, coin_change(coins, amount))

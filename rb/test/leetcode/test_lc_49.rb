@@ -13,30 +13,30 @@ module LeetCode
       [
         %w[foo],
         [
-          %w[foo],
-        ],
+          %w[foo]
+        ]
       ],
       [
         %w[foo oof],
         [
-          %w[foo oof],
-        ],
+          %w[foo oof]
+        ]
       ],
       [
         %w[foo oof bar],
         [
           %w[foo oof],
-          %w[bar],
-        ],
+          %w[bar]
+        ]
       ],
       [
         %w[eat tea tan ate nat bat],
         [
           %w[ate eat tea],
           %w[nat tan],
-          %w[bat],
-        ],
-      ],
+          %w[bat]
+        ]
+      ]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_group_anagrams_#{i}") do
         assert_equal(expected.map(&:sort), group_anagrams(list).map(&:sort))

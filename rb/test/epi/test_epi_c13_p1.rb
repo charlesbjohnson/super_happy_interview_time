@@ -17,7 +17,7 @@ module EPI
           ["acts", %w[cast cats]],
           ["antlers", %w[rentals sternal]],
           ["backward", %w[drawback]],
-          ["calm", %w[clam]],
+          ["calm", %w[clam]]
         ], result)
       end
 

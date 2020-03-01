@@ -34,7 +34,7 @@ module LeetCode
       [[0, 1, 2, 3, 4, 5, 6], 7, 2],
       [[0, 1, 2, 3, 4, 5, 6], 5, 3],
       [[10, 5, -3, 3, 2, nil, 11, 3, -2, nil, 1], 8, 3],
-      [[0, 1, 2, 3], 3, 1],
+      [[0, 1, 2, 3], 3, 1]
     ].each.with_index do |(tree, sum, expected), i|
       define_method(:"test_path_sum_#{i}") do
         assert_equal(expected, path_sum(build(tree), sum))

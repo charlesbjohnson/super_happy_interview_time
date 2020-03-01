@@ -35,7 +35,7 @@ module LeetCode
       [[1], [0, 2], [0, 1, 2]],
       [[0, 2], [1], [0, 1, 2]],
       [[0, 2], [1, 3], [0, 1, 2, 3]],
-      [[1, 2, 4], [1, 3, 4], [1, 1, 2, 3, 4, 4]],
+      [[1, 2, 4], [1, 3, 4], [1, 1, 2, 3, 4, 4]]
     ].each.with_index do |(left, right, expected), i|
       define_method(:"test_merge_two_lists_#{i}") do
         assert_equal(build(expected), merge_two_lists(build(left), build(right)))

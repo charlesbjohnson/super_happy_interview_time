@@ -27,7 +27,7 @@ module LeetCode
       [[8, 9], 1, [8]],
       [[8, 9], 2, [9]],
       [[7, 8, 9], 2, [7, 9]],
-      [[1, 2, 3, 4, 5], 2, [1, 2, 3, 5]],
+      [[1, 2, 3, 4, 5], 2, [1, 2, 3, 5]]
     ].each.with_index do |(list, nth, expected), i|
       define_method(:"test_remove_nth_from_end_#{i}") do
         assert_equal(build(expected), remove_nth_from_end(build(list), nth))

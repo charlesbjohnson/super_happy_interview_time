@@ -12,7 +12,7 @@ module LeetCode
       [[], false],
       [[1], false],
       [[1, 2], false],
-      [[1, 1], true],
+      [[1, 1], true]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_contains_duplicate_#{i}") do
         assert_equal(expected, contains_duplicate(list))

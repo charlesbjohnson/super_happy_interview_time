@@ -32,7 +32,7 @@ module LeetCode
       [[0, nil, 1], 1],
       [[0, 1, 2], 2],
       [[0, 1, 2, 3, 4, 5, 6], 4],
-      [[0, 1, 2, 3, 4, nil, nil], 3],
+      [[0, 1, 2, 3, 4, nil, nil], 3]
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_diameter_of_binary_tree_#{i}") do
         assert_equal(expected, diameter_of_binary_tree(build(tree)))

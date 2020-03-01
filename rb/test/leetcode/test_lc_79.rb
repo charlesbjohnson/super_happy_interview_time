@@ -17,54 +17,54 @@ module LeetCode
       [
         [
           %w[A B],
-          %w[D C],
+          %w[D C]
         ],
         "ABCD",
-        true,
+        true
       ],
       [
         [
           %w[A B],
-          %w[D C],
+          %w[D C]
         ],
         "ABDC",
-        false,
+        false
       ],
       [
         [
           %w[A B],
-          %w[D C],
+          %w[D C]
         ],
         "ABCDA",
-        false,
+        false
       ],
       [
         [
           %w[A B C E],
           %w[S F C S],
-          %w[A D E E],
+          %w[A D E E]
         ],
         "ABCCED",
-        true,
+        true
       ],
       [
         [
           %w[A B C E],
           %w[S F C S],
-          %w[A D E E],
+          %w[A D E E]
         ],
         "SEE",
-        true,
+        true
       ],
       [
         [
           %w[A B C E],
           %w[S F C S],
-          %w[A D E E],
+          %w[A D E E]
         ],
         "ABCB",
-        false,
-      ],
+        false
+      ]
     ].each.with_index do |(board, word, expected), i|
       define_method(:"test_word_exists?_#{i}") do
         assert_equal(expected, word_exists?(board, word))

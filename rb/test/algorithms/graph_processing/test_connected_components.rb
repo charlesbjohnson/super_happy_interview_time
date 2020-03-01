@@ -23,7 +23,7 @@ describe Algorithms::GraphProcessing::ConnectedComponents do
       [7, 8],
       [9, 10],
       [9, 11],
-      [9, 12],
+      [9, 12]
     ]
   end
 

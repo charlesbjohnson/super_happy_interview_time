@@ -14,7 +14,7 @@ module LeetCode
       ["C", 3],
       ["Z", 26],
       ["AA", 27],
-      ["AB", 28],
+      ["AB", 28]
     ].each.with_index do |(s, expected), i|
       define_method(:"test_title_to_number_#{i}") do
         assert_equal(expected, title_to_number(s))

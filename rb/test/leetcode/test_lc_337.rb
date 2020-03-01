@@ -33,7 +33,7 @@ module LeetCode
       [[1, 2, 2], 4],
       [[5, 2, 2], 5],
       [[3, 2, 3, nil, 3, nil, 1], 7],
-      [[3, 4, 5, 1, 3, nil, 1], 9],
+      [[3, 4, 5, 1, 3, nil, 1], 9]
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_rob_#{i}") do
         assert_equal(expected, rob(build(tree)))

@@ -13,7 +13,7 @@ module LeetCode
       ["1", []],
       ["2", %w[a b c]],
       ["012", %w[a b c]],
-      ["23", %w[ad ae af bd be bf cd ce cf]],
+      ["23", %w[ad ae af bd be bf cd ce cf]]
     ].each.with_index do |(digits, expected), i|
       define_method(:"test_letter_combinations_#{i}") do
         assert_equal(expected, letter_combinations(digits).sort)

@@ -31,7 +31,7 @@ module LeetCode
       [[2, nil, 3], [2, 3]],
       [[2, 1, nil], [1, 2]],
       [[2, 1, 3], [1, 2, 3]],
-      [[1, nil, 2, nil, nil, 3, nil], [1, 3, 2]],
+      [[1, nil, 2, nil, nil, 3, nil], [1, 3, 2]]
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_inorder_traversal_#{i}") do
         assert_equal(expected, inorder_traversal(build(tree)))

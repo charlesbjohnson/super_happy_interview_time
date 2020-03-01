@@ -26,7 +26,7 @@ module LeetCode
     [
       [[1], [1]],
       [[1, 2], [2, 1]],
-      [[1, 2, 3], [3, 2, 1]],
+      [[1, 2, 3], [3, 2, 1]]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_reverse_list_#{i}") do
         assert_equal(build(expected), reverse_list(build(list)))

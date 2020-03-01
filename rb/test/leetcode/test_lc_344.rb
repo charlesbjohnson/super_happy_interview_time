@@ -12,7 +12,7 @@ module LeetCode
       %w[a a],
       %w[ab ba],
       %w[foobar raboof],
-      %w[hello olleh],
+      %w[hello olleh]
     ].each.with_index do |(s, expected), i|
       define_method(:"test_reverse_string_#{i}") do
         assert_equal(expected, reverse_string(s))

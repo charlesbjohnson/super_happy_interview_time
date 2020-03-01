@@ -16,7 +16,7 @@ module LeetCode
       [10, 2],
       [15, 3],
       [20, 4],
-      [100, 24],
+      [100, 24]
     ].each.with_index do |(n, expected), i|
       define_method(:"test_trailing_zeroes_#{i}") do
         assert_equal(expected, trailing_zeroes(n))

@@ -28,8 +28,8 @@ module LeetCode
     [
       [
         [3, 2, 1, 6, 0, 5],
-        [6, 3, 5, nil, 2, 0, nil, nil, nil, nil, 1],
-      ],
+        [6, 3, 5, nil, 2, 0, nil, nil, nil, nil, 1]
+      ]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_construct_maximum_binary_tree_#{i}") do
         assert_equal(build(expected), construct_maximum_binary_tree(list))

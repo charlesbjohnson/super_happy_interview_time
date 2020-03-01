@@ -21,7 +21,7 @@ module LeetCode
       [([0, 1, 2, 3, 4] * 2).shuffle, 3, 3],
       [([0, 1, 2, 3, 4] * 2).shuffle, 5, 2],
       [([0, 1, 2, 3, 4] * 2).shuffle, 7, 1],
-      [([0, 1, 2, 3, 4] * 2).shuffle, 9, 0],
+      [([0, 1, 2, 3, 4] * 2).shuffle, 9, 0]
     ].each.with_index do |(list, k, expected), i|
       define_method(:"test_find_kth_largest_#{i}") do
         assert_equal(expected, find_kth_largest(list, k))

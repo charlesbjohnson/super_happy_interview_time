@@ -52,7 +52,7 @@ module Refactor
         Mapping.new("thirteen", 13),
         Mapping.new("fourteen", 14),
         Mapping.new("fifteen", 15),
-        Mapping.new("sixteen", 16),
+        Mapping.new("sixteen", 16)
       ].freeze
 
       def self.match?(str)

@@ -27,7 +27,7 @@ describe Algorithms::GraphProcessing::BipartiteDetection do
           [5, 4],
           [6, 4],
           [7, 8],
-          [7, 9],
+          [7, 9]
         ]
       end
 
@@ -46,7 +46,7 @@ describe Algorithms::GraphProcessing::BipartiteDetection do
           [0, 4],
           [1, 3],
           [2, 3],
-          [2, 4],
+          [2, 4]
         ]
       end
 

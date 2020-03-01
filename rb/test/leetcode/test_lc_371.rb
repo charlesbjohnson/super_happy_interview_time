@@ -13,7 +13,7 @@ module LeetCode
       [0, 1, 1],
       [1, 0, 1],
       [1, 2, 3],
-      [5, 2, 7],
+      [5, 2, 7]
     ].each.with_index do |(left, right, expected), i|
       define_method(:"test_sum_#{i}") do
         assert_equal(expected, sum(left, right))

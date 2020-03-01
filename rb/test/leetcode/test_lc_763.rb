@@ -16,7 +16,7 @@ module LeetCode
       ["aaabbb", [3, 3]],
       ["abbba", [5]],
       ["qiejxqfnqceocmy", [13, 1, 1]],
-      ["ababcbacadefegdehijhklij", [9, 7, 8]],
+      ["ababcbacadefegdehijhklij", [9, 7, 8]]
     ].each.with_index do |(s, expected), i|
       define_method(:"test_partition_labels_#{i}") do
         assert_equal(expected, partition_labels(s))

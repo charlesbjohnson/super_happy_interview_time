@@ -14,7 +14,7 @@ module LeetCode
       ["ab", false],
       ["aba", true],
       ["A man, a plan, a canal: Panama", true],
-      ["racecar a car", false],
+      ["racecar a car", false]
     ].each.with_index do |(string, expected), i|
       define_method(:"test_palindrome?_#{i}") do
         assert_equal(expected, palindrome?(string))

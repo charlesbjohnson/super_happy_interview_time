@@ -31,7 +31,7 @@ describe Algorithms::GraphProcessing::TopologicalOrder do
         [9, 10],
         [9, 11],
         [9, 12],
-        [11, 12],
+        [11, 12]
       ]
     end
 
@@ -68,7 +68,7 @@ describe Algorithms::GraphProcessing::TopologicalOrder do
         [9, 10],
         [9, 11],
         [9, 12],
-        [11, 12],
+        [11, 12]
       ]
     end
 

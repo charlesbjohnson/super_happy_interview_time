@@ -21,7 +21,7 @@ module LeetCode
       [1, -1, 1],
       [2, -1, 1.0 / 2],
       [2, -2, 1.0 / 4],
-      [3, -3, 1.0 / 27],
+      [3, -3, 1.0 / 27]
     ].each.with_index do |(x, n, expected), i|
       define_method(:"test_my_pow_#{i}") do
         assert_equal(expected, my_pow(x, n))

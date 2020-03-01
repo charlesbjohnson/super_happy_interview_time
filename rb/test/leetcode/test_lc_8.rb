@@ -22,7 +22,7 @@ module LeetCode
       ["100", 100],
       ["1234", 1234],
       ["3000000000", 2_147_483_647],
-      ["-3000000000", -2_147_483_648],
+      ["-3000000000", -2_147_483_648]
     ].each.with_index do |(string, expected), i|
       define_method(:"test_my_atoi_#{i}") do
         assert_equal(expected, my_atoi(string))

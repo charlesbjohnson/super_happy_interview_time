@@ -12,7 +12,7 @@ module LeetCode
       [[], [[]]],
       [[1], [[1]]],
       [[1, 2], [[2, 1], [1, 2]]],
-      [[1, 2, 3], [[3, 2, 1], [2, 3, 1], [2, 1, 3], [3, 1, 2], [1, 3, 2], [1, 2, 3]]],
+      [[1, 2, 3], [[3, 2, 1], [2, 3, 1], [2, 1, 3], [3, 1, 2], [1, 3, 2], [1, 2, 3]]]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_permute_#{i}") do
         assert_equal(expected.sort, permute(list).sort)

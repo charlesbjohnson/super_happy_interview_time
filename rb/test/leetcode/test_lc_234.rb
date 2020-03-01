@@ -29,7 +29,7 @@ module LeetCode
       [[1, 2, 1], true],
       [[1, 2, 3], false],
       [[1, 2, 2, 1], true],
-      [[1, 2, 3, 2, 1], true],
+      [[1, 2, 3, 2, 1], true]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_palindrome?_#{i}") do
         assert_equal(expected, palindrome?(build(list)))

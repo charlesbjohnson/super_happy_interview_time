@@ -33,7 +33,7 @@ describe Algorithms::GraphProcessing::StronglyConnectedComponents do
       [10, 12],
       [11, 4],
       [11, 12],
-      [12, 9],
+      [12, 9]
     ]
   end
 

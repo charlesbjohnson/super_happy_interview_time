@@ -16,7 +16,7 @@ module LeetCode
       [4, 2],
       [5, 2],
       [6, 3],
-      [40, 12],
+      [40, 12]
     ].each.with_index do |(n, expected), i|
       define_method(:"test_count_primes_#{i}") do
         assert_equal(expected, count_primes(n))

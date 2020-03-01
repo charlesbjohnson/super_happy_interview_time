@@ -48,7 +48,7 @@ module LeetCode
       [[3, 1, 5, 0, 2, 4, 6], 4, 3],
       [[3, 1, 5, 0, 2, 4, 6], 5, 4],
       [[3, 1, 5, 0, 2, 4, 6], 6, 5],
-      [[3, 1, 5, 0, 2, 4, 6], 7, 6],
+      [[3, 1, 5, 0, 2, 4, 6], 7, 6]
     ].each.with_index do |(tree, k, expected), i|
       define_method(:"test_kth_smallest_#{i}") do
         assert_equal(expected, kth_smallest(build(tree), k))

@@ -40,7 +40,7 @@ module LeetCode
       [[1, 2, 3], [1, 2, 3]],
       [[1, 2, nil, 3, 4], [1, 2, 3, 4]],
       [[1, nil, 2, nil, nil, 4, 5], [1, 2, 4, 5]],
-      [[1, 2, 3, 4, 5, 6, 7], [1, 2, 4, 5, 3, 6, 7]],
+      [[1, 2, 3, 4, 5, 6, 7], [1, 2, 4, 5, 3, 6, 7]]
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_flatten_#{i}") do
         check(expected, flatten(build(tree)))

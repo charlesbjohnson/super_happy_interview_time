@@ -16,7 +16,7 @@ module LeetCode
       ["()[]{}", true],
       ["(", false],
       ["(]", false],
-      ["([)]", false],
+      ["([)]", false]
     ].each.with_index do |(s, expected), i|
       define_method(:"test_valid?_#{i}") do
         assert_equal(expected, valid?(s))

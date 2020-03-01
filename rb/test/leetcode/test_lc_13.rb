@@ -22,7 +22,7 @@ module LeetCode
       ["XVIII", 18],
       ["XIX", 19],
       ["MDCCCLXXXIV", 1884],
-      ["MMMCMXCIX", 3999],
+      ["MMMCMXCIX", 3999]
     ].each.with_index do |(s, expected), i|
       define_method(:"test_roman_to_int_#{i}") do
         assert_equal(expected, roman_to_int(s))

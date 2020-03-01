@@ -20,7 +20,7 @@ module LeetCode
       [2, 2],
       [3, 1],
       [3, 2],
-      [3, 3],
+      [3, 3]
     ].each.with_index do |(versions, expected), i|
       define_method(:"test_first_bad_version_#{i}") do
         @bad_version = expected

@@ -14,7 +14,7 @@ module LeetCode
       [[1, 1, 1], false],
       [[5, 4, 3], false],
       [[0, 1, -1, 0, 2], true],
-      [[1, 0, 2, -1, 3], true],
+      [[1, 0, 2, -1, 3], true]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_increasing_triplet_#{i}") do
         assert_equal(expected, increasing_triplet(list))

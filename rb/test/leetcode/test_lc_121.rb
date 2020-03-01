@@ -17,7 +17,7 @@ module LeetCode
       [[9, 8, 7, 6], 0],
       [[7, 1, 5, 3, 6, 4], 5],
       [[7, 6, 4, 3, 1], 0],
-      [[3, 3, 5, 0, 0, 3, 1, 4], 4],
+      [[3, 3, 5, 0, 0, 3, 1, 4], 4]
     ].each.with_index do |(prices, expected), i|
       define_method(:"test_max_profit_#{i}") do
         assert_equal(expected, max_profit(prices))

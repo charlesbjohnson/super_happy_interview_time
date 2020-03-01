@@ -21,7 +21,7 @@ module LeetCode
       [[1, 2, 2, 1], 3],
       [[1, 3, 4, 2], 4],
       [[1, 2, 4, 3], 4],
-      [[1, 3, 2, 5, 25, 24, 5], 24],
+      [[1, 3, 2, 5, 25, 24, 5], 24]
     ].each.with_index do |(heights, expected), i|
       define_method(:"test_max_area_#{i}") do
         assert_equal(expected, max_area(heights))

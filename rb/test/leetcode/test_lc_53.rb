@@ -17,7 +17,7 @@ module LeetCode
       [[-1, -2], -1],
       [[-2, -1], -1],
       [[-1, 1, -1, 3], 3],
-      [[-2, 1, -3, 4, -1, 2, 1, -5, 4], 6],
+      [[-2, 1, -3, 4, -1, 2, 1, -5, 4], 6]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_max_sub_array_#{i}") do
         assert_equal(expected, max_sub_array(list))

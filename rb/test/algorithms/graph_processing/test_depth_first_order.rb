@@ -28,7 +28,7 @@ describe Algorithms::GraphProcessing::DepthFirstOrder do
         [3, 5],
         [3, 6],
         [4, 6],
-        [4, 6],
+        [4, 6]
       ]
     end
 
@@ -61,7 +61,7 @@ describe Algorithms::GraphProcessing::DepthFirstOrder do
         [3, 6],
         [5, 2],
         [6, 0],
-        [6, 4],
+        [6, 4]
       ]
     end
 

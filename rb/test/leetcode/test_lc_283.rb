@@ -13,7 +13,7 @@ module LeetCode
       [[0], [0]],
       [[0, 0], [0, 0]],
       [[0, 1], [1, 0]],
-      [[0, 1, 0, 3, 12], [1, 3, 12, 0, 0]],
+      [[0, 1, 0, 3, 12], [1, 3, 12, 0, 0]]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_move_zeroes_#{i}") do
         move_zeroes(list)

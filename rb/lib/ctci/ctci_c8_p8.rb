@@ -59,7 +59,7 @@ module CTCI
           [[0, -1, 0, 1],
            [-1, 0, 1, 0],
            [-1, -1, 1, 1],
-           [-1, 1, 1, -1],].each do |r_dec, c_dec, r_inc, c_inc|
+           [-1, 1, 1, -1]].each do |r_dec, c_dec, r_inc, c_inc|
             return true if scan_direction(r, c, r_dec, c_dec, r_inc, c_inc,
               color).any?
           end
@@ -78,7 +78,7 @@ module CTCI
           to_flip = [[0, -1, 0, 1],
                      [-1, 0, 1, 0],
                      [-1, -1, 1, 1],
-                     [-1, 1, 1, -1],].flat_map { |r_dec, c_dec, r_inc, c_inc|
+                     [-1, 1, 1, -1]].flat_map { |r_dec, c_dec, r_inc, c_inc|
             scan_direction(r, c, r_dec, c_dec, r_inc, c_inc, color)
           }
 

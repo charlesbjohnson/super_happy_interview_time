@@ -18,7 +18,7 @@ module LeetCode
       ["abcadefg", 7],
       ["abcdefcz", 6],
       ["abcdeffabcdeghi", 9],
-      ["abcadefgabcdefghijk", 11],
+      ["abcadefgabcdefghijk", 11]
     ].each.with_index do |(s, expected), i|
       define_method(:"test_length_of_longest_substring_#{i}") do
         assert_equal(expected, length_of_longest_substring(s))

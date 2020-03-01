@@ -10,7 +10,7 @@ module LeetCode
 
     [
       %w[cba abcd cbad],
-      %w[poi aosidbp poiasdb],
+      %w[poi aosidbp poiasdb]
     ].each.with_index do |(s, t, expected), i|
       define_method(:"test_custom_sort_string_#{i}") do
         assert_equal(expected, custom_sort_string(s, t))

@@ -25,7 +25,7 @@ describe Algorithms::GraphProcessing::UndirectedCycleDetection do
         [6, 7],
         [6, 8],
         [6, 9],
-        [7, 8],
+        [7, 8]
       ]
     end
 
@@ -52,7 +52,7 @@ describe Algorithms::GraphProcessing::UndirectedCycleDetection do
         [1, 3],
         [1, 4],
         [2, 5],
-        [2, 6],
+        [2, 6]
       ]
     end
 

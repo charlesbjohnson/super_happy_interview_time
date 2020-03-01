@@ -32,7 +32,7 @@ module LeetCode
       [[1], false],
       [[1, 2], false],
       [[1, 2, 3], false],
-      [[1, 2, 3, 4], false],
+      [[1, 2, 3, 4], false]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_cycle?_#{i}") do
         assert_equal(expected, cycle?(build(list)))

@@ -15,7 +15,7 @@ module LeetCode
       [-20, 4, -5],
       [-49, -7, 7],
       [2**32, 1, MAX],
-      [-(2**32), 1, MIN],
+      [-(2**32), 1, MIN]
     ].each.with_index do |(dividend, divisor, expected), i|
       define_method(:"test_divide_#{i}") do
         assert_equal(expected, divide(dividend, divisor))

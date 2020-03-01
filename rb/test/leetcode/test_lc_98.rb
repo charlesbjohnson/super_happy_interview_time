@@ -37,7 +37,7 @@ module LeetCode
       [[1, 2, 3], false],
       [[4, 2, 6, 1, 3, 5, 7], true],
       [[4, 2, 6, 1, 3, 5, 7, nil, nil, -1], false],
-      [[4, 2, 6, 1, 3, 5, 7, nil, nil, nil, 4], false],
+      [[4, 2, 6, 1, 3, 5, 7, nil, nil, nil, 4], false]
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_valid_bst?_#{i}") do
         assert_equal(expected, valid_bst?(build(tree)))

@@ -14,7 +14,7 @@ module LeetCode
       "6" => %w[m n o],
       "7" => %w[p q r s],
       "8" => %w[t u v],
-      "9" => %w[w x y z],
+      "9" => %w[w x y z]
     }.freeze
 
     # Description:

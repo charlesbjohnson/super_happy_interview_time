@@ -41,7 +41,7 @@ module CTCI
 
       def count_bits_at_column(c, numbers)
         result = {zero: {count: 0, matching: []},
-                  one: {count: 0, matching: []},}
+                  one: {count: 0, matching: []}}
 
         numbers.each do |n|
           which = bit(c, n).zero? ? :zero : :one

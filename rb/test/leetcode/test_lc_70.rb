@@ -12,7 +12,7 @@ module LeetCode
       [1, 1],
       [2, 2],
       [3, 3],
-      [4, 5],
+      [4, 5]
     ].each.with_index do |(n, expected), i|
       define_method(:"test_climb_stairs_#{i}") do
         assert_equal(expected, climb_stairs(n))

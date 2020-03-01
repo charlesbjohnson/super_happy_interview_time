@@ -25,7 +25,7 @@ module LeetCode
 
       result = [
         [1],
-        [1, 1],
+        [1, 1]
       ]
 
       return result if n == 2

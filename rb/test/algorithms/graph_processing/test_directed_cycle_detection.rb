@@ -37,7 +37,7 @@ describe Algorithms::GraphProcessing::DirectedCycleDetection do
         [10, 12],
         [11, 4],
         [11, 12],
-        [12, 9],
+        [12, 9]
       ]
     end
 
@@ -74,7 +74,7 @@ describe Algorithms::GraphProcessing::DirectedCycleDetection do
         [9, 10],
         [9, 11],
         [10, 12],
-        [11, 12],
+        [11, 12]
       ]
     end
 

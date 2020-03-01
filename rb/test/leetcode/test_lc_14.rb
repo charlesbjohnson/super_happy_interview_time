@@ -14,7 +14,7 @@ module LeetCode
       [["a"], "a"],
       [%w[a b], ""],
       [%w[aa ab], "a"],
-      [%w[aaa ab aac], "a"],
+      [%w[aaa ab aac], "a"]
     ].each.with_index do |(list, expected), i|
       define_method(:"test_longest_common_prefix_#{i}") do
         assert_equal(expected, longest_common_prefix(list))

@@ -32,7 +32,7 @@ module LeetCode
       [[0, 1], [[0], [1]]],
       [[0, nil, 1], [[0], [1]]],
       [[0, 1, 2, 3, 4, 5, 6], [[0], [2, 1], [3, 4, 5, 6]]],
-      [(0...15).to_a, [[0], [2, 1], [3, 4, 5, 6], [14, 13, 12, 11, 10, 9, 8, 7]]],
+      [(0...15).to_a, [[0], [2, 1], [3, 4, 5, 6], [14, 13, 12, 11, 10, 9, 8, 7]]]
     ].each.with_index do |(tree, expected), i|
       define_method(:"test_zigzag_level_order_#{i}") do
         assert_equal(expected, zigzag_level_order(build(tree)))

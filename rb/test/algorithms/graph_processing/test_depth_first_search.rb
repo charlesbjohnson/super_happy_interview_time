@@ -28,7 +28,7 @@ describe Algorithms::GraphProcessing::DepthFirstSearch do
         [7, 8],
         [9, 10],
         [9, 11],
-        [9, 12],
+        [9, 12]
       ]
     end
 
@@ -75,7 +75,7 @@ describe Algorithms::GraphProcessing::DepthFirstSearch do
         [9, 11],
         [10, 12],
         [11, 12],
-        [12, 9],
+        [12, 9]
       ]
     end
 

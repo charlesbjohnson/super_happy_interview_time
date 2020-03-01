@@ -16,7 +16,7 @@ module LeetCode
       [1, 1, 0],
       [1, 0, 1],
       [0, 1, 1],
-      [5, 2, 9],
+      [5, 2, 9]
     ].each.with_index do |(reds, whites, blues), i|
       define_method(:"test_sort_colors_#{i}") do
         list = Array.new(reds) { 0 } + Array.new(whites) { 1 } + Array.new(blues) { 2 }
