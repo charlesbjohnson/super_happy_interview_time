@@ -4330,6 +4330,8 @@ class Parser::AST::Processor
 
   def on_eflipflop(node); end
 
+  def on_empty_else(node); end
+
   def on_ensure(node); end
 
   def on_erange(node); end
@@ -5783,7 +5785,7 @@ class Parser::Source::TreeRewriter::Action
 
   def ordered_replacements(); end
 
-  def place_in_hierachy(action); end
+  def place_in_hierarchy(action); end
 
   def range(); end
 
@@ -6094,10 +6096,6 @@ module RbConfig
 end
 
 class Refactor::CodeStructure::Rewriter
-end
-
-class Regexp
-  def match?(*_); end
 end
 
 module RubyVM::AbstractSyntaxTree
