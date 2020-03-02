@@ -2624,6 +2624,11 @@ class Complex
   def self.rectangular(*_); end
 end
 
+module DCP::DCP1
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
 class DataStructures::MinMaxSingleNode
   def data(*args, &block); end
 
@@ -4044,6 +4049,8 @@ end
 module Marshal
   def self.restore(*_); end
 end
+
+Methods = T::Private::Methods
 
 class Module
   def const_source_location(*_); end
