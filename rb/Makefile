@@ -36,7 +36,7 @@ help:
 
 .PHONY: check
 check:
-	$(Q)bundle exec srb typecheck $(OPTS)
+	$(Q)bin/srb typecheck $(OPTS)
 
 
 .PHONY: clean
@@ -46,23 +46,22 @@ clean:
 
 .PHONY: console
 console:
-	$(Q)bundle exec rake console $(OPTS)
+	$(Q)bin/rake console $(OPTS)
 
 
 .PHONY: deps
 deps:
-	$(Q)bundle install $(OPTS)
+	$(Q)bin/bundle install $(OPTS)
 
 
 .PHONY: fmt
 fmt:
-	$(Q)bundle exec standardrb $(OPTS)
-	$(Q)bundle exec rubocop --auto-correct $(OPTS)
+	$(Q)bin/rubocop --auto-correct $(OPTS)
 
 
 .PHONY: lint
 lint:
-	$(Q)bundle exec rubocop $(OPTS)
+	$(Q)bin/rubocop $(OPTS)
 
 
 .PHONY: refactor
@@ -73,4 +72,4 @@ refactor:
 
 .PHONY: test
 test:
-	$(Q)bundle exec rake test $(OPTS)
+	$(Q)bin/rake test $(OPTS)

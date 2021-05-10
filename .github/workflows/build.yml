@@ -16,8 +16,11 @@ jobs:
           restore-keys: |
             rb-${{ hashFiles('rb/Gemfile.lock') }}
             rb-
-      - run: gem install bundler --no-document
-      - run: make rb deps OPTS='--frozen --deployment'
+      - run: |
+          gem install bundler --no-document
+          bin/bundle config set --local deployment true
+          bin/bundle config set --local frozen true
+          make rb deps OPTS='--jobs 2 --retry 3'
       - run: make rb check
       - run: make rb lint
       - run: make rb test
