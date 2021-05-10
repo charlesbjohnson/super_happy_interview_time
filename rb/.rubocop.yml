@@ -12,6 +12,11 @@ inherit_mode:
 inherit_gem:
   standard: config/base.yml
 
+AllCops:
+  DisabledByDefault: false
+  NewCops: enable
+  TargetRubyVersion: 3.0
+
 Layout/LineLength:
   Enabled: false
 
