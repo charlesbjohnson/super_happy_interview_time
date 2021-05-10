@@ -1,12 +1,16 @@
 ---
-inherit_from:
-  - .rubocop.sorbet.yml
-  - .rubocop.standard.yml
-
 require:
   - rubocop-minitest
   - rubocop-performance
   - rubocop-sorbet
+  - standard
+
+inherit_mode:
+  merge:
+    - Exclude
+
+inherit_gem:
+  standard: config/base.yml
 
 Layout/LineLength:
   Enabled: false
@@ -15,6 +19,21 @@ Metrics:
   Enabled: false
 
 Naming/MethodParameterName:
+  Enabled: false
+
+Sorbet/EnforceSignatures:
+  Enabled: false
+
+Sorbet/FalseSigil:
+  Enabled: false
+
+Sorbet/StrictSigil:
+  Enabled: false
+
+Sorbet/StrongSigil:
+  Enabled: false
+
+Sorbet/TrueSigil:
   Enabled: false
 
 Style/Documentation:
