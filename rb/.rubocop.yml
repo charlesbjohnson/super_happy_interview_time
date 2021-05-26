@@ -42,5 +42,15 @@ Sorbet/StrongSigil:
 Sorbet/TrueSigil:
   Enabled: false
 
+# Style/BlockDelimiters:
+#   EnforcedStyle: always_braces
+
 Style/Documentation:
   Enabled: false
+
+# Style/MethodCallWithArgsParentheses:
+#   AllowParenthesesInCamelCaseMethod: true
+#   AllowParenthesesInChaining: true
+#   AllowParenthesesInMultilineCall: true
+#   Enabled: true
+#   IgnoreMacros: false
