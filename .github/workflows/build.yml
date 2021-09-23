@@ -4,34 +4,36 @@ on: push
 jobs:
   rb:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rb/
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-ruby@v1
+      - uses: extractions/setup-just@v1
+      - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
-      - uses: actions/cache@v1
-        with:
-          path: rb/vendor/bundle
-          key: rb-${{ hashFiles('rb/Gemfile.lock') }}
-          restore-keys: |
-            rb-${{ hashFiles('rb/Gemfile.lock') }}
-            rb-
-      - run: gem install bundler --no-document
-      - run: make rb deps OPTS='--frozen --deployment'
-      - run: make rb check
-      - run: make rb lint
-      - run: make rb test
+          ruby-version: 2.7
+          bundler-cache: true
+          working-directory: rb/
+      - run: just typecheck
+      - run: just lint
+      - run: just test
 
   rs:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rs/
     steps:
       - uses: actions/checkout@v2
+      - uses: extractions/setup-just@v1
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           profile: minimal
-          components: clippy
-      - run: make rs build
-      - run: make rs check
-      - run: make rs lint
-      - run: make rs test
+          components: clippy, rustfmt
+      - run: just build
+      - run: just typecheck
+      - run: just fmt -- --check
+      - run: just lint
+      - run: just test

@@ -1,0 +1,39 @@
+default:
+    @just --list
+
+# Print this help message
+help: default
+
+# Build the project
+build *OPTS:
+    @bundle install {{ OPTS }}
+
+# Remove build artifacts
+clean:
+    @rm -rf coverage
+    @rm -rf vendor/bundle
+
+# Run the console
+console *OPTS:
+    @bundle exec rake console {{ OPTS }}
+
+# Run the formatter
+fmt *OPTS:
+    @bundle exec rubocop --auto-correct {{ OPTS }}
+
+# Run the linter
+lint *OPTS:
+    @bundle exec rubocop {{ OPTS }}
+
+# Run the refactoring tool
+refactor *OPTS:
+    @bundle exec ruby lib/refactor/main.rb code {{ OPTS }}
+    @bundle exec ruby lib/refactor/main.rb file {{ OPTS }}
+
+# Run the tests
+test *OPTS:
+    @bundle exec rake test {{ OPTS }}
+
+# Run the type checker
+typecheck *OPTS:
+    @bundle exec srb typecheck {{ OPTS }}

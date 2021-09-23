@@ -1,0 +1,29 @@
+default:
+    @just --list
+
+# Print this help message
+help: default
+
+# Build the project
+build *OPTS:
+    @cargo build {{ OPTS }}
+
+# Remove build artifacts
+clean *OPTS:
+    @cargo clean {{ OPTS }}
+
+# Run the formatter
+fmt *OPTS:
+    @cargo fmt {{ OPTS }}
+
+# Run the linter
+lint *OPTS:
+    @cargo clippy {{ OPTS }}
+
+# Run the tests
+test *OPTS:
+    @cargo test {{ OPTS }}
+
+# Run the type checker
+typecheck *OPTS:
+    @cargo check {{ OPTS }}

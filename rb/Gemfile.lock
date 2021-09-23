@@ -69,7 +69,7 @@ DEPENDENCIES
   standard (~> 0.1)
 
 RUBY VERSION
-   ruby 2.7.0p0
+   ruby 2.7.4p191
 
 BUNDLED WITH
-   2.1.2
+   2.1.4
