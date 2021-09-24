@@ -1,12 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "dcp/dcp_1"
+require("config")
+require("dcp/dcp_1")
 
 module DCP
   class TestDCP1 < Minitest::Test
-    include DCP1
+    include(DCP1)
 
     [
       [[], 0, false],

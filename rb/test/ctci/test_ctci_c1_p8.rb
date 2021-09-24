@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c1_p8"
+require("config")
+require("ctci/ctci_c1_p8")
 
 module CTCI
   module C1
     class TestP8 < Minitest::Test
-      include P8
+      include(P8)
 
       def test_returns_true_if_is_rotation
         s = "waterbottle"

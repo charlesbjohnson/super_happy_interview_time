@@ -1,11 +1,11 @@
 # typed: false
 # frozen_string_literal: true
 
-require_relative "single_node"
+require_relative("single_node")
 
 module DataStructures
   class LinkedList
-    include Enumerable
+    include(Enumerable)
 
     def initialize
       @head = SingleNode.new

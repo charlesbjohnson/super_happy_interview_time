@@ -1,12 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "leetcode/lc_206"
+require("config")
+require("leetcode/lc_206")
 
 module LeetCode
   class TestLC206 < Minitest::Test
-    include LC206
+    include(LC206)
 
     def build(list)
       head = ListNode.new(list[0])

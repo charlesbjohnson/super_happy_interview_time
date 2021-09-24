@@ -4,7 +4,7 @@
 module Algorithms
   module GraphProcessing
     class DepthFirstSearch
-      attr_reader :count
+      attr_reader(:count)
 
       def initialize(graph, source)
         @graph = graph

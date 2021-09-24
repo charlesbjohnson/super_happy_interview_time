@@ -1,31 +1,31 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c11_p7"
+require("config")
+require("ctci/ctci_c11_p7")
 
 module CTCI
   module C11
     class TestP7 < Minitest::Test
-      include P7
+      include(P7)
 
       def test_returns_height_of_tallest_human_tower
         p = [[65, 114],
              [58, 100],
              [70, 168]].map { |h, w| Stats.new(h, w) }
-        assert_equal 3, tallest_human_tower(p)
+        assert_equal(3, tallest_human_tower(p))
 
         p = [[66, 103],
              [59, 101],
              [62, 111]].map { |h, w| Stats.new(h, w) }
-        assert_equal 2, tallest_human_tower(p)
+        assert_equal(2, tallest_human_tower(p))
 
         p = [[70, 191],
              [66, 103],
              [66, 102],
              [68, 165],
              [66, 170]].map { |h, w| Stats.new(h, w) }
-        assert_equal 3, tallest_human_tower(p)
+        assert_equal(3, tallest_human_tower(p))
 
         p = [[59, 101],
              [62, 111],
@@ -37,15 +37,15 @@ module CTCI
              [70, 191],
              [68, 166],
              [68, 175]].map { |h, w| Stats.new(h, w) }
-        assert_equal 5, tallest_human_tower(p)
+        assert_equal(5, tallest_human_tower(p))
       end
 
       def test_returns_zero_if_empty
         p = []
-        assert_equal 0, tallest_human_tower(p)
+        assert_equal(0, tallest_human_tower(p))
 
         p = [[], Stats.new(70, 180)]
-        assert_equal 0, tallest_human_tower(p)
+        assert_equal(0, tallest_human_tower(p))
       end
     end
   end

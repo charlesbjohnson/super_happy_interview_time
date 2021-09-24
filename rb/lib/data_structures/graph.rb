@@ -40,7 +40,7 @@ module DataStructures
   end
 
   class GraphNode
-    attr_accessor :data, :adjacent
+    attr_accessor(:data, :adjacent)
 
     def initialize(d = nil)
       @data = d

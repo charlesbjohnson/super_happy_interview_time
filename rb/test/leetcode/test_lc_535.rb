@@ -1,15 +1,15 @@
 # typed: false
 # frozen_string_literal: true
 
-require "cgi"
-require "uri"
+require("cgi")
+require("uri")
 
-require "config"
-require "leetcode/lc_535"
+require("config")
+require("leetcode/lc_535")
 
 module LeetCode
   class TestLC535 < Minitest::Test
-    include LC535
+    include(LC535)
 
     def around
       REGISTRY.clear

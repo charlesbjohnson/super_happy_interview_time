@@ -1,9 +1,9 @@
 # typed: true
 # frozen_string_literal: true
 
-require "pathname"
+require("pathname")
 
-require_relative "./slug"
+require_relative("./slug")
 
 module Refactor
   module Util
@@ -60,18 +60,19 @@ module Refactor
 
       private
 
-      private_constant \
+      private_constant(
         :LIB_DIR,
         :Params,
         :TEST_DIR
+      )
 
-      private_class_method def self.construct(str)
+      private_class_method(def self.construct(str)
         parts = split(str)
 
         is_lib = parts.any? { |part| LIB_DIR == part }
         is_test = parts.any? { |part| TEST_DIR == part }
 
-        raise "given path must specify root" if !is_lib && !is_test
+        raise("given path must specify root") if !is_lib && !is_test
 
         extension = File.extname(str)
         dir = is_lib ? LIB_DIR : TEST_DIR
@@ -88,26 +89,26 @@ module Refactor
           extension,
           is_test
         )
-      end
+      end)
 
       #
       # lib/epi/chapter_five/one.rb
       # => [lib epi chapter_five one]
       #
-      private_class_method def self.split(path)
+      private_class_method(def self.split(path)
         Pathname.new(path)
           .each_filename
           .map { |part| File.basename(part, File.extname(part)) }
-      end
+      end)
 
       #
       # lib/epi/chapter_five/one.rb
       # => [[lib] [epi chapter_five one.rb]]
       #
-      private_class_method def self.partition(parts, dir)
+      private_class_method(def self.partition(parts, dir)
         index = parts.find_index(dir)
         [parts[0..index], parts[(index + 1)..-1]]
-      end
+      end)
     end
   end
 end

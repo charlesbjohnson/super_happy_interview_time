@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative "./base"
-require_relative "../util/path"
+require_relative("./base")
+require_relative("../util/path")
 
 #
 # Before:

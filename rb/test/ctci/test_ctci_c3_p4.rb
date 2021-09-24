@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c3_p4"
+require("config")
+require("ctci/ctci_c3_p4")
 
 module CTCI
   module C3
@@ -17,9 +17,9 @@ module CTCI
 
         @hanoi.solve(0, 2, 1)
 
-        assert_equal 0, @hanoi.tower(0)
-        assert_equal 0, @hanoi.tower(1)
-        assert_equal 1, @hanoi.tower(2)
+        assert_equal(0, @hanoi.tower(0))
+        assert_equal(0, @hanoi.tower(1))
+        assert_equal(1, @hanoi.tower(2))
       end
 
       def test_two_on_first_to_third
@@ -28,9 +28,9 @@ module CTCI
 
         @hanoi.solve(0, 2, 1)
 
-        assert_equal 0, @hanoi.tower(0)
-        assert_equal 0, @hanoi.tower(1)
-        assert_equal 2, @hanoi.tower(2)
+        assert_equal(0, @hanoi.tower(0))
+        assert_equal(0, @hanoi.tower(1))
+        assert_equal(2, @hanoi.tower(2))
       end
 
       def test_three_on_first_to_third
@@ -39,9 +39,9 @@ module CTCI
 
         @hanoi.solve(0, 2, 1)
 
-        assert_equal 0, @hanoi.tower(0)
-        assert_equal 0, @hanoi.tower(1)
-        assert_equal 3, @hanoi.tower(2)
+        assert_equal(0, @hanoi.tower(0))
+        assert_equal(0, @hanoi.tower(1))
+        assert_equal(3, @hanoi.tower(2))
       end
     end
 
@@ -52,8 +52,8 @@ module CTCI
 
         @from.move_disk(@to)
 
-        assert_nil @from.stack.peek
-        assert_equal 1, @to.stack.peek
+        assert_nil(@from.stack.peek)
+        assert_equal(1, @to.stack.peek)
       end
 
       def test_move_smaller_onto_larger
@@ -65,8 +65,8 @@ module CTCI
 
         @from.move_disk(@to)
 
-        assert_nil @from.stack.peek
-        assert_equal 1, @to.stack.peek
+        assert_nil(@from.stack.peek)
+        assert_equal(1, @to.stack.peek)
       end
 
       def test_move_larger_onto_smaller
@@ -78,8 +78,8 @@ module CTCI
 
         @from.move_disk(@to)
 
-        assert_equal 2, @from.stack.peek
-        assert_equal 1, @to.stack.peek
+        assert_equal(2, @from.stack.peek)
+        assert_equal(1, @to.stack.peek)
       end
     end
   end

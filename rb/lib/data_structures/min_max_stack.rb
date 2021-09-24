@@ -1,10 +1,10 @@
 # typed: true
 # frozen_string_literal: true
 
-require "forwardable"
+require("forwardable")
 
-require_relative "stack"
-require_relative "single_node"
+require_relative("stack")
+require_relative("single_node")
 
 module DataStructures
   class MinMaxStack < Stack
@@ -37,10 +37,10 @@ module DataStructures
   end
 
   class MinMaxSingleNode
-    extend Forwardable
+    extend(Forwardable)
 
-    def_delegators :@node, :data, :data=, :next, :next=
-    attr_accessor :min, :max
+    def_delegators(:@node, :data, :data=, :next, :next=)
+    attr_accessor(:min, :max)
 
     def initialize(d = nil, n: nil, min: nil, max: nil)
       @node = SingleNode.new(d, n: n)

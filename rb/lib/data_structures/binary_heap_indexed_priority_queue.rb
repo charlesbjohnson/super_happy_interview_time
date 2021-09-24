@@ -3,7 +3,7 @@
 
 module DataStructures
   class BinaryHeapIndexedPriorityQueue
-    include Enumerable
+    include(Enumerable)
 
     def initialize(priority = nil)
       @priority = priority || ->(a, b) { a <=> b }

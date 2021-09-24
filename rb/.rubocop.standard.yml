@@ -4,3 +4,10 @@ inherit_gem:
 
 Style/BlockDelimiters:
   Enabled: false
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  AllowParenthesesInCamelCaseMethod: true
+  AllowParenthesesInChaining: true
+  AllowParenthesesInMultilineCall: true
+  IgnoreMacros: false

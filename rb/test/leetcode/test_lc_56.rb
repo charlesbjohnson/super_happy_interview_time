@@ -1,12 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "leetcode/lc_56"
+require("config")
+require("leetcode/lc_56")
 
 module LeetCode
   class TestLC56 < Minitest::Test
-    include LC56
+    include(LC56)
 
     def build(intervals)
       intervals.map { |interval| Interval.new(interval[0], interval[1]) }

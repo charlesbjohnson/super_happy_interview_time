@@ -1,15 +1,15 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
+require("config")
 
-require "data_structures/linked_list"
-require "epi/epi_c8_p1"
+require("data_structures/linked_list")
+require("epi/epi_c8_p1")
 
 module EPI
   module C8
     class TestP1 < Minitest::Test
-      include P1
+      include(P1)
 
       def setup
         @left_list = DataStructures::LinkedList.new

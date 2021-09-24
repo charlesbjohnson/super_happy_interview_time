@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c3_p7"
+require("config")
+require("ctci/ctci_c3_p7")
 
 module CTCI
   module C3
@@ -19,22 +19,22 @@ module CTCI
 
         dequeued = @animal_queue.dequeue_any
 
-        assert dequeued.dog?
-        assert_equal 1, dequeued.order
+        assert(dequeued.dog?)
+        assert_equal(1, dequeued.order)
       end
 
       def test_dequeue_any_when_only_dog
         @animal_queue.enqueue(Animal.dog)
-        assert @animal_queue.dequeue_any.dog?
+        assert(@animal_queue.dequeue_any.dog?)
       end
 
       def test_dequeue_any_when_only_cat
         @animal_queue.enqueue(Animal.cat)
-        assert @animal_queue.dequeue_any.cat?
+        assert(@animal_queue.dequeue_any.cat?)
       end
 
       def test_dequeue_any_when_empty
-        assert_nil @animal_queue.dequeue_any
+        assert_nil(@animal_queue.dequeue_any)
       end
 
       def test_dequeue_dog
@@ -43,13 +43,13 @@ module CTCI
 
         dequeued = @animal_queue.dequeue_dog
 
-        assert dequeued.dog?
-        assert_equal 2, dequeued.order
+        assert(dequeued.dog?)
+        assert_equal(2, dequeued.order)
       end
 
       def test_dequeue_dog_when_only_cat
         @animal_queue.enqueue(Animal.cat)
-        assert_nil @animal_queue.dequeue_dog
+        assert_nil(@animal_queue.dequeue_dog)
       end
 
       def test_dequeue_cat
@@ -58,13 +58,13 @@ module CTCI
 
         dequeued = @animal_queue.dequeue_cat
 
-        assert dequeued.cat?
-        assert_equal 2, dequeued.order
+        assert(dequeued.cat?)
+        assert_equal(2, dequeued.order)
       end
 
       def test_dequeue_cat_when_only_dog
         @animal_queue.enqueue(Animal.dog)
-        assert_nil @animal_queue.dequeue_cat
+        assert_nil(@animal_queue.dequeue_cat)
       end
     end
   end

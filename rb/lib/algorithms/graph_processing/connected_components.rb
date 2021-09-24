@@ -4,7 +4,7 @@
 module Algorithms
   module GraphProcessing
     class ConnectedComponents
-      attr_reader :count
+      attr_reader(:count)
 
       def initialize(graph)
         @graph = graph

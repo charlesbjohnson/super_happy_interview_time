@@ -43,8 +43,8 @@ module CTCI
     end
 
     class Tower
-      attr_reader :index
-      attr_accessor :stack
+      attr_reader(:index)
+      attr_accessor(:stack)
 
       def initialize(i, disks = 0)
         @index = i

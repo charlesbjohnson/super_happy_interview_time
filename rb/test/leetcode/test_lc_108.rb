@@ -1,12 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "leetcode/lc_108"
+require("config")
+require("leetcode/lc_108")
 
 module LeetCode
   class TestLC108 < Minitest::Test
-    include LC108
+    include(LC108)
 
     def build(values)
       return if values.empty?

@@ -1,12 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "leetcode/lc_278"
+require("config")
+require("leetcode/lc_278")
 
 module LeetCode
   class TestLC278 < Minitest::Test
-    include LC278
+    include(LC278)
 
     def bad_version?(version)
       version >= @bad_version

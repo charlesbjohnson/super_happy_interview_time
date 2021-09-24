@@ -1,42 +1,42 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c8_p6"
+require("config")
+require("ctci/ctci_c8_p6")
 
 module CTCI
   module C8
     module P6
-      describe JigSaw do
+      describe(JigSaw) do
         subject { JigSaw.new }
 
-        it { _(subject).must_respond_to :board }
-        it { _(subject).must_respond_to :unplaced }
-        it { _(subject).must_respond_to :columns }
-        it { _(subject).must_respond_to :rows }
-        it { _(subject).must_respond_to :solve }
+        it { _(subject).must_respond_to(:board) }
+        it { _(subject).must_respond_to(:unplaced) }
+        it { _(subject).must_respond_to(:columns) }
+        it { _(subject).must_respond_to(:rows) }
+        it { _(subject).must_respond_to(:solve) }
 
-        describe "::new" do
-          it "creates a 3x3 board by default" do
-            _(subject.unplaced.size).must_equal 9
-            _(subject.board.size).must_equal 3
-            _(subject.board.first.size).must_equal 3
+        describe("::new") do
+          it("creates a 3x3 board by default") do
+            _(subject.unplaced.size).must_equal(9)
+            _(subject.board.size).must_equal(3)
+            _(subject.board.first.size).must_equal(3)
           end
 
-          it "creates pieces for each position in the puzzle" do
+          it("creates pieces for each position in the puzzle") do
             subject.unplaced.each { |p| _(p).must_be_kind_of(Piece) }
-            _(subject.unplaced.count(&:corner?)).must_equal 4
-            _(subject.unplaced.count { |p| p.top.flat? }).must_equal 3
-            _(subject.unplaced.count { |p| p.right.flat? }).must_equal 3
-            _(subject.unplaced.count { |p| p.bottom.flat? }).must_equal 3
-            _(subject.unplaced.count { |p| p.left.flat? }).must_equal 3
-            _(subject.unplaced.count { |p| p.edges.all?(&:flat?) }).must_equal 0
-            _(subject.unplaced.count { |p| p.edges.none?(&:flat?) }).must_equal 1
+            _(subject.unplaced.count(&:corner?)).must_equal(4)
+            _(subject.unplaced.count { |p| p.top.flat? }).must_equal(3)
+            _(subject.unplaced.count { |p| p.right.flat? }).must_equal(3)
+            _(subject.unplaced.count { |p| p.bottom.flat? }).must_equal(3)
+            _(subject.unplaced.count { |p| p.left.flat? }).must_equal(3)
+            _(subject.unplaced.count { |p| p.edges.all?(&:flat?) }).must_equal(0)
+            _(subject.unplaced.count { |p| p.edges.none?(&:flat?) }).must_equal(1)
           end
         end
 
-        describe "#solve" do
-          it "fills the board so that each piece fits with those around it" do
+        describe("#solve") do
+          it("fills the board so that each piece fits with those around it") do
             subject.solve
 
             _(subject.unplaced).must_be_empty
@@ -66,230 +66,230 @@ module CTCI
               break unless all_fit
             end
 
-            _(all_fit).must_equal true
+            _(all_fit).must_equal(true)
           end
         end
       end
 
-      describe Piece do
+      describe(Piece) do
         # edges for a top left corner piece
         let(:edges) { [1, 2, 3, 1].map { |e| Edge.new(e) } }
         subject { Piece.new(edges) }
 
-        it { _(Piece).must_respond_to :empty }
-        it { _(Piece).must_respond_to :that_fits_between }
+        it { _(Piece).must_respond_to(:empty) }
+        it { _(Piece).must_respond_to(:that_fits_between) }
 
-        it { _(subject).must_respond_to :edges }
-        it { _(subject).must_respond_to :top }
-        it { _(subject).must_respond_to :right }
-        it { _(subject).must_respond_to :bottom }
-        it { _(subject).must_respond_to :left }
-        it { _(subject).must_respond_to :corner? }
-        it { _(subject).must_respond_to :empty? }
+        it { _(subject).must_respond_to(:edges) }
+        it { _(subject).must_respond_to(:top) }
+        it { _(subject).must_respond_to(:right) }
+        it { _(subject).must_respond_to(:bottom) }
+        it { _(subject).must_respond_to(:left) }
+        it { _(subject).must_respond_to(:corner?) }
+        it { _(subject).must_respond_to(:empty?) }
 
-        describe "piece constructors" do
-          describe "::empty" do
-            it "creates an empty piece that has no edges, a null Piece object" do
-              _(Piece.empty.edges.all?(&:none?)).must_equal true
+        describe("piece constructors") do
+          describe("::empty") do
+            it("creates an empty piece that has no edges, a null Piece object") do
+              _(Piece.empty.edges.all?(&:none?)).must_equal(true)
             end
           end
 
-          describe "::that_fits_between" do
-            it "creates a piece that fits between the given edges" do
+          describe("::that_fits_between") do
+            it("creates a piece that fits between the given edges") do
               edges_around = [Edge.none, nil, Edge.inward, Edge.outward]
               piece = Piece.that_fits_between(edges_around)
               top = piece.top.type
-              _(%i[inward outward].include?(top)).must_equal true
-              _(piece.right).must_be :flat?
-              _(piece.bottom).must_be :outward?
-              _(piece.left).must_be :inward?
+              _(%i[inward outward].include?(top)).must_equal(true)
+              _(piece.right).must_be(:flat?)
+              _(piece.bottom).must_be(:outward?)
+              _(piece.left).must_be(:inward?)
             end
           end
         end
 
-        describe "edges" do
-          describe "#edges" do
-            it "returns edges from the top going clockwise" do
-              _(subject.edges).must_equal edges
+        describe("edges") do
+          describe("#edges") do
+            it("returns edges from the top going clockwise") do
+              _(subject.edges).must_equal(edges)
             end
           end
 
-          describe "#top" do
-            it { _(subject.top).must_equal edges[0] }
+          describe("#top") do
+            it { _(subject.top).must_equal(edges[0]) }
           end
 
-          describe "#right" do
-            it { _(subject.right).must_equal edges[1] }
+          describe("#right") do
+            it { _(subject.right).must_equal(edges[1]) }
           end
 
-          describe "#bottom" do
-            it { _(subject.bottom).must_equal edges[2] }
+          describe("#bottom") do
+            it { _(subject.bottom).must_equal(edges[2]) }
           end
 
-          describe "#left" do
-            it { _(subject.left).must_equal edges[3] }
+          describe("#left") do
+            it { _(subject.left).must_equal(edges[3]) }
           end
         end
 
-        describe "piece edge checking" do
-          describe "#corner?" do
-            it "returns true if two consecutive edges are both flat" do
+        describe("piece edge checking") do
+          describe("#corner?") do
+            it("returns true if two consecutive edges are both flat") do
               # start at top left, going counter clockwise
-              _(subject).must_be :corner?
-              _(Piece.new(edges.rotate)).must_be :corner?
-              _(Piece.new(edges.rotate(2))).must_be :corner?
-              _(Piece.new(edges.rotate(3))).must_be :corner?
+              _(subject).must_be(:corner?)
+              _(Piece.new(edges.rotate)).must_be(:corner?)
+              _(Piece.new(edges.rotate(2))).must_be(:corner?)
+              _(Piece.new(edges.rotate(3))).must_be(:corner?)
             end
 
-            it "returns false if not a corner piece" do
+            it("returns false if not a corner piece") do
               flat_top_bottom = [1, 2, 1, 3].map { |e| Edge.new(e) }
-              _(Piece.new(flat_top_bottom)).wont_be :corner?
+              _(Piece.new(flat_top_bottom)).wont_be(:corner?)
 
               flat_left_right = [2, 1, 3, 1].map { |e| Edge.new(e) }
-              _(Piece.new(flat_left_right)).wont_be :corner?
+              _(Piece.new(flat_left_right)).wont_be(:corner?)
 
               none_flat = [2, 3, 3, 2].map { |e| Edge.new(e) }
-              _(Piece.new(none_flat)).wont_be :corner?
+              _(Piece.new(none_flat)).wont_be(:corner?)
 
-              _(Piece.empty).wont_be :corner?
+              _(Piece.empty).wont_be(:corner?)
             end
           end
 
-          describe "#empty?" do
+          describe("#empty?") do
             it do
-              _(Piece.empty).must_be :empty?
-              _(subject).wont_be :empty?
+              _(Piece.empty).must_be(:empty?)
+              _(subject).wont_be(:empty?)
             end
           end
         end
       end
 
-      describe Edge do
+      describe(Edge) do
         subject { Edge.new(0) }
         let(:none) { subject }
         let(:flat) { Edge.new(1) }
         let(:inward) { Edge.new(2) }
         let(:outward) { Edge.new(3) }
 
-        it { _(Edge).must_respond_to :none }
-        it { _(Edge).must_respond_to :flat }
-        it { _(Edge).must_respond_to :inward }
-        it { _(Edge).must_respond_to :outward }
-        it { _(Edge).must_respond_to :rand_in_out }
-        it { _(Edge).must_respond_to :complement }
+        it { _(Edge).must_respond_to(:none) }
+        it { _(Edge).must_respond_to(:flat) }
+        it { _(Edge).must_respond_to(:inward) }
+        it { _(Edge).must_respond_to(:outward) }
+        it { _(Edge).must_respond_to(:rand_in_out) }
+        it { _(Edge).must_respond_to(:complement) }
 
-        it { _(subject).must_respond_to :type }
-        it { _(subject).must_respond_to :fits_with? }
-        it { _(subject).must_respond_to :flat? }
-        it { _(subject).must_respond_to :inward? }
-        it { _(subject).must_respond_to :outward? }
+        it { _(subject).must_respond_to(:type) }
+        it { _(subject).must_respond_to(:fits_with?) }
+        it { _(subject).must_respond_to(:flat?) }
+        it { _(subject).must_respond_to(:inward?) }
+        it { _(subject).must_respond_to(:outward?) }
 
-        describe "edge constructors" do
-          describe "::none" do
-            it { _(Edge.none.type).must_equal :none }
+        describe("edge constructors") do
+          describe("::none") do
+            it { _(Edge.none.type).must_equal(:none) }
           end
 
-          describe "::flat" do
-            it { _(Edge.flat.type).must_equal :flat }
+          describe("::flat") do
+            it { _(Edge.flat.type).must_equal(:flat) }
           end
 
-          describe "::rand_in_out" do
-            it "returns either an inward or outward edge randomly" do
+          describe("::rand_in_out") do
+            it("returns either an inward or outward edge randomly") do
               r = Array.new(10) { Edge.rand_in_out }
-              _(r.all? { |e| e.type == :inward }).must_equal false
-              _(r.all? { |e| e.type == :outward }).must_equal false
-              _(r.all? { |e| e.type == :flat }).must_equal false
-              _(r.all? { |e| e.type == :inward || e.type == :outward }).must_equal true
+              _(r.all? { |e| e.type == :inward }).must_equal(false)
+              _(r.all? { |e| e.type == :outward }).must_equal(false)
+              _(r.all? { |e| e.type == :flat }).must_equal(false)
+              _(r.all? { |e| e.type == :inward || e.type == :outward }).must_equal(true)
             end
           end
 
-          describe "::complement" do
-            it "returns an edge depending on the type of edge given" do
+          describe("::complement") do
+            it("returns an edge depending on the type of edge given") do
               none_complement = Edge.complement(none).type
               is_inward = none_complement == :inward
               is_outward = none_complement == :outward
-              _(is_inward || is_outward).must_equal true
+              _(is_inward || is_outward).must_equal(true)
 
-              _(Edge.complement(flat).type).must_equal :flat
-              _(Edge.complement(inward).type).must_equal :outward
-              _(Edge.complement(outward).type).must_equal :inward
+              _(Edge.complement(flat).type).must_equal(:flat)
+              _(Edge.complement(inward).type).must_equal(:outward)
+              _(Edge.complement(outward).type).must_equal(:inward)
             end
 
-            it "returns a flat edge if no edge or nil given" do
-              _(Edge.complement.type).must_equal :flat
-              _(Edge.complement(nil).type).must_equal :flat
+            it("returns a flat edge if no edge or nil given") do
+              _(Edge.complement.type).must_equal(:flat)
+              _(Edge.complement(nil).type).must_equal(:flat)
             end
           end
         end
 
-        describe "#fits_with?" do
+        describe("#fits_with?") do
           it do
-            _(none).must_be :fits_with?, none.clone
-            _(none).must_be :fits_with?, inward
-            _(none).must_be :fits_with?, outward
-            _(none).wont_be :fits_with?, flat
-            _(none).wont_be :fits_with?, nil
+            _(none).must_be(:fits_with?, none.clone)
+            _(none).must_be(:fits_with?, inward)
+            _(none).must_be(:fits_with?, outward)
+            _(none).wont_be(:fits_with?, flat)
+            _(none).wont_be(:fits_with?, nil)
           end
 
           it do
-            _(flat).wont_be :fits_with?, none
-            _(flat).wont_be :fits_with?, inward
-            _(flat).wont_be :fits_with?, outward
-            _(flat).must_be :fits_with?, flat.clone
-            _(flat).must_be :fits_with?, nil
+            _(flat).wont_be(:fits_with?, none)
+            _(flat).wont_be(:fits_with?, inward)
+            _(flat).wont_be(:fits_with?, outward)
+            _(flat).must_be(:fits_with?, flat.clone)
+            _(flat).must_be(:fits_with?, nil)
           end
 
           it do
-            _(inward).must_be :fits_with?, none
-            _(inward).wont_be :fits_with?, inward.clone
-            _(inward).must_be :fits_with?, outward
-            _(inward).wont_be :fits_with?, flat
-            _(inward).wont_be :fits_with?, nil
+            _(inward).must_be(:fits_with?, none)
+            _(inward).wont_be(:fits_with?, inward.clone)
+            _(inward).must_be(:fits_with?, outward)
+            _(inward).wont_be(:fits_with?, flat)
+            _(inward).wont_be(:fits_with?, nil)
           end
 
           it do
-            _(outward).must_be :fits_with?, none
-            _(outward).must_be :fits_with?, inward
-            _(outward).wont_be :fits_with?, outward.clone
-            _(outward).wont_be :fits_with?, flat
-            _(outward).wont_be :fits_with?, nil
+            _(outward).must_be(:fits_with?, none)
+            _(outward).must_be(:fits_with?, inward)
+            _(outward).wont_be(:fits_with?, outward.clone)
+            _(outward).wont_be(:fits_with?, flat)
+            _(outward).wont_be(:fits_with?, nil)
           end
         end
 
-        describe "edge checking" do
-          describe "#none?" do
+        describe("edge checking") do
+          describe("#none?") do
             it do
-              _(none).must_be :none?
-              _(flat).wont_be :none?
-              _(inward).wont_be :none?
-              _(outward).wont_be :none?
+              _(none).must_be(:none?)
+              _(flat).wont_be(:none?)
+              _(inward).wont_be(:none?)
+              _(outward).wont_be(:none?)
             end
           end
 
-          describe "#flat?" do
+          describe("#flat?") do
             it do
-              _(none).wont_be :flat?
-              _(flat).must_be :flat?
-              _(inward).wont_be :flat?
-              _(outward).wont_be :flat?
+              _(none).wont_be(:flat?)
+              _(flat).must_be(:flat?)
+              _(inward).wont_be(:flat?)
+              _(outward).wont_be(:flat?)
             end
           end
 
-          describe "#inward?" do
+          describe("#inward?") do
             it do
-              _(none).wont_be :inward?
-              _(flat).wont_be :inward?
-              _(inward).must_be :inward?
-              _(outward).wont_be :inward?
+              _(none).wont_be(:inward?)
+              _(flat).wont_be(:inward?)
+              _(inward).must_be(:inward?)
+              _(outward).wont_be(:inward?)
             end
           end
 
-          describe "#outward?" do
+          describe("#outward?") do
             it do
-              _(none).wont_be :outward?
-              _(flat).wont_be :outward?
-              _(outward).must_be :outward?
-              _(inward).wont_be :outward?
+              _(none).wont_be(:outward?)
+              _(flat).wont_be(:outward?)
+              _(outward).must_be(:outward?)
+              _(inward).wont_be(:outward?)
             end
           end
         end

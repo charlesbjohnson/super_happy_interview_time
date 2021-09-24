@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative "./word"
+require_relative("./word")
 
 module Refactor
   module Util
@@ -19,9 +19,10 @@ module Refactor
         "#{source}_c#{chapter}_p#{problem}"
       end
 
-      private_constant \
+      private_constant(
         :CHAPTER_REGEX,
         :TEST_REGEX
+      )
     end
   end
 end

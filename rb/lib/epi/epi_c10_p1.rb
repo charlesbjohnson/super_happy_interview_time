@@ -1,7 +1,7 @@
 # typed: strong
 # frozen_string_literal: true
 
-require "ctci/ctci_c4_p1"
+require("ctci/ctci_c4_p1")
 
 module EPI
   module C10
@@ -11,7 +11,7 @@ module EPI
       # Use O(h) additional storage, where h is the height of the tree.
       #
       # This has already been implemented and tested in CTCI problem 4.1.
-      include ::CTCI::C4::P1
+      include(::CTCI::C4::P1)
     end
   end
 end

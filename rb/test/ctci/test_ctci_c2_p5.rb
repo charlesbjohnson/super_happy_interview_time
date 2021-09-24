@@ -1,15 +1,15 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
+require("config")
 
-require "data_structures/linked_list"
-require "ctci/ctci_c2_p5"
+require("data_structures/linked_list")
+require("ctci/ctci_c2_p5")
 
 module CTCI
   module C2
     class TestP5 < Minitest::Test
-      include P5
+      include(P5)
 
       def setup
         @first, @second = Array.new(2) { DataStructures::LinkedList.new }
@@ -22,7 +22,7 @@ module CTCI
 
         actual = reverse_add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal [2, 1, 9], actual.to_a
+        assert_equal([2, 1, 9], actual.to_a)
       end
 
       def test_reverse_add_digits_differing_magnitude
@@ -31,7 +31,7 @@ module CTCI
 
         actual = reverse_add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal [4, 6, 5, 5], actual.to_a
+        assert_equal([4, 6, 5, 5], actual.to_a)
       end
 
       def test_reverse_add_digits_one_empty
@@ -39,13 +39,13 @@ module CTCI
 
         actual = reverse_add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal [1, 2], actual.to_a
+        assert_equal([1, 2], actual.to_a)
       end
 
       def test_reverse_add_digits_both_empty
         actual = reverse_add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal [], actual.to_a
+        assert_equal([], actual.to_a)
       end
 
       # forward implementation
@@ -55,7 +55,7 @@ module CTCI
 
         actual = add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal [9, 1, 2], actual.to_a
+        assert_equal([9, 1, 2], actual.to_a)
       end
 
       def test_add_digits_differing_magnitude
@@ -64,7 +64,7 @@ module CTCI
 
         actual = add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal [5, 5, 6, 4], actual.to_a
+        assert_equal([5, 5, 6, 4], actual.to_a)
       end
 
       def test_add_digits_one_empty
@@ -72,13 +72,13 @@ module CTCI
 
         actual = add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal [2, 1], actual.to_a
+        assert_equal([2, 1], actual.to_a)
       end
 
       def test_add_digits_both_empty
         actual = add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal [], actual.to_a
+        assert_equal([], actual.to_a)
       end
     end
   end

@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-require "set"
+require("set")
 
 module LeetCode
   # 36. Valid Sudoku

@@ -26,7 +26,7 @@ module EPI
       def s_to_i(s)
         s = s.to_s.strip
 
-        raise "invalid input `#{s}'" if s.empty?
+        raise("invalid input `#{s}'") if s.empty?
 
         is_negative = s[0] == "-"
         start = is_negative ? 1 : 0
@@ -34,7 +34,7 @@ module EPI
         result = (start...s.length).reverse_each.with_index.reduce(0) { |a, (e, i)|
           character = s[e]
 
-          raise "invalid character `#{character}'" unless ("0".."9").cover?(character)
+          raise("invalid character `#{character}'") unless ("0".."9").cover?(character)
 
           power = 10**i
           digit = character.ord - "0".ord

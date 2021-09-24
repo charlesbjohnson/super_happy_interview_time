@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c1_p5"
+require("config")
+require("ctci/ctci_c1_p5")
 
 module CTCI
   module C1
     class TestP5 < Minitest::Test
-      include P5
+      include(P5)
 
       def test_compresses_a_string
         s = "aabcccccaaa"

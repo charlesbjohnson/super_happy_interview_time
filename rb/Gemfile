@@ -1,21 +1,21 @@
 # typed: ignore
 # frozen_string_literal: true
 
-ruby "2.7.4"
-source "https://rubygems.org"
+ruby("2.7.4")
+source("https://rubygems.org")
 
-gem "byebug", "~> 11.1", require: false
-gem "minitest", "~> 5.14", require: false
-gem "minitest-around", "~> 0.5", require: false
-gem "minitest-focus", "~> 1.1", require: false
-gem "minitest-reporters", "~> 1.4", require: false
-gem "parser", "~> 2.7", require: false
-gem "rake", "~> 13.0", require: false
-gem "rubocop", "~> 0.79", require: false
-gem "rubocop-minitest", "~> 0.6", require: false
-gem "rubocop-performance", "~> 1.5", require: false
-gem "rubocop-sorbet", "~> 0.3", require: false
-gem "simplecov", "~> 0.18", require: false
-gem "sorbet", "~> 0.5", require: false
-gem "sorbet-runtime", "~> 0.5", require: false
-gem "standard", "~> 0.1", require: false
+gem("byebug", "~> 11.1", require: false)
+gem("minitest", "~> 5.14", require: false)
+gem("minitest-around", "~> 0.5", require: false)
+gem("minitest-focus", "~> 1.1", require: false)
+gem("minitest-reporters", "~> 1.4", require: false)
+gem("parser", "~> 2.7", require: false)
+gem("rake", "~> 13.0", require: false)
+gem("rubocop", "~> 0.79", require: false)
+gem("rubocop-minitest", "~> 0.6", require: false)
+gem("rubocop-performance", "~> 1.5", require: false)
+gem("rubocop-sorbet", "~> 0.3", require: false)
+gem("simplecov", "~> 0.18", require: false)
+gem("sorbet", "~> 0.5", require: false)
+gem("sorbet-runtime", "~> 0.5", require: false)
+gem("standard", "~> 0.1", require: false)

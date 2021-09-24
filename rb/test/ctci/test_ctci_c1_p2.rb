@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c1_p2"
+require("config")
+require("ctci/ctci_c1_p2")
 
 module CTCI
   module C1
     class TestP2 < Minitest::Test
-      include P2
+      include(P2)
 
       def test_reverses_a_string
         s = "Hello World!"

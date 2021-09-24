@@ -5,7 +5,7 @@ module Refactor
   module CodeStructure
     class Base
       def self.register
-        raise NotImplementedError
+        raise(NotImplementedError)
       end
 
       def initialize(rewriter, node)
@@ -14,18 +14,19 @@ module Refactor
       end
 
       def match?
-        raise NotImplementedError
+        raise(NotImplementedError)
       end
 
       def execute!
-        raise NotImplementedError
+        raise(NotImplementedError)
       end
 
       private
 
-      attr_reader \
+      attr_reader(
         :rewriter,
         :node
+      )
     end
   end
 end

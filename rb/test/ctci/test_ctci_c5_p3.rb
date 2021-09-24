@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c5_p3"
+require("config")
+require("ctci/ctci_c5_p3")
 
 module CTCI
   module C5
     class TestP3 < Minitest::Test
-      include P3
+      include(P3)
 
       def test_returns_prev_and_next_numbers_with_same_number_bits
         vals = [

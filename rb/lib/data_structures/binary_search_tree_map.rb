@@ -3,7 +3,7 @@
 
 module DataStructures
   class BinarySearchTreeMap
-    include Enumerable
+    include(Enumerable)
 
     def initialize
       @root = nil
@@ -179,7 +179,7 @@ module DataStructures
   end
 
   class TreeNode
-    attr_accessor :key, :value, :left, :right, :count
+    attr_accessor(:key, :value, :left, :right, :count)
 
     def initialize(k = nil, v = nil, c: nil)
       @key = k

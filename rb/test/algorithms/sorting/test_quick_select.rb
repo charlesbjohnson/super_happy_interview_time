@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "algorithms/sorting/quick_select"
+require("config")
+require("algorithms/sorting/quick_select")
 
 module Algorithms
   module Sorting
     class TestQuickSelect < Minitest::Test
-      include QuickSelect
+      include(QuickSelect)
 
       def test_returns_ith_element_when_odd_length
         assert_equal(-3, select(2, [56, 59, 94, 45, -11, -71, 15, 0, -3]))

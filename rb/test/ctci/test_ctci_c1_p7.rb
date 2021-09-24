@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c1_p7"
+require("config")
+require("ctci/ctci_c1_p7")
 
 module CTCI
   module C1
     class TestP7 < Minitest::Test
-      include P7
+      include(P7)
 
       def test_rows_with_zero_collapse_to_zero
         m = [[1, 0, 0],

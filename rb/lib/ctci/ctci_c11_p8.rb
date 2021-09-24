@@ -73,7 +73,7 @@ module CTCI
       end
 
       class Node
-        attr_accessor :number, :rank, :left, :right
+        attr_accessor(:number, :rank, :left, :right)
 
         def initialize(n, r)
           @number = n

@@ -30,7 +30,7 @@ module CTCI
       end
 
       class Line
-        attr_accessor :slope, :y_intercept, :x_intercept
+        attr_accessor(:slope, :y_intercept, :x_intercept)
 
         def initialize(slp, yint, xint = nil)
           @slope = slp

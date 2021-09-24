@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c4_p6"
+require("config")
+require("ctci/ctci_c4_p6")
 
 module CTCI
   module C4
     class TestP6 < Minitest::Test
-      include P6
+      include(P6)
 
       def setup
         nodes = Array.new(5) { |i| TreeTripleNode.new(i, i.to_s) }
@@ -22,24 +22,24 @@ module CTCI
       end
 
       def test_returns_next_from_root_subtree
-        assert_equal @root.left.right, next_inorder(@root.left)
+        assert_equal(@root.left.right, next_inorder(@root.left))
       end
 
       def test_returns_next_from_left_leaf
-        assert_equal @root.left, next_inorder(@root.left.left)
+        assert_equal(@root.left, next_inorder(@root.left.left))
       end
 
       def test_returns_next_from_right_leaf
-        assert_equal @root, next_inorder(@root.left.right)
+        assert_equal(@root, next_inorder(@root.left.right))
       end
 
       def test_returns_nil_from_largest
-        assert_nil next_inorder(@root.right)
+        assert_nil(next_inorder(@root.right))
       end
     end
 
     class TreeTripleNode
-      attr_accessor :key, :value, :left, :right, :parent
+      attr_accessor(:key, :value, :left, :right, :parent)
 
       def initialize(k, v)
         @key = k

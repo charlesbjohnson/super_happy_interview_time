@@ -1,12 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "leetcode/lc_326"
+require("config")
+require("leetcode/lc_326")
 
 module LeetCode
   class TestLC326 < Minitest::Test
-    include LC326
+    include(LC326)
 
     [
       [0, false],

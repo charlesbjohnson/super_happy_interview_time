@@ -1,20 +1,20 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
+require("config")
 
-require "algorithms/graph_processing/depth_first_order"
-require "data_structures/undirected_graph"
+require("algorithms/graph_processing/depth_first_order")
+require("data_structures/undirected_graph")
 
-describe Algorithms::GraphProcessing::DepthFirstOrder do
+describe(Algorithms::GraphProcessing::DepthFirstOrder) do
   subject { Algorithms::GraphProcessing::DepthFirstOrder.new(graph) }
 
   let(:graph) { DataStructures::UndirectedGraph.new }
 
-  it { _(subject).must_respond_to :pre }
-  it { _(subject).must_respond_to :post }
+  it { _(subject).must_respond_to(:pre) }
+  it { _(subject).must_respond_to(:post) }
 
-  describe "with an undirected graph" do
+  describe("with an undirected graph") do
     let(:edges) do
       [
         [0, 1],
@@ -34,20 +34,20 @@ describe Algorithms::GraphProcessing::DepthFirstOrder do
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe "#pre" do
-      it "returns vertices in preorder" do
+    describe("#pre") do
+      it("returns vertices in preorder") do
         _(subject.pre).must_equal([0, 1, 4, 3, 2, 5, 6])
       end
     end
 
-    describe "#post" do
-      it "returns vertices in postorder" do
+    describe("#post") do
+      it("returns vertices in postorder") do
         _(subject.post).must_equal([5, 2, 6, 3, 4, 1, 0])
       end
     end
   end
 
-  describe "with a directed graph" do
+  describe("with a directed graph") do
     let(:graph) { DataStructures::DirectedGraph.new }
     let(:edges) do
       [
@@ -67,14 +67,14 @@ describe Algorithms::GraphProcessing::DepthFirstOrder do
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe "#pre" do
-      it "returns vertices in preorder" do
+    describe("#pre") do
+      it("returns vertices in preorder") do
         _(subject.pre).must_equal([0, 1, 4, 2, 5, 3, 6])
       end
     end
 
-    describe "#post" do
-      it "returns vertices in postorder" do
+    describe("#post") do
+      it("returns vertices in postorder") do
         _(subject.post).must_equal([4, 1, 2, 5, 0, 6, 3])
       end
     end

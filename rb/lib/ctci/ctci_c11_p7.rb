@@ -32,9 +32,9 @@ module CTCI
       end
 
       class Stats
-        include Comparable
+        include(Comparable)
 
-        attr_reader :height, :weight
+        attr_reader(:height, :weight)
 
         def initialize(h, w)
           @height = h

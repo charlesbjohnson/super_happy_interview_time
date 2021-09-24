@@ -72,9 +72,10 @@ module Refactor
         mapping ? mapping.replace(str) : str
       end
 
-      private_constant \
+      private_constant(
         :MAPPINGS,
         :Mapping
+      )
     end
   end
 end

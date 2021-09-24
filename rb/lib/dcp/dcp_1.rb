@@ -1,13 +1,13 @@
 # typed: strong
 # frozen_string_literal: true
 
-require "sorbet-runtime"
-require "set"
+require("sorbet-runtime")
+require("set")
 
 module DCP
   # 1. Two Sum
   module DCP1
-    extend T::Sig
+    extend(T::Sig)
     # Description:
     # Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
     #

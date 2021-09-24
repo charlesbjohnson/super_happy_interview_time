@@ -3,7 +3,7 @@
 
 module DataStructures
   class BinaryTree
-    attr_accessor :root
+    attr_accessor(:root)
 
     def self.from(keys, head)
       top = nil
@@ -43,11 +43,11 @@ module DataStructures
       found
     end
 
-    private_class_method :new
+    private_class_method(:new)
   end
 
   class BinaryTreeNode
-    attr_accessor :key, :value, :left, :right
+    attr_accessor(:key, :value, :left, :right)
 
     def initialize(k, l = nil, r = nil)
       @key = k

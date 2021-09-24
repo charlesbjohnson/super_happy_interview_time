@@ -1,13 +1,13 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c9_p7"
+require("config")
+require("ctci/ctci_c9_p7")
 
 module CTCI
   module C9
     class TestP7 < Minitest::Test
-      include P7
+      include(P7)
 
       def test_fills_surrounding_paint
         screen = [%i[r r r r r],
@@ -23,7 +23,7 @@ module CTCI
                     %i[g g g g g]]
 
         paint_fill([0, 0], :g, screen)
-        assert_equal expected, screen
+        assert_equal(expected, screen)
       end
 
       def test_fills_only_surrounding_and_connected_paint
@@ -40,7 +40,7 @@ module CTCI
                     %i[g g g g g]]
 
         paint_fill([3, 3], :g, screen)
-        assert_equal expected, screen
+        assert_equal(expected, screen)
       end
 
       def test_does_nothing_if_point_is_already_color_specified
@@ -53,7 +53,7 @@ module CTCI
         expected = Marshal.load(Marshal.dump(screen))
 
         paint_fill([0, 0], :r, screen)
-        assert_equal expected, screen
+        assert_equal(expected, screen)
       end
     end
   end

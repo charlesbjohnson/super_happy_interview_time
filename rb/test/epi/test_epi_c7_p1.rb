@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "epi/epi_c7_p1"
+require("config")
+require("epi/epi_c7_p1")
 
 module EPI
   module C7
     class TestP1 < Minitest::Test
-      include P1
+      include(P1)
 
       def test_i_to_s_converts_an_integer_to_string
         i = 29
@@ -46,7 +46,7 @@ module EPI
       end
 
       def test_s_to_i_fails_on_unconvertable_input
-        assert_raises { s_to_i "14fd59" }
+        assert_raises { s_to_i("14fd59") }
       end
     end
   end

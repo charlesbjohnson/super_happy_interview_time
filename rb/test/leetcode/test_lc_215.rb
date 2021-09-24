@@ -1,12 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "leetcode/lc_215"
+require("config")
+require("leetcode/lc_215")
 
 module LeetCode
   class TestLC215 < Minitest::Test
-    include LC215
+    include(LC215)
 
     def test_find_kth_largest_empty
       assert_nil(find_kth_largest([], 1))

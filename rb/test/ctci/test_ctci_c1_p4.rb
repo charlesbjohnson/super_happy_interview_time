@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c1_p4"
+require("config")
+require("ctci/ctci_c1_p4")
 
 module CTCI
   module C1
     class TestP4 < Minitest::Test
-      include P4
+      include(P4)
 
       def test_encodes_spaces
         s = "Mr John Smith"

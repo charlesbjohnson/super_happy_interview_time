@@ -11,7 +11,7 @@ module CTCI
       # a fitsWith method which, when passed two puzzle pieces, returns true
       # if the two pieces belong together.
       class JigSaw
-        attr_reader :board, :unplaced, :columns, :rows
+        attr_reader(:board, :unplaced, :columns, :rows)
 
         def initialize(r = 3, c = 3)
           @rows = r
@@ -108,7 +108,7 @@ module CTCI
       end
 
       class Piece
-        attr_reader :edges
+        attr_reader(:edges)
 
         def initialize(e)
           @edges = e
@@ -123,7 +123,7 @@ module CTCI
         end
 
         %i[top right bottom left].each_with_index do |e, i|
-          define_method e do
+          define_method(e) do
             @edges[i]
           end
         end
@@ -148,9 +148,9 @@ module CTCI
       class Edge
         @types = %i[none flat inward outward]
 
-        attr_reader :type
+        attr_reader(:type)
         class << self
-          attr_reader :types
+          attr_reader(:types)
         end
 
         def initialize(t)

@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "epi/epi_c12_p1"
+require("config")
+require("epi/epi_c12_p1")
 
 module EPI
   module C12
     class TestP1 < Minitest::Test
-      include P1
+      include(P1)
 
       def test_find_first_returns_index_of_sole_element_occurrence
         a = [12, 15, 20, 25, 26, 31, 42, 43, 45, 48]

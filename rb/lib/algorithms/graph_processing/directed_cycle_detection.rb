@@ -4,7 +4,7 @@
 module Algorithms
   module GraphProcessing
     class DirectedCycleDetection
-      attr_reader :cycle
+      attr_reader(:cycle)
 
       def initialize(graph)
         @graph = graph

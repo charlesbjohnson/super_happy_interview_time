@@ -1,12 +1,12 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "leetcode/lc_384"
+require("config")
+require("leetcode/lc_384")
 
 module LeetCode
   class TestLC384 < Minitest::Test
-    include LC384
+    include(LC384)
 
     def test_solution
       list = [-1, 3, 0, 2, 1]

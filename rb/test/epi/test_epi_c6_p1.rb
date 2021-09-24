@@ -1,13 +1,13 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "epi/epi_c6_p1"
+require("config")
+require("epi/epi_c6_p1")
 
 module EPI
   module C6
     class TestP1 < Minitest::Test
-      include P1
+      include(P1)
 
       def test_partition_modifies_in_place
         a = [31, 94, 64, 5, 43, 54, 13, 89, 43, 29]

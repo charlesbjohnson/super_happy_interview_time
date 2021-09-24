@@ -1,12 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-require "config"
-require "leetcode/lc_162"
+require("config")
+require("leetcode/lc_162")
 
 module LeetCode
   class TestLC162 < Minitest::Test
-    include LC162
+    include(LC162)
 
     def test_find_peak_element_empty
       assert_nil(find_peak_element([]))

@@ -1,14 +1,14 @@
 # typed: false
 # frozen_string_literal: true
 
-require "parser"
-require "parser/runner/ruby_rewrite"
+require("parser")
+require("parser/runner/ruby_rewrite")
 
-require_relative "./code_structure/call_method_on_problem"
-require_relative "./code_structure/declare_chapter"
-require_relative "./code_structure/declare_problem"
-require_relative "./code_structure/include_problem"
-require_relative "./code_structure/require_problem"
+require_relative("./code_structure/call_method_on_problem")
+require_relative("./code_structure/declare_chapter")
+require_relative("./code_structure/declare_problem")
+require_relative("./code_structure/include_problem")
+require_relative("./code_structure/require_problem")
 
 module Refactor
   module CodeStructure
@@ -35,11 +35,11 @@ module Refactor
 
       private
 
-      attr_reader :path
+      attr_reader(:path)
     end
 
     class Rewriter < Parser::TreeRewriter
-      attr_reader :path
+      attr_reader(:path)
 
       def initialize(path:)
         @path = path
@@ -95,10 +95,11 @@ module Refactor
         refactor&.execute!
       end
 
-      attr_reader \
+      attr_reader(
         :class_refactor_factories,
         :module_refactor_factories,
         :send_refactor_factories
+      )
     end
   end
 end

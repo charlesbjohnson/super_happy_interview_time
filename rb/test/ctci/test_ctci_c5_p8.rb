@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c5_p8"
+require("config")
+require("ctci/ctci_c5_p8")
 
 module CTCI
   module C5
     class TestP8 < Minitest::Test
-      include P8
+      include(P8)
 
       def test_draws_line_on_screen
         width = height = 4
@@ -18,8 +18,8 @@ module CTCI
                     0b0000_0000, 0b0000_0000, 0b0000_0000, 0b0000_0000,
                     0b0000_0000, 0b0000_0000, 0b0000_0000, 0b0000_0000]
 
-        assert_equal expected, draw_horizontal_line(screen, 8 * width,
-          12, 20, 1)
+        assert_equal(expected, draw_horizontal_line(screen, 8 * width,
+          12, 20, 1))
       end
 
       def test_draws_line_across_row
@@ -32,8 +32,8 @@ module CTCI
                     0b0000_0000, 0b0000_0000,
                     0b1111_1111, 0b1111_1111]
 
-        assert_equal expected, draw_horizontal_line(screen, 8 * width,
-          0, 15, 3)
+        assert_equal(expected, draw_horizontal_line(screen, 8 * width,
+          0, 15, 3))
       end
 
       def test_draws_line_within_byte
@@ -46,8 +46,8 @@ module CTCI
                     0b0011_1100, 0b0000_0000,
                     0b0000_0000, 0b0000_0000]
 
-        assert_equal expected, draw_horizontal_line(screen, 8 * width,
-          2, 5, 2)
+        assert_equal(expected, draw_horizontal_line(screen, 8 * width,
+          2, 5, 2))
       end
 
       def test_draws_line_across_bytes
@@ -59,17 +59,17 @@ module CTCI
                     0b0000_0000, 0b0000_0000, 0b0000_0000, 0b0000_0000,
                     0b0000_0000, 0b0000_0000, 0b0000_0000, 0b0000_0000]
 
-        assert_equal expected, draw_horizontal_line(screen, 8 * width,
-          4, 27, 0)
+        assert_equal(expected, draw_horizontal_line(screen, 8 * width,
+          4, 27, 0))
       end
 
       def test_does_nothing_on_invalid_input
         width = height = 2
         screen = Array.new(width * height, 0b0000_0000)
 
-        assert_equal screen, draw_horizontal_line(screen, 8 * width, -1, 1, 0)
-        assert_equal screen, draw_horizontal_line(screen, 8 * width, 1, -1, 0)
-        assert_equal screen, draw_horizontal_line(screen, 8 * width, 0, 5, -1)
+        assert_equal(screen, draw_horizontal_line(screen, 8 * width, -1, 1, 0))
+        assert_equal(screen, draw_horizontal_line(screen, 8 * width, 1, -1, 0))
+        assert_equal(screen, draw_horizontal_line(screen, 8 * width, 0, 5, -1))
       end
     end
   end

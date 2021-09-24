@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative "./code_structure"
-require_relative "./file_structure"
+require_relative("./code_structure")
+require_relative("./file_structure")
 
 module Refactor
   class Main

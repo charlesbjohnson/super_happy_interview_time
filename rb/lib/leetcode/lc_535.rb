@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-require "digest"
-require "uri"
+require("digest")
+require("uri")
 
 module LeetCode
   # 535. Encode and Decode TinyURL

@@ -42,7 +42,7 @@ module CTCI
       end
 
       def divide(i)
-        raise "Divide by zero" if i.zero?
+        raise("Divide by zero") if i.zero?
 
         a = self
         b = i

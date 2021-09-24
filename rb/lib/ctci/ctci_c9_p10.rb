@@ -47,7 +47,7 @@ module CTCI
       end
 
       class Box
-        attr_reader :width, :height, :depth
+        attr_reader(:width, :height, :depth)
 
         def initialize(w, h, d)
           @width = w

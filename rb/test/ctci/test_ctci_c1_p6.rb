@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c1_p6"
+require("config")
+require("ctci/ctci_c1_p6")
 
 module CTCI
   module C1
     class TestP6 < Minitest::Test
-      include P6
+      include(P6)
 
       def test_rotates_square_matrix
         m = [[1, 2, 3],

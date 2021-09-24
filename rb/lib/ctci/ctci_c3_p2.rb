@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require "data_structures/stack"
-require "data_structures/single_node"
+require("data_structures/stack")
+require("data_structures/single_node")
 
 module CTCI
   module C3
@@ -30,7 +30,7 @@ module CTCI
     end
 
     class MinNode < DataStructures::SingleNode
-      attr_accessor :min
+      attr_accessor(:min)
     end
   end
 end

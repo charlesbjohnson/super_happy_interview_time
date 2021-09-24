@@ -57,14 +57,14 @@ module CTCI
       end
 
       class Card
-        include Comparable
+        include(Comparable)
 
-        attr_reader :rank, :suit, :value
+        attr_reader(:rank, :suit, :value)
 
         @suits = %i[hearts spades clubs diamonds].freeze
         @ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, :jack, :queen, :king, :ace].freeze
         class << self
-          attr_reader :suits, :ranks
+          attr_reader(:suits, :ranks)
         end
 
         def initialize(r, s, v = nil)
@@ -74,7 +74,7 @@ module CTCI
         end
 
         suits.each do |s|
-          define_method :"#{s}?" do
+          define_method(:"#{s}?") do
             @suit == s
           end
         end

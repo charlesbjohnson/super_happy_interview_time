@@ -1,16 +1,16 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
+require("config")
 
-require "data_structures/linked_list"
-require "ctci/ctci_c2_p6"
+require("data_structures/linked_list")
+require("ctci/ctci_c2_p6")
 
 module CTCI
   module C2
     class TestP6 < Minitest::Test
       LinkedList = DataStructures::LinkedList.dup.class_exec {
-        include P6
+        include(P6)
       }
 
       def setup
@@ -24,14 +24,14 @@ module CTCI
         join(@list, @loop)
         expected = make_loop(@loop) # 1,2,3,4,5,6,7,8,9,10,11,4,5,6...
 
-        assert_equal expected.data, @list.find_loop.data
+        assert_equal(expected.data, @list.find_loop.data)
       end
 
       def test_find_loop_front
         @list.append(1)
         expected = make_loop(@list) # 1,1,1...
 
-        assert_equal expected, @list.find_loop
+        assert_equal(expected, @list.find_loop)
       end
 
       def test_find_loop_single
@@ -40,21 +40,21 @@ module CTCI
         join(@list, @loop)
         expected = make_loop(@loop)
 
-        assert_equal expected, @list.find_loop
+        assert_equal(expected, @list.find_loop)
       end
 
       def test_find_loop_empty
-        assert_nil @list.find_loop
+        assert_nil(@list.find_loop)
       end
 
       def test_find_loop_nonexistent
         1.upto(3) { |n| @list.append(n) }
-        assert_nil @list.find_loop
+        assert_nil(@list.find_loop)
       end
 
       def test_find_loop_nonexistent_single
         @list.append(1)
-        assert_nil @list.find_loop
+        assert_nil(@list.find_loop)
       end
 
       private

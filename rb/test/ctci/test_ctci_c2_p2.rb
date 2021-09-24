@@ -1,16 +1,16 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
+require("config")
 
-require "data_structures/linked_list"
-require "ctci/ctci_c2_p2"
+require("data_structures/linked_list")
+require("ctci/ctci_c2_p2")
 
 module CTCI
   module C2
     class TestP2 < Minitest::Test
       LinkedList = DataStructures::LinkedList.dup.class_exec {
-        include P2
+        include(P2)
       }
 
       def setup

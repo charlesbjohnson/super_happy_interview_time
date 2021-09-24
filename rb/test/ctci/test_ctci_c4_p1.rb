@@ -1,16 +1,16 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
+require("config")
 
-require "data_structures/binary_search_tree_map"
-require "ctci/ctci_c4_p1"
+require("data_structures/binary_search_tree_map")
+require("ctci/ctci_c4_p1")
 
 module CTCI
   module C4
     class TestP1 < Minitest::Test
       BinarySearchTreeMap = DataStructures::BinarySearchTreeMap.dup.class_exec {
-        include P1
+        include(P1)
       }
 
       def setup
@@ -23,7 +23,7 @@ module CTCI
         @tree.put(:b, 2)
         @tree.put(:d, 4)
 
-        assert @tree.balanced?
+        assert(@tree.balanced?)
       end
 
       def test_returns_false_if_tree_is_not_balanced
@@ -33,11 +33,11 @@ module CTCI
         @tree.put(:d, 4)
         @tree.put(:e, 5)
 
-        refute @tree.balanced?
+        refute(@tree.balanced?)
       end
 
       def test_returns_true_if_empty
-        assert @tree.balanced?
+        assert(@tree.balanced?)
       end
     end
   end

@@ -12,7 +12,7 @@ module CTCI
       # has no more valid moves. The win is assigned to the person with the most
       # pieces. Implement the object-oriented design for Othello.
       class Othello
-        attr_reader :board, :size, :black, :white, :remaining
+        attr_reader(:board, :size, :black, :white, :remaining)
 
         def initialize
           @size = 8
@@ -145,9 +145,9 @@ module CTCI
         @v_to_k = @k_to_v.invert
         @colors = @k_to_v.values
 
-        attr_reader :color
+        attr_reader(:color)
         class << self
-          attr_reader :k_to_v, :v_to_k, :colors
+          attr_reader(:k_to_v, :v_to_k, :colors)
         end
 
         def initialize(c)

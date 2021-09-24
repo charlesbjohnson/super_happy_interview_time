@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative "./base"
-require_relative "../util/word"
+require_relative("./base")
+require_relative("../util/word")
 
 #
 # Before:
@@ -57,9 +57,10 @@ module Refactor
 
       private
 
-      private_constant \
+      private_constant(
         :MATCH_REGEX,
         :REPLACE_REGEX
+      )
 
       def declaration_node_type
         declaration_node&.type

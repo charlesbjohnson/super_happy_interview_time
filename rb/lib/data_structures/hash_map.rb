@@ -1,18 +1,18 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative "linked_list"
+require_relative("linked_list")
 
 module DataStructures
   class HashMap
-    include Enumerable
+    include(Enumerable)
 
     def initialize
       @table = Array.new(30)
       @size = 0
     end
 
-    attr_reader :size
+    attr_reader(:size)
 
     def each(&block)
       enum = Enumerator.new { |y|

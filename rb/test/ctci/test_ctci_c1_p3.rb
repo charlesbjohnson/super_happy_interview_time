@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "ctci/ctci_c1_p3"
+require("config")
+require("ctci/ctci_c1_p3")
 
 module CTCI
   module C1
     class TestP3 < Minitest::Test
-      include P3
+      include(P3)
 
       def test_returns_true_when_is_permutation
         s = "abc "

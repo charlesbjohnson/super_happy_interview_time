@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-require "observer"
+require("observer")
 
 module CTCI
   module C8
@@ -71,13 +71,13 @@ module CTCI
       end
 
       class Call
-        attr_reader :respondent, :level
+        attr_reader(:respondent, :level)
 
         def initialize
           @level = 0
           @respondent = nil
 
-          yield self if block_given?
+          yield(self) if block_given?
         end
 
         def connected?
@@ -98,22 +98,22 @@ module CTCI
       end
 
       class StaffMember
-        include Observable
+        include(Observable)
 
-        attr_reader :support_role, :current_call
+        attr_reader(:support_role, :current_call)
 
         @roles = %i[respondent manager director].freeze
         @roles.each do |r|
-          self.class.define_method r do
+          self.class.define_method(r) do
             new(r)
           end
         end
 
         class << self
-          attr_reader :roles
+          attr_reader(:roles)
         end
 
-        private_class_method :new
+        private_class_method(:new)
 
         def initialize(role)
           @support_role = role

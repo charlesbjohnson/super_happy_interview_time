@@ -1,13 +1,13 @@
 # typed: true
 # frozen_string_literal: true
 
-require "config"
-require "epi/epi_c5_p1"
+require("config")
+require("epi/epi_c5_p1")
 
 module EPI
   module C5
     class TestP1 < Minitest::Test
-      include P1
+      include(P1)
 
       def test_parity_returns_one_when_number_of_on_bits_is_odd
         w = 0b1011
