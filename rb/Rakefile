@@ -1,19 +1,9 @@
 # typed: ignore
 # frozen_string_literal: true
 
-require "rubygems"
-require "bundler/setup"
-
-require "irb"
 require "rake/testtask"
 
 task default: :test
-
-task :console do
-  $LOAD_PATH.unshift(File.expand_path("lib"))
-  ARGV.clear
-  IRB.start
-end
 
 Rake::TestTask.new do |task|
   task.libs = %w[lib test]
