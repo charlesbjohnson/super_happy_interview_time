@@ -1,12 +1,26 @@
 ---
-inherit_from:
-  - .rubocop.sorbet.yml
-  - .rubocop.standard.yml
-
 require:
+  - standard
   - rubocop-minitest
   - rubocop-performance
   - rubocop-sorbet
+
+inherit_mode:
+  merge:
+    - Exclude
+
+inherit_from:
+  - .rubocop.standard.yml
+  - .rubocop.sorbet.yml
+
+AllCops:
+  DisabledByDefault: false
+  TargetRubyVersion: 2.7
+  Exclude:
+    - bin/*
+    - coverage/*
+    - sorbet/*
+    - vendor/*
 
 Layout/LineLength:
   Enabled: false
