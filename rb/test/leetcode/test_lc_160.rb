@@ -13,10 +13,10 @@ module LeetCode
 
       head = ListNode.new(list[0])
 
-      list.drop(1).reduce(head) do |res, v|
+      list.drop(1).reduce(head) { |res, v|
         res.next = ListNode.new(v)
         res.next
-      end
+      }
 
       head
     end

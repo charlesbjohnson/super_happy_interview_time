@@ -32,14 +32,14 @@ module Algorithms
         should_be_right_of_pivot_i = -> { a[left_i] > a[pivot_i] }
         should_be_left_of_pivot_i = -> { a[right_i] < a[pivot_i] }
 
-        loop do
+        loop {
           left_i += 1 until left_i > high || should_be_right_of_pivot_i.call
           right_i -= 1 until right_i <= low || should_be_left_of_pivot_i.call
 
           break if left_i >= right_i
 
           a[left_i], a[right_i] = a[right_i], a[left_i]
-        end
+        }
 
         a[pivot_i], a[right_i] = a[right_i], a[pivot_i]
 

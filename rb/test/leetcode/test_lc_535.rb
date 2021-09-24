@@ -19,23 +19,23 @@ module LeetCode
     [
       "",
       "https://leetcode.com/problems/design-tinyurl"
-    ].each.with_index do |url, i|
-      define_method(:"test_encode_#{i}") do
+    ].each.with_index { |url, i|
+      define_method(:"test_encode_#{i}") {
         actual = URI(encode(url))
 
         assert_equal("tinyurl.com", actual.host)
         assert_match(/http|https/, actual.scheme)
         assert(actual.path.length > 1)
-      end
-    end
+      }
+    }
 
     [
       ["https://tinyurl.com/lol", "", proc { |s| s }],
       ["https://example.com/lol", "https://example.com/lol", proc { |s| encode(s) }]
-    ].each.with_index do |(actual, expected, action), i|
-      define_method(:"test_decode_#{i}") do
+    ].each.with_index { |(actual, expected, action), i|
+      define_method(:"test_decode_#{i}") {
         assert_equal(expected, decode(instance_exec(actual, &action)))
-      end
-    end
+      }
+    }
   end
 end

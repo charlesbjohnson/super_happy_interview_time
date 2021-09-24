@@ -57,7 +57,7 @@ module LeetCode
       return if data.empty?
 
       nodes = data.split(",").map { |s| s.empty? ? nil : TreeNode.new(s.to_i) }
-      nodes.reduce(0) do |i, node|
+      nodes.reduce(0) { |i, node|
         next i unless node
 
         left = (i * 2) + 1
@@ -67,7 +67,7 @@ module LeetCode
         node.right = nodes[right] if right < nodes.length
 
         i + 1
-      end
+      }
 
       nodes.first
     end

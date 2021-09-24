@@ -27,10 +27,10 @@ module LeetCode
       [[5, 1, 2, 3, 4], 1, 1],
       [[3, 4, 5, 1, 2], 1, 3],
       [[4, 5, 6, 7, 8, 1, 2, 3], 8, 4]
-    ].each.with_index do |(list, target, expected), i|
-      define_method(:"test_search_#{i}") do
+    ].each.with_index { |(list, target, expected), i|
+      define_method(:"test_search_#{i}") {
         assert_equal(expected, search(list, target))
-      end
-    end
+      }
+    }
   end
 end

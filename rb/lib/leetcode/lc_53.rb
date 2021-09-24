@@ -22,10 +22,10 @@ module LeetCode
       sum = list[0]
       max = list[0]
 
-      (1...list.length).each do |i|
+      (1...list.length).each { |i|
         sum = [sum + list[i], list[i]].max
         max = [sum, max].max
-      end
+      }
 
       max
     end

@@ -16,10 +16,10 @@ module LeetCode
       [5, false],
       [19, true],
       [5555, true]
-    ].each.with_index do |(n, expected), i|
-      define_method(:"test_happy?_#{i}") do
+    ].each.with_index { |(n, expected), i|
+      define_method(:"test_happy?_#{i}") {
         assert_equal(expected, happy?(n))
-      end
-    end
+      }
+    }
   end
 end

@@ -23,26 +23,26 @@ module Algorithms
         @marked = Array.new(@graph.size_vertices) { false }
         path = nil
 
-        @marked.each_with_index do |was_visited, v|
+        @marked.each_with_index { |was_visited, v|
           unless was_visited
             path = r_execute(v, v, [v])
             break unless path.nil?
           end
-        end
+        }
 
         @cycle = cutoff_vertices_until_cycle(path) unless path.nil?
       end
 
       def r_execute(from, came_from, path)
         @marked[from] = true
-        @graph.adjacent(from).each do |to|
+        @graph.adjacent(from).each { |to|
           return path.push(to) if cycled?(to, came_from)
 
           unless @marked[to]
             result = r_execute(to, from, path.clone.push(to))
             return result unless result.nil?
           end
-        end
+        }
 
         nil
       end

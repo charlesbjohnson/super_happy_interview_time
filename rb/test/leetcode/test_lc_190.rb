@@ -12,10 +12,10 @@ module LeetCode
       [0, 0],
       [1, 2_147_483_648],
       [43_261_596, 964_176_192]
-    ].each.with_index do |(n, expected), i|
-      define_method(:"test_reverse_bits_#{i}") do
+    ].each.with_index { |(n, expected), i|
+      define_method(:"test_reverse_bits_#{i}") {
         assert_equal(expected, reverse_bits(n))
-      end
-    end
+      }
+    }
   end
 end

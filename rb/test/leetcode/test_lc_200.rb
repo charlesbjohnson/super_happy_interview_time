@@ -62,10 +62,10 @@ module LeetCode
         ],
         3
       ]
-    ].each.with_index do |(grid, expected), i|
-      define_method(:"test_num_islands_#{i}") do
+    ].each.with_index { |(grid, expected), i|
+      define_method(:"test_num_islands_#{i}") {
         assert_equal(expected, num_islands(grid))
-      end
-    end
+      }
+    }
   end
 end

@@ -16,11 +16,11 @@ module LeetCode
     def sort_colors(colors)
       counts = [0, 0, 0]
 
-      colors.each do |color|
+      colors.each { |color|
         counts[color] += 1
-      end
+      }
 
-      colors.each_index do |i|
+      colors.each_index { |i|
         if counts[0].positive?
           colors[i] = 0
           counts[0] -= 1
@@ -35,7 +35,7 @@ module LeetCode
 
         colors[i] = 2
         counts[2] -= 1
-      end
+      }
 
       colors
     end

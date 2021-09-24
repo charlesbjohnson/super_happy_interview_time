@@ -15,10 +15,10 @@ module LeetCode
       [[2, 1], 2],
       [[1, 3, 2], 3],
       [[1, 2, 3, 4, 5], 9]
-    ].each.with_index do |(list, expected), i|
-      define_method(:"test_rob_#{i}") do
+    ].each.with_index { |(list, expected), i|
+      define_method(:"test_rob_#{i}") {
         assert_equal(expected, rob(list))
-      end
-    end
+      }
+    }
   end
 end

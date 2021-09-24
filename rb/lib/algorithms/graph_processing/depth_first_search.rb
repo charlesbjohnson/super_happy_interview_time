@@ -22,9 +22,9 @@ module Algorithms
       def r_execute(from)
         @marked[from] = true
         @count += 1
-        @graph.adjacent(from).each do |to|
+        @graph.adjacent(from).each { |to|
           r_execute(to) unless @marked[to]
-        end
+        }
       end
     end
   end

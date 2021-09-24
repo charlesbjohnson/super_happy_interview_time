@@ -21,7 +21,7 @@ module LeetCode
       low = 1
       high = versions
 
-      loop do
+      loop {
         return low if low == high
 
         if high - low == 1
@@ -35,7 +35,7 @@ module LeetCode
         else
           low = mid + 1
         end
-      end
+      }
     end
   end
 end

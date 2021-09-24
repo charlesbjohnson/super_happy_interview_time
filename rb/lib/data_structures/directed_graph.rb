@@ -35,11 +35,11 @@ module DataStructures
 
     def reverse
       reversed = DirectedGraph.new
-      size_vertices.times do |to|
-        adjacent(to).each do |from|
+      size_vertices.times { |to|
+        adjacent(to).each { |from|
           reversed.add_edge(from, to)
-        end
-      end
+        }
+      }
 
       reversed
     end

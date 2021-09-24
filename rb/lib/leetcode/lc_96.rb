@@ -27,7 +27,7 @@ module LeetCode
       cache[0] = 0
       cache[1] = 1
 
-      (2..n).each do |num_nodes|
+      (2..n).each { |num_nodes|
         count = (0...num_nodes).each.reduce(0) { |sum, i|
           next sum + cache[num_nodes - 1] if i.zero? || i == (num_nodes - 1)
 
@@ -35,7 +35,7 @@ module LeetCode
         }
 
         cache[num_nodes] = count
-      end
+      }
 
       cache[n]
     end

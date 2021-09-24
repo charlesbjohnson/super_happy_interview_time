@@ -40,7 +40,7 @@ module LeetCode
       letter_set = [s[0]]
       cursor = s.length - 1
 
-      loop do
+      loop {
         cursor -= 1 while cursor.positive? && !letter_set.include?(s[cursor])
         new_letter_set = s[0..cursor].chars.sort.uniq
 
@@ -48,7 +48,7 @@ module LeetCode
 
         cursor = s.length - 1
         letter_set = new_letter_set
-      end
+      }
 
       cursor + 1
     end

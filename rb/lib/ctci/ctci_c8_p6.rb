@@ -34,13 +34,13 @@ module CTCI
         private
 
         def create_pieces
-          @rows.times do |r|
-            @columns.times do |c|
+          @rows.times { |r|
+            @columns.times { |c|
               piece = Piece.that_fits_between(around(r, c))
               @board[r][c] = piece
               @unplaced.push(piece)
-            end
-          end
+            }
+          }
         end
 
         def around(r, c)
@@ -83,7 +83,7 @@ module CTCI
 
             if piece.empty?
               edges_around_piece = around(r, c)
-              @unplaced.each_with_index do |p, i|
+              @unplaced.each_with_index { |p, i|
                 compared_edges = p.edges.zip(edges_around_piece)
                 piece_fits = compared_edges.all? { |pe, ae| pe.fits_with?(ae) }
                 next unless piece_fits
@@ -91,7 +91,7 @@ module CTCI
                 @board[r][c] = p
                 @unplaced.delete_at(i)
                 break
-              end
+              }
             end
 
             r, c = first_open_edge(r, c)
@@ -122,11 +122,11 @@ module CTCI
           new(edges_around.map { |e| Edge.complement(e) })
         end
 
-        %i[top right bottom left].each_with_index do |e, i|
-          define_method(e) do
+        %i[top right bottom left].each_with_index { |e, i|
+          define_method(e) {
             @edges[i]
-          end
-        end
+          }
+        }
 
         def corner?
           @edges.cycle(2).each_cons(2).any? { |h, t| h == t && h.flat? }
@@ -157,10 +157,10 @@ module CTCI
           @type = self.class.types[t % self.class.types.size]
         end
 
-        types.each_with_index do |t, i|
+        types.each_with_index { |t, i|
           define_method(:"#{t}?") { @type == t }
           define_singleton_method(t) { new(i) }
-        end
+        }
 
         def self.rand_in_out
           new(rand((2..3)))

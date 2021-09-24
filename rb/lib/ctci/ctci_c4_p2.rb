@@ -19,9 +19,9 @@ module CTCI
         result = false
         visited[from] = true
         cursor = @table[from]
-        cursor.adjacent.each do |a|
+        cursor.adjacent.each { |a|
           result = r_connected?(a, to, visited) unless visited[a]
-        end
+        }
 
         result
       end

@@ -12,7 +12,7 @@ module LeetCode
       encoded_buffer = []
       encoded_times_buffer = []
 
-      chars.each do |char|
+      chars.each { |char|
         if ("0".."9").cover?(char) && open_brackets.zero?
           encoded_times_buffer.push(char)
 
@@ -49,7 +49,7 @@ module LeetCode
         end
 
         encoded_buffer.push(char)
-      end
+      }
 
       (decoded_buffer.join + encoded_buffer.join) * times
     end

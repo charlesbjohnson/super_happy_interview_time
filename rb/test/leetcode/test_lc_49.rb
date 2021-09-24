@@ -37,10 +37,10 @@ module LeetCode
           %w[bat]
         ]
       ]
-    ].each.with_index do |(list, expected), i|
-      define_method(:"test_group_anagrams_#{i}") do
+    ].each.with_index { |(list, expected), i|
+      define_method(:"test_group_anagrams_#{i}") {
         assert_equal(expected.map(&:sort), group_anagrams(list).map(&:sort))
-      end
-    end
+      }
+    }
   end
 end

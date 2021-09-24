@@ -19,10 +19,10 @@ module LeetCode
       ["hello", "ll", 2],
       ["aaaaa", "bba", -1],
       ["aaa", "ab", -1]
-    ].each.with_index do |(haystack, needle, expected), i|
-      define_method(:"test_str_str_#{i}") do
+    ].each.with_index { |(haystack, needle, expected), i|
+      define_method(:"test_str_str_#{i}") {
         assert_equal(expected, str_str(haystack, needle))
-      end
-    end
+      }
+    }
   end
 end

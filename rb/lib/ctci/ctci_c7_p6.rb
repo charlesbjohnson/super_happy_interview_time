@@ -9,14 +9,14 @@ module CTCI
       def line_of_best_fit(points)
         line_intersections = {}
 
-        0.upto(points.size - 2) do |i|
-          i.succ.upto(points.size - 1).each do |j|
+        0.upto(points.size - 2) { |i|
+          i.succ.upto(points.size - 1).each { |j|
             line = Line.from_points(points[i], points[j])
             approx_slope = line.slope.round(1)
             counter = line_intersections[approx_slope] ||= [0, line]
             counter[0] += 1
-          end
-        end
+          }
+        }
 
         line_intersections.max_by { |_, v| v.first }.last.last
       end

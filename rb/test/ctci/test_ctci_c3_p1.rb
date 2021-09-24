@@ -13,15 +13,15 @@ module CTCI
 
       def test_size
         expected = (1..3)
-        expected.each do |i|
-          i.times do
+        expected.each { |i|
+          i.times {
             @triple_stack.push(i.pred, i)
-          end
-        end
+          }
+        }
 
-        expected.each do |i|
+        expected.each { |i|
           assert_equal(i, @triple_stack.size(i.pred))
-        end
+        }
       end
 
       def test_size_when_empty

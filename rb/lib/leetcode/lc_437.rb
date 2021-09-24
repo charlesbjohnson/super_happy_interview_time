@@ -49,9 +49,9 @@ module LeetCode
     # @param sum {Integer}
     # @return {Integer}
     def path_sum(tree, sum)
-      [0].tap do |count|
+      [0].tap { |count|
         path_sum_recurse(tree, sum, count, false)
-      end.first
+      }.first
     end
   end
 end

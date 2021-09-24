@@ -46,14 +46,14 @@ module LeetCode
 
       count = 0
 
-      (0...grid.length).each do |row|
-        (0...grid[row].length).each do |col|
+      (0...grid.length).each { |row|
+        (0...grid[row].length).each { |col|
           if grid[row][col] == "1"
             num_islands_recurse(grid, row, col)
             count += 1
           end
-        end
-      end
+        }
+      }
 
       count
     end

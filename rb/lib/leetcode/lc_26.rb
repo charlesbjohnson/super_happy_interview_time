@@ -20,9 +20,9 @@ module LeetCode
     def remove_duplicates(list)
       return 1 if list.length == 1
 
-      (0...(list.length - 1)).each do |i|
+      (0...(list.length - 1)).each { |i|
         list[i] = nil if list[i] == list[i + 1]
-      end
+      }
 
       filler = 0
       finder = filler + 1

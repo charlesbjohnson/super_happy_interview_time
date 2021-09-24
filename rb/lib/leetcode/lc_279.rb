@@ -7,12 +7,12 @@ module LeetCode
   # 279. Perfect Squares
   module LC279
     def generate_squares(n)
-      (1..n).each.with_object([]) do |v, squares|
+      (1..n).each.with_object([]) { |v, squares|
         square = v * v
         return squares if square > n
 
         squares.push(square)
-      end
+      }
     end
 
     # Desciption:
@@ -41,14 +41,14 @@ module LeetCode
         result += 1
         tmp = Set.new
 
-        queue.each do |v|
-          squares.each do |square|
+        queue.each { |v|
+          squares.each { |square|
             return result if square == v
             break if square > v
 
             tmp.add(v - square)
-          end
-        end
+          }
+        }
 
         queue = tmp
       end

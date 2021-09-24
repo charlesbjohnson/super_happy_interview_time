@@ -13,10 +13,10 @@ module LeetCode
 
       head = ListNode.new(list[0])
 
-      list.drop(1).reduce(head) do |res, v|
+      list.drop(1).reduce(head) { |res, v|
         res.next = ListNode.new(v)
         res.next
-      end
+      }
 
       head
     end
@@ -46,10 +46,10 @@ module LeetCode
         [1, 2, 3, 4, 5],
         [1, 3, 5, 2, 4]
       ]
-    ].each.with_index do |(list, expected), i|
-      define_method(:"test_odd_even_list_#{i}") do
+    ].each.with_index { |(list, expected), i|
+      define_method(:"test_odd_even_list_#{i}") {
         assert_equal(build(expected), odd_even_list(build(list)))
-      end
-    end
+      }
+    }
   end
 end

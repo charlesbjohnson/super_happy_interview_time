@@ -29,20 +29,20 @@ module Algorithms
         reversed = @graph.reverse
         post = Algorithms::GraphProcessing::DepthFirstOrder.new(reversed).post
 
-        post.reverse_each do |v|
+        post.reverse_each { |v|
           unless @marked[v]
             r_execute(v)
             @count += 1
           end
-        end
+        }
       end
 
       def r_execute(from)
         @marked[from] = true
         @components[from] = @count
-        @graph.adjacent(from).reject { |v| @marked[v] }.each do |to|
+        @graph.adjacent(from).reject { |v| @marked[v] }.each { |to|
           r_execute(to)
-        end
+        }
       end
     end
   end

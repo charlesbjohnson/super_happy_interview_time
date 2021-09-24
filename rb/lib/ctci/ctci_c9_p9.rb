@@ -15,12 +15,12 @@ module CTCI
         if row == size
           result.push(rows.clone)
         else
-          (0...size).each do |column|
+          (0...size).each { |column|
             if valid_placement(rows, row, column)
               rows[row] = column
               r_queen_placements(row.succ, rows, result, size)
             end
-          end
+          }
         end
 
         result

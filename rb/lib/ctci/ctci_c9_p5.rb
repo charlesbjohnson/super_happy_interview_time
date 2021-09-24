@@ -8,7 +8,7 @@ module CTCI
       def permutations(string)
         result = [""]
         buffer = []
-        string.chars.each do |c|
+        string.chars.each { |c|
           until result.empty?
             to_permute = result.pop
             permutations = permutations_with_character(c, to_permute)
@@ -17,7 +17,7 @@ module CTCI
 
           result.concat(buffer)
           buffer.clear
-        end
+        }
 
         result
       end
@@ -29,10 +29,10 @@ module CTCI
       # ('a', 'bc') => ['abc', 'bac', 'bca']
       def permutations_with_character(c, string)
         permutations = Array.new(string.size.succ) { string.chars }
-        permutations.map.with_index do |p, i|
+        permutations.map.with_index { |p, i|
           p.insert(i, c)
           p.join
-        end
+        }
       end
     end
   end

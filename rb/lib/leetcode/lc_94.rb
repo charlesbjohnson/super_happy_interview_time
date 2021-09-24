@@ -27,7 +27,7 @@ module LeetCode
 
       values = []
 
-      loop do
+      loop {
         break if !cursor && stack.empty?
 
         unless cursor
@@ -39,7 +39,7 @@ module LeetCode
 
         stack.push(cursor)
         cursor = cursor.left
-      end
+      }
 
       values
     end

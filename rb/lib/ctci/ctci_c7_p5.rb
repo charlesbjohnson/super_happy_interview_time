@@ -131,11 +131,11 @@ module CTCI
 
       def comparisons(points)
         result = []
-        0.upto(points.size - 2) do |i|
-          i.succ.upto(points.size - 1) do |j|
+        0.upto(points.size - 2) { |i|
+          i.succ.upto(points.size - 1) { |j|
             result.push([points[i], points[j]])
-          end
-        end
+          }
+        }
 
         result
       end

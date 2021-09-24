@@ -9,9 +9,9 @@ module CTCI
         existing_vals = []
         ascii_vals = s.bytes
         result = true
-        ascii_vals.each do |v|
+        ascii_vals.each { |v|
           existing_vals[v] == 1 ? result = false : existing_vals[v] = 1
-        end
+        }
 
         result
       end

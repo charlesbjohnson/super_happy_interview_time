@@ -73,11 +73,11 @@ module CTCI
           @value = v || r
         end
 
-        suits.each do |s|
-          define_method(:"#{s}?") do
+        suits.each { |s|
+          define_method(:"#{s}?") {
             @suit == s
-          end
-        end
+          }
+        }
 
         def <=>(other)
           @value.<=>(other.value)

@@ -43,11 +43,11 @@ module CTCI
         result = {zero: {count: 0, matching: []},
                   one: {count: 0, matching: []}}
 
-        numbers.each do |n|
+        numbers.each { |n|
           which = bit(c, n).zero? ? :zero : :one
           result[which][:count] += 1
           result[which][:matching].push(n)
-        end
+        }
 
         result
       end

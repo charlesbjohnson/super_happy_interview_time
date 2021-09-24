@@ -21,11 +21,11 @@ module LeetCode
       [3, 1],
       [3, 2],
       [3, 3]
-    ].each.with_index do |(versions, expected), i|
-      define_method(:"test_first_bad_version_#{i}") do
+    ].each.with_index { |(versions, expected), i|
+      define_method(:"test_first_bad_version_#{i}") {
         @bad_version = expected
         assert_equal(expected, first_bad_version(versions))
-      end
-    end
+      }
+    }
   end
 end

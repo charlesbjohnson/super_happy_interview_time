@@ -13,10 +13,10 @@ module LeetCode
       %w[ab ba],
       %w[foobar raboof],
       %w[hello olleh]
-    ].each.with_index do |(s, expected), i|
-      define_method(:"test_reverse_string_#{i}") do
+    ].each.with_index { |(s, expected), i|
+      define_method(:"test_reverse_string_#{i}") {
         assert_equal(expected, reverse_string(s))
-      end
-    end
+      }
+    }
   end
 end

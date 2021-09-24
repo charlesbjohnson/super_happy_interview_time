@@ -9,7 +9,7 @@ module DataStructures
       top = nil
 
       nodes = []
-      keys.each do |rt, c|
+      keys.each { |rt, c|
         l = r = nil
         unless c.nil?
           l = c[0]
@@ -21,7 +21,7 @@ module DataStructures
         root = find_or_create(rt, nodes, left, right)
 
         top = root if root.key == head
-      end
+      }
 
       result = new
       result.root = top

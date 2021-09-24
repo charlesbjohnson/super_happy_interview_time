@@ -4,7 +4,7 @@
 require("config")
 require("data_structures/graph")
 
-describe(DataStructures::Graph) do
+describe(DataStructures::Graph) {
   subject { DataStructures::Graph.new }
 
   it { _(subject).must_respond_to(:size_vertices) }
@@ -21,7 +21,7 @@ describe(DataStructures::Graph) do
     _(subject.size_edges).must_equal(0)
   end
 
-  describe("#get") do
+  describe("#get") {
     it("returns the data for a vertex index") do
       subject.add_vertex(foo)
       _(subject.get(0)).must_equal(foo)
@@ -30,9 +30,9 @@ describe(DataStructures::Graph) do
     it("returns nil for nonexistent vertex") do
       _(subject.get(0)).must_be_nil
     end
-  end
+  }
 
-  describe("#adjacent") do
+  describe("#adjacent") {
     it("returns nil for nonexistent vertex") do
       _(subject.adjacent(0)).must_be_nil
     end
@@ -49,9 +49,9 @@ describe(DataStructures::Graph) do
       _(subject.adjacent(1)).must_equal([[2, "baz"]])
       _(subject.adjacent(2)).must_equal([[0, foo]])
     end
-  end
+  }
 
-  describe("#add_vertex") do
+  describe("#add_vertex") {
     it("creates a vertex in the graph") do
       subject.add_vertex(foo)
 
@@ -59,9 +59,9 @@ describe(DataStructures::Graph) do
       _(subject.size_vertices).must_equal(1)
       _(subject.adjacent(0)).must_equal([])
     end
-  end
+  }
 
-  describe("#add_edge") do
+  describe("#add_edge") {
     it("creates an edge in the graph between two vertices") do
       subject.add_vertex("bar")
       subject.add_vertex(foo)
@@ -71,7 +71,7 @@ describe(DataStructures::Graph) do
       _(subject.adjacent(0)).must_equal([[1, foo]])
     end
 
-    describe("with invalid vertices") do
+    describe("with invalid vertices") {
       it("doesnt create an edge on nonexistent vertices") do
         subject.add_vertex(foo)
         subject.add_edge(0, 1)
@@ -79,6 +79,6 @@ describe(DataStructures::Graph) do
         _(subject.size_edges).must_equal(0)
         _(subject.adjacent(0)).must_equal([])
       end
-    end
-  end
-end
+    }
+  }
+}

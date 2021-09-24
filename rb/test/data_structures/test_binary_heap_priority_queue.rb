@@ -4,7 +4,7 @@
 require("config")
 require("data_structures/binary_heap_priority_queue")
 
-describe(DataStructures::BinaryHeapPriorityQueue) do
+describe(DataStructures::BinaryHeapPriorityQueue) {
   subject { DataStructures::BinaryHeapPriorityQueue.new(priority) }
 
   let(:priority) { ->(a, b) { a >= b } }
@@ -17,7 +17,7 @@ describe(DataStructures::BinaryHeapPriorityQueue) do
   it { _(subject).must_respond_to(:peek) }
   it { _(subject).must_respond_to(:pop) }
 
-  describe("#size") do
+  describe("#size") {
     it("starts out empty") do
       _(subject.size).must_equal(0)
     end
@@ -46,24 +46,24 @@ describe(DataStructures::BinaryHeapPriorityQueue) do
       subject.each {}
       _(subject.size).must_equal(4)
     end
-  end
+  }
 
-  describe("#push") do
+  describe("#push") {
     it("adds to the priority queue") do
       subject.push(1)
       _(subject.peek).must_equal(1)
     end
 
-    describe("when it already contains elements") do
+    describe("when it already contains elements") {
       before { [1, 5, -3, 4, 6].each { |i| subject.push(i) } }
 
       it("adds according to the priority") do
         subject.push(2)
         _(subject.peek).must_equal(6)
       end
-    end
+    }
 
-    describe("with a comparable priority") do
+    describe("with a comparable priority") {
       let(:priority) { ->(a, b) { a <=> b } }
 
       before { [1, 0, 1, 2, 1].each { |i| subject.push(i) } }
@@ -71,10 +71,10 @@ describe(DataStructures::BinaryHeapPriorityQueue) do
       it("prioritizes the positive comparison") do
         _(subject.peek).must_equal(2)
       end
-    end
-  end
+    }
+  }
 
-  describe("#peek") do
+  describe("#peek") {
     before { [-1, 5, 2].each { |i| subject.push(i) } }
 
     it("returns the element with the highest priority") do
@@ -86,16 +86,16 @@ describe(DataStructures::BinaryHeapPriorityQueue) do
       _(subject.peek).must_equal(5)
     end
 
-    describe("when empty") do
+    describe("when empty") {
       let(:empty) { DataStructures::BinaryHeapPriorityQueue.new(priority) }
 
       it("returns nil") do
         _(empty.peek).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#pop") do
+  describe("#pop") {
     before { [3, -1, 4, 9].each { |i| subject.push(i) } }
 
     it("returns the element with the highest priority") do
@@ -113,16 +113,16 @@ describe(DataStructures::BinaryHeapPriorityQueue) do
       _(subject.pop).must_equal(3)
     end
 
-    describe("when empty") do
+    describe("when empty") {
       let(:empty) { DataStructures::BinaryHeapPriorityQueue.new(priority) }
 
       it("returns nil") do
         _(empty.pop).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#each") do
+  describe("#each") {
     before { [8, 3, -11, 10, 1].each { |i| subject.push(i) } }
 
     it("yields each element by the highest priority") do
@@ -137,10 +137,10 @@ describe(DataStructures::BinaryHeapPriorityQueue) do
       _(subject.peek).must_equal(10)
     end
 
-    describe("without a block") do
+    describe("without a block") {
       it("returns the enumerator") do
         _(subject.each).must_be_kind_of(Enumerator)
       end
-    end
-  end
-end
+    }
+  }
+}

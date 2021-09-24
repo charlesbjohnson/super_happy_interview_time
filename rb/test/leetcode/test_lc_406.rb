@@ -29,10 +29,10 @@ module LeetCode
         [[7, 0], [4, 4], [7, 1], [5, 0], [6, 1], [5, 2]],
         [[5, 0], [7, 0], [5, 2], [6, 1], [4, 4], [7, 1]]
       ]
-    ].each.with_index do |(people, expected), i|
-      define_method(:"test_reconstruct_queue_#{i}") do
+    ].each.with_index { |(people, expected), i|
+      define_method(:"test_reconstruct_queue_#{i}") {
         assert_equal(expected, reconstruct_queue(people))
-      end
-    end
+      }
+    }
   end
 end

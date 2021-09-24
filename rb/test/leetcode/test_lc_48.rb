@@ -47,11 +47,11 @@ module LeetCode
           [16, 7, 10, 11]
         ]
       ]
-    ].each.with_index do |(matrix, expected), i|
-      define_method(:"test_rotate_#{i}") do
+    ].each.with_index { |(matrix, expected), i|
+      define_method(:"test_rotate_#{i}") {
         rotate(matrix)
         assert_equal(expected, matrix)
-      end
-    end
+      }
+    }
   end
 end

@@ -30,10 +30,10 @@ module LeetCode
       [[1, 2, 3], 5, 1],
       [[1, 2, 3], 6, 1],
       [[1, -1, 1, -1, 1], 0, 6]
-    ].each.with_index do |(list, k, expected), i|
-      define_method(:"test_subarray_sum_#{i}") do
+    ].each.with_index { |(list, k, expected), i|
+      define_method(:"test_subarray_sum_#{i}") {
         assert_equal(expected, subarray_sum(list, k))
-      end
-    end
+      }
+    }
   end
 end

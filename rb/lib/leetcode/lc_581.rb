@@ -25,12 +25,12 @@ module LeetCode
       left = list.length
       right = 0
 
-      list.each_index do |i|
+      list.each_index { |i|
         next if list[i] == sorted[i]
 
         left = [left, i].min
         right = [right, i].max
-      end
+      }
 
       (right - left).positive? ? (right - left + 1) : 0
     end

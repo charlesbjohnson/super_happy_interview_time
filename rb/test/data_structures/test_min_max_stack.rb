@@ -4,7 +4,7 @@
 require("config")
 require("data_structures/min_max_stack")
 
-describe(DataStructures::MinMaxStack) do
+describe(DataStructures::MinMaxStack) {
   subject { DataStructures::MinMaxStack.new }
 
   it { _(subject).must_respond_to(:size) }
@@ -21,7 +21,7 @@ describe(DataStructures::MinMaxStack) do
     _(subject.size).must_equal(0)
   end
 
-  describe("#push") do
+  describe("#push") {
     it("adds to the stack") do
       subject.push(foo)
       _(subject.peek).must_equal(foo)
@@ -41,7 +41,7 @@ describe(DataStructures::MinMaxStack) do
       _(subject.push(foo)).must_equal(foo)
     end
 
-    describe("when the item is not comparable to others in the stack") do
+    describe("when the item is not comparable to others in the stack") {
       it("is not added") do
         subject.push(1)
         _(subject.size).must_equal(1)
@@ -55,10 +55,10 @@ describe(DataStructures::MinMaxStack) do
         subject.push(1)
         _(subject.push("")).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#peek") do
+  describe("#peek") {
     it("returns the item at the top") do
       subject.push("bar")
       subject.push(foo)
@@ -76,9 +76,9 @@ describe(DataStructures::MinMaxStack) do
     it("returns nil if empty") do
       _(subject.peek).must_be_nil
     end
-  end
+  }
 
-  describe("#pop") do
+  describe("#pop") {
     it("returns the item at the top") do
       subject.push("bar")
       subject.push(foo)
@@ -97,14 +97,14 @@ describe(DataStructures::MinMaxStack) do
       _(subject.pop).must_be_nil
     end
 
-    describe("multiple") do
+    describe("multiple") {
       it("returns nil every time") do
         3.times { _(subject.pop).must_be_nil }
       end
-    end
-  end
+    }
+  }
 
-  describe("#each") do
+  describe("#each") {
     it("yields each item") do
       expected = %w[foo bar baz]
       expected.reverse_each { |item| subject.push(item) }
@@ -115,9 +115,9 @@ describe(DataStructures::MinMaxStack) do
       subject.each { |item| actual << item }
       _(actual).must_equal(expected)
     end
-  end
+  }
 
-  describe("#min") do
+  describe("#min") {
     it("returns the minimum item") do
       subject.push(2)
       subject.push(8)
@@ -138,7 +138,7 @@ describe(DataStructures::MinMaxStack) do
       _(subject.min).must_be_nil
     end
 
-    describe("when the minimum changes") do
+    describe("when the minimum changes") {
       it("changes accordingly") do
         subject.push(2)
         subject.push(8)
@@ -151,10 +151,10 @@ describe(DataStructures::MinMaxStack) do
         subject.pop
         _(subject.min).must_equal(2)
       end
-    end
-  end
+    }
+  }
 
-  describe("#max") do
+  describe("#max") {
     it("returns the maximum item") do
       subject.push(2)
       subject.push(8)
@@ -175,7 +175,7 @@ describe(DataStructures::MinMaxStack) do
       _(subject.max).must_be_nil
     end
 
-    describe("when the maximum changes") do
+    describe("when the maximum changes") {
       it("changes accordingly") do
         subject.push(8)
         subject.push(2)
@@ -188,6 +188,6 @@ describe(DataStructures::MinMaxStack) do
         subject.pop
         _(subject.max).must_equal(8)
       end
-    end
-  end
-end
+    }
+  }
+}

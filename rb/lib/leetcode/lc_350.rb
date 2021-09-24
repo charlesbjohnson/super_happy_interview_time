@@ -24,12 +24,12 @@ module LeetCode
     # @return {Array<Integer>}
     def intersect(left, right)
       left = left.each.with_object(Hash.new(0)) { |n, counts| counts[n] += 1 }
-      right.each.with_object([]) do |n, intersection|
+      right.each.with_object([]) { |n, intersection|
         if left[n].positive?
           left[n] -= 1
           intersection.push(n)
         end
-      end
+      }
     end
   end
 end

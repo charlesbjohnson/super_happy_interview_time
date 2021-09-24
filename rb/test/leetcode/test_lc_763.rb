@@ -17,10 +17,10 @@ module LeetCode
       ["abbba", [5]],
       ["qiejxqfnqceocmy", [13, 1, 1]],
       ["ababcbacadefegdehijhklij", [9, 7, 8]]
-    ].each.with_index do |(s, expected), i|
-      define_method(:"test_partition_labels_#{i}") do
+    ].each.with_index { |(s, expected), i|
+      define_method(:"test_partition_labels_#{i}") {
         assert_equal(expected, partition_labels(s))
-      end
-    end
+      }
+    }
   end
 end

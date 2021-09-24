@@ -6,7 +6,7 @@ require("config")
 require("algorithms/graph_processing/depth_first_order")
 require("data_structures/undirected_graph")
 
-describe(Algorithms::GraphProcessing::DepthFirstOrder) do
+describe(Algorithms::GraphProcessing::DepthFirstOrder) {
   subject { Algorithms::GraphProcessing::DepthFirstOrder.new(graph) }
 
   let(:graph) { DataStructures::UndirectedGraph.new }
@@ -14,8 +14,8 @@ describe(Algorithms::GraphProcessing::DepthFirstOrder) do
   it { _(subject).must_respond_to(:pre) }
   it { _(subject).must_respond_to(:post) }
 
-  describe("with an undirected graph") do
-    let(:edges) do
+  describe("with an undirected graph") {
+    let(:edges) {
       [
         [0, 1],
         [0, 2],
@@ -30,26 +30,26 @@ describe(Algorithms::GraphProcessing::DepthFirstOrder) do
         [4, 6],
         [4, 6]
       ]
-    end
+    }
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe("#pre") do
+    describe("#pre") {
       it("returns vertices in preorder") do
         _(subject.pre).must_equal([0, 1, 4, 3, 2, 5, 6])
       end
-    end
+    }
 
-    describe("#post") do
+    describe("#post") {
       it("returns vertices in postorder") do
         _(subject.post).must_equal([5, 2, 6, 3, 4, 1, 0])
       end
-    end
-  end
+    }
+  }
 
-  describe("with a directed graph") do
+  describe("with a directed graph") {
     let(:graph) { DataStructures::DirectedGraph.new }
-    let(:edges) do
+    let(:edges) {
       [
         [0, 1],
         [0, 2],
@@ -63,20 +63,20 @@ describe(Algorithms::GraphProcessing::DepthFirstOrder) do
         [6, 0],
         [6, 4]
       ]
-    end
+    }
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe("#pre") do
+    describe("#pre") {
       it("returns vertices in preorder") do
         _(subject.pre).must_equal([0, 1, 4, 2, 5, 3, 6])
       end
-    end
+    }
 
-    describe("#post") do
+    describe("#post") {
       it("returns vertices in postorder") do
         _(subject.post).must_equal([4, 1, 2, 5, 0, 6, 3])
       end
-    end
-  end
-end
+    }
+  }
+}

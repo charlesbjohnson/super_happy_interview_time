@@ -36,9 +36,9 @@ module LeetCode
     # @param s {String}
     # @return {Integer}
     def count_substrings(s)
-      (0...s.length).reduce(0) do |cnt, i|
+      (0...s.length).reduce(0) { |cnt, i|
         cnt + count_palindromes_around(s, i, i) + count_palindromes_around(s, i, i + 1)
-      end
+      }
     end
   end
 end

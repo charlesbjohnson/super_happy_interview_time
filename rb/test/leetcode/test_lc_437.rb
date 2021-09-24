@@ -12,7 +12,7 @@ module LeetCode
       return if values.empty?
 
       nodes = values.map { |v| v ? TreeNode.new(v) : nil }
-      nodes.each.with_index do |node, i|
+      nodes.each.with_index { |node, i|
         next unless node
 
         left = i * 2 + 1
@@ -20,7 +20,7 @@ module LeetCode
 
         node.left = nodes[left] if left < nodes.length
         node.right = nodes[right] if right < nodes.length
-      end
+      }
 
       nodes.first
     end
@@ -35,10 +35,10 @@ module LeetCode
       [[0, 1, 2, 3, 4, 5, 6], 5, 3],
       [[10, 5, -3, 3, 2, nil, 11, 3, -2, nil, 1], 8, 3],
       [[0, 1, 2, 3], 3, 1]
-    ].each.with_index do |(tree, sum, expected), i|
-      define_method(:"test_path_sum_#{i}") do
+    ].each.with_index { |(tree, sum, expected), i|
+      define_method(:"test_path_sum_#{i}") {
         assert_equal(expected, path_sum(build(tree), sum))
-      end
-    end
+      }
+    }
   end
 end

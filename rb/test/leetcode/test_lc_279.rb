@@ -18,10 +18,10 @@ module LeetCode
       [100, 1],
       [80, 2],
       [85, 2]
-    ].each.with_index do |(n, expected), i|
-      define_method(:"test_num_squares_#{i}") do
+    ].each.with_index { |(n, expected), i|
+      define_method(:"test_num_squares_#{i}") {
         assert_equal(expected, num_squares(n))
-      end
-    end
+      }
+    }
   end
 end

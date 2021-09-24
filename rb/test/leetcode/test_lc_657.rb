@@ -11,10 +11,10 @@ module LeetCode
     [
       ["UD", true],
       ["LL", false]
-    ].each.with_index do |(moves, expected), i|
-      define_method(:"test_judge_circle_#{i}") do
+    ].each.with_index { |(moves, expected), i|
+      define_method(:"test_judge_circle_#{i}") {
         assert_equal(expected, judge_circle(moves))
-      end
-    end
+      }
+    }
   end
 end

@@ -13,8 +13,8 @@ module LeetCode
       zero_first_row = false
       zero_first_col = false
 
-      (0...matrix.length).each do |row|
-        (0...matrix[row].length).each do |col|
+      (0...matrix.length).each { |row|
+        (0...matrix[row].length).each { |col|
           next unless matrix[row][col].zero?
 
           zero_first_row = true if row.zero?
@@ -24,18 +24,18 @@ module LeetCode
             matrix[row][0] = 0
             matrix[0][col] = 0
           end
-        end
-      end
+        }
+      }
 
-      (0...matrix.length).reverse_each do |row|
-        (0...matrix[row].length).reverse_each do |col|
+      (0...matrix.length).reverse_each { |row|
+        (0...matrix[row].length).reverse_each { |col|
           next unless (col.zero? && zero_first_col) ||
             (row.zero? && zero_first_row) ||
             (matrix[row][0].zero? || matrix[0][col].zero?)
 
           matrix[row][col] = 0
-        end
-      end
+        }
+      }
 
       nil
     end

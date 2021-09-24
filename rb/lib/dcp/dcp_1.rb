@@ -19,11 +19,11 @@ module DCP
     def two_sum?(list, target)
       seen = Set.new
 
-      list.each do |value|
+      list.each { |value|
         return true if seen.include?(target - value)
 
         seen.add(value)
-      end
+      }
 
       false
     end

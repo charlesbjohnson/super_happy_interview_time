@@ -48,9 +48,9 @@ module LeetCode
     # @param tree {TreeNode}
     # @return {Integer}
     def diameter_of_binary_tree(tree)
-      [0].tap do |max|
+      [0].tap { |max|
         diameter_of_binary_tree_recurse(tree, max)
-      end.first
+      }.first
     end
   end
 end

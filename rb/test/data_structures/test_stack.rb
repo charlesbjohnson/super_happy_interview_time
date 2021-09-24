@@ -4,7 +4,7 @@
 require("config")
 require("data_structures/stack")
 
-describe(DataStructures::Stack) do
+describe(DataStructures::Stack) {
   subject { DataStructures::Stack.new }
 
   it { _(subject).must_respond_to(:size) }
@@ -20,7 +20,7 @@ describe(DataStructures::Stack) do
     _(subject).must_be(:empty?)
   end
 
-  describe("#push") do
+  describe("#push") {
     it("adds to the stack") do
       subject.push(foo)
       _(subject.peek).must_equal(foo)
@@ -39,9 +39,9 @@ describe(DataStructures::Stack) do
     it("returns what was pushed") do
       _(subject.push(foo)).must_equal(foo)
     end
-  end
+  }
 
-  describe("#peek") do
+  describe("#peek") {
     it("returns the item at the top") do
       subject.push("bar")
       subject.push(foo)
@@ -59,9 +59,9 @@ describe(DataStructures::Stack) do
     it("returns nil if empty") do
       _(subject.peek).must_be_nil
     end
-  end
+  }
 
-  describe("#pop") do
+  describe("#pop") {
     it("returns the item at the top") do
       subject.push("bar")
       subject.push(foo)
@@ -80,14 +80,14 @@ describe(DataStructures::Stack) do
       _(subject.pop).must_be_nil
     end
 
-    describe("multiple") do
+    describe("multiple") {
       it("returns nil every time") do
         3.times { _(subject.pop).must_be_nil }
       end
-    end
-  end
+    }
+  }
 
-  describe("#each") do
+  describe("#each") {
     it("yields each item") do
       expected = %w[foo bar baz]
       expected.reverse_each { |item| subject.push(item) }
@@ -98,5 +98,5 @@ describe(DataStructures::Stack) do
       subject.each { |item| actual << item }
       _(actual).must_equal(expected)
     end
-  end
-end
+  }
+}

@@ -17,7 +17,7 @@ module LeetCode
       primes[0] = nil
       primes[1] = nil
 
-      (2...(primes.length / 2.0).ceil).each do |v|
+      (2...(primes.length / 2.0).ceil).each { |v|
         next unless primes[v]
 
         next_divisible = v
@@ -25,7 +25,7 @@ module LeetCode
           next_divisible += v
           primes[next_divisible] = nil
         end
-      end
+      }
 
       primes.each.reduce(0) { |a, v| v ? a + 1 : a }
     end

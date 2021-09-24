@@ -36,13 +36,13 @@ module LeetCode
         visit = []
         value = []
 
-        nodes.each do |node|
+        nodes.each { |node|
           next unless node
 
           visit.push(node.left) if node.left
           visit.push(node.right) if node.right
           value.push(node.val)
-        end
+        }
 
         value.reverse! if counter.odd?
         counter += 1

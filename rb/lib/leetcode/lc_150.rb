@@ -23,7 +23,7 @@ module LeetCode
     def eval_rpn(tokens)
       stack = []
 
-      tokens.each do |token|
+      tokens.each { |token|
         case token
         when "*"
           stack.push(stack.pop * stack.pop)
@@ -40,7 +40,7 @@ module LeetCode
         else
           stack.push(token.to_i)
         end
-      end
+      }
 
       stack.pop
     end

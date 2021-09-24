@@ -7,7 +7,7 @@ require("ctci/ctci_c8_p6")
 module CTCI
   module C8
     module P6
-      describe(JigSaw) do
+      describe(JigSaw) {
         subject { JigSaw.new }
 
         it { _(subject).must_respond_to(:board) }
@@ -16,7 +16,7 @@ module CTCI
         it { _(subject).must_respond_to(:rows) }
         it { _(subject).must_respond_to(:solve) }
 
-        describe("::new") do
+        describe("::new") {
           it("creates a 3x3 board by default") do
             _(subject.unplaced.size).must_equal(9)
             _(subject.board.size).must_equal(3)
@@ -33,17 +33,17 @@ module CTCI
             _(subject.unplaced.count { |p| p.edges.all?(&:flat?) }).must_equal(0)
             _(subject.unplaced.count { |p| p.edges.none?(&:flat?) }).must_equal(1)
           end
-        end
+        }
 
-        describe("#solve") do
+        describe("#solve") {
           it("fills the board so that each piece fits with those around it") do
             subject.solve
 
             _(subject.unplaced).must_be_empty
 
             all_fit = true
-            subject.board.each_with_index do |r, ri|
-              r.each_with_index do |c, ci|
+            subject.board.each_with_index { |r, ri|
+              r.each_with_index { |c, ci|
                 above_end = ri.pred.negative?
                 right_end = ci.succ >= subject.columns
                 below_end = ri.succ >= subject.rows
@@ -62,16 +62,16 @@ module CTCI
 
                 all_fit = [above_fits, right_fits, bottom_fits, left_fits].all?
                 break unless all_fit
-              end
+              }
               break unless all_fit
-            end
+            }
 
             _(all_fit).must_equal(true)
           end
-        end
-      end
+        }
+      }
 
-      describe(Piece) do
+      describe(Piece) {
         # edges for a top left corner piece
         let(:edges) { [1, 2, 3, 1].map { |e| Edge.new(e) } }
         subject { Piece.new(edges) }
@@ -87,14 +87,14 @@ module CTCI
         it { _(subject).must_respond_to(:corner?) }
         it { _(subject).must_respond_to(:empty?) }
 
-        describe("piece constructors") do
-          describe("::empty") do
+        describe("piece constructors") {
+          describe("::empty") {
             it("creates an empty piece that has no edges, a null Piece object") do
               _(Piece.empty.edges.all?(&:none?)).must_equal(true)
             end
-          end
+          }
 
-          describe("::that_fits_between") do
+          describe("::that_fits_between") {
             it("creates a piece that fits between the given edges") do
               edges_around = [Edge.none, nil, Edge.inward, Edge.outward]
               piece = Piece.that_fits_between(edges_around)
@@ -104,35 +104,35 @@ module CTCI
               _(piece.bottom).must_be(:outward?)
               _(piece.left).must_be(:inward?)
             end
-          end
-        end
+          }
+        }
 
-        describe("edges") do
-          describe("#edges") do
+        describe("edges") {
+          describe("#edges") {
             it("returns edges from the top going clockwise") do
               _(subject.edges).must_equal(edges)
             end
-          end
+          }
 
-          describe("#top") do
+          describe("#top") {
             it { _(subject.top).must_equal(edges[0]) }
-          end
+          }
 
-          describe("#right") do
+          describe("#right") {
             it { _(subject.right).must_equal(edges[1]) }
-          end
+          }
 
-          describe("#bottom") do
+          describe("#bottom") {
             it { _(subject.bottom).must_equal(edges[2]) }
-          end
+          }
 
-          describe("#left") do
+          describe("#left") {
             it { _(subject.left).must_equal(edges[3]) }
-          end
-        end
+          }
+        }
 
-        describe("piece edge checking") do
-          describe("#corner?") do
+        describe("piece edge checking") {
+          describe("#corner?") {
             it("returns true if two consecutive edges are both flat") do
               # start at top left, going counter clockwise
               _(subject).must_be(:corner?)
@@ -153,18 +153,18 @@ module CTCI
 
               _(Piece.empty).wont_be(:corner?)
             end
-          end
+          }
 
-          describe("#empty?") do
+          describe("#empty?") {
             it do
               _(Piece.empty).must_be(:empty?)
               _(subject).wont_be(:empty?)
             end
-          end
-        end
-      end
+          }
+        }
+      }
 
-      describe(Edge) do
+      describe(Edge) {
         subject { Edge.new(0) }
         let(:none) { subject }
         let(:flat) { Edge.new(1) }
@@ -184,16 +184,16 @@ module CTCI
         it { _(subject).must_respond_to(:inward?) }
         it { _(subject).must_respond_to(:outward?) }
 
-        describe("edge constructors") do
-          describe("::none") do
+        describe("edge constructors") {
+          describe("::none") {
             it { _(Edge.none.type).must_equal(:none) }
-          end
+          }
 
-          describe("::flat") do
+          describe("::flat") {
             it { _(Edge.flat.type).must_equal(:flat) }
-          end
+          }
 
-          describe("::rand_in_out") do
+          describe("::rand_in_out") {
             it("returns either an inward or outward edge randomly") do
               r = Array.new(10) { Edge.rand_in_out }
               _(r.all? { |e| e.type == :inward }).must_equal(false)
@@ -201,9 +201,9 @@ module CTCI
               _(r.all? { |e| e.type == :flat }).must_equal(false)
               _(r.all? { |e| e.type == :inward || e.type == :outward }).must_equal(true)
             end
-          end
+          }
 
-          describe("::complement") do
+          describe("::complement") {
             it("returns an edge depending on the type of edge given") do
               none_complement = Edge.complement(none).type
               is_inward = none_complement == :inward
@@ -219,10 +219,10 @@ module CTCI
               _(Edge.complement.type).must_equal(:flat)
               _(Edge.complement(nil).type).must_equal(:flat)
             end
-          end
-        end
+          }
+        }
 
-        describe("#fits_with?") do
+        describe("#fits_with?") {
           it do
             _(none).must_be(:fits_with?, none.clone)
             _(none).must_be(:fits_with?, inward)
@@ -254,46 +254,46 @@ module CTCI
             _(outward).wont_be(:fits_with?, flat)
             _(outward).wont_be(:fits_with?, nil)
           end
-        end
+        }
 
-        describe("edge checking") do
-          describe("#none?") do
+        describe("edge checking") {
+          describe("#none?") {
             it do
               _(none).must_be(:none?)
               _(flat).wont_be(:none?)
               _(inward).wont_be(:none?)
               _(outward).wont_be(:none?)
             end
-          end
+          }
 
-          describe("#flat?") do
+          describe("#flat?") {
             it do
               _(none).wont_be(:flat?)
               _(flat).must_be(:flat?)
               _(inward).wont_be(:flat?)
               _(outward).wont_be(:flat?)
             end
-          end
+          }
 
-          describe("#inward?") do
+          describe("#inward?") {
             it do
               _(none).wont_be(:inward?)
               _(flat).wont_be(:inward?)
               _(inward).must_be(:inward?)
               _(outward).wont_be(:inward?)
             end
-          end
+          }
 
-          describe("#outward?") do
+          describe("#outward?") {
             it do
               _(none).wont_be(:outward?)
               _(flat).wont_be(:outward?)
               _(outward).must_be(:outward?)
               _(inward).wont_be(:outward?)
             end
-          end
-        end
-      end
+          }
+        }
+      }
     end
   end
 end

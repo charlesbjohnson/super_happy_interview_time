@@ -29,7 +29,7 @@ module LeetCode
       origin = Point.new(0, 0)
       current = origin.clone
 
-      moves.chars.each do |move|
+      moves.chars.each { |move|
         case move
         when "R"
           current.x += 1
@@ -40,7 +40,7 @@ module LeetCode
         when "D"
           current.y -= 1
         end
-      end
+      }
 
       origin == current
     end

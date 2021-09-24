@@ -21,9 +21,9 @@ module LeetCode
     def count_bits(n)
       result = Array.new(n + 1, 0)
 
-      (1...result.length).each do |i|
+      (1...result.length).each { |i|
         result[i] += result[i & (i - 1)] + 1
-      end
+      }
 
       result
     end

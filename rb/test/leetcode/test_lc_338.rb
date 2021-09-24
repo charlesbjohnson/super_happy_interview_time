@@ -25,10 +25,10 @@ module LeetCode
       [13, [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3]],
       [14, [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3]],
       [15, [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4]]
-    ].each.with_index do |(n, expected), i|
-      define_method(:"test_count_bits_#{i}") do
+    ].each.with_index { |(n, expected), i|
+      define_method(:"test_count_bits_#{i}") {
         assert_equal(expected, count_bits(n))
-      end
-    end
+      }
+    }
   end
 end

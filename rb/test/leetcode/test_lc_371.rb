@@ -14,10 +14,10 @@ module LeetCode
       [1, 0, 1],
       [1, 2, 3],
       [5, 2, 7]
-    ].each.with_index do |(left, right, expected), i|
-      define_method(:"test_sum_#{i}") do
+    ].each.with_index { |(left, right, expected), i|
+      define_method(:"test_sum_#{i}") {
         assert_equal(expected, sum(left, right))
-      end
-    end
+      }
+    }
   end
 end

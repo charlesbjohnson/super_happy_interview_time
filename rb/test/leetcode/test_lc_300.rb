@@ -17,10 +17,10 @@ module LeetCode
       [[3, 5, 4, 1, 2], 2],
       [[2, 4, 3, 5, 1], 3],
       [[3, 4, -1, 0, 6, 2, 3], 4]
-    ].each.with_index do |(list, expected), i|
-      define_method(:"test_length_of_lis_#{i}") do
+    ].each.with_index { |(list, expected), i|
+      define_method(:"test_length_of_lis_#{i}") {
         assert_equal(expected, length_of_lis(list))
-      end
-    end
+      }
+    }
   end
 end

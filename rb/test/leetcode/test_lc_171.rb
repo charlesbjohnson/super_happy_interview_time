@@ -15,10 +15,10 @@ module LeetCode
       ["Z", 26],
       ["AA", 27],
       ["AB", 28]
-    ].each.with_index do |(s, expected), i|
-      define_method(:"test_title_to_number_#{i}") do
+    ].each.with_index { |(s, expected), i|
+      define_method(:"test_title_to_number_#{i}") {
         assert_equal(expected, title_to_number(s))
-      end
-    end
+      }
+    }
   end
 end

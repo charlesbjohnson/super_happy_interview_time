@@ -17,10 +17,10 @@ module LeetCode
       [15, 3],
       [20, 4],
       [30, 5]
-    ].each.with_index do |(x, expected), i|
-      define_method(:"test_my_sqrt_#{i}") do
+    ].each.with_index { |(x, expected), i|
+      define_method(:"test_my_sqrt_#{i}") {
         assert_equal(expected, my_sqrt(x))
-      end
-    end
+      }
+    }
   end
 end

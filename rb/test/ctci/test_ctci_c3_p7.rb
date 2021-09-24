@@ -12,10 +12,10 @@ module CTCI
       end
 
       def test_dequeue_any
-        2.times do
+        2.times {
           @animal_queue.enqueue(Animal.dog)
           @animal_queue.enqueue(Animal.cat)
-        end
+        }
 
         dequeued = @animal_queue.dequeue_any
 

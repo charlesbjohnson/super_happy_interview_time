@@ -15,10 +15,10 @@ module LeetCode
       ["aba", true],
       ["A man, a plan, a canal: Panama", true],
       ["racecar a car", false]
-    ].each.with_index do |(string, expected), i|
-      define_method(:"test_palindrome?_#{i}") do
+    ].each.with_index { |(string, expected), i|
+      define_method(:"test_palindrome?_#{i}") {
         assert_equal(expected, palindrome?(string))
-      end
-    end
+      }
+    }
   end
 end

@@ -16,10 +16,10 @@ module LeetCode
       %w[abcdef f],
       ["a" * 1000, "a" * 1000],
       ["#{"a" * 499}bc#{"a" * 499}", "a" * 499]
-    ].each.with_index do |(s, expected), i|
-      define_method(:"test_longest_palindrome_#{i}") do
+    ].each.with_index { |(s, expected), i|
+      define_method(:"test_longest_palindrome_#{i}") {
         assert_equal(expected, longest_palindrome(s))
-      end
-    end
+      }
+    }
   end
 end

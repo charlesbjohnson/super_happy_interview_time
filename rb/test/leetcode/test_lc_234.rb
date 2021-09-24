@@ -13,10 +13,10 @@ module LeetCode
 
       head = ListNode.new(list[0])
 
-      list.drop(1).reduce(head) do |res, v|
+      list.drop(1).reduce(head) { |res, v|
         res.next = ListNode.new(v)
         res.next
-      end
+      }
 
       head
     end
@@ -30,10 +30,10 @@ module LeetCode
       [[1, 2, 3], false],
       [[1, 2, 2, 1], true],
       [[1, 2, 3, 2, 1], true]
-    ].each.with_index do |(list, expected), i|
-      define_method(:"test_palindrome?_#{i}") do
+    ].each.with_index { |(list, expected), i|
+      define_method(:"test_palindrome?_#{i}") {
         assert_equal(expected, palindrome?(build(list)))
-      end
-    end
+      }
+    }
   end
 end

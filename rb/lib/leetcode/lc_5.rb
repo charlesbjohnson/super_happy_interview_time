@@ -33,7 +33,7 @@ module LeetCode
       left_bound = 0
       right_bound = 0
 
-      (0...s.length).each do |i|
+      (0...s.length).each { |i|
         len_on = longest_palindrome_length_around(s, i, i)
         len_between = longest_palindrome_length_around(s, i, i + 1)
 
@@ -43,7 +43,7 @@ module LeetCode
           left_bound = i - ((longest - 1) / 2)
           right_bound = i + (longest / 2)
         end
-      end
+      }
 
       s[left_bound..right_bound]
     end

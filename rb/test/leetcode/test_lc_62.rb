@@ -17,10 +17,10 @@ module LeetCode
       [3, 3, 6],
       [4, 4, 20],
       [5, 5, 70]
-    ].each.with_index do |(rows, columns, expected), i|
-      define_method(:"test_unique_paths_#{i}") do
+    ].each.with_index { |(rows, columns, expected), i|
+      define_method(:"test_unique_paths_#{i}") {
         assert_equal(expected, unique_paths(rows, columns))
-      end
-    end
+      }
+    }
   end
 end

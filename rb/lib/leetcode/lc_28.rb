@@ -24,12 +24,12 @@ module LeetCode
       return 0 if needle.empty?
       return -1 if haystack.length < needle.length
 
-      (0..(haystack.length - needle.length)).each do |h|
-        (0...needle.length).each do |n|
+      (0..(haystack.length - needle.length)).each { |h|
+        (0...needle.length).each { |n|
           break if haystack[h + n] != needle[n]
           return h if n == needle.length - 1
-        end
-      end
+        }
+      }
 
       -1
     end

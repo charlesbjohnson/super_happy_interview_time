@@ -24,7 +24,7 @@ module CTCI
         max_height = 0
         max_stack = nil
 
-        boxes.each do |box|
+        boxes.each { |box|
           next unless box.can_stack_on_top_of(bottom)
 
           new_stack = r_tallest_stack(boxes, box, cache)
@@ -33,7 +33,7 @@ module CTCI
             max_height = new_height
             max_stack = new_stack
           end
-        end
+        }
 
         max_stack = [] if max_stack.nil?
         max_stack.unshift(bottom) unless bottom.nil?

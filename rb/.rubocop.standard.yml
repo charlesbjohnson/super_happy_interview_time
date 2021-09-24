@@ -2,8 +2,11 @@
 inherit_gem:
   standard: config/base.yml
 
-Style/BlockDelimiters:
+Standard/SemanticBlocks:
   Enabled: false
+
+Style/BlockDelimiters:
+  EnforcedStyle: always_braces
 
 Style/MethodCallWithArgsParentheses:
   Enabled: true

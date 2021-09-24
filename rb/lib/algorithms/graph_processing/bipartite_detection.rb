@@ -18,15 +18,15 @@ module Algorithms
         @marked = Array.new(@graph.size_vertices) { false }
         @colors = Array.new(@graph.size_vertices)
         @bipartite = true
-        @marked.each_with_index do |was_visited, v|
+        @marked.each_with_index { |was_visited, v|
           r_execute(v, true) if !was_visited && @bipartite
-        end
+        }
       end
 
       def r_execute(from, color)
         @marked[from] = true
         @colors[from] = color
-        @graph.adjacent(from).each do |to|
+        @graph.adjacent(from).each { |to|
           break unless @bipartite
 
           if @colors[to] == color
@@ -34,7 +34,7 @@ module Algorithms
           elsif !@marked[to]
             r_execute(to, !color)
           end
-        end
+        }
       end
     end
   end

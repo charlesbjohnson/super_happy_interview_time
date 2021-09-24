@@ -36,7 +36,7 @@ module LeetCode
     # @param digits {String}
     # @return {Array<String>}
     def letter_combinations(digits)
-      digits.chars.reduce([]) do |combinations, digit|
+      digits.chars.reduce([]) { |combinations, digit|
         mapping = MAPPING[digit].clone
 
         if combinations.empty?
@@ -44,10 +44,10 @@ module LeetCode
           next combinations
         end
 
-        combinations.flat_map do |combination|
+        combinations.flat_map { |combination|
           mapping.map { |character| combination + character }
-        end
-      end
+        }
+      }
     end
   end
 end

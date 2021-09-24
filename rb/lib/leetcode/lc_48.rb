@@ -5,22 +5,22 @@ module LeetCode
   # 48. Rotate Image
   module LC48
     def transpose(matrix)
-      (0...matrix.length).each do |row|
-        (row...matrix[row].length).each do |col|
+      (0...matrix.length).each { |row|
+        (row...matrix[row].length).each { |col|
           matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
-        end
-      end
+        }
+      }
 
       matrix
     end
 
     def flip_horizontal(matrix)
-      (0...matrix.length).each do |row|
-        (0...(matrix[row].length / 2)).each do |col|
+      (0...matrix.length).each { |row|
+        (0...(matrix[row].length / 2)).each { |col|
           offset = (matrix[row].length - 1 - col)
           matrix[row][col], matrix[row][offset] = matrix[row][offset], matrix[row][col]
-        end
-      end
+        }
+      }
 
       matrix
     end

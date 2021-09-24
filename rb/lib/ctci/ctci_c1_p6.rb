@@ -12,11 +12,11 @@ module CTCI
         return [] unless matrix.all? { |r| r.length == rotated_length }
 
         result = Array.new(rotated_length) { [] }
-        matrix.each do |row|
-          rotated_length.times do |i|
+        matrix.each { |row|
+          rotated_length.times { |i|
             result[i].unshift(row[i])
-          end
-        end
+          }
+        }
 
         result
       end

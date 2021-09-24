@@ -23,10 +23,10 @@ module LeetCode
         ],
         true
       ]
-    ].each.with_index do |(board, expected), i|
-      define_method(:"test_is_valid_sudoku_#{i}") do
+    ].each.with_index { |(board, expected), i|
+      define_method(:"test_is_valid_sudoku_#{i}") {
         assert_equal(expected, valid_sudoku?(board))
-      end
-    end
+      }
+    }
   end
 end

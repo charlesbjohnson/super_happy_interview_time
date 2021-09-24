@@ -15,12 +15,12 @@ module EPI
       def capacity(heights)
         minimum_height = Float::INFINITY
 
-        heights.reduce(0) do |capacity, height|
+        heights.reduce(0) { |capacity, height|
           capacity = [capacity, height - minimum_height].max
           minimum_height = [minimum_height, height].min
 
           capacity
-        end
+        }
       end
     end
   end

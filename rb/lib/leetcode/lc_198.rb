@@ -24,9 +24,9 @@ module LeetCode
 
       cache = [list[0], [list[0], list[1]].max]
 
-      (2...list.length).each do |i|
+      (2...list.length).each { |i|
         cache[i] = [list[i] + cache[i - 2], cache[i - 1]].max
-      end
+      }
 
       cache[list.length - 1]
     end

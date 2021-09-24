@@ -4,7 +4,7 @@
 require("config")
 require("data_structures/linked_list")
 
-describe(DataStructures::LinkedList) do
+describe(DataStructures::LinkedList) {
   subject { DataStructures::LinkedList.new }
 
   it { _(subject).must_respond_to(:size) }
@@ -23,7 +23,7 @@ describe(DataStructures::LinkedList) do
     _(subject).must_be(:empty?)
   end
 
-  describe("#append") do
+  describe("#append") {
     it("adds to the list") do
       subject.append(foo)
       _(subject[0]).must_equal(foo)
@@ -42,9 +42,9 @@ describe(DataStructures::LinkedList) do
       _(subject[2]).must_equal(baz)
       _(subject.size).must_equal(3)
     end
-  end
+  }
 
-  describe("#insert") do
+  describe("#insert") {
     it("adds to the list") do
       subject.insert(0, foo)
       _(subject[0]).must_equal(foo)
@@ -80,9 +80,9 @@ describe(DataStructures::LinkedList) do
       _(subject[1]).must_equal(baz)
       _(subject[2]).must_equal(bar)
     end
-  end
+  }
 
-  describe("#remove") do
+  describe("#remove") {
     before { subject.append(foo) }
 
     it("takes away from the list") do
@@ -106,9 +106,9 @@ describe(DataStructures::LinkedList) do
       _(subject[1]).must_equal(bar)
       _(subject[2]).must_be_nil
     end
-  end
+  }
 
-  describe("#delete") do
+  describe("#delete") {
     before { subject.append(foo) }
 
     it("takes away from the list") do
@@ -149,9 +149,9 @@ describe(DataStructures::LinkedList) do
       _(subject[1]).must_equal(baz)
       _(subject[2]).must_be_nil
     end
-  end
+  }
 
-  describe("#each") do
+  describe("#each") {
     it("yields each item") do
       expected = %w[foo bar baz]
       expected.each { |item| subject.append(item) }
@@ -162,9 +162,9 @@ describe(DataStructures::LinkedList) do
       subject.each { |item| actual << item }
       _(actual).must_equal(expected)
     end
-  end
+  }
 
-  describe("#index") do
+  describe("#index") {
     it("returns the index where an item appears") do
       subject.append("bar")
       subject.append(foo)
@@ -176,5 +176,5 @@ describe(DataStructures::LinkedList) do
     it("returns nil if item does not exist") do
       _(subject.index(foo)).must_be_nil
     end
-  end
-end
+  }
+}

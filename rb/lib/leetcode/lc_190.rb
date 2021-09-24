@@ -22,12 +22,12 @@ module LeetCode
     def reverse_bits(n)
       reversed = 0
 
-      32.times.each do
+      32.times.each {
         reversed <<= 1
         reversed |= (n & 1)
 
         n >>= 1
-      end
+      }
 
       reversed
     end

@@ -13,11 +13,11 @@ require_relative("./code_structure/require_problem")
 module Refactor
   module CodeStructure
     def self.refactor!(path:)
-      Parser::Runner::RubyRewrite.new.tap do |rewriter|
+      Parser::Runner::RubyRewrite.new.tap { |rewriter|
         rewriter.instance_variable_set(:@modify, true)
         rewriter.instance_variable_set(:@warnings, true)
         rewriter.instance_variable_get(:@rewriters).push(Factory.new(path: path))
-      end.execute([path])
+      }.execute([path])
     end
 
     class Factory

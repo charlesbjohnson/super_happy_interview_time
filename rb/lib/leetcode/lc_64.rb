@@ -29,19 +29,19 @@ module LeetCode
       rows = grid.length
       cols = grid[0].length
 
-      (1...rows).each do |row|
+      (1...rows).each { |row|
         grid[row][0] += grid[row - 1][0]
-      end
+      }
 
-      (1...cols).each do |col|
+      (1...cols).each { |col|
         grid[0][col] += grid[0][col - 1]
-      end
+      }
 
-      (1...rows).each do |row|
-        (1...cols).each do |col|
+      (1...rows).each { |row|
+        (1...cols).each { |col|
           grid[row][col] += [grid[row - 1][col], grid[row][col - 1]].min
-        end
-      end
+        }
+      }
 
       grid[rows - 1][cols - 1]
     end

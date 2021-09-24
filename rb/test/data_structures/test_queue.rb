@@ -4,7 +4,7 @@
 require("config")
 require("data_structures/queue")
 
-describe(DataStructures::Queue) do
+describe(DataStructures::Queue) {
   subject { DataStructures::Queue.new }
 
   it { _(subject).must_respond_to(:size) }
@@ -19,7 +19,7 @@ describe(DataStructures::Queue) do
     _(subject.size).must_equal(0)
   end
 
-  describe("#enqueue") do
+  describe("#enqueue") {
     it("adds to the queue") do
       subject.enqueue(foo)
       _(subject.peek).must_equal(foo)
@@ -34,9 +34,9 @@ describe(DataStructures::Queue) do
       _(subject.peek).must_equal(foo)
       _(subject.size).must_equal(3)
     end
-  end
+  }
 
-  describe("#peek") do
+  describe("#peek") {
     it("returns the item at the front") do
       subject.enqueue(foo)
       subject.enqueue("bar")
@@ -54,9 +54,9 @@ describe(DataStructures::Queue) do
     it("returns nil if empty") do
       _(subject.peek).must_be_nil
     end
-  end
+  }
 
-  describe("#dequeue") do
+  describe("#dequeue") {
     it("returns the item at the front") do
       subject.enqueue(foo)
       subject.enqueue("bar")
@@ -75,14 +75,14 @@ describe(DataStructures::Queue) do
       _(subject.dequeue).must_be_nil
     end
 
-    describe("multiple") do
+    describe("multiple") {
       it("returns nil every time") do
         3.times { _(subject.dequeue).must_be_nil }
       end
-    end
-  end
+    }
+  }
 
-  describe("#each") do
+  describe("#each") {
     it("yields each item") do
       expected = %w[foo bar baz]
       expected.each { |item| subject.enqueue(item) }
@@ -93,5 +93,5 @@ describe(DataStructures::Queue) do
       subject.each { |item| actual << item }
       _(actual).must_equal(expected)
     end
-  end
-end
+  }
+}

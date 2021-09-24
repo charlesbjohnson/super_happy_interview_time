@@ -24,11 +24,11 @@ module LeetCode
       grid.each_index { |row| grid[row][0] = 1 }
       grid[0].each_index { |col| grid[0][col] = 1 }
 
-      (1...grid.length).each do |row|
-        (1...grid[row].length).each do |col|
+      (1...grid.length).each { |row|
+        (1...grid[row].length).each { |col|
           grid[row][col] = grid[row - 1][col] + grid[row][col - 1]
-        end
-      end
+        }
+      }
 
       grid[rows - 1][columns - 1]
     end

@@ -65,10 +65,10 @@ module LeetCode
         "ABCB",
         false
       ]
-    ].each.with_index do |(board, word, expected), i|
-      define_method(:"test_word_exists?_#{i}") do
+    ].each.with_index { |(board, word, expected), i|
+      define_method(:"test_word_exists?_#{i}") {
         assert_equal(expected, word_exists?(board, word))
-      end
-    end
+      }
+    }
   end
 end

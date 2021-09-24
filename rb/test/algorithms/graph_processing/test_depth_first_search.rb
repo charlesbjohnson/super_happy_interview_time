@@ -6,7 +6,7 @@ require("config")
 require("algorithms/graph_processing/depth_first_search")
 require("data_structures/undirected_graph")
 
-describe(Algorithms::GraphProcessing::DepthFirstSearch) do
+describe(Algorithms::GraphProcessing::DepthFirstSearch) {
   subject { Algorithms::GraphProcessing::DepthFirstSearch.new(graph, 0) }
 
   let(:graph) { DataStructures::UndirectedGraph.new }
@@ -14,8 +14,8 @@ describe(Algorithms::GraphProcessing::DepthFirstSearch) do
   it { _(subject).must_respond_to(:marked?) }
   it { _(subject).must_respond_to(:count) }
 
-  describe("with an undirected graph") do
-    let(:edges) do
+  describe("with an undirected graph") {
+    let(:edges) {
       [
         [0, 1],
         [0, 2],
@@ -30,11 +30,11 @@ describe(Algorithms::GraphProcessing::DepthFirstSearch) do
         [9, 11],
         [9, 12]
       ]
-    end
+    }
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe("#marked?") do
+    describe("#marked?") {
       it("returns true if the source is connected to the target") do
         _(subject.marked?(3)).must_equal(true)
       end
@@ -42,18 +42,18 @@ describe(Algorithms::GraphProcessing::DepthFirstSearch) do
       it("returns false if the source is not connected to the target") do
         _(subject.marked?(9)).must_equal(false)
       end
-    end
+    }
 
-    describe("#count") do
+    describe("#count") {
       it("returns the number of vertices connected to the source") do
         _(subject.count).must_equal(6)
       end
-    end
-  end
+    }
+  }
 
-  describe("with a directed graph") do
+  describe("with a directed graph") {
     let(:graph) { DataStructures::DirectedGraph.new }
-    let(:edges) do
+    let(:edges) {
       [
         [0, 1],
         [0, 5],
@@ -77,11 +77,11 @@ describe(Algorithms::GraphProcessing::DepthFirstSearch) do
         [11, 12],
         [12, 9]
       ]
-    end
+    }
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe("#marked?") do
+    describe("#marked?") {
       it("returns true if the source is connected to the target") do
         _(subject.marked?(3)).must_equal(true)
       end
@@ -89,12 +89,12 @@ describe(Algorithms::GraphProcessing::DepthFirstSearch) do
       it("returns false if the source is not connected to the target") do
         _(subject.marked?(9)).must_equal(false)
       end
-    end
+    }
 
-    describe("#count") do
+    describe("#count") {
       it("returns the number of vertices connected to the source") do
         _(subject.count).must_equal(5)
       end
-    end
-  end
-end
+    }
+  }
+}

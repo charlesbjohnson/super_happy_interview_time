@@ -33,10 +33,10 @@ module Algorithms
 
       def r_execute(from)
         @marked[from] = true
-        @graph.adjacent(from).reject { |v| @marked[v] }.each do |to|
+        @graph.adjacent(from).reject { |v| @marked[v] }.each { |to|
           @arrive_at_through[to] = from
           r_execute(to)
-        end
+        }
       end
     end
   end

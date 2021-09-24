@@ -11,10 +11,10 @@ module LeetCode
     [
       [[], [], []],
       [[1, 2, 2, 1], [2, 2], [2, 2]]
-    ].each.with_index do |(left, right, expected), i|
-      define_method(:"test_intersect_#{i}") do
+    ].each.with_index { |(left, right, expected), i|
+      define_method(:"test_intersect_#{i}") {
         assert_equal(expected, intersect(left, right))
-      end
-    end
+      }
+    }
   end
 end

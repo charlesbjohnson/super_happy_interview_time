@@ -23,10 +23,10 @@ module LeetCode
     def cyclic?(graph)
       visited = Array.new(graph.length, false)
 
-      visited.each_index do |vertex|
+      visited.each_index { |vertex|
         next if visited[vertex]
         return true if cyclic_recurse(graph, visited, vertex, [vertex])
-      end
+      }
 
       false
     end
@@ -34,10 +34,10 @@ module LeetCode
     def cyclic_recurse(graph, visited, vertex, path)
       visited[vertex] = true
 
-      graph.adjacent_to(vertex).each do |adjacent|
+      graph.adjacent_to(vertex).each { |adjacent|
         return true if path.include?(adjacent)
         return true if !visited[adjacent] && cyclic_recurse(graph, visited, adjacent, path + [adjacent])
-      end
+      }
 
       false
     end

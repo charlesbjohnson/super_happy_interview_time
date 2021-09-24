@@ -13,10 +13,10 @@ module LeetCode
       [[0], [[], [0]]],
       [[0, 1], [[], [0], [1], [0, 1]]],
       [[0, 1, 2], [[], [0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]]
-    ].each.with_index do |(list, expected), i|
-      define_method(:"test_subsets_#{i}") do
+    ].each.with_index { |(list, expected), i|
+      define_method(:"test_subsets_#{i}") {
         assert_equal(expected.sort, subsets(list).sort)
-      end
-    end
+      }
+    }
   end
 end

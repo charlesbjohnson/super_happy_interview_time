@@ -19,10 +19,10 @@ module LeetCode
       ["abcdefcz", 6],
       ["abcdeffabcdeghi", 9],
       ["abcadefgabcdefghijk", 11]
-    ].each.with_index do |(s, expected), i|
-      define_method(:"test_length_of_longest_substring_#{i}") do
+    ].each.with_index { |(s, expected), i|
+      define_method(:"test_length_of_longest_substring_#{i}") {
         assert_equal(expected, length_of_longest_substring(s))
-      end
-    end
+      }
+    }
   end
 end

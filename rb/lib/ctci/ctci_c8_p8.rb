@@ -59,10 +59,10 @@ module CTCI
           [[0, -1, 0, 1],
            [-1, 0, 1, 0],
            [-1, -1, 1, 1],
-           [-1, 1, 1, -1]].each do |r_dec, c_dec, r_inc, c_inc|
+           [-1, 1, 1, -1]].each { |r_dec, c_dec, r_inc, c_inc|
             return true if scan_direction(r, c, r_dec, c_dec, r_inc, c_inc,
               color).any?
-          end
+          }
 
           false
         end
@@ -154,14 +154,14 @@ module CTCI
           @color = self.class.k_to_v[c]
         end
 
-        k_to_v.each do |k, v|
+        k_to_v.each { |k, v|
           define_singleton_method(v) { new(k) }
           define_method(:"#{v}?") { @color == v }
-          define_method(:"#{v}!") do
+          define_method(:"#{v}!") {
             @color = v
             self
-          end
-        end
+          }
+        }
 
         def flip!
           new_value = self.class.v_to_k[@color] * -1

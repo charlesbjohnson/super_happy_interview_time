@@ -47,7 +47,7 @@ module Algorithms
         past_high_end = -> { high_i > high_end }
         higher_is_smaller = -> { tmp[high_i] < tmp[low_i] }
 
-        (low_start..high_end).each do |i|
+        (low_start..high_end).each { |i|
           break if past_low_end.call && past_high_end.call
 
           if past_low_end.call || (!past_high_end.call && higher_is_smaller.call)
@@ -57,7 +57,7 @@ module Algorithms
             a[i] = tmp[low_i]
             low_i += 1
           end
-        end
+        }
       end
     end
   end

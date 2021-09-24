@@ -73,11 +73,11 @@ module LeetCode
           [0, 0, 0, 0]
         ]
       ]
-    ].each.with_index do |(matrix, expected), i|
-      define_method(:"test_set_zeroes_#{i}") do
+    ].each.with_index { |(matrix, expected), i|
+      define_method(:"test_set_zeroes_#{i}") {
         set_zeroes(matrix)
         assert_equal(expected, matrix)
-      end
-    end
+      }
+    }
   end
 end

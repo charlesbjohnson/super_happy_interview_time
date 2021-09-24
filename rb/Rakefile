@@ -5,7 +5,7 @@ require("rake/testtask")
 
 task(default: :test)
 
-Rake::TestTask.new do |task|
+Rake::TestTask.new { |task|
   task.libs = %w[lib test]
   task.test_files = FileList.new("test/**/test_*.rb")
-end
+}

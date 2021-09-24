@@ -17,10 +17,10 @@ module LeetCode
       [9, true],
       [9, true],
       [27, true]
-    ].each.with_index do |(n, expected), i|
-      define_method(:"test_power_of_three?_#{i}") do
+    ].each.with_index { |(n, expected), i|
+      define_method(:"test_power_of_three?_#{i}") {
         assert_equal(expected, power_of_three?(n))
-      end
-    end
+      }
+    }
   end
 end

@@ -11,10 +11,10 @@ module LeetCode
     def build(list)
       head = ListNode.new(list[0])
 
-      list.drop(1).reduce(head) do |res, v|
+      list.drop(1).reduce(head) { |res, v|
         res.next = ListNode.new(v)
         res.next
-      end
+      }
 
       head
     end
@@ -28,10 +28,10 @@ module LeetCode
       [[8, 9], 2, [9]],
       [[7, 8, 9], 2, [7, 9]],
       [[1, 2, 3, 4, 5], 2, [1, 2, 3, 5]]
-    ].each.with_index do |(list, nth, expected), i|
-      define_method(:"test_remove_nth_from_end_#{i}") do
+    ].each.with_index { |(list, nth, expected), i|
+      define_method(:"test_remove_nth_from_end_#{i}") {
         assert_equal(build(expected), remove_nth_from_end(build(list), nth))
-      end
-    end
+      }
+    }
   end
 end

@@ -13,10 +13,10 @@ module LeetCode
       [2, 2],
       [3, 3],
       [4, 5]
-    ].each.with_index do |(n, expected), i|
-      define_method(:"test_climb_stairs_#{i}") do
+    ].each.with_index { |(n, expected), i|
+      define_method(:"test_climb_stairs_#{i}") {
         assert_equal(expected, climb_stairs(n))
-      end
-    end
+      }
+    }
   end
 end

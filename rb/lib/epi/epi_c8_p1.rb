@@ -35,7 +35,7 @@ module EPI
         left_cursor = left_head.next
         right_cursor = right_head.next
 
-        loop do
+        loop {
           if left_cursor.nil?
             previous_cursor.next = right_cursor
             break
@@ -55,7 +55,7 @@ module EPI
           end
 
           previous_cursor = previous_cursor.next
-        end
+        }
 
         previous_cursor = previous_cursor.next until previous_cursor.next.nil?
 

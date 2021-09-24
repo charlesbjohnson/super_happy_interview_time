@@ -18,11 +18,11 @@ module LeetCode
       [[2], [1, 3], [1, 2, 3]],
       [[1, 2, 3], [-1, 0], [-1, 0, 1, 2, 3]],
       [[-1, 0], [1, 2, 3], [-1, 0, 1, 2, 3]]
-    ].each.with_index do |(left, right, expected), i|
-      define_method(:"test_merge_#{i}") do
+    ].each.with_index { |(left, right, expected), i|
+      define_method(:"test_merge_#{i}") {
         merge(left, left.length, right, right.length)
         assert_equal(expected, left)
-      end
-    end
+      }
+    }
   end
 end

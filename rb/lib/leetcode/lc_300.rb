@@ -26,15 +26,15 @@ module LeetCode
       cache = Array.new(list.length, 0)
       cache[0] = 1
 
-      (1...cache.length).each do |right|
+      (1...cache.length).each { |right|
         max = 0
 
-        (0...right).each do |left|
+        (0...right).each { |left|
           max = [max, cache[left]].max if list[left] < list[right]
-        end
+        }
 
         cache[right] = max + 1
-      end
+      }
 
       cache.max
     end

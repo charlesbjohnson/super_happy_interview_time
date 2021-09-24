@@ -31,12 +31,12 @@ module LeetCode
         groups = list.pop
         next unless groups
 
-        groups.each do |n|
+        groups.each { |n|
           return result if k.zero?
 
           result.push(n)
           k -= 1
-        end
+        }
       end
 
       result

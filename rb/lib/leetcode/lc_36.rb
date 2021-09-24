@@ -22,10 +22,10 @@ module LeetCode
 
     def valid_region?(board, start_row, start_col, size)
       !((start_row...(start_row + size)).each.with_object(Set.new) { |row, set|
-        (start_col...(start_col + size)).each do |col|
+        (start_col...(start_col + size)).each { |col|
           next if board[row][col] == "."
           return false unless set.add?(board[row][col])
-        end
+        }
       }).nil?
     end
 
@@ -52,18 +52,18 @@ module LeetCode
     # @param {Array<Array<String>>}
     # @return {Boolean}
     def valid_sudoku?(board)
-      (0...board.length).each do |row|
+      (0...board.length).each { |row|
         return false unless valid_row?(board, row)
-      end
+      }
 
-      (0...board[0].length).each do |col|
+      (0...board[0].length).each { |col|
         return false unless valid_column?(board, col)
-      end
+      }
 
       regions = (0...board.length).step(3).to_a
-      regions.product(regions).each do |(row, col)|
+      regions.product(regions).each { |(row, col)|
         return false unless valid_region?(board, row, col, 3)
-      end
+      }
 
       true
     end

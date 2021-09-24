@@ -4,7 +4,7 @@
 require("config")
 require("data_structures/binary_heap_indexed_priority_queue")
 
-describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
+describe(DataStructures::BinaryHeapIndexedPriorityQueue) {
   subject { DataStructures::BinaryHeapIndexedPriorityQueue.new(priority) }
 
   let(:priority) { ->(a, b) { a >= b } }
@@ -24,7 +24,7 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
   it { _(subject).must_respond_to(:change_element_at) }
   it { _(subject).must_respond_to(:delete_element_at) }
 
-  describe("#size") do
+  describe("#size") {
     it("starts out empty") do
       _(subject.size).must_equal(0)
     end
@@ -75,25 +75,25 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
       subject.each {}
       _(subject.size).must_equal(4)
     end
-  end
+  }
 
-  describe("#insert") do
+  describe("#insert") {
     it("inserts a element at an index") do
       subject.insert(3, 5)
       _(subject.include_index?(3)).must_equal(true)
       _(subject.include_element?(5)).must_equal(true)
     end
 
-    describe("invalid index") do
-      describe("when index is negative") do
+    describe("invalid index") {
+      describe("when index is negative") {
         it("does nothing") do
           subject.insert(-3, 5)
           _(subject.include_index?(-3)).must_equal(false)
           _(subject.include_element?(5)).must_equal(false)
         end
-      end
+      }
 
-      describe("when index is already bound to an element") do
+      describe("when index is already bound to an element") {
         before { subject.insert(3, 0) }
 
         it("does nothing") do
@@ -102,11 +102,11 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
           _(subject.include_element?(5)).must_equal(false)
           _(subject.include_element?(0)).must_equal(true)
         end
-      end
-    end
+      }
+    }
 
-    describe("when it already contains elements") do
-      before do
+    describe("when it already contains elements") {
+      before {
         [
           [1, 6],
           [6, 0],
@@ -115,18 +115,18 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
           [2, 9],
           [3, 4]
         ].each { |i, e| subject.insert(i, e) }
-      end
+      }
 
       it("inserts according to the priority") do
         _(subject.peek_element).must_equal(9)
         _(subject.peek_index).must_equal(2)
       end
-    end
+    }
 
-    describe("with a comparable priority") do
+    describe("with a comparable priority") {
       let(:priority) { ->(a, b) { a <=> b } }
 
-      before do
+      before {
         [
           [1, 3],
           [3, 1],
@@ -134,87 +134,87 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
           [0, 7],
           [2, 5]
         ].each { |i, e| subject.insert(i, e) }
-      end
+      }
 
       it("prioritizes the positive comparison") do
         _(subject.peek_element).must_equal(7)
         _(subject.peek_index).must_equal(0)
       end
-    end
-  end
+    }
+  }
 
-  describe("#include_index?") do
-    describe("when there is a key for the index") do
+  describe("#include_index?") {
+    describe("when there is a key for the index") {
       before { subject.insert(3, 5) }
 
       it("returns true") do
         _(subject.include_index?(3)).must_equal(true)
       end
-    end
+    }
 
-    describe("when there is not a key for the index") do
+    describe("when there is not a key for the index") {
       it("returns false") do
         _(subject.include_index?(3)).must_equal(false)
       end
-    end
-  end
+    }
+  }
 
-  describe("#include_element?") do
-    describe("when the element exists in the priority queue") do
+  describe("#include_element?") {
+    describe("when the element exists in the priority queue") {
       before { subject.insert(3, 5) }
 
       it("returns true") do
         _(subject.include_element?(5)).must_equal(true)
       end
-    end
+    }
 
-    describe("when the element does not exist in the priority queue") do
+    describe("when the element does not exist in the priority queue") {
       it("returns false") do
         _(subject.include_element?(5)).must_equal(false)
       end
-    end
-  end
+    }
+  }
 
-  describe("#empty?") do
-    describe("when the priority queue is empty") do
+  describe("#empty?") {
+    describe("when the priority queue is empty") {
       it("returns true") do
         _(subject).must_be(:empty?)
       end
-    end
+    }
 
-    describe("when the priority queue is not empty") do
+    describe("when the priority queue is not empty") {
       before { subject.insert(3, 5) }
 
       it("returns false") do
         _(subject).wont_be(:empty?)
       end
-    end
-  end
+    }
+  }
 
-  describe("#element_at") do
-    describe("when the index exists in the priority queue") do
+  describe("#element_at") {
+    describe("when the index exists in the priority queue") {
       before { subject.insert(3, 5) }
 
       it("returns the element for the given index") do
         _(subject.element_at(3)).must_equal(5)
       end
-    end
+    }
 
-    describe("when the index does not exist in the priority queue") do
+    describe("when the index does not exist in the priority queue") {
       it("returns nil") do
         _(subject.element_at(3)).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#peek_index") do
-    before do
+  describe("#peek_index") {
+    before {
       [
         [1, 3],
         [3, 5],
         [8, 1]
       ].each { |i, e| subject.insert(i, e) }
-    end
+    }
 
     it("returns the index for the highest priority key") do
       _(subject.peek_index).must_equal(3)
@@ -231,23 +231,23 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
       _(subject.element_at(subject.peek_index)).must_equal(5)
     end
 
-    describe("when empty") do
+    describe("when empty") {
       let(:empty) { DataStructures::BinaryHeapIndexedPriorityQueue.new(priority) }
 
       it("returns nil") do
         _(empty.peek_index).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#peek_element") do
-    before do
+  describe("#peek_element") {
+    before {
       [
         [3, 5],
         [0, 7],
         [6, 2]
       ].each { |i, e| subject.insert(i, e) }
-    end
+    }
 
     it("returns the element with the highest priority") do
       _(subject.peek_element).must_equal(7)
@@ -263,17 +263,17 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
       _(subject.peek_index).must_equal(0)
     end
 
-    describe("when empty") do
+    describe("when empty") {
       let(:empty) { DataStructures::BinaryHeapIndexedPriorityQueue.new(priority) }
 
       it("returns nil") do
         _(empty.peek_element).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#pop") do
-    before do
+  describe("#pop") {
+    before {
       [
         [4, 6],
         [2, 0],
@@ -281,7 +281,7 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
         [3, 7],
         [5, 3]
       ].each { |i, e| subject.insert(i, e) }
-    end
+    }
 
     it("returns the element with the highest priority") do
       _(subject.pop).must_equal(7)
@@ -303,18 +303,18 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
       _(subject.pop).must_equal(3)
     end
 
-    describe("when empty") do
+    describe("when empty") {
       let(:empty) { DataStructures::BinaryHeapIndexedPriorityQueue.new(priority) }
 
       it("returns nil") do
         _(empty.pop).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#change_element_at") do
-    describe("when the index exists in the priority queue") do
-      before do
+  describe("#change_element_at") {
+    describe("when the index exists in the priority queue") {
+      before {
         [
           [4, 6],
           [2, 0],
@@ -323,34 +323,34 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
           [7, 8],
           [9, 2]
         ].each { |i, e| subject.insert(i, e) }
-      end
+      }
 
       it("changes the element for the given index") do
         subject.change_element_at(2, 10)
         _(subject.element_at(2)).must_equal(10)
       end
 
-      describe("when increasing the priority at the index") do
+      describe("when increasing the priority at the index") {
         it("maintains priority") do
           subject.change_element_at(2, 10)
           _(subject.peek_element).must_equal(10)
         end
-      end
+      }
 
-      describe("when decreasing the priority at the index") do
+      describe("when decreasing the priority at the index") {
         it("maintains priority") do
           subject.change_element_at(7, 1)
           _(subject.peek_element).must_equal(6)
         end
-      end
+      }
 
-      describe("with multiple operations") do
-        before do
+      describe("with multiple operations") {
+        before {
           subject.insert(6, 9)
           subject.pop
           subject.delete_element_at(1)
           subject.change_element_at(9, 7)
-        end
+        }
 
         it("maintains priority") do
           _(subject.pop).must_equal(8)
@@ -360,19 +360,19 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
           _(subject.pop).must_equal(0)
           _(subject.pop).must_be_nil
         end
-      end
-    end
+      }
+    }
 
-    describe("when the index does not exist in the priority queue") do
+    describe("when the index does not exist in the priority queue") {
       it("does nothing") do
         subject.change_element_at(0, 9)
         _(subject.element_at(0)).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#delete_element_at") do
-    before do
+  describe("#delete_element_at") {
+    before {
       [
         [4, 6],
         [2, 0],
@@ -382,7 +382,7 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
         [7, 4],
         [8, 2]
       ].each { |i, e| subject.insert(i, e) }
-    end
+    }
 
     it("deletes the element at the given index") do
       subject.delete_element_at(4)
@@ -399,12 +399,12 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
       _(subject.peek_element).must_equal(8)
     end
 
-    describe("with multiple operationss") do
-      before do
+    describe("with multiple operationss") {
+      before {
         subject.delete_element_at(4)
         subject.insert(1, 7)
         subject.pop
-      end
+      }
 
       it("maintains priority") do
         _(subject.pop).must_equal(7)
@@ -415,18 +415,18 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
         _(subject.pop).must_equal(0)
         _(subject.pop).must_be_nil
       end
-    end
+    }
 
-    describe("when the index does not exist in the priority queue") do
+    describe("when the index does not exist in the priority queue") {
       it("does nothing") do
         subject.delete_element_at(0)
         _(subject.element_at(0)).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#each") do
-    before do
+  describe("#each") {
+    before {
       [
         [1, 6],
         [6, 0],
@@ -435,7 +435,7 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
         [2, 9],
         [3, 4]
       ].each { |i, e| subject.insert(i, e) }
-    end
+    }
 
     it("yields each index and element by the highest priority") do
       expected = [
@@ -456,10 +456,10 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) do
       _(subject.peek_element).must_equal(9)
     end
 
-    describe("without a block") do
+    describe("without a block") {
       it("returns the enumerator") do
         _(subject.each).must_be_kind_of(Enumerator)
       end
-    end
-  end
-end
+    }
+  }
+}

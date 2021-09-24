@@ -22,12 +22,12 @@ module LeetCode
     def reconstruct_queue(people)
       queue = []
 
-      people.sort! do |(left_h, left_k), (right_h, right_k)|
+      people.sort! { |(left_h, left_k), (right_h, right_k)|
         next 1 if left_h < right_h
         next -1 if left_h > right_h
 
         left_k <=> right_k
-      end
+      }
 
       until people.empty?
         person = people.shift

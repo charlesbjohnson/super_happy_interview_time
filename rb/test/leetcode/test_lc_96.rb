@@ -17,10 +17,10 @@ module LeetCode
       [4, 14],
       [5, 42],
       [6, 132]
-    ].each.with_index do |(n, expected), i|
-      define_method(:"test_num_trees_#{i}") do
+    ].each.with_index { |(n, expected), i|
+      define_method(:"test_num_trees_#{i}") {
         assert_equal(expected, num_trees(n))
-      end
-    end
+      }
+    }
   end
 end

@@ -14,10 +14,10 @@ module LeetCode
       ["a", "b", false],
       ["anagram", "nagaram", true],
       ["rat", "car", false]
-    ].each.with_index do |(substring, string, expected), i|
-      define_method(:"test_anagram?_#{i}") do
+    ].each.with_index { |(substring, string, expected), i|
+      define_method(:"test_anagram?_#{i}") {
         assert_equal(expected, anagram?(substring, string))
-      end
-    end
+      }
+    }
   end
 end

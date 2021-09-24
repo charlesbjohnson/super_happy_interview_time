@@ -38,9 +38,9 @@ module LeetCode
       uniq.push(s[0].last) if s[0].first != s[1].first
       uniq.push(s[s.length - 1].last) if s[s.length - 1].first != s[s.length - 2].first
 
-      (1...s.length - 1).each do |i|
+      (1...s.length - 1).each { |i|
         uniq.push(s[i].last) if s[i].first != s[i - 1].first && s[i].first != s[i + 1].first
-      end
+      }
 
       return -1 if uniq.empty?
 

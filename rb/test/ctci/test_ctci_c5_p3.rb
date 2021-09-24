@@ -17,9 +17,9 @@ module CTCI
           [0b10_1000_0111, 0b10_0111_1000, 0b10_1000_1011]
         ]
 
-        vals.each do |input, p, n|
+        vals.each { |input, p, n|
           assert_equal({prev: p, next: n}, equal_bits_around(input))
-        end
+        }
       end
 
       def test_returns_prev_and_next_numbers_when_single_bit

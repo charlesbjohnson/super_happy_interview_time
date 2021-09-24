@@ -69,10 +69,10 @@ module LeetCode
         15,
         false
       ]
-    ].each.with_index do |(matrix, target, expected), i|
-      define_method(:"test_search_matrix_#{i}") do
+    ].each.with_index { |(matrix, target, expected), i|
+      define_method(:"test_search_matrix_#{i}") {
         assert_equal(expected, search_matrix(matrix, target))
-      end
-    end
+      }
+    }
   end
 end

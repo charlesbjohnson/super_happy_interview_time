@@ -6,11 +6,11 @@ require("config")
 require("algorithms/graph_processing/connected_components")
 require("data_structures/undirected_graph")
 
-describe(Algorithms::GraphProcessing::ConnectedComponents) do
+describe(Algorithms::GraphProcessing::ConnectedComponents) {
   subject { Algorithms::GraphProcessing::ConnectedComponents.new(graph) }
 
   let(:graph) { DataStructures::UndirectedGraph.new }
-  let(:edges) do
+  let(:edges) {
     [
       [0, 1],
       [0, 2],
@@ -25,7 +25,7 @@ describe(Algorithms::GraphProcessing::ConnectedComponents) do
       [9, 11],
       [9, 12]
     ]
-  end
+  }
 
   before { edges.each { |from, to| graph.add_edge(from, to) } }
 
@@ -33,29 +33,29 @@ describe(Algorithms::GraphProcessing::ConnectedComponents) do
   it { _(subject).must_respond_to(:count) }
   it { _(subject).must_respond_to(:id) }
 
-  describe("#connected?") do
-    describe("when the vertices are connected") do
+  describe("#connected?") {
+    describe("when the vertices are connected") {
       it("returns true") do
         _(subject.connected?(3, 6)).must_equal(true)
       end
-    end
+    }
 
-    describe("when the vertices are not connected") do
+    describe("when the vertices are not connected") {
       it("returns false") do
         _(subject.connected?(2, 8)).must_equal(false)
       end
-    end
-  end
+    }
+  }
 
-  describe("#count") do
+  describe("#count") {
     it("returns the number of component groups for the graph") do
       _(subject.count).must_equal(3)
     end
-  end
+  }
 
-  describe("#id") do
+  describe("#id") {
     it("returns the id of the component group for the target vertex") do
       _(subject.id(12)).must_equal(2)
     end
-  end
-end
+  }
+}

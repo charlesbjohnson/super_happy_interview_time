@@ -15,10 +15,10 @@ module DCP
       [[0, 1, 2], 1, true],
       [[0, 1, 2], 3, true],
       [[0, 1, 2], 2, true]
-    ].each.with_index do |(list, target, expected), i|
-      define_method(:"test_two_sum?_#{i}") do
+    ].each.with_index { |(list, target, expected), i|
+      define_method(:"test_two_sum?_#{i}") {
         assert_equal(expected, two_sum?(list, target))
-      end
-    end
+      }
+    }
   end
 end

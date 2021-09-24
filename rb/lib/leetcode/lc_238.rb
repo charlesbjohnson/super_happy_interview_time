@@ -23,15 +23,15 @@ module LeetCode
     def product_except_self(list)
       result = Array.new(list.length)
 
-      list.each.with_index.reduce(1) do |product, (v, i)|
+      list.each.with_index.reduce(1) { |product, (v, i)|
         result[i] = product
         product * v
-      end
+      }
 
-      list.reverse_each.with_index.reduce(1) do |product, (v, i)|
+      list.reverse_each.with_index.reduce(1) { |product, (v, i)|
         result[list.length - i - 1] *= product
         product * v
-      end
+      }
 
       result
     end

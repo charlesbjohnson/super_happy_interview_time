@@ -6,7 +6,7 @@ require("config")
 require("algorithms/graph_processing/breadth_first_paths")
 require("data_structures/undirected_graph")
 
-describe(Algorithms::GraphProcessing::BreadthFirstPaths) do
+describe(Algorithms::GraphProcessing::BreadthFirstPaths) {
   subject { Algorithms::GraphProcessing::BreadthFirstPaths.new(graph, 0) }
 
   let(:graph) { DataStructures::UndirectedGraph.new }
@@ -14,8 +14,8 @@ describe(Algorithms::GraphProcessing::BreadthFirstPaths) do
   it { _(subject).must_respond_to(:path_to?) }
   it { _(subject).must_respond_to(:path_to) }
 
-  describe("with an undirected graph") do
-    let(:edges) do
+  describe("with an undirected graph") {
+    let(:edges) {
       [
         [0, 1],
         [0, 2],
@@ -30,11 +30,11 @@ describe(Algorithms::GraphProcessing::BreadthFirstPaths) do
         [9, 11],
         [9, 12]
       ]
-    end
+    }
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe("#path_to?") do
+    describe("#path_to?") {
       it("returns true if there is a path to the target from the source") do
         _(subject.path_to?(3)).must_equal(true)
       end
@@ -42,9 +42,9 @@ describe(Algorithms::GraphProcessing::BreadthFirstPaths) do
       it("returns false if there is no path to the target from the source") do
         _(subject.path_to?(9)).must_equal(false)
       end
-    end
+    }
 
-    describe("#path_to") do
+    describe("#path_to") {
       it("returns a path to the target when there is one") do
         _([[0, 5, 3], [0, 6, 4, 3]].any? { |path|
           subject.path_to(3) == path
@@ -54,12 +54,12 @@ describe(Algorithms::GraphProcessing::BreadthFirstPaths) do
       it("returns nil when there is no path to the target") do
         _(subject.path_to(9)).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("with an directed graph") do
+  describe("with an directed graph") {
     let(:graph) { DataStructures::DirectedGraph.new }
-    let(:edges) do
+    let(:edges) {
       [
         [0, 1],
         [0, 5],
@@ -83,11 +83,11 @@ describe(Algorithms::GraphProcessing::BreadthFirstPaths) do
         [11, 12],
         [12, 9]
       ]
-    end
+    }
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe("#path_to?") do
+    describe("#path_to?") {
       it("returns true if there is a path to the target from the source") do
         _(subject.path_to?(3)).must_equal(true)
       end
@@ -95,9 +95,9 @@ describe(Algorithms::GraphProcessing::BreadthFirstPaths) do
       it("returns false if there is no path to the target from the source") do
         _(subject.path_to?(9)).must_equal(false)
       end
-    end
+    }
 
-    describe("#path_to") do
+    describe("#path_to") {
       it("returns a path to the target when there is one") do
         _([[0, 5, 4, 3], [0, 5, 4, 2, 3]].any? { |path|
           subject.path_to(3) == path
@@ -107,6 +107,6 @@ describe(Algorithms::GraphProcessing::BreadthFirstPaths) do
       it("returns an empty array when there is no path to the target") do
         _(subject.path_to(9)).must_be_nil
       end
-    end
-  end
-end
+    }
+  }
+}

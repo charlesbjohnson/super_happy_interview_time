@@ -18,10 +18,10 @@ module LeetCode
       [%w[2 1 + 3 *], 9],
       [%w[4 13 5 / +], 6],
       [%w[10 6 9 3 + -11 * / * 17 + 5 +], 22]
-    ].each.with_index do |(tokens, expected), i|
-      define_method(:"test_eval_rpn_#{i}") do
+    ].each.with_index { |(tokens, expected), i|
+      define_method(:"test_eval_rpn_#{i}") {
         assert_equal(expected, eval_rpn(tokens))
-      end
-    end
+      }
+    }
   end
 end

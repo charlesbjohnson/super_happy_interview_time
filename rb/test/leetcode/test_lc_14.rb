@@ -15,10 +15,10 @@ module LeetCode
       [%w[a b], ""],
       [%w[aa ab], "a"],
       [%w[aaa ab aac], "a"]
-    ].each.with_index do |(list, expected), i|
-      define_method(:"test_longest_common_prefix_#{i}") do
+    ].each.with_index { |(list, expected), i|
+      define_method(:"test_longest_common_prefix_#{i}") {
         assert_equal(expected, longest_common_prefix(list))
-      end
-    end
+      }
+    }
   end
 end

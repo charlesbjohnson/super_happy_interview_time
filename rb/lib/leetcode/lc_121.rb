@@ -30,13 +30,13 @@ module LeetCode
       cheapest = Float::INFINITY
       profit = 0
 
-      prices.each do |price|
+      prices.each { |price|
         if price < cheapest
           cheapest = price
         elsif price - cheapest > profit
           profit = price - cheapest
         end
-      end
+      }
 
       profit
     end

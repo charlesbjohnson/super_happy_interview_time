@@ -18,14 +18,14 @@ module EPI
       def find_first(k, a)
         found_at_i, leftmost_possible_i = r_find(k, a, 0, a.size.pred)
 
-        loop do
+        loop {
           break if found_at_i.nil? || leftmost_possible_i >= found_at_i.pred
 
           leftmost_found_at_i, leftmost_possible_i = r_find(k, a, leftmost_possible_i, found_at_i.pred)
           break if leftmost_found_at_i.nil?
 
           found_at_i = leftmost_found_at_i
-        end
+        }
 
         found_at_i
       end

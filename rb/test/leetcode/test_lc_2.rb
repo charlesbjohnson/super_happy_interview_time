@@ -13,10 +13,10 @@ module LeetCode
 
       head = ListNode.new(list[0])
 
-      list.drop(1).reduce(head) do |res, v|
+      list.drop(1).reduce(head) { |res, v|
         res.next = ListNode.new(v)
         res.next
-      end
+      }
 
       head
     end
@@ -52,10 +52,10 @@ module LeetCode
         [5, 6, 4],
         [7, 0, 8]
       ]
-    ].each.with_index do |(left, right, expected), i|
-      define_method(:"test_add_two_numbers_#{i}") do
+    ].each.with_index { |(left, right, expected), i|
+      define_method(:"test_add_two_numbers_#{i}") {
         assert_equal(build(expected), add_two_numbers(build(left), build(right)))
-      end
-    end
+      }
+    }
   end
 end

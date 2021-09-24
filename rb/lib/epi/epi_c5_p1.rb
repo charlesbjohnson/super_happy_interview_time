@@ -11,9 +11,9 @@ module EPI
       def parity(n)
         result = 0
 
-        (0..n.bit_length).each do |i|
+        (0..n.bit_length).each { |i|
           result ^= n[i]
-        end
+        }
 
         result
       end
@@ -21,11 +21,11 @@ module EPI
       def split(n, chunk_width: 8)
         mask = bitmask(chunk_width)
 
-        (0...(bits(n) / chunk_width)).reduce([]) do |a, i|
+        (0...(bits(n) / chunk_width)).reduce([]) { |a, i|
           chunk_offset = i * chunk_width
           chunk = n >> chunk_offset
           a.unshift(chunk & mask)
-        end
+        }
       end
 
       private

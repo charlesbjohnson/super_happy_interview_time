@@ -4,12 +4,12 @@
 require("config")
 require("data_structures/binary_tree")
 
-describe(DataStructures::BinaryTree) do
+describe(DataStructures::BinaryTree) {
   subject { DataStructures::BinaryTree }
 
   it { _(subject).must_respond_to(:from) }
 
-  describe("::from") do
+  describe("::from") {
     it("creates a binary tree from required specified nodes") do
       nodes = [[1, [2, 3]]]
       tree = subject.from(nodes, 1)
@@ -64,5 +64,5 @@ describe(DataStructures::BinaryTree) do
       assert_nil(tree.root.left.left.right.left)
       assert_nil(tree.root.left.left.right.right)
     end
-  end
-end
+  }
+}

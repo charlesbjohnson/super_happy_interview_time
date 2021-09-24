@@ -17,10 +17,10 @@ module LeetCode
       ["(", false],
       ["(]", false],
       ["([)]", false]
-    ].each.with_index do |(s, expected), i|
-      define_method(:"test_valid?_#{i}") do
+    ].each.with_index { |(s, expected), i|
+      define_method(:"test_valid?_#{i}") {
         assert_equal(expected, valid?(s))
-      end
-    end
+      }
+    }
   end
 end

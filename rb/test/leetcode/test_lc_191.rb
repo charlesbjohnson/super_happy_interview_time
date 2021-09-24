@@ -13,10 +13,10 @@ module LeetCode
       [1, 1],
       [2, 1],
       [11, 3]
-    ].each.with_index do |(n, expected), i|
-      define_method(:"test_hamming_weight_#{i}") do
+    ].each.with_index { |(n, expected), i|
+      define_method(:"test_hamming_weight_#{i}") {
         assert_equal(expected, hamming_weight(n))
-      end
-    end
+      }
+    }
   end
 end

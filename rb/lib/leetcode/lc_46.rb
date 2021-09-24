@@ -10,9 +10,9 @@ module LeetCode
         return
       end
 
-      list.each.with_index do |v, i|
+      list.each.with_index { |v, i|
         permute_recurse(result, current + [v], list[0...i] + list[(i + 1)..-1])
-      end
+      }
     end
 
     # Description:
@@ -34,9 +34,9 @@ module LeetCode
     def permute(list)
       return [[]] if list.empty?
 
-      [].tap do |result|
+      [].tap { |result|
         permute_recurse(result, [], list)
-      end
+      }
     end
   end
 end

@@ -16,10 +16,10 @@ module LeetCode
       [[0, 1, 2], 2, [0, 2]],
       [[1, 0, 2], 2, [1, 2]],
       [[2, 7, 11, 15], 9, [0, 1]]
-    ].each.with_index do |(list, target, expected), i|
-      define_method(:"test_two_sum_#{i}") do
+    ].each.with_index { |(list, target, expected), i|
+      define_method(:"test_two_sum_#{i}") {
         assert_equal(expected, two_sum(list, target))
-      end
-    end
+      }
+    }
   end
 end

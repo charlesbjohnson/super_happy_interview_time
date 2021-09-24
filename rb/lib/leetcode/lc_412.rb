@@ -32,7 +32,7 @@ module LeetCode
     # @param n {Integer}
     # @return {Array<String>}
     def fizz_buzz(n)
-      Array.new(n) do |i|
+      Array.new(n) { |i|
         i += 1
 
         s = ""
@@ -42,7 +42,7 @@ module LeetCode
         s += i.to_s if s.empty?
 
         s
-      end
+      }
     end
   end
 end

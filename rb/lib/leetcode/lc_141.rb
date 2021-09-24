@@ -20,14 +20,14 @@ module LeetCode
       slow = list
       fast = list
 
-      loop do
+      loop {
         return false if !slow || !fast || !fast.next
 
         slow = slow.next
         fast = fast.next.next
 
         return true if slow == fast
-      end
+      }
     end
 
     alias has_cycle cycle?

@@ -30,7 +30,7 @@ module LeetCode
 
       return result if n == 2
 
-      (2...n).each do |i|
+      (2...n).each { |i|
         prev = result[i - 1]
         current = []
 
@@ -56,7 +56,7 @@ module LeetCode
         end
 
         result.push(current)
-      end
+      }
 
       result
     end

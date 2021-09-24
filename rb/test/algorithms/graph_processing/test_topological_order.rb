@@ -6,7 +6,7 @@ require("config")
 require("algorithms/graph_processing/topological_order")
 require("data_structures/directed_graph")
 
-describe(Algorithms::GraphProcessing::TopologicalOrder) do
+describe(Algorithms::GraphProcessing::TopologicalOrder) {
   subject { Algorithms::GraphProcessing::TopologicalOrder.new(graph) }
 
   let(:graph) { DataStructures::DirectedGraph.new }
@@ -14,8 +14,8 @@ describe(Algorithms::GraphProcessing::TopologicalOrder) do
   it { _(subject).must_respond_to(:acyclic?) }
   it { _(subject).must_respond_to(:order) }
 
-  describe("when the graph is acyclic") do
-    let(:edges) do
+  describe("when the graph is acyclic") {
+    let(:edges) {
       [
         [0, 1],
         [0, 5],
@@ -33,25 +33,25 @@ describe(Algorithms::GraphProcessing::TopologicalOrder) do
         [9, 12],
         [11, 12]
       ]
-    end
+    }
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe("#acyclic?") do
+    describe("#acyclic?") {
       it("returns true") do
         _(subject.acyclic?).must_equal(true)
       end
-    end
+    }
 
-    describe("#order") do
+    describe("#order") {
       it("returns a topologically ordered path") do
         _(subject.order).must_equal([8, 7, 2, 3, 0, 6, 9, 11, 12, 10, 5, 4, 1])
       end
-    end
-  end
+    }
+  }
 
-  describe("when the graph is cyclic") do
-    let(:edges) do
+  describe("when the graph is cyclic") {
+    let(:edges) {
       [
         [0, 1],
         [0, 5],
@@ -70,20 +70,20 @@ describe(Algorithms::GraphProcessing::TopologicalOrder) do
         [9, 12],
         [11, 12]
       ]
-    end
+    }
 
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-    describe("#acyclic?") do
+    describe("#acyclic?") {
       it("returns false") do
         _(subject.acyclic?).must_equal(false)
       end
-    end
+    }
 
-    describe("#order") do
+    describe("#order") {
       it("returns nil") do
         _(subject.order).must_be_nil
       end
-    end
-  end
-end
+    }
+  }
+}

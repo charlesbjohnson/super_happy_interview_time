@@ -15,10 +15,10 @@ module LeetCode
       ["aabccd", 2],
       ["leetcode", 0],
       ["loveleetcode", 2]
-    ].each.with_index do |(s, expected), i|
-      define_method(:"test_first_uniq_char_#{i}") do
+    ].each.with_index { |(s, expected), i|
+      define_method(:"test_first_uniq_char_#{i}") {
         assert_equal(expected, first_uniq_char(s))
-      end
-    end
+      }
+    }
   end
 end

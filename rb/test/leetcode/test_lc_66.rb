@@ -16,10 +16,10 @@ module LeetCode
       [[9, 9], [1, 0, 0]],
       [[9, 8, 9], [9, 9, 0]],
       [[9, 8, 9, 9], [9, 9, 0, 0]]
-    ].each.with_index do |(digits, expected), i|
-      define_method(:"test_plus_one_#{i}") do
+    ].each.with_index { |(digits, expected), i|
+      define_method(:"test_plus_one_#{i}") {
         assert_equal(expected, plus_one(digits))
-      end
-    end
+      }
+    }
   end
 end

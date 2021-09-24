@@ -103,11 +103,11 @@ module CTCI
         attr_reader(:support_role, :current_call)
 
         @roles = %i[respondent manager director].freeze
-        @roles.each do |r|
-          self.class.define_method(r) do
+        @roles.each { |r|
+          self.class.define_method(r) {
             new(r)
-          end
-        end
+          }
+        }
 
         class << self
           attr_reader(:roles)

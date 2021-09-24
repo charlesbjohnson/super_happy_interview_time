@@ -21,10 +21,10 @@ module LeetCode
       [%w[A A B B C C], 2, 6],
       [%w[A A B B B C], 2, 7],
       [%w[A A A B C D E], 2, 7]
-    ].each.with_index do |(tasks, n, expected), i|
-      define_method(:"test_least_interval_#{i}") do
+    ].each.with_index { |(tasks, n, expected), i|
+      define_method(:"test_least_interval_#{i}") {
         assert_equal(expected, least_interval(tasks, n))
-      end
-    end
+      }
+    }
   end
 end

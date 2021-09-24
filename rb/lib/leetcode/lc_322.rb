@@ -11,10 +11,10 @@ module LeetCode
 
       min = Float::INFINITY
 
-      coins.each do |coin|
+      coins.each { |coin|
         result = coin_change_recurse(coins, amount - coin, cache)
         min = result + 1 if (0...min).cover?(result)
-      end
+      }
 
       cache[amount] = min.infinite? ? -1 : min
       cache[amount]

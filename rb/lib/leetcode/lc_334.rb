@@ -26,7 +26,7 @@ module LeetCode
       first = Float::INFINITY
       second = Float::INFINITY
 
-      list.each do |n|
+      list.each { |n|
         if n <= first
           first = n
           next
@@ -38,7 +38,7 @@ module LeetCode
         end
 
         return true
-      end
+      }
 
       false
     end

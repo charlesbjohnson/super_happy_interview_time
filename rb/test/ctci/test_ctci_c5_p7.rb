@@ -10,19 +10,19 @@ module CTCI
       include(P7)
 
       def test_returns_missing_number_from_array_even_amount
-        [1, 3, 7].each do |expected|
+        [1, 3, 7].each { |expected|
           array = (0..9).to_a
           array.delete(expected)
           assert_equal(expected, find_missing(array))
-        end
+        }
       end
 
       def test_returns_missing_number_from_array_odd_amount
-        [1, 3, 7].each do |expected|
+        [1, 3, 7].each { |expected|
           array = (0..10).to_a
           array.delete(expected)
           assert_equal(expected, find_missing(array))
-        end
+        }
       end
 
       def test_returns_next_for_missing_at_end

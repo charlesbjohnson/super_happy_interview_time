@@ -30,7 +30,7 @@ module LeetCode
     def valid?(s)
       stack = []
 
-      s.chars.each do |c|
+      s.chars.each { |c|
         case c
         when "(", "[", "{"
           stack.push(c)
@@ -41,7 +41,7 @@ module LeetCode
         when "}"
           return false if stack.pop != "{"
         end
-      end
+      }
 
       stack.empty?
     end

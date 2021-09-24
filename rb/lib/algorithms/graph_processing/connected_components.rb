@@ -26,20 +26,20 @@ module Algorithms
         @components = Array.new(@graph.size_vertices)
         @count = 0
 
-        @marked.each_with_index do |was_visited, v|
+        @marked.each_with_index { |was_visited, v|
           unless was_visited
             r_execute(v)
             @count += 1
           end
-        end
+        }
       end
 
       def r_execute(from)
         @marked[from] = true
         @components[from] = @count
-        @graph.adjacent(from).reject { |v| @marked[v] }.each do |to|
+        @graph.adjacent(from).reject { |v| @marked[v] }.each { |to|
           r_execute(to)
-        end
+        }
       end
     end
   end

@@ -20,11 +20,11 @@ module LeetCode
       left = list[0]
       right = list[0]
 
-      loop do
+      loop {
         left = list[left]
         right = list[list[right]]
         break if left == right
-      end
+      }
 
       right = left
       left = list[0]

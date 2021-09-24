@@ -4,7 +4,7 @@
 require("config")
 require("data_structures/directed_graph")
 
-describe(DataStructures::DirectedGraph) do
+describe(DataStructures::DirectedGraph) {
   subject { DataStructures::DirectedGraph.new }
 
   it { _(subject).must_respond_to(:size_vertices) }
@@ -18,7 +18,7 @@ describe(DataStructures::DirectedGraph) do
     _(subject.size_edges).must_equal(0)
   end
 
-  describe("#add_edge") do
+  describe("#add_edge") {
     it("creates an edge from the first vertex") do
       subject.add_edge(0, 1)
       _(subject.adjacent(0)).must_include(1)
@@ -34,7 +34,7 @@ describe(DataStructures::DirectedGraph) do
 
     it { _(subject.add_edge(0, 1)).must_equal(true) }
 
-    describe("with invalid vertices") do
+    describe("with invalid vertices") {
       it("does nothing") do
         subject.add_edge(-1, 0)
         subject.add_edge("not an integer", 0)
@@ -43,16 +43,16 @@ describe(DataStructures::DirectedGraph) do
       end
 
       it { _(subject.add_edge(-1, 0)).must_equal(false) }
-    end
-  end
+    }
+  }
 
-  describe("#adjacent") do
-    before do
+  describe("#adjacent") {
+    before {
       subject.add_edge(0, 1)
       subject.add_edge(0, 2)
       subject.add_edge(1, 4)
       subject.add_edge(3, 1)
-    end
+    }
 
     it("returns all of the vertices adjacent to the target") do
       _(subject.adjacent(0)).must_equal([1, 2])
@@ -67,21 +67,21 @@ describe(DataStructures::DirectedGraph) do
       _(subject.adjacent(0)).must_equal([1, 2])
     end
 
-    describe("with invalid vertex") do
+    describe("with invalid vertex") {
       it("returns nil") do
         _(subject.adjacent(-1)).must_be_nil
         _(subject.adjacent("not a vertex")).must_be_nil
       end
-    end
-  end
+    }
+  }
 
-  describe("#reverse") do
-    before do
+  describe("#reverse") {
+    before {
       subject.add_edge(0, 1)
       subject.add_edge(0, 2)
       subject.add_edge(1, 4)
       subject.add_edge(3, 1)
-    end
+    }
 
     it("returns a graph with all the edges reversed") do
       reversed = subject.reverse
@@ -91,5 +91,5 @@ describe(DataStructures::DirectedGraph) do
       _(reversed.adjacent(3)).must_equal([])
       _(reversed.adjacent(4)).must_equal([1])
     end
-  end
-end
+  }
+}

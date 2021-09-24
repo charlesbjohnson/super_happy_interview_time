@@ -39,9 +39,9 @@ module LeetCode
     # @param list {Array<Integer>}
     # @return {Array<Array<Integer>>}
     def subsets(list)
-      [].tap do |result|
+      [].tap { |result|
         subsets_recurse(result, [], list)
-      end
+      }
     end
   end
 end

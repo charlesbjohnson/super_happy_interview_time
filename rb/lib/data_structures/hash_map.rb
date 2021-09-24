@@ -16,9 +16,9 @@ module DataStructures
 
     def each(&block)
       enum = Enumerator.new { |y|
-        @table.each do |c|
+        @table.each { |c|
           c&.each { |i| y << i }
-        end
+        }
       }
 
       block_given? ? enum.each(&block) : enum

@@ -14,7 +14,7 @@ module CTCI
         queues = [[3, [1]], [5, []], [7, []]]
 
         result = nil
-        0.upto(k) do
+        0.upto(k) {
           possible_minimums = queues.map.with_index { |(_, q), qi|
             [(q.first || LARGE_NUMBER), qi]
           }
@@ -26,7 +26,7 @@ module CTCI
           queues[minimum_index..-1].each { |qv, q| q.push(minimum_value * qv) }
 
           result = queues[minimum_index][1].shift
-        end
+        }
 
         result
       end

@@ -60,11 +60,11 @@ module LeetCode
     # @param word {String}
     # @return {Boolean}
     def word_exists?(board, word)
-      (0...board.length).each do |row|
-        (0...board[row].length).each do |col|
+      (0...board.length).each { |row|
+        (0...board[row].length).each { |col|
           return true if word_exists_recurse(board, row, col, word)
-        end
-      end
+        }
+      }
 
       false
     end

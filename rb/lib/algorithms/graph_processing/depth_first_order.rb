@@ -23,18 +23,18 @@ module Algorithms
         @marked = Array.new(@graph.size_vertices) { false }
         @pre = []
         @post = []
-        @marked.each_with_index do |was_visited, v|
+        @marked.each_with_index { |was_visited, v|
           r_execute(v) unless was_visited
-        end
+        }
       end
 
       def r_execute(from)
         @pre.push(from)
 
         @marked[from] = true
-        @graph.adjacent(from).each do |to|
+        @graph.adjacent(from).each { |to|
           r_execute(to) unless @marked[to]
-        end
+        }
 
         @post.push(from)
       end

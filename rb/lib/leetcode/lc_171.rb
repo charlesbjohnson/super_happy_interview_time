@@ -39,9 +39,9 @@ module LeetCode
     # @param s {String}
     # @return {Integer}
     def title_to_number(s)
-      s.chars.reverse_each.with_index.reduce(0) do |total, (char, i)|
+      s.chars.reverse_each.with_index.reduce(0) { |total, (char, i)|
         total + (to_code(char) * 26**i)
-      end
+      }
     end
   end
 end

@@ -17,10 +17,10 @@ module LeetCode
       [15, 3],
       [20, 4],
       [100, 24]
-    ].each.with_index do |(n, expected), i|
-      define_method(:"test_trailing_zeroes_#{i}") do
+    ].each.with_index { |(n, expected), i|
+      define_method(:"test_trailing_zeroes_#{i}") {
         assert_equal(expected, trailing_zeroes(n))
-      end
-    end
+      }
+    }
   end
 end

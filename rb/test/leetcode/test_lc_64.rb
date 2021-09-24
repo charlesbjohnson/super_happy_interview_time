@@ -55,10 +55,10 @@ module LeetCode
         ],
         7
       ]
-    ].each.with_index do |(grid, expected), i|
-      define_method(:"test_min_path_sum_#{i}") do
+    ].each.with_index { |(grid, expected), i|
+      define_method(:"test_min_path_sum_#{i}") {
         assert_equal(expected, min_path_sum(grid))
-      end
-    end
+      }
+    }
   end
 end

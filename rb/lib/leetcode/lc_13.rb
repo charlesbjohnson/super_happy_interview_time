@@ -26,7 +26,7 @@ module LeetCode
       total = 0
       prev = 0
 
-      s.chars.reverse_each do |c|
+      s.chars.reverse_each { |c|
         v = CHARS[c]
 
         if v < total && v != prev
@@ -36,7 +36,7 @@ module LeetCode
         end
 
         prev = v
-      end
+      }
 
       total
     end

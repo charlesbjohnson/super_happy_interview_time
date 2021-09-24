@@ -32,9 +32,9 @@ module LeetCode
     def generate_parenthesis(n)
       return [] if n < 1
 
-      [].tap do |result|
+      [].tap { |result|
         generate_parenthesis_recurse(result, "", 0, 0, n)
-      end
+      }
     end
   end
 end

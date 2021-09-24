@@ -24,11 +24,11 @@ module LeetCode
       sums = {0 => 1}
       sum = 0
 
-      list.each do |v|
+      list.each { |v|
         sum += v
         result += sums.fetch(sum - k, 0)
         sums[sum] = sums.fetch(sum, 0) + 1
-      end
+      }
 
       result
     end
