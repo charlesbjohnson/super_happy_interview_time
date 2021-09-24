@@ -1,26 +1,25 @@
 # `ctci`
 
-Included are the solutions for problems from [Cracking the Coding Interview][0].
+## Contents
 
-The chapters in the book are broken down as follows:
-
-1. Arrays and Strings
-2. Linked Lists
-3. Stacks and Queues
-4. Trees and Graphs
-5. Bit Manipulation
-6. Brain Teasers
-7. Mathematics and Probability
-8. Object-Oriented Design
-9. Recursion and Dynamic Programming
-10. Scalability and Memory Limits
-11. Sorting and Searching
-12. Testing
-13. C and C++
-14. Java
-15. Databases
-16. Threads and Locks
-17. Moderate
-18. Hard
-
-[0]: https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850
+```
+./
+├── ctci_c1_*   # arrays and strings
+├── ctci_c2_*   # linked lists
+├── ctci_c3_*   # stacks and queues
+├── ctci_c4_*   # trees and graphs
+├── ctci_c5_*   # bit manipulation
+├── ctci_c6_*   # brain teasers
+├── ctci_c7_*   # mathematics and probability
+├── ctci_c8_*   # object-oriented design
+├── ctci_c9_*   # recursion and dynamic programming
+├── ctci_c10_*  # scalability and memory limits
+├── ctci_c11_*  # sorting and searching
+├── ctci_c12_*  # testing
+├── ctci_c13_*  # c and c++
+├── ctci_c14_*  # java
+├── ctci_c15_*  # databases
+├── ctci_c16_*  # threads and locks
+├── ctci_c17_*  # moderate
+└── ctci_c18_*  # hard
+```
