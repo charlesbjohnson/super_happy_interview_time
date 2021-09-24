@@ -11,9 +11,8 @@ module LeetCode
   class TestLC535 < Minitest::Test
     include(LC535)
 
-    def around
+    def before
       REGISTRY.clear
-      yield
     end
 
     [
