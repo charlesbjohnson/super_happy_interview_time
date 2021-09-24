@@ -23,7 +23,7 @@ module CTCI
       end
 
       def test_sort_ascending_when_empty
-        assert_equal([], sort_ascending(@stack).to_a)
+        assert_empty(sort_ascending(@stack).to_a)
       end
 
       def test_sort_ascending_when_sorted

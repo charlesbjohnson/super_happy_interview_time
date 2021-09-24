@@ -35,7 +35,7 @@ module DataStructures
         end
       }
 
-      block_given? ? enum.each(&block) : enum
+      block ? enum.each(&block) : enum
     end
 
     def append(data)

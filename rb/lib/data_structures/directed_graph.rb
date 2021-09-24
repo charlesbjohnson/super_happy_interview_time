@@ -17,7 +17,7 @@ module DataStructures
     end
 
     def add_edge(from, to)
-      return false unless [from, to].all? { |i| i.is_a?(Numeric) }
+      return false unless [from, to].all?(Numeric)
       return false if [from, to].any?(&:negative?)
 
       from_vertex = @table[from] ||= []

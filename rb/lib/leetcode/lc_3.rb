@@ -40,13 +40,13 @@ module LeetCode
       while left < s.length - 1 && right < s.length
         v = s[right]
 
-        if !map.key?(v)
-          map[v] = right
-          right += 1
-        else
+        if map.key?(v)
           new_left = map[v] + 1
           (left...new_left).each { |i| map.delete(s[i]) }
           left = new_left
+        else
+          map[v] = right
+          right += 1
         end
 
         max = [map.length, max].max

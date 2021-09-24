@@ -14,7 +14,7 @@ module LeetCode
       tmp = board[row][col]
       board[row][col] = nil
 
-      next_word = word[1..-1]
+      next_word = word[1..]
 
       return true if word_exists_recurse(board, row + 1, col, next_word)
       return true if word_exists_recurse(board, row - 1, col, next_word)
@@ -69,6 +69,6 @@ module LeetCode
       false
     end
 
-    alias exist word_exists?
+    alias_method(:exist, :word_exists?)
   end
 end

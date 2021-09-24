@@ -27,6 +27,6 @@ module LeetCode
       substring.chars.sort == string.chars.sort
     end
 
-    alias is_anagram anagram?
+    alias_method(:is_anagram, :anagram?)
   end
 end

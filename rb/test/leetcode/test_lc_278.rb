@@ -12,7 +12,7 @@ module LeetCode
       version >= @bad_version
     end
 
-    alias is_bad_version bad_version?
+    alias_method(:is_bad_version, :bad_version?)
 
     [
       [1, 1],

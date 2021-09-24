@@ -69,8 +69,8 @@ module Refactor
       private_class_method(def self.construct(str)
         parts = split(str)
 
-        is_lib = parts.any? { |part| LIB_DIR == part }
-        is_test = parts.any? { |part| TEST_DIR == part }
+        is_lib = parts.any?(LIB_DIR)
+        is_test = parts.any?(TEST_DIR)
 
         raise("given path must specify root") if !is_lib && !is_test
 
@@ -107,7 +107,7 @@ module Refactor
       #
       private_class_method(def self.partition(parts, dir)
         index = parts.find_index(dir)
-        [parts[0..index], parts[(index + 1)..-1]]
+        [parts[0..index], parts[(index + 1)..]]
       end)
     end
   end

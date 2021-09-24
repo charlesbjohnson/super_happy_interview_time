@@ -30,6 +30,6 @@ module LeetCode
       }
     end
 
-    alias has_cycle cycle?
+    alias_method(:has_cycle, :cycle?)
   end
 end

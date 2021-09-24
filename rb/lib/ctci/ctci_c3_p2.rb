@@ -12,6 +12,7 @@ module CTCI
       # the minimum element? Push, pop, and min should all
       # operate in O(1) time.
       def initialize
+        super
         @head = MinNode.new
       end
 

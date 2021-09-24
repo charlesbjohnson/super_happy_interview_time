@@ -11,7 +11,7 @@ module LeetCode
       end
 
       list.each.with_index { |v, i|
-        permute_recurse(result, current + [v], list[0...i] + list[(i + 1)..-1])
+        permute_recurse(result, current + [v], list[0...i] + list[(i + 1)..])
       }
     end
 

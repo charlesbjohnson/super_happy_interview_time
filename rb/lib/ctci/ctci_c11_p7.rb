@@ -53,10 +53,10 @@ module CTCI
           same_height && same_weight
         end
 
-        alias eql? ==
+        alias_method(:eql?, :==)
 
         def <=>(other)
-          return unless self.class == other.class
+          return unless instance_of?(other.class)
 
           return -1 if @height < other.height
           return 1 if @height > other.height

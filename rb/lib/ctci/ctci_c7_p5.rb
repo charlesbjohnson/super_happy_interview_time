@@ -19,15 +19,15 @@ module CTCI
           if squares_horizontal?(center_a, center_b)
             # Lefts and rights of each square
             a_intersections = [Point.new([a.top_left.x, center_a.y]),
-                               Point.new([a.top_right.x, center_a.y])]
+              Point.new([a.top_right.x, center_a.y])]
             b_intersections = [Point.new([b.top_left.x, center_b.y]),
-                               Point.new([b.top_right.x, center_b.y])]
+              Point.new([b.top_right.x, center_b.y])]
           elsif squares_vertical?(center_a, center_b)
             # Tops and bottoms of each square
             a_intersections = [Point.new([center_a.x, a.top_left.y]),
-                               Point.new([center_a.x, a.bottom_left.y])]
+              Point.new([center_a.x, a.bottom_left.y])]
             b_intersections = [Point.new([center_b.x, b.top_left.y]),
-                               Point.new([center_b.x, b.bottom_left.y])]
+              Point.new([center_b.x, b.bottom_left.y])]
           end
         else
           a_intersections = intersects_at(center_slope, a)
@@ -101,10 +101,10 @@ module CTCI
         left = point_at_x_with_slope(square.top_left.x, slope)
         right = point_at_x_with_slope(square.top_right.x, slope)
 
-        top = point_within_segment?(top, square.top_left, square.top_right) ? top : nil
-        bottom = point_within_segment?(bottom, square.bottom_left, square.bottom_right) ? bottom : nil
-        left = point_within_segment?(left, square.top_left, square.bottom_left) ? left : nil
-        right = point_within_segment?(right, square.top_right, square.bottom_right) ? right : nil
+        top = nil unless point_within_segment?(top, square.top_left, square.top_right)
+        bottom = nil unless point_within_segment?(bottom, square.bottom_left, square.bottom_right)
+        left = nil unless point_within_segment?(left, square.top_left, square.bottom_left)
+        right = nil unless point_within_segment?(right, square.top_right, square.bottom_right)
 
         [top, bottom, left, right].compact.uniq
       end

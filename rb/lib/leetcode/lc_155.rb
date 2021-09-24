@@ -37,7 +37,7 @@ module LeetCode
         @mins.last
       end
 
-      alias get_min min
+      alias_method(:get_min, :min)
     end
   end
 end

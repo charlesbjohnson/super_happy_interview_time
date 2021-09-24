@@ -16,9 +16,9 @@ module CTCI
       # to the first available employee.
       class CallCenter
         def initialize
-          @staff = Hash[StaffMember.roles.map { |r|
+          @staff = StaffMember.roles.map { |r|
             [r, {available: [], unavailable: []}]
-          }]
+          }.to_h
           @wait_list = []
         end
 

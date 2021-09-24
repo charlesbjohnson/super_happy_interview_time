@@ -51,6 +51,6 @@ module LeetCode
       true
     end
 
-    alias is_symmetric symmetric?
+    alias_method(:is_symmetric, :symmetric?)
   end
 end

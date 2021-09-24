@@ -142,13 +142,14 @@ module CTCI
           @edges == other.edges
         end
 
-        alias eql? ==
+        alias_method(:eql?, :==)
       end
 
       class Edge
         @types = %i[none flat inward outward]
 
         attr_reader(:type)
+
         class << self
           attr_reader(:types)
         end
@@ -190,7 +191,7 @@ module CTCI
           @type == other.type
         end
 
-        alias eql? ==
+        alias_method(:eql?, :==)
 
         def self.complement_type(type)
           case type

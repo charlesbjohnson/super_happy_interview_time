@@ -19,7 +19,7 @@ module EPI
           result = ("0".ord + digit).chr + result
         end
 
-        result = "-" + result if is_negative
+        result = "-#{result}" if is_negative
         result
       end
 

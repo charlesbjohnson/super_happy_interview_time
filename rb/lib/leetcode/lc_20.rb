@@ -46,6 +46,6 @@ module LeetCode
       stack.empty?
     end
 
-    alias is_valid valid?
+    alias_method(:is_valid, :valid?)
   end
 end

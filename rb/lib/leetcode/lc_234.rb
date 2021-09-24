@@ -76,6 +76,6 @@ module LeetCode
       true
     end
 
-    alias is_palindrome palindrome?
+    alias_method(:is_palindrome, :palindrome?)
   end
 end

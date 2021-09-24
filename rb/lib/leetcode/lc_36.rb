@@ -68,6 +68,6 @@ module LeetCode
       true
     end
 
-    alias is_valid_sudoku valid_sudoku?
+    alias_method(:is_valid_sudoku, :valid_sudoku?)
   end
 end

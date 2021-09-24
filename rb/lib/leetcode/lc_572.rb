@@ -52,6 +52,6 @@ module LeetCode
       subtree_recurse(left, right, false)
     end
 
-    alias is_subtree subtree?
+    alias_method(:is_subtree, :subtree?)
   end
 end

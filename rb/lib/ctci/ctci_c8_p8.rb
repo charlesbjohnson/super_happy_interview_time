@@ -57,9 +57,9 @@ module CTCI
         def available_move?(r, c, color)
           # horizontal, vertical, both diagonals
           [[0, -1, 0, 1],
-           [-1, 0, 1, 0],
-           [-1, -1, 1, 1],
-           [-1, 1, 1, -1]].each { |r_dec, c_dec, r_inc, c_inc|
+            [-1, 0, 1, 0],
+            [-1, -1, 1, 1],
+            [-1, 1, 1, -1]].each { |r_dec, c_dec, r_inc, c_inc|
             return true if scan_direction(r, c, r_dec, c_dec, r_inc, c_inc,
               color).any?
           }
@@ -76,9 +76,9 @@ module CTCI
         def flip_tokens(r, c, color)
           # horizontal, vertical, both diagonals
           to_flip = [[0, -1, 0, 1],
-                     [-1, 0, 1, 0],
-                     [-1, -1, 1, 1],
-                     [-1, 1, 1, -1]].flat_map { |r_dec, c_dec, r_inc, c_inc|
+            [-1, 0, 1, 0],
+            [-1, -1, 1, 1],
+            [-1, 1, 1, -1]].flat_map { |r_dec, c_dec, r_inc, c_inc|
             scan_direction(r, c, r_dec, c_dec, r_inc, c_inc, color)
           }
 
@@ -146,6 +146,7 @@ module CTCI
         @colors = @k_to_v.values
 
         attr_reader(:color)
+
         class << self
           attr_reader(:k_to_v, :v_to_k, :colors)
         end
@@ -175,7 +176,7 @@ module CTCI
           @color == other.color
         end
 
-        alias eql? ==
+        alias_method(:eql?, :==)
       end
     end
   end

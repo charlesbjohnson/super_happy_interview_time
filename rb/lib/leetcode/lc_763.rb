@@ -29,7 +29,7 @@ module LeetCode
 
       until remaining.empty?
         up_to = pinpoint(remaining)
-        remaining = remaining[up_to..-1]
+        remaining = remaining[up_to..]
         partitions.push(up_to)
       end
 

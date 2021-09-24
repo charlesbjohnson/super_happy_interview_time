@@ -11,8 +11,8 @@ module CTCI
 
       def test_rows_with_zero_collapse_to_zero
         m = [[1, 0, 0],
-             [0, 2, 0],
-             [0, 0, 3]]
+          [0, 2, 0],
+          [0, 0, 3]]
         actual = collapse_on_zero(m)
         expected = Array.new(3) { Array.new(3, 0) }
 
@@ -21,23 +21,23 @@ module CTCI
 
       def test_rows_without_zero_dont_collapse_to_zero
         m = [[1, 2],
-             [3, 0],
-             [4, 5]]
+          [3, 0],
+          [4, 5]]
         actual = collapse_on_zero(m)
         expected = [[1, 2],
-                    [0, 0],
-                    [4, 5]]
+          [0, 0],
+          [4, 5]]
 
         assert_equal(expected, actual)
       end
 
       def test_returns_empty_array_on_invalid_matrix
         m = [[1],
-             [2, 3],
-             [4, 5, 6]]
+          [2, 3],
+          [4, 5, 6]]
         actual = collapse_on_zero(m)
 
-        assert_equal([], actual)
+        assert_empty(actual)
       end
     end
   end

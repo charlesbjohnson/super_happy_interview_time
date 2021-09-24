@@ -5,7 +5,7 @@ module Algorithms
   module GraphProcessing
     class BipartiteDetection
       attr_reader(:bipartite)
-      alias bipartite? bipartite
+      alias_method(:bipartite?, :bipartite)
 
       def initialize(graph)
         @graph = graph

@@ -9,6 +9,7 @@ require_relative("single_node")
 module DataStructures
   class MinMaxStack < Stack
     def initialize
+      super
       @head = MinMaxSingleNode.new
     end
 

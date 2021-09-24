@@ -38,7 +38,7 @@ module LeetCode
 
       start = s[0].match?(/[+-]/) ? 1 : 0
       is_negative = s[0] == "-"
-      s = s[start..-1]
+      s = s[start..]
 
       non_digit = s =~ /[^\d]/
       s = s[0...non_digit] if non_digit

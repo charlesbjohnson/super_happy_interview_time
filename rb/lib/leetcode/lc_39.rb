@@ -53,7 +53,7 @@ module LeetCode
 
       return result if candidates.empty? || target.negative?
 
-      result.add([target]) if candidates.any? { |v| v == target }
+      result.add([target]) if candidates.any?(target)
 
       candidates = candidates.sort.reject { |v| v >= target }
 

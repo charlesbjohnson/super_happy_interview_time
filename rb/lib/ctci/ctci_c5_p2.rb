@@ -25,7 +25,7 @@ module CTCI
           num = r
         end
 
-        "0." + result
+        "0.#{result}"
       end
     end
   end

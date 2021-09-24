@@ -101,7 +101,7 @@ module DataStructures
         y.yield([cloned.peek_index, cloned.pop]) until cloned.size.zero?
       }
 
-      block_given? ? enum.each(&block) : enum
+      block ? enum.each(&block) : enum
     end
 
     private

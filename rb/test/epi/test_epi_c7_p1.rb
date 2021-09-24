@@ -46,7 +46,7 @@ module EPI
       end
 
       def test_s_to_i_fails_on_unconvertable_input
-        assert_raises { s_to_i("14fd59") }
+        assert_raises(StandardError) { s_to_i("14fd59") }
       end
     end
   end

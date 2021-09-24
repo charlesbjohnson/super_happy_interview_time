@@ -26,7 +26,7 @@ module LeetCode
       return 0 if s.length < 2
 
       if s.length < 3
-        return s[0] != s[1] ? 0 : -1
+        return s[0] == s[1] ? -1 : 0
       end
 
       s = s.chars

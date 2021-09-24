@@ -26,7 +26,7 @@ module DataStructures
       end
 
       enum = items.to_enum
-      block_given? ? enum.each(&block) : enum
+      block ? enum.each(&block) : enum
     end
 
     def get(key)

@@ -63,7 +63,7 @@ module CTCI
           end
         end
 
-        alias eql? ==
+        alias_method(:eql?, :==)
 
         def hash
           [@slope, @y_intercept].hash

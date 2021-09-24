@@ -45,7 +45,7 @@ module CTCI
       def test_reverse_add_digits_both_empty
         actual = reverse_add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal([], actual.to_a)
+        assert_empty(actual.to_a)
       end
 
       # forward implementation
@@ -78,7 +78,7 @@ module CTCI
       def test_add_digits_both_empty
         actual = add_digits(@first.instance_variable_get(:@head),
           @second.instance_variable_get(:@head))
-        assert_equal([], actual.to_a)
+        assert_empty(actual.to_a)
       end
     end
   end

@@ -46,9 +46,7 @@ describe(Algorithms::GraphProcessing::DepthFirstPaths) {
 
     describe("#path_to") {
       it("returns a path to the target when there is one") do
-        _([[0, 5, 3], [0, 6, 4, 3]].any? { |path|
-          subject.path_to(3) == path
-        }).must_equal(true)
+        _([[0, 5, 3], [0, 6, 4, 3]].any?(subject.path_to(3))).must_equal(true)
       end
 
       it("returns nil when there is no path to the target") do
@@ -99,9 +97,7 @@ describe(Algorithms::GraphProcessing::DepthFirstPaths) {
 
     describe("#path_to") {
       it("returns a path to the target when there is one") do
-        _([[0, 5, 4, 3], [0, 5, 4, 2, 3]].any? { |path|
-          subject.path_to(3) == path
-        }).must_equal(true)
+        _([[0, 5, 4, 3], [0, 5, 4, 2, 3]].any?(subject.path_to(3))).must_equal(true)
       end
 
       it("returns an empty array when there is no path to the target") do

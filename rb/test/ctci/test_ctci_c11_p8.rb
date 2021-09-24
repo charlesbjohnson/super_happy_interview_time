@@ -16,7 +16,7 @@ module CTCI
       def test_returns_amount_of_numbers_less_than_number
         numbers = (0..10).to_a.shuffle
         numbers.each { |i| @ranker.track(i) }
-        numbers.each { |i| assert_equal(i, @ranker.rank_for(i)) }
+        numbers.each { |i| assert_equal(i, @ranker.rank_for(i)) } # rubocop:disable Style/CombinableLoops
       end
 
       def test_returns_amount_of_numbers_less_than_number_with_duplicates

@@ -75,7 +75,7 @@ module CTCI
           same_width && same_height && same_depth
         end
 
-        alias eql? ==
+        alias_method(:eql?, :==)
 
         def hash
           [@width, @height, @depth].hash

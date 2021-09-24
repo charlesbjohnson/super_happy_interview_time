@@ -50,6 +50,6 @@ module LeetCode
       partition_recurse(list.sort, quotient, 0, 0, {})
     end
 
-    alias can_partition partition?
+    alias_method(:can_partition, :partition?)
   end
 end

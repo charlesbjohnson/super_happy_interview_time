@@ -38,18 +38,18 @@ module LeetCode
       end_right = nil
 
       while cursor_left != cursor_right
-        if !cursor_left.next
+        if cursor_left.next
+          cursor_left = cursor_left.next
+        else
           end_left = cursor_left
           cursor_left = right
-        else
-          cursor_left = cursor_left.next
         end
 
-        if !cursor_right.next
+        if cursor_right.next
+          cursor_right = cursor_right.next
+        else
           end_right = cursor_right
           cursor_right = left
-        else
-          cursor_right = cursor_right.next
         end
 
         return if end_left && end_right && end_left != end_right
@@ -58,6 +58,6 @@ module LeetCode
       cursor_left
     end
 
-    alias get_intersection_node intersection_node
+    alias_method(:get_intersection_node, :intersection_node)
   end
 end

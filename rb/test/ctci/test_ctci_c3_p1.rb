@@ -4,6 +4,8 @@
 require("config")
 require("ctci/ctci_c3_p1")
 
+# rubocop:disable Style/CombinableLoops
+
 module CTCI
   module C3
     class TestP1 < Minitest::Test
@@ -119,3 +121,5 @@ module CTCI
     end
   end
 end
+
+# rubocop:enable Style/CombinableLoops

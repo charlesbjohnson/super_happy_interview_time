@@ -2,9 +2,6 @@
 inherit_gem:
   standard: config/base.yml
 
-Standard/SemanticBlocks:
-  Enabled: false
-
 Style/BlockDelimiters:
   EnforcedStyle: always_braces
 

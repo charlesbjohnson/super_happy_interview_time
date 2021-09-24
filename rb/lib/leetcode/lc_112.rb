@@ -33,6 +33,6 @@ module LeetCode
       path_sum?(tree.left, sum - tree.val) || path_sum?(tree.right, sum - tree.val)
     end
 
-    alias has_path_sum path_sum?
+    alias_method(:has_path_sum, :path_sum?)
   end
 end

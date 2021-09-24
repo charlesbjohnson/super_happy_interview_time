@@ -47,7 +47,7 @@ module LeetCode
         @list[rand(0...@length)]
       end
 
-      alias get_random random
+      alias_method(:get_random, :random)
     end
   end
 end

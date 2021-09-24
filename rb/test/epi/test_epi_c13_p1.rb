@@ -24,12 +24,12 @@ module EPI
       def test_anagram_sets_returns_no_groups_when_no_words_are_anagrams
         words = %w[cats dog pants]
         result = anagram_sets(words)
-        assert_equal([], result)
+        assert_empty(result)
       end
 
       def test_anagram_sets_returns_no_groups_when_no_words_given
         result = anagram_sets([])
-        assert_equal([], result)
+        assert_empty(result)
       end
     end
   end

@@ -23,26 +23,26 @@ module CTCI
 
       def test_returns_paths_to_target_around_obstacles
         assert_equal([[0, 0],
-                      [1, 0],
-                      [1, 1]], find_blocked_robot_path([1, 1], [[0, 1]]))
+          [1, 0],
+          [1, 1]], find_blocked_robot_path([1, 1], [[0, 1]]))
 
         assert_equal([[0, 0],
-                      [1, 0],
-                      [1, 1],
-                      [2, 1]], find_blocked_robot_path([2, 1], [[2, 0]]))
+          [1, 0],
+          [1, 1],
+          [2, 1]], find_blocked_robot_path([2, 1], [[2, 0]]))
 
         assert_equal([[0, 0],
-                      [1, 0],
-                      [2, 0],
-                      [2, 1],
-                      [2, 2]], find_blocked_robot_path([2, 2], [[0, 2], [1, 2]]))
+          [1, 0],
+          [2, 0],
+          [2, 1],
+          [2, 2]], find_blocked_robot_path([2, 2], [[0, 2], [1, 2]]))
 
         assert_equal([[0, 0],
-                      [0, 1],
-                      [0, 2],
-                      [1, 2],
-                      [2, 2],
-                      [3, 2]], find_blocked_robot_path([3, 2], [[2, 0], [1, 1]]))
+          [0, 1],
+          [0, 2],
+          [1, 2],
+          [2, 2],
+          [3, 2]], find_blocked_robot_path([3, 2], [[2, 0], [1, 1]]))
       end
 
       def test_returns_nil_if_no_path_to_target

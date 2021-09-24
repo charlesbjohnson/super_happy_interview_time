@@ -30,7 +30,7 @@ module CTCI
       end
 
       def test_returns_nothing_if_empty
-        assert_equal([], @tree.depth_lists)
+        assert_empty(@tree.depth_lists)
       end
     end
   end

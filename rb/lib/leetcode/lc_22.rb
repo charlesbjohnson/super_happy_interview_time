@@ -10,8 +10,8 @@ module LeetCode
         return
       end
 
-      generate_parenthesis_recurse(result, current + "(", left + 1, right, n) if left < n
-      generate_parenthesis_recurse(result, current + ")", left, right + 1, n) if right < left
+      generate_parenthesis_recurse(result, "#{current}(", left + 1, right, n) if left < n
+      generate_parenthesis_recurse(result, "#{current})", left, right + 1, n) if right < left
     end
 
     # Description:

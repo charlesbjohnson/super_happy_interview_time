@@ -20,6 +20,6 @@ module LeetCode
       3**power == n
     end
 
-    alias is_power_of_three power_of_three?
+    alias_method(:is_power_of_three, :power_of_three?)
   end
 end

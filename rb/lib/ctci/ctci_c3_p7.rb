@@ -50,6 +50,7 @@ module CTCI
 
     class Animal
       attr_accessor(:order, :type)
+
       private_class_method(:new)
 
       def initialize(t)

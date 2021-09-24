@@ -23,7 +23,7 @@ module CTCI
           minimum_value = minimum[0]
           minimum_index = minimum[1]
 
-          queues[minimum_index..-1].each { |qv, q| q.push(minimum_value * qv) }
+          queues[minimum_index..].each { |qv, q| q.push(minimum_value * qv) }
 
           result = queues[minimum_index][1].shift
         }

@@ -50,6 +50,6 @@ module LeetCode
       valid_bst_recurse(tree, [])
     end
 
-    alias is_valid_bst valid_bst?
+    alias_method(:is_valid_bst, :valid_bst?)
   end
 end

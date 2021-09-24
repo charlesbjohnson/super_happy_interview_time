@@ -4,7 +4,7 @@
 module LeetCode
   # 207. Course Schedule
   module LC207
-    Graph = Struct.new(:length) {
+    Graph = Struct.new(:length) { # rubocop:disable Lint/StructNewOverride
       def initialize(length)
         self.length = length
         @vertices = Array.new(length) { [] }
@@ -72,6 +72,6 @@ module LeetCode
       })
     end
 
-    alias can_finish finishable?
+    alias_method(:can_finish, :finishable?)
   end
 end

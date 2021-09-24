@@ -31,13 +31,13 @@ module LeetCode
       set = Set.new([n])
 
       until n == 1
-        n = n.digits.map { |d| d**2 }.sum
+        n = n.digits.sum { |d| d**2 }
         return false unless set.add?(n)
       end
 
       true
     end
 
-    alias is_happy happy?
+    alias_method(:is_happy, :happy?)
   end
 end

@@ -27,6 +27,6 @@ module LeetCode
       left
     end
 
-    alias get_sum sum
+    alias_method(:get_sum, :sum)
   end
 end

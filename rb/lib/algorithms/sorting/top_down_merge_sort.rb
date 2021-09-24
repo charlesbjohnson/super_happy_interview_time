@@ -47,9 +47,9 @@ module Algorithms
         end
 
         if a_i >= a.size
-          result.concat(b[b_i..-1])
+          result.concat(b[b_i..])
         elsif b_i >= b.size
-          result.concat(a[a_i..-1])
+          result.concat(a[a_i..])
         end
 
         result

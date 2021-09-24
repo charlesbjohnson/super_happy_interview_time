@@ -36,7 +36,7 @@ module EPI
       def test_partition_returns_empty_array_when_nothing_to_partition
         a = []
         result = partition!(a, -1)
-        assert_equal([], result)
+        assert_empty(result)
       end
     end
   end

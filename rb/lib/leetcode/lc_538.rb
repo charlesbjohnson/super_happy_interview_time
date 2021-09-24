@@ -11,9 +11,7 @@ module LeetCode
 
       right = convert_bst_recurse(tree.right, greater)
       tree.val += right
-      left = convert_bst_recurse(tree.left, tree.val)
-
-      left
+      convert_bst_recurse(tree.left, tree.val)
     end
 
     # Description:
