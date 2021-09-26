@@ -36,8 +36,8 @@ require_relative("../util/word")
 module Refactor
   module CodeStructure
     class DeclareProblem < Base
-      MATCH_REGEX = /\btest\w+\b/i.freeze
-      REPLACE_REGEX = /test/i.freeze
+      MATCH_REGEX = /\btest\w+\b/i
+      REPLACE_REGEX = /test/i
 
       def self.register(rewriter)
         rewriter.add_class_refactor(self)

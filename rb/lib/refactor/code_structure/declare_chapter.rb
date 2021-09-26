@@ -22,8 +22,8 @@ require_relative("../util/word")
 module Refactor
   module CodeStructure
     class DeclareChapter < Base
-      MATCH_REGEX = /\bchapter\w+\b/i.freeze
-      REPLACE_REGEX = /chapter/i.freeze
+      MATCH_REGEX = /\bchapter\w+\b/i
+      REPLACE_REGEX = /chapter/i
 
       def self.register(rewriter)
         rewriter.add_module_refactor(self)

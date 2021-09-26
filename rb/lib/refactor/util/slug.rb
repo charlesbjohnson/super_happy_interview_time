@@ -6,8 +6,8 @@ require_relative("./word")
 module Refactor
   module Util
     class Slug
-      CHAPTER_REGEX = /chapter_/i.freeze
-      TEST_REGEX = /test_/i.freeze
+      CHAPTER_REGEX = /chapter_/i
+      TEST_REGEX = /test_/i
 
       #
       # epi chapter_five test_one
