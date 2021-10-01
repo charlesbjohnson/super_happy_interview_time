@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(
+  File.expand_path("../lib", __dir__),
+  File.expand_path("../test", __dir__)
+)
+
+TEST_DIRS = [
+  "../test"
+]
+
+require("rubygems")
+require("bundler/setup")
+
+require("minitest/autorun")
+
+def main(args)
+  if !args.empty?
+    args.each { |file| run(file) unless file.start_with?("-") }
+  else
+    TEST_DIRS.each { |test_dir|
+      Dir.glob(Pathname.new(test_dir).expand_path(__dir__).join("**/test_*.rb")).each { |file| run(file) }
+    }
+  end
+end
+
+def run(file)
+  require(Pathname.new(file).expand_path.sub_ext("").to_s)
+end
+
+main(ARGV)

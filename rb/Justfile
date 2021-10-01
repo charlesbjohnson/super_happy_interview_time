@@ -28,7 +28,7 @@ refactor *OPTS:
 
 # Run the tests
 test *OPTS:
-    @bin/rake test {{ OPTS }}
+    @bin/minitest {{ OPTS }}
 
 # Run the type checker
 typecheck *OPTS:
