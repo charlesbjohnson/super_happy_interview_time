@@ -16,7 +16,15 @@ module LeetCode
       end
 
       def shuffle
-        @list.shuffle
+        shuffled = @list
+
+        loop {
+          shuffled = @list.shuffle
+
+          break if shuffled != @list
+        }
+
+        shuffled
       end
     end
   end
