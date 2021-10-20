@@ -9,7 +9,7 @@ SimpleCov.start {
   load_profile(:test_frameworks)
 }
 
-require("byebug")
+require("debug")
 require("minitest/reporters")
 
 Minitest::Reporters.use!(Minitest::Reporters::DefaultReporter.new)
