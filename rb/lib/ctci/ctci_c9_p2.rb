@@ -1,4 +1,3 @@
-# typed: true
 # frozen_string_literal: true
 
 # Wow and I thought I was being so clever with my rinky dink hash,

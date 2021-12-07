@@ -1,4 +1,3 @@
-# typed: true
 # frozen_string_literal: true
 
 # is the book solution wrong for this one?

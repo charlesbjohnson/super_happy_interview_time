@@ -1,4 +1,3 @@
-# typed: true
 # frozen_string_literal: true
 
 # Also had to look this up. Didn't think of using a 1D array.

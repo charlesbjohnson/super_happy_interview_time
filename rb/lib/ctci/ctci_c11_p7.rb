@@ -1,4 +1,3 @@
-# typed: false
 # frozen_string_literal: true
 
 # I don't really get how this is a sorting/searching problem.

@@ -1,4 +1,3 @@
-# typed: true
 # frozen_string_literal: true
 
 # I'm tired of these motha****in' slopes on this motha****kn' Cartesian plane!

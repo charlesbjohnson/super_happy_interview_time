@@ -15,7 +15,6 @@ jobs:
           ruby-version: 3.0
           bundler-cache: true
           working-directory: rb/
-      - run: just typecheck
       - run: just lint
       - run: just test
 

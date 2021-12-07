@@ -29,7 +29,3 @@ refactor *OPTS:
 # Run the tests
 test *OPTS:
     @bin/minitest {{ OPTS }}
-
-# Run the type checker
-typecheck *OPTS:
-    @bin/srb typecheck {{ OPTS }}

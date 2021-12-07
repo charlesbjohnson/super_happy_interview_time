@@ -1,4 +1,3 @@
-# typed: true
 # frozen_string_literal: true
 
 # Maybe I'm dumb, but this seems a lot simpler than the book's approach

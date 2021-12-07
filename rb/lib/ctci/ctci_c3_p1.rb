@@ -1,4 +1,3 @@
-# typed: true
 # frozen_string_literal: true
 
 # Kind of cheated since I'm taking advantage of Ruby's Array

@@ -1,4 +1,3 @@
-# typed: strong
 # frozen_string_literal: true
 
 require("ctci/ctci_c4_p1")

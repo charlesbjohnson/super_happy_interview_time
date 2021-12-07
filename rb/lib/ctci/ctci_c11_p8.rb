@@ -1,4 +1,3 @@
-# typed: true
 # frozen_string_literal: true
 
 # Intuitive but surprisingly hard to get update_ranks right.

@@ -2,7 +2,6 @@
 require:
   - standard
   - rubocop-minitest
-  - rubocop-sorbet
 
 inherit_mode:
   merge:
@@ -10,7 +9,6 @@ inherit_mode:
 
 inherit_from:
   - .rubocop.standard.yml
-  - .rubocop.sorbet.yml
 
 AllCops:
   DisabledByDefault: false
@@ -19,7 +17,6 @@ AllCops:
   Exclude:
     - bin/*
     - coverage/*
-    - sorbet/*
     - vendor/*
 
 Layout/LineLength:
