@@ -72,7 +72,7 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) {
 
     it("stays the same on #each") do
       [1, 2, 3, 4].each { |i| subject.insert(i, i) }
-      subject.each {} # rubocop:disable Lint/EmptyBlock
+      subject.each {}
       _(subject.size).must_equal(4)
     end
   }
@@ -452,7 +452,7 @@ describe(DataStructures::BinaryHeapIndexedPriorityQueue) {
     end
 
     it("does not remove any elements") do
-      subject.each {} # rubocop:disable Lint/EmptyBlock
+      subject.each {}
       _(subject.peek_element).must_equal(9)
     end
 

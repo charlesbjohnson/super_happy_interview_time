@@ -9,7 +9,7 @@ module LeetCode
     #
     # @param matrix {Array<Array<Integer>>}
     # @return {nil}
-    def set_zeroes(matrix) # rubocop:disable Naming/AccessorMethodName
+    def set_zeroes(matrix)
       zero_first_row = false
       zero_first_col = false
 

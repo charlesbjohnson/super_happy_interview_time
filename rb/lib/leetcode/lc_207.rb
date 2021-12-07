@@ -4,7 +4,7 @@
 module LeetCode
   # 207. Course Schedule
   module LC207
-    Graph = Struct.new(:length) { # rubocop:disable Lint/StructNewOverride
+    Graph = Struct.new(:length) {
       def initialize(length)
         self.length = length
         @vertices = Array.new(length) { [] }
