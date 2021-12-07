@@ -7,7 +7,7 @@ trim_trailing_whitespace = true
 [Justfile]
 indent_size = 4
 
-[rb/{*.rb,Gemfile,Rakefile}]
+[rb/{*.rb,Gemfile}]
 indent_size = 2
 indent_style = space
 
