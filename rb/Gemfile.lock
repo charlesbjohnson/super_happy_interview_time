@@ -69,7 +69,6 @@ DEPENDENCIES
   parser (~> 3.0)
   rubocop (~> 1.23)
   rubocop-minitest (~> 0.17)
-  rubocop-performance (~> 1.12)
   rubocop-sorbet (~> 0.6)
   simplecov (~> 0.18)
   sorbet (~> 0.5)

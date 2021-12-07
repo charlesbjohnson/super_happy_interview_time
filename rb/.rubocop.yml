@@ -2,7 +2,6 @@
 require:
   - standard
   - rubocop-minitest
-  - rubocop-performance
   - rubocop-sorbet
 
 inherit_mode:
