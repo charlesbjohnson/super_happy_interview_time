@@ -41,13 +41,13 @@ impl<T> Bag<T> {
 
     pub fn iter(&self) -> Iter<T> {
         Iter {
-            current: self.head.as_ref().map(|node| &**node),
+            current: self.head.as_deref(),
         }
     }
 
     pub fn iter_mut(&mut self) -> IterMut<T> {
         IterMut {
-            current: self.head.as_mut().map(|node| &mut **node),
+            current: self.head.as_deref_mut(),
         }
     }
 }
@@ -74,7 +74,7 @@ impl<'n, T> Iterator for Iter<'n, T> {
 
     fn next(&mut self) -> Option<Self::Item> {
         self.current.map(|node| {
-            self.current = node.next.as_ref().map(|node| &**node);
+            self.current = node.next.as_deref();
             &node.value
         })
     }
@@ -85,7 +85,7 @@ impl<'n, T> Iterator for IterMut<'n, T> {
 
     fn next(&mut self) -> Option<Self::Item> {
         self.current.take().map(|node| {
-            self.current = node.next.as_mut().map(|node| &mut **node);
+            self.current = node.next.as_deref_mut();
             &mut node.value
         })
     }

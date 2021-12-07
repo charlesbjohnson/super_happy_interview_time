@@ -200,25 +200,25 @@ impl<T> LinkedList<T> {
 
     pub fn iter(&self) -> Iter<T> {
         Iter {
-            front: self.head.as_ref().map(|node| &**node),
+            front: self.head.as_deref(),
             back: self.tail,
         }
     }
 
     pub fn iter_mut(&mut self) -> IterMut<T> {
         IterMut {
-            front: self.head.as_mut().map(|node| &mut **node),
+            front: self.head.as_deref_mut(),
         }
     }
 
     fn get(&self, index: usize) -> &Node<T> {
         let mut i = 0;
-        let mut current = self.head.as_ref().map(|node| &**node);
+        let mut current = self.head.as_deref();
 
         while i < index {
             i += 1;
             if let Some(node) = current.take() {
-                current = node.next.as_ref().map(|node| &**node);
+                current = node.next.as_deref();
             }
         }
 
@@ -227,12 +227,12 @@ impl<T> LinkedList<T> {
 
     fn get_mut(&mut self, index: usize) -> &mut Node<T> {
         let mut i = 0;
-        let mut current = self.head.as_mut().map(|node| &mut **node);
+        let mut current = self.head.as_deref_mut();
 
         while i < index {
             i += 1;
             if let Some(node) = current.take() {
-                current = node.next.as_mut().map(|node| &mut **node);
+                current = node.next.as_deref_mut();
             }
         }
 
@@ -300,7 +300,7 @@ impl<'n, T> Iterator for Iter<'n, T> {
 
     fn next(&mut self) -> Option<Self::Item> {
         self.front.take().map(|node| {
-            self.front = node.next.as_ref().map(|node| &**node);
+            self.front = node.next.as_deref();
             &node.value
         })
     }
@@ -325,7 +325,7 @@ impl<'n, T> Iterator for IterMut<'n, T> {
 
     fn next(&mut self) -> Option<Self::Item> {
         self.front.take().map(|node| {
-            self.front = node.next.as_mut().map(|node| &mut **node);
+            self.front = node.next.as_deref_mut();
             &mut node.value
         })
     }
