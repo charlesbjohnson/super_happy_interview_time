@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+require("config")
+require("leetcode/lc_<%= problem %>")
+
+module LeetCode
+  class TestLC<%= problem %> < Minitest::Test
+    include(LC<%= problem %>)
+
+    [
+      ["TODO", "TODO"]
+    ].each.with_index { |(v, expected), i|
+      define_method(:"test_todo_#{i}") {
+        assert_equal(expected, todo(v))
+      }
+    }
+  end
+end

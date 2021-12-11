@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require("erb")
+require("pathname")
+
+def main(args)
+  problem = Integer(args.first)
+
+  lib_dir = Pathname.new(__dir__).join("../lib/leetcode")
+  solution_template_path = lib_dir.join("template.rb.tt")
+  solution_path = lib_dir.join("lc_#{problem}.rb")
+
+  test_dir = Pathname.new(__dir__).join("../test/leetcode")
+  test_template_path = test_dir.join("template.rb.tt")
+  test_path = test_dir.join("test_lc_#{problem}.rb")
+
+  render(problem, solution_template_path, solution_path)
+  puts("created `#{solution_path.relative_path_from(Pathname.pwd)}'")
+
+  render(problem, test_template_path, test_path)
+  puts("created `#{test_path.relative_path_from(Pathname.pwd)}'")
+end
+
+private
+
+def render(problem, template_path, output_path)
+  output_path.write(eval(ERB.new(template_path.read).src, binding)) # rubocop:disable Security/Eval
+end
+
+main(ARGV)
