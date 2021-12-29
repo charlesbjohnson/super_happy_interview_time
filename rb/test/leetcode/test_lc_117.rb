@@ -3,21 +3,23 @@
 require("config")
 require("helpers/leetcode/binary_tree")
 
-require("leetcode/lc_116")
+require("leetcode/lc_117")
 
 module LeetCode
-  class TestLC116 < Minitest::Test
+  class TestLC117 < Minitest::Test
     include(Helpers::LeetCode::BinaryTree)
-    include(LC116)
+    include(LC117)
 
     Node = Struct.new(*Helpers::LeetCode::BinaryTree::TreeNode.members, :next)
 
     [
       [],
       [1],
+      [1, 2],
       [1, 2, 3],
-      [1, 2, 3, 4, 5, 6, 7],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      [1, 2, 3, 4, 5, nil, 6],
+      [1, 2, 3, 4, 5, nil, 6, nil, 7],
+      [1, 2, 3, 4, 5, nil, 6, nil, 7, nil, nil, 8]
     ].each.with_index { |root, i|
       define_method(:"test_connect_#{i}") {
         if root.empty?

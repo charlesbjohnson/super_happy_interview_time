@@ -3,35 +3,37 @@
 module LeetCode
   # 112. Path Sum
   module LC112
-    TreeNode = Struct.new(:val, :left, :right)
-
     # Description:
-    # Given a binary tree and a sum, determine if the tree has a root-to-leaf path
-    # such that adding up all the values along the path equals the given sum.
+    # Given the root of a binary tree and an integer targetSum,
+    # return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
     #
     # Examples:
-    # Input:
-    #       tree, sum = 22
-    #         5
-    #        / \
-    #       4   8
-    #      /   / \
-    #     11  13  4
-    #    /  \      \
-    #   7    2      1
+    # Input: root = [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1], targetSum = 22
     # Output: true
-    # Explanation: 5->4->11->2
     #
-    # @param tree {TreeNode}
-    # @param sum {Integer}
+    # Input: root = [1, 2, 3], targetSum = 5
+    # Output: false
+    #
+    # Input: root = [], targetSum = 0
+    # Output: false
+    #
+    # @param {TreeNode} root
+    # @param {Integer} target_sum
     # @return {Boolean}
-    def path_sum?(tree, sum)
-      return false unless tree
-      return (sum - tree.val).zero? if !tree.left && !tree.right
+    def has_path_sum(root, target_sum)
+      stack = []
+      stack.push([root, target_sum]) if root
 
-      path_sum?(tree.left, sum - tree.val) || path_sum?(tree.right, sum - tree.val)
+      until stack.empty?
+        node, sum = stack.pop
+
+        return true if !node.left && !node.right && node.val == sum
+
+        stack.push([node.right, sum - node.val]) if node.right
+        stack.push([node.left, sum - node.val]) if node.left
+      end
+
+      false
     end
-
-    alias_method(:has_path_sum, :path_sum?)
   end
 end

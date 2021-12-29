@@ -1,39 +1,37 @@
 # frozen_string_literal: true
 
 require("config")
+require("helpers/leetcode/binary_tree")
+
 require("leetcode/lc_297")
 
 module LeetCode
   class TestLC297 < Minitest::Test
+    include(Helpers::LeetCode::BinaryTree)
     include(LC297)
 
-    def build(values)
-      return if values.empty?
-
-      nodes = values.map { |v| v ? TreeNode.new(v) : nil }
-      nodes.each.with_index { |node, i|
-        next unless node
-
-        left = i * 2 + 1
-        right = left + 1
-
-        node.left = nodes[left] if left < nodes.length
-        node.right = nodes[right] if right < nodes.length
-      }
-
-      nodes.first
-    end
-
     [
-      [[1, 2, 3], "1,2,3"],
+      [[], ""],
+      [[1], "1"],
       [[1, 2], "1,2"],
+      [[1, 2, 3], "1,2,3"],
       [[1, nil, 3], "1,,3"],
-      [[1, nil, 3, nil, nil, nil, 4], "1,,3,,4"],
+      [[1, nil, 3, nil, 4], "1,,3,,4"],
       [[1, 2, 3, nil, nil, 4, 5], "1,2,3,,,4,5"]
-    ].each.with_index { |(tree, expected), i|
+    ].each.with_index { |(root, expected), i|
       define_method(:"test_serialize_deserialize_#{i}") {
-        assert_equal(expected, serialize(build(tree)))
-        assert_equal(build(tree), deserialize(expected))
+        root = build_binary_tree(root)
+
+        serialized = serialize(root)
+        deserialized = deserialize(serialized)
+
+        assert_equal(expected, serialized)
+
+        if expected != ""
+          assert_equal(root, deserialized)
+        else
+          assert_nil(deserialized)
+        end
       }
     }
   end

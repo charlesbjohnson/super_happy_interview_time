@@ -3,25 +3,21 @@
 module LeetCode
   # 105. Construct Binary Tree from Preorder and Inorder Traversal
   module LC105
-    TreeNode = Struct.new(:val, :left, :right)
+    TreeNode = Helpers::LeetCode::BinaryTree::TreeNode
 
     # Description:
-    # Given preorder and inorder traversal of a tree, construct the binary tree.
+    # Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree
+    # and inorder is the inorder traversal of the same tree, construct and return the binary tree.
     #
     # Examples:
     # Input: preorder = [3, 9, 20, 15, 7], inorder = [9, 3, 15, 20, 7]
-    # Output:
-    #      3
-    #     / \
-    #    9  20
-    #      /  \
-    #     15   7
+    # Output: [3, 9, 20, null, null, 15, 7]
     #
-    # Notes:
-    # - You may assume that duplicates do not exist in the tree.
+    # Input: preorder = [-1], inorder = [-1]
+    # Output: [-1]
     #
-    # @param preorder {Array<Integer>}
-    # @param inorder {Array<Integer>}
+    # @param {Array<Integer>} preorder
+    # @param {Array<Integer>} inorder
     # @return {TreeNode}
     def build_tree(preorder, inorder)
       return if preorder.empty? || inorder.empty?
@@ -29,11 +25,11 @@ module LeetCode
       root_value = preorder.shift
       root_index = inorder.find_index(root_value)
 
-      root_node = TreeNode.new(root_value)
-      root_node.left = build_tree(preorder, inorder.take(root_index))
-      root_node.right = build_tree(preorder, inorder.drop(root_index + 1))
+      root = TreeNode.new(root_value)
+      root.left = build_tree(preorder, inorder[...root_index])
+      root.right = build_tree(preorder, inorder[(root_index + 1)..])
 
-      root_node
+      root
     end
   end
 end

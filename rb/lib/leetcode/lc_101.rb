@@ -3,53 +3,34 @@
 module LeetCode
   # 101. Symmetric Tree
   module LC101
-    TreeNode = Struct.new(:val, :left, :right)
-
     # Description:
-    # Given a binary tree, check whether it is a mirror of itself (ie. symmetric around its center).
+    # Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+    #
+    # Follow up: Could you solve it both recursively and iteratively?
     #
     # Examples:
-    # - 1:
-    #   Input:
-    #       1
-    #      / \
-    #     2   2
-    #    / \ / \
-    #   3  4 4  3
-    #   Output: true
+    # Input: root = [1, 2, 2, 3, 4, 4, 3]
+    # Output: true
     #
-    # - 2:
-    #   Input:
-    #     1
-    #    / \
-    #   2   2
-    #    \   \
-    #    3    3
-    #   Output: false
+    # Input: root = [1, 2, 2, null, 3, null, 3]
+    # Output: false
     #
-    # Notes:
-    # - Bonus points if you could solve it both recursively and iteratively.
-    #
-    # @param tree {TreeNode}
+    # @param {TreeNode} root
     # @return {Boolean}
-    def symmetric?(tree)
-      return true unless tree
+    def is_symmetric(root)
+      stack = []
+      stack.push([root.left, root.right]) if root.left || root.right
 
-      queue = [[tree]]
+      until stack.empty?
+        left, right = stack.pop
 
-      until queue.empty?
-        nodes = queue.shift
+        return false if !left && right || left && !right || left.val != right.val
 
-        values = nodes.map { |node| node ? node.val : nil }
-        return false if values != values.reverse
-
-        visit = nodes.reject(&:nil?).flat_map { |node| [node.left, node.right] }
-        queue.push(visit) unless visit.empty?
+        stack.push([left.left, right.right]) if left.left || right.right
+        stack.push([left.right, right.left]) if left.right || right.left
       end
 
       true
     end
-
-    alias_method(:is_symmetric, :symmetric?)
   end
 end

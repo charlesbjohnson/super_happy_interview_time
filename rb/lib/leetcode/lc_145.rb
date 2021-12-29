@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 module LeetCode
-  # 94. Binary Tree Inorder Traversal
-  module LC94
+  # 145. Binary Tree Postorder Traversal
+  module LC145
     # Description:
-    # Given a binary tree, return the inorder traversal of its nodes' values.
+    # Given the root of a binary tree, return the postorder traversal of its nodes' values.
     #
     # Follow up: Recursive solution is trivial, could you do it iteratively?
     #
     # Examples:
     # Input: root = [1, null, 2, 3]
-    # Output: [1, 3, 2]
+    # Output: [3, 2, 1]
     #
     # Input: root = []
     # Output: []
@@ -19,8 +19,8 @@ module LeetCode
     # Output: [1]
     #
     # @param {TreeNode} root
-    # @return {Array<Integer>}
-    def inorder_traversal(root)
+    # @return {Integer[]}
+    def postorder_traversal(root)
       stack = []
       result = []
 
@@ -32,8 +32,8 @@ module LeetCode
         if visited || (!node.left && !node.right)
           result.push(node.val)
         else
-          stack.push([node.right, false]) if node.right
           stack.push([node, true])
+          stack.push([node.right, false]) if node.right
           stack.push([node.left, false]) if node.left
         end
       end

@@ -3,34 +3,22 @@
 module LeetCode
   # 104. Maximum Depth of Binary Tree
   module LC104
-    TreeNode = Struct.new(:val, :left, :right)
-
-    def max_depth_recurse(node, depth)
-      return depth unless node
-
-      left = max_depth_recurse(node.left, depth + 1)
-      right = max_depth_recurse(node.right, depth + 1)
-
-      left > right ? left : right
-    end
-
     # Description:
-    # Given a binary tree, find its maximum depth.
-    # The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+    # Given the root of a binary tree, return its maximum depth.
+    #
+    # A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
     #
     # Examples:
-    # Input:
-    #     3
-    #    / \
-    #   9  20
-    #     /  \
-    #    15   7
+    # Input: root = [3, 9, 20, null, null, 15, 7]
     # Output: 3
     #
-    # @param tree {TreeNode}
+    # Input: root = [1, null, 2]
+    # Output: 2
+    #
+    # @param {TreeNode} root
     # @return {Integer}
-    def max_depth(tree)
-      max_depth_recurse(tree, 0)
+    def max_depth(root)
+      root ? [max_depth(root.left) + 1, max_depth(root.right) + 1].max : 0
     end
   end
 end

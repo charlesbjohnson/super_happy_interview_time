@@ -3,25 +3,25 @@
 require("config")
 require("helpers/leetcode/binary_tree")
 
-require("leetcode/lc_105")
+require("leetcode/lc_106")
 
 module LeetCode
-  class TestLC105 < Minitest::Test
+  class TestLC106 < Minitest::Test
     include(Helpers::LeetCode::BinaryTree)
-    include(LC105)
+    include(LC106)
 
     [
       [[[], []], []],
       [[[-1], [-1]], [-1]],
-      [[[3, 9, 20, 15, 7], [9, 3, 15, 20, 7]], [3, 9, 20, nil, nil, 15, 7]]
-    ].each.with_index { |((preorder, inorder), expected), i|
+      [[[9, 3, 15, 20, 7], [9, 15, 7, 20, 3]], [3, 9, 20, nil, nil, 15, 7]]
+    ].each.with_index { |((inorder, postorder), expected), i|
       define_method(:"test_build_tree_#{i}") {
         expected = build_binary_tree(expected)
 
         if expected
-          assert_equal(expected, build_tree(preorder, inorder))
+          assert_equal(expected, build_tree(inorder, postorder))
         else
-          assert_nil(build_tree(preorder, inorder))
+          assert_nil(build_tree(inorder, postorder))
         end
       }
     }
