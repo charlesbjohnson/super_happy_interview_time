@@ -13,10 +13,10 @@ module LeetCode
       [[0, 0], [0, 0]],
       [[0, 1], [1, 0]],
       [[0, 1, 0, 3, 12], [1, 3, 12, 0, 0]]
-    ].each.with_index { |(list, expected), i|
+    ].each.with_index { |(nums, expected), i|
       define_method(:"test_move_zeroes_#{i}") {
-        move_zeroes(list)
-        assert_equal(expected, list)
+        move_zeroes(nums)
+        assert_equal(expected, nums)
       }
     }
   end

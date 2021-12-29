@@ -4,40 +4,51 @@ module LeetCode
   # 88. Merge Sorted Array
   module LC88
     # Description:
-    # Given two sorted integer arrays left and right, merge right into left as one sorted array.
+    # You are given two integer arrays nums1 and nums2, sorted in non-decreasing order,
+    # and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
     #
-    # Notes:
-    # You may assume that left has enough space (size that is greater or equal to m + n) to hold additional elements from right.
-    # The number of elements initialized in left and right are m and n respectively.
+    # Merge nums1 and nums2 into a single array sorted in non-decreasing order.
     #
-    # @param left {Array<Integer>}
-    # @param length_left {Integer}
-    # @param left {Array<Integer>}
-    # @param length_right {Integer}
+    # The final sorted array should not be returned by the function,
+    # but instead be stored inside the array nums1.
+    #
+    # To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged,
+    # and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+    #
+    # Examples:
+    # Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+    # Output: [1,2,2,3,5,6]
+    #
+    # Input: nums1 = [1], m = 1, nums2 = [], n = 0
+    # Output: [1]
+    #
+    # Input: nums1 = [0], m = 0, nums2 = [1], n = 1
+    # Output: [1]
+    #
+    # @param {Array<Integer>} nums1
+    # @param {Integer} m
+    # @param {Array<Integer>} nums2
+    # @param {Integer} n
     # @return {nil}
-    def merge(left, length_left, right, length_right)
-      l_cursor = length_left - 1
-      r_cursor = length_right - 1
+    def merge(nums1, m, nums2, n)
+      i = m - 1
+      j = n - 1
 
-      cursor = length_left + length_right - 1
+      k = nums1.length - 1
 
-      while l_cursor >= 0 && r_cursor >= 0
-        if left[l_cursor] > right[r_cursor]
-          left[cursor] = left[l_cursor]
-          l_cursor -= 1
-        else
-          left[cursor] = right[r_cursor]
-          r_cursor -= 1
+      while k >= 0
+        if (i >= 0 && j >= 0 && nums1[i] > nums2[j]) || j < 0
+          nums1[k] = nums1[i]
+          i -= 1
+        elsif (i >= 0 && j >= 0 && nums1[i] <= nums2[j]) || i < 0
+          nums1[k] = nums2[j]
+          j -= 1
         end
 
-        cursor -= 1
+        k -= 1
       end
 
-      while r_cursor >= 0
-        left[cursor] = right[r_cursor]
-        r_cursor -= 1
-        cursor -= 1
-      end
+      nums1
     end
   end
 end
