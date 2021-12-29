@@ -3,34 +3,29 @@
 module LeetCode
   # 237. Delete Node in a Linked List
   module LC237
-    ListNode = Struct.new(:val, :next)
-
-    def delete_node_recurse(node)
-      return node unless node.next
-
-      ahead = delete_node_recurse(node.next)
-      result = ListNode.new(node.val, node)
-
-      node.val = ahead.val
-      node.next = ahead.next
-
-      result
-    end
-
     # Description:
-    # Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
+    # Write a function to delete a node in a singly-linked list.
+    # You will not be given access to the head of the list, instead you will be given access to the node to be deleted directly.
+    #
+    # It is guaranteed that the node to be deleted is not a tail node in the list.
     #
     # Examples:
-    # Input: list = 1->2->3->4, node = 3
-    # Output: nil
-    # where list = 1->2->4
+    # Input: head = [4, 5, 1, 9], node = 5
+    # Output: [4, 1, 9]
     #
-    # @param node {ListNode}
+    # Input: head = [4, 5, 1, 9], node = 1
+    # Output: [4, 5, 9]
+    #
+    # @param {ListNode} node
     # @return {nil}
     def delete_node(node)
-      delete_node_recurse(node)
+      loop {
+        node.val = node.next.val
+        break if !node.next.next
+        node = node.next
+      }
 
-      nil
+      node.next = nil
     end
   end
 end

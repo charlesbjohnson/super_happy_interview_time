@@ -3,35 +3,37 @@
 module LeetCode
   # 206. Reverse Linked List
   module LC206
-    ListNode = Struct.new(:val, :next)
-
-    def reverse_list_recurse(node, box)
-      unless node.next
-        box[0] = node
-        return node
-      end
-
-      previous = reverse_list_recurse(node.next, box)
-      previous.next = node
-    end
-
     # Description:
     # Reverse a singly linked list.
     #
-    # Notes:
+    # Follow Up:
     # A linked list can be reversed either iteratively or recursively. Could you implement both?
     #
-    # @param list {ListNode}
+    # Examples:
+    # Input: head = [1, 2, 3, 4, 5]
+    # Output: [5, 4, 3, 2, 1]
+    #
+    # Input: head = [1, 2]
+    # Output: [2, 1]
+    #
+    # Input: head = []
+    # Output: []
+    #
+    # @param {ListNode} head
     # @return {ListNode}
-    def reverse_list(list)
-      return unless list
+    def reverse_list(head)
+      curr = head
 
-      box = [nil]
+      while curr&.next
+        new_head = curr.next
 
-      reverse_list_recurse(list, box)
-      list.next = nil
+        curr.next = new_head.next
+        new_head.next = head
 
-      box.first
+        head = new_head
+      end
+
+      head
     end
   end
 end

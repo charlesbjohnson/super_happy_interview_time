@@ -1,24 +1,14 @@
 # frozen_string_literal: true
 
 require("config")
+require("helpers/leetcode/linked_list")
+
 require("leetcode/lc_234")
 
 module LeetCode
   class TestLC234 < Minitest::Test
+    include(Helpers::LeetCode::LinkedList)
     include(LC234)
-
-    def build(list)
-      return if list.empty?
-
-      head = ListNode.new(list[0])
-
-      list.drop(1).reduce(head) { |res, v|
-        res.next = ListNode.new(v)
-        res.next
-      }
-
-      head
-    end
 
     [
       [[], true],
@@ -29,9 +19,9 @@ module LeetCode
       [[1, 2, 3], false],
       [[1, 2, 2, 1], true],
       [[1, 2, 3, 2, 1], true]
-    ].each.with_index { |(list, expected), i|
-      define_method(:"test_palindrome?_#{i}") {
-        assert_equal(expected, palindrome?(build(list)))
+    ].each.with_index { |(head, expected), i|
+      define_method(:"test_is_palindrome_#{i}") {
+        assert_equal(expected, is_palindrome(build_linked_list(head)))
       }
     }
   end

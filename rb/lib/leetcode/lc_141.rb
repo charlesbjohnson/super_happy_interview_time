@@ -3,21 +3,19 @@
 module LeetCode
   # 141. Linked List Cycle
   module LC141
-    ListNode = Struct.new(:val, :next)
-
     # Description:
     # Given a linked list, determine if it has a cycle in it.
     #
     # Notes:
     # - Can you solve it without using extra space?
     #
-    # @param list {ListNode}
+    # @param {ListNode} head
     # @return {Boolean}
-    def cycle?(list)
-      return false if !list || !list.next
+    def has_cycle(head)
+      return false if !head || !head.next
 
-      slow = list
-      fast = list
+      slow = head
+      fast = head
 
       loop {
         return false if !slow || !fast || !fast.next
@@ -28,7 +26,5 @@ module LeetCode
         return true if slow == fast
       }
     end
-
-    alias_method(:has_cycle, :cycle?)
   end
 end

@@ -1,81 +1,40 @@
 # frozen_string_literal: true
 
 require("config")
+require("helpers/leetcode/linked_list")
+
 require("leetcode/lc_160")
 
 module LeetCode
   class TestLC160 < Minitest::Test
+    include(Helpers::LeetCode::LinkedList)
     include(LC160)
 
-    def build(list)
-      return if list.empty?
+    [
+      [[4, 1], [5, 6, 1], [8, 4, 5]],
+      [[1, 9, 1], [3], [2, 4]],
+      [[2, 6, 4], [1, 3], []]
+    ].each.with_index { |(head_a, head_b, expected), i|
+      define_method(:"test_get_intersection_node_cycle_#{i}") {
+        len_a = head_a.length
+        len_b = head_b.length
 
-      head = ListNode.new(list[0])
+        head_a = build_linked_list(head_a)
+        head_b = build_linked_list(head_b)
+        expected = build_linked_list(expected)
 
-      list.drop(1).reduce(head) { |res, v|
-        res.next = ListNode.new(v)
-        res.next
+        tail_a = index_linked_list(head_a, len_a - 1)
+        tail_b = index_linked_list(head_b, len_b - 1)
+
+        tail_a.next = expected
+        tail_b.next = expected
+
+        if expected
+          assert_equal(expected, get_intersection_node(head_a, head_b))
+        else
+          assert_nil(get_intersection_node(head_a, head_b))
+        end
       }
-
-      head
-    end
-
-    def index(list, i)
-      cursor = list
-
-      while i.positive?
-        cursor = cursor.next
-        i -= 1
-      end
-
-      cursor
-    end
-
-    def test_intersection_node_nil
-      left = nil
-      right = build([1, 2, 3])
-
-      assert_nil(intersection_node(left, right))
-      assert_nil(intersection_node(right, left))
-    end
-
-    def test_intersection_node_no_intersection
-      left = build([1, 2, 3])
-      right = build([4, 5, 6])
-
-      assert_nil(intersection_node(left, right))
-    end
-
-    def test_intersection_node_fork_intersection_same_length
-      left = build([1, 2, 3])
-      right = build([4, 5, 6])
-      overlap = build([7, 8, 9])
-
-      index(left, 2).next = overlap
-      index(right, 2).next = overlap
-
-      assert_equal(overlap, intersection_node(left, right))
-      assert_equal(overlap, intersection_node(right, left))
-    end
-
-    def test_intersection_node_fork_intersection_different_length
-      left = build([1, 2, 3])
-      right = build([4, 5])
-      overlap = build([7, 8, 9])
-
-      index(left, 2).next = overlap
-      index(right, 1).next = overlap
-
-      assert_equal(overlap, intersection_node(left, right))
-      assert_equal(overlap, intersection_node(right, left))
-    end
-
-    def test_intersection_node_full_end_intersection
-      left = build([1, 2, 3, 4, 5])
-      right = index(left, 2)
-
-      assert_equal(right, intersection_node(left, right))
-      assert_equal(right, intersection_node(right, left))
-    end
+    }
   end
 end

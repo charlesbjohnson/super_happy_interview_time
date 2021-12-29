@@ -1,36 +1,27 @@
 # frozen_string_literal: true
 
 require("config")
+require("helpers/leetcode/linked_list")
+
 require("leetcode/lc_237")
 
 module LeetCode
   class TestLC237 < Minitest::Test
+    include(Helpers::LeetCode::LinkedList)
     include(LC237)
 
-    def build(list)
-      return if list.empty?
-
-      head = ListNode.new(list[0])
-
-      list.drop(1).reduce(head) { |res, v|
-        res.next = ListNode.new(v)
-        res.next
-      }
-
-      head
-    end
-
     [
-      [[1, 2], proc { |list| list }, [2]],
-      [[1, 2, 3], proc { |list| list.next }, [1, 3]],
-      [[1, 2, 3], proc { |list| list }, [2, 3]],
-      [[1, 2, 2], proc { |list| list }, [2, 2]],
-      [[1, 2, 3, 4], proc { |list| list.next.next }, [1, 2, 4]]
-    ].each.with_index { |(list, pointer, expected), i|
+      [[[1, 2], 0], [2]],
+      [[[1, 2, 3], 0], [2, 3]],
+      [[[1, 2, 3], 1], [1, 3]],
+      [[[1, 2, 3, 4], 2], [1, 2, 4]]
+    ].each.with_index { |((head, node), expected), i|
       define_method(:"test_delete_node_#{i}") {
-        list = build(list)
-        delete_node(pointer.call(list))
-        assert_equal(build(expected), list)
+        head = build_linked_list(head)
+        node = index_linked_list(head, node)
+        expected = build_linked_list(expected)
+        delete_node(node)
+        assert_equal(expected, head)
       }
     }
   end

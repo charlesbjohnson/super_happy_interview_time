@@ -3,44 +3,48 @@
 module LeetCode
   # 2. Add Two Numbers
   module LC2
-    ListNode = Struct.new(:val, :next)
+    ListNode = Helpers::LeetCode::LinkedList::ListNode
 
     # Description:
     # You are given two non-empty linked lists representing two non-negative integers.
-    # The digits are stored in reverse order and each of their nodes contain a single digit.
-    # Add the two numbers and return it as a linked list.
+    # The digits are stored in reverse order, and each of their nodes contains a single digit.
+    # Add the two numbers and return the sum as a linked list.
     #
-    # Examples:
-    # Input: left = 2->4->3, right = 5->6->4
-    # Output: 7->0->8
-    # Explanation: 342 + 465 = 807
+    # You may assume the two numbers do not contain any leading zero, except the number 0 itself.
     #
-    # Notes:
-    # - You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+    # Examples
+    # Input: l1 = [2, 4, 3], l2 = [5, 6, 4]
+    # Output: [7, 0, 8]
     #
-    # @param left {ListNode}
-    # @param right {ListNode}
+    # Input: l1 = [0], l2 = [0]
+    # Output: [0]
+    #
+    # Input: l1 = [9, 9, 9, 9, 9, 9, 9], l2 = [9, 9, 9, 9]
+    # Output: [8, 9, 9, 9, 0, 0, 0, 1]
+    #
+    # @param {ListNode} l1
+    # @param {ListNode} l2
     # @return {ListNode}
-    def add_two_numbers(left, right)
+    def add_two_numbers(l1, l2)
       head = ListNode.new(nil)
 
       sum = head
       carry = 0
 
-      while left || right || carry.positive?
+      while l1 || l2 || carry.positive?
         if sum.val
           sum.next = ListNode.new(nil)
           sum = sum.next
         end
 
-        if left
-          sum.val = (sum.val || 0) + left.val
-          left = left.next
+        if l1
+          sum.val = (sum.val || 0) + l1.val
+          l1 = l1.next
         end
 
-        if right
-          sum.val = (sum.val || 0) + right.val
-          right = right.next
+        if l2
+          sum.val = (sum.val || 0) + l2.val
+          l2 = l2.next
         end
 
         sum.val = (sum.val || 0) + carry

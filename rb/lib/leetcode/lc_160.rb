@@ -3,18 +3,16 @@
 module LeetCode
   # 160. Intersection of Two Linked Lists
   module LC160
-    ListNode = Struct.new(:val, :next)
-
     # Description:
     # Write a program to find the node at which the intersection of two singly linked lists begins.
     #
     # Examples:
     # Input:
-    #   left =  1->2->3
+    #   head_a = 1->2->3
     #                  \
     #                   7->8->9
     #                  /
-    #   right =    4->5
+    #   head_b =   4->5
     #
     # Output: 7->8->9
     #
@@ -24,39 +22,31 @@ module LeetCode
     # - You may assume there are no cycles anywhere in the entire linked structure.
     # - Your code should preferably run in O(n) time and use only O(1) memory.
     #
-    # @param left {ListNode}
-    # @param right {ListNode}
+    # @param {ListNode} head_a
+    # @param {ListNode} head_b
     # @return {ListNode}
-    def intersection_node(left, right)
-      return if !left || !right
+    def get_intersection_node(head_a, head_b)
+      i_head = head_a
+      j_head = head_b
 
-      cursor_left = left
-      cursor_right = right
+      i = head_a
+      j = head_b
 
-      end_left = nil
-      end_right = nil
-
-      while cursor_left != cursor_right
-        if cursor_left.next
-          cursor_left = cursor_left.next
-        else
-          end_left = cursor_left
-          cursor_left = right
+      while i && j && !i.equal?(j)
+        i = i.next
+        if !i && i_head == head_a
+          i_head = head_b
+          i = i_head
         end
 
-        if cursor_right.next
-          cursor_right = cursor_right.next
-        else
-          end_right = cursor_right
-          cursor_right = left
+        j = j.next
+        if !j && j_head == head_b
+          j_head = head_a
+          j = j_head
         end
-
-        return if end_left && end_right && end_left != end_right
       end
 
-      cursor_left
+      i
     end
-
-    alias_method(:get_intersection_node, :intersection_node)
   end
 end
