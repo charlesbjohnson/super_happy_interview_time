@@ -5,31 +5,28 @@ module LeetCode
   module LC20
     # Description:
     # Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
-    # The brackets must close in the correct order.
+    #
+    # An input string is valid if:
+    # - Open brackets must be closed by the same type of brackets.
+    # - Open brackets must be closed in the correct order.
+    #
     #
     # Examples:
-    # - 1:
-    #   Input: '()'
-    #   Output: true
+    # Input: s = "()"
+    # Output: true
     #
-    # - 2:
-    #   Input: '()[]{}'
-    #   Output: true
+    # Input: s = "()[]{}"
+    # Output: true
     #
-    # - 3:
-    #   Input: '(]'
-    #   Output: false
+    # Input: s = "(]"
+    # Output: false
     #
-    # - 4:
-    #   Input: '([)]'
-    #   Output: false
-    #
-    # @param s {String}
+    # @param {String} s
     # @return {Boolean}
-    def valid?(s)
+    def is_valid(s)
       stack = []
 
-      s.chars.each { |c|
+      s.each_char { |c|
         case c
         when "(", "[", "{"
           stack.push(c)
@@ -44,7 +41,5 @@ module LeetCode
 
       stack.empty?
     end
-
-    alias_method(:is_valid, :valid?)
   end
 end

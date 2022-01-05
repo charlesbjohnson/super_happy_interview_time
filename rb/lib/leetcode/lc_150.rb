@@ -5,37 +5,43 @@ module LeetCode
   module LC150
     # Description:
     # Evaluate the value of an arithmetic expression in Reverse Polish Notation.
-    # Valid operators are +, -, *, /.
-    # Each operand may be an integer or another expression.
+    #
+    # Valid operators are +, -, *, and /. Each operand may be an integer or another expression.
+    #
+    # Note that division between two integers should truncate toward zero.
+    #
+    # It is guaranteed that the given RPN expression is always valid. That means the expression would always evaluate to a result, and there will not be any division by zero operation.
     #
     # Examples:
-    # - 1:
-    #   Input: ["2", "1", "+", "3", "*"]
-    #   Output: 9
+    # Input: tokens = ["2", "1", "+", "3", "*"]
+    # Output: 9
     #
-    # - 2:
-    #   Input: ["4", "13", "5", "/", "+"]
-    #   Output: 5
+    # Input: tokens = ["4", "13", "5", "/", "+"]
+    # Output: 6
     #
-    # @param tokens {Array<String>}
+    # Input: tokens = ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]
+    # Output: 22
+    #
+    # @param {Array<String>} tokens
     # @return {Integer}
     def eval_rpn(tokens)
       stack = []
 
       tokens.each { |token|
         case token
-        when "*"
-          stack.push(stack.pop * stack.pop)
-        when "/"
-          right = stack.pop
-          left = stack.pop
-          stack.push((left / right.to_f).to_i)
-        when "+"
-          stack.push(stack.pop + stack.pop)
-        when "-"
-          right = stack.pop
-          left = stack.pop
-          stack.push(left - right)
+        when "+", "-", "*", "/"
+          right, left = stack.pop, stack.pop
+
+          case token
+          when "+"
+            stack.push(left + right)
+          when "-"
+            stack.push(left - right)
+          when "*"
+            stack.push(left * right)
+          when "/"
+            stack.push(Integer(left.fdiv(right).to_i))
+          end
         else
           stack.push(token.to_i)
         end

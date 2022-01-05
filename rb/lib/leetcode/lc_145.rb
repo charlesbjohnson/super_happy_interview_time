@@ -19,7 +19,7 @@ module LeetCode
     # Output: [1]
     #
     # @param {TreeNode} root
-    # @return {Integer[]}
+    # @return {Array<Integer>}
     def postorder_traversal(root)
       stack = []
       result = []

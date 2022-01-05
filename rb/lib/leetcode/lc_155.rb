@@ -5,38 +5,58 @@ module LeetCode
   module LC155
     # Description:
     # Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
-    # - push(x)   -- Push element x onto stack.
-    # - pop()     -- Removes the element on top of the stack.
-    # - top()     -- Get the top element.
-    # - get_min() -- Retrieve the minimum element in the stack.
+    #
+    # Implement the MinStack class:
+    # - MinStack()         initializes the stack object.
+    # - void push(int val) pushes the element val onto the stack.
+    # - void pop()         removes the element on the top of the stack.
+    # - int top()          gets the top element of the stack.
+    # - int getMin()       retrieves the minimum element in the stack.
+    #
+    # Examples:
+    # Input:
+    # ["MinStack", "push", "push", "push", "getMin", "pop", "top", "getMin"]
+    # [[], [-2], [0], [-3], [], [], [], []]
+    #
+    # Output:
+    # [null, null, null, null, -3, null, 0, -2]
+    #
     class MinStack
       def initialize
-        @vals = []
-        @mins = []
+        self.vals = []
+        self.mins = []
       end
 
-      def push(x)
-        @vals.push(x)
-        @mins.push(x) if @mins.empty? || x <= @mins.last
+      # @param {Integer} val
+      # @return {nil}
+      def push(val)
+        vals.push(val)
+        mins.push([val, get_min].compact.min)
 
         nil
       end
 
+      # @return {nil}
       def pop
-        @mins.pop if @vals.pop == @mins.last
+        vals.pop
+        mins.pop
 
         nil
       end
 
+      # @return {Integer}
       def top
-        @vals.last
+        vals.last
       end
 
-      def min
-        @mins.last
+      # @return {Integer}
+      def get_min
+        mins.last
       end
 
-      alias_method(:get_min, :min)
+      private
+
+      attr_accessor(:vals, :mins)
     end
   end
 end

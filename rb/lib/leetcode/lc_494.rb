@@ -3,50 +3,55 @@
 module LeetCode
   # 494. Target Sum
   module LC494
-    def find_target_sum_ways_recurse(list, sum, index, current, cache)
-      if index == list.length
-        return current == sum ? 1 : 0
-      end
-
-      return cache.dig(index, current) if cache.dig(index, current)
-
-      value = list[index]
-      add = find_target_sum_ways_recurse(list, sum, index + 1, current + value, cache)
-      sub = find_target_sum_ways_recurse(list, sum, index + 1, current - value, cache)
-
-      cache[index] = {} unless cache[index]
-      cache[index][current] = add + sub
-      add + sub
-    end
-
     # Description:
-    # You are given a list of non-negative integers and a target sum.
-    # You have 2 symbols, + and -.
-    # For each integer, choose either + or - as its new symbol.
+    # You are given an integer array nums and an integer target.
     #
-    # Find out how many ways to assign symbols to make the sum of integers equal to the target sum.
+    # You want to build an expression out of nums by adding one of the symbols '+' and '-'
+    # before each integer in nums and then concatenate all the integers.
+    #
+    # For example, if nums = [2, 1], you can add a '+' before 2 and a '-' before 1
+    # and concatenate them to build the expression "+2-1".
+    #
+    # Return the number of different expressions that you can build, which evaluates to target.
     #
     # Examples:
-    # Input: list = [1, 1, 1, 1, 1], sum = 3
+    # Input: nums = [1, 1, 1, 1, 1],  target = 3
     # Output: 5
-    # Explanation:
-    # There are 5 ways to assign symbols to make the sum of the list be 3.
-    #   1. - 1 + 1 + 1 + 1 + 1 = 3
-    #   2. + 1 - 1 + 1 + 1 + 1 = 3
-    #   3. + 1 + 1 - 1 + 1 + 1 = 3
-    #   4. + 1 + 1 + 1 - 1 + 1 = 3
-    #   5. + 1 + 1 + 1 + 1 - 1 = 3
     #
-    # Notes:
-    # - The length of the given array is positive and will not exceed 20.
-    # - The sum of elements in the given array will not exceed 1000.
-    # - Your output answer is guaranteed to fit in a 32-bit integer.
+    # Input: nums = [1], target = 1
+    # Output: 1
     #
-    # @param list {Array<Integer>}
-    # @param sum {Integer}
+    # @param {Array<Integer>} nums
+    # @param {Integer} target
     # @return {Integer}
-    def find_target_sum_ways(list, sum)
-      find_target_sum_ways_recurse(list, sum, 0, 0, {})
+    def find_target_sum_ways(nums, target)
+      stack = []
+      cache = {}
+
+      stack.push([0, 0, false]) if nums.length > 0
+
+      until stack.empty?
+        i, sum, visited = stack.pop
+
+        next if cache.key?([i, sum])
+
+        if visited
+          cache[[i, sum]] = cache[[i + 1, sum + nums[i]]] + cache[[i + 1, sum - nums[i]]]
+          next
+        end
+
+        if i < nums.length - 1
+          stack.push([i, sum, true])
+          stack.push([i + 1, sum + nums[i], false])
+          stack.push([i + 1, sum - nums[i], false])
+        else
+          cache[[i + 1, sum + nums[i]]] = sum + nums[i] == target ? 1 : 0
+          cache[[i + 1, sum - nums[i]]] = sum - nums[i] == target ? 1 : 0
+          cache[[i, sum]] = cache[[i + 1, sum + nums[i]]] + cache[[i + 1, sum - nums[i]]]
+        end
+      end
+
+      cache.fetch([0, 0], 0)
     end
   end
 end

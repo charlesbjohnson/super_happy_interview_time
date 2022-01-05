@@ -5,54 +5,42 @@ require("set")
 module LeetCode
   # 279. Perfect Squares
   module LC279
-    def generate_squares(n)
-      (1..n).each.with_object([]) { |v, squares|
-        square = v * v
-        return squares if square > n
-
-        squares.push(square)
-      }
-    end
-
     # Desciption:
-    # Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
+    # Given an integer n, return the least number of perfect square numbers that sum to n.
+    #
+    # A perfect square is an integer that is the square of an integer;
+    # in other words, it is the product of some integer with itself.
+    # For example, 1, 4, 9, and 16 are perfect squares while 3 and 11 are not.
     #
     # Examples:
-    # - 1:
-    #   Input: 12
-    #   Output: 3
-    #   Explanation: 12 = 4 + 4 + 4
+    # Input: n = 12
+    # Output: 3
     #
-    # - 2:
-    #   Input: 13
-    #   Output: 2
-    #   Explanation: 4 + 9
+    # Input: n = 13
+    # Output: 2
     #
-    # @param n {Integer}
+    # @param {Integer} n
     # @return {Integer}
     def num_squares(n)
-      squares = generate_squares(n)
+      perfect_squares = (1..n).each_with_object([]) { |v, ps|
+        ps.push(v**2) if v**2 <= n
+      }
 
-      queue = Set.new([n])
-      result = 0
+      queue = [[n, 0]]
 
       until queue.empty?
-        result += 1
-        tmp = Set.new
+        remaining, count = queue.shift
 
-        queue.each { |v|
-          squares.each { |square|
-            return result if square == v
-            break if square > v
+        perfect_squares.reverse_each { |perfect_square|
+          return count + 1 if perfect_square == remaining
 
-            tmp.add(v - square)
-          }
+          if perfect_square < remaining
+            queue.push([remaining - perfect_square, count + 1])
+          end
         }
-
-        queue = tmp
       end
 
-      result
+      n
     end
   end
 end
