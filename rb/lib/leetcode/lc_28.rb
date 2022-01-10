@@ -5,32 +5,38 @@ module LeetCode
   module LC28
     # Description:
     # Implement strStr().
+    #
     # Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
     #
     # Examples:
-    # - 1:
-    #   Input: haystack = "hello", needle = "ll"
-    #   Output: 2
+    # Input: haystack = "hello", needle = "ll"
+    # Output: 2
     #
-    # - 2:
-    #   Input: haystack = "aaaaa", needle = "bba"
-    #   Output: -1
+    # Input: haystack = "aaaaa", needle = "bba"
+    # Output: -1
     #
-    # @param haystack {String}
-    # @param needle {String}
+    # Input: haystack = "", needle = ""
+    # Output: 0
+    #
+    # @param {String} haystack
+    # @param {String} needle
     # @return {Integer}
     def str_str(haystack, needle)
-      return 0 if needle.empty?
-      return -1 if haystack.length < needle.length
+      idx = needle.each_char.with_index.with_object({}) { |(c, i), h| h[c] = i }
 
-      (0..(haystack.length - needle.length)).each { |h|
-        (0...needle.length).each { |n|
-          break if haystack[h + n] != needle[n]
-          return h if n == needle.length - 1
-        }
-      }
+      i = 0
+      j = 0
 
-      -1
+      while i <= haystack.length - needle.length
+        j = needle.length - 1
+        j -= 1 while j >= 0 && haystack[i + j] == needle[j]
+
+        break if j < 0
+
+        i += [j - idx.fetch(haystack[i + j], -1), 1].max
+      end
+
+      j >= 0 ? -1 : i
     end
   end
 end

@@ -24,30 +24,25 @@ module LeetCode
     # @param {Array<Integer>} nums
     # @return {Integer}
     def remove_duplicates(nums)
+      return nums.length if nums.length <= 1
+
       i = 1
-
-      while i < nums.length
-        nums[i - 1] = nil if nums[i - 1] == nums[i]
-        i += 1
-      end
-
-      i = 0
       j = i
 
       while i < nums.length && j < nums.length
-        if !nums[i].nil?
+        if nums[i - 1] < nums[i]
           i += 1
-          j = i
           next
         end
 
-        if j == i || nums[j].nil?
+        j = [j, i].max
+
+        if nums[i - 1] >= nums[j]
           j += 1
           next
         end
 
         nums[i] = nums[j]
-        nums[j] = nil
       end
 
       i

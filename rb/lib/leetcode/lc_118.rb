@@ -4,57 +4,34 @@ module LeetCode
   # 118. Pascal's Triangle
   module LC118
     # Description:
-    # Given n, generate the first n rows of Pascal's triangle.
+    # Given an integer num_rows, return the first num_rows of Pascal's triangle.
+    #
+    # In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
+    #
+    #     1
+    #    1 1
+    #   1 2 1
+    #  1 3 3 1
+    # 1 4 6 4 1
     #
     # Examples:
-    # Given: 5
-    # Output: [
-    # [1],
-    # [1,1],
-    # [1,2,1],
-    # [1,3,3,1],
-    # [1,4,6,4,1],
-    # ]
-
-    # @param n {Integer}
+    # Input: num_rows = 5
+    # Output: [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]
+    #
+    # Input: num_rows = 1
+    # Output: [[1]]
+    #
+    # @param {Integer} num_rows
     # @return {Array<Array<Integer>>}
-    def generate(n)
-      return [] if n < 1
-      return [[1]] if n == 1
+    def generate(num_rows)
+      result = Array.new(num_rows) { |i|
+        Array.new(i + 1) { |j| j == 0 || j == i ? 1 : nil }
+      }
 
-      result = [
-        [1],
-        [1, 1]
-      ]
-
-      return result if n == 2
-
-      (2...n).each { |i|
-        prev = result[i - 1]
-        current = []
-
-        mid = prev.length / 2
-        left = mid
-        right = mid
-
-        if prev.length.even?
-          left = mid - 1
-          right = mid
-          current.push(prev[left] + prev[right])
-        end
-
-        while left >= 0 && right < prev.length
-          next_left = left.zero? ? 0 : prev[left - 1]
-          next_right = right == prev.length - 1 ? 0 : prev[right + 1]
-
-          current.unshift(prev[left] + next_left)
-          current.push(prev[right] + next_right)
-
-          left -= 1
-          right += 1
-        end
-
-        result.push(current)
+      (2...result.length).each { |r|
+        (1...(result[r].length - 1)).each { |c|
+          result[r][c] = result[r - 1][c - 1] + result[r - 1][c]
+        }
       }
 
       result

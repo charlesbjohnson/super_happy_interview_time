@@ -4,42 +4,45 @@ module LeetCode
   # 189. Rotate Array
   module LC189
     # Description:
-    # Rotate an array of n elements to the right by k steps.
+    # Given an array, rotate the array to the right by k steps, where k is non-negative.
     #
     # Examples:
-    # Input: list = [1, 2, 3, 4, 5, 6, 7], steps = 3
-    # Output: nil
-    # where list = [5, 6, 7, 1, 2, 3, 4]
+    # Input: nums = [1, 2, 3, 4, 5, 6, 7], k = 3
+    # Output: [5, 6, 7, 1, 2, 3, 4]
     #
-    # Notes:
-    # - Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.
+    # Input: nums = [-1, -100, 3, 99], k = 2
+    # Output: [3, 99, -1, -100]
     #
-    # @param list {Array<Integer>}
-    # @param steps {Integer}
+    # @param {Array<Integer>} nums
+    # @param {Integer} k
     # @return {nil}
-    def rotate(list, steps)
-      return if list.length < 2
+    def rotate(nums, k)
+      k %= nums.length
+      return if k == 0
 
-      steps = steps % list.length
-      return if steps < 1
+      placed = 0
+      i = 0
 
-      reverse(list, 0...list.length)
-      reverse(list, 0...steps)
-      reverse(list, steps...list.length)
-    end
+      while placed < nums.length
+        start = i
 
-    def reverse(list, range)
-      left = range.min
-      right = range.max
+        place = start
+        placing = nums[place]
 
-      while left < right
-        list[left], list[right] = list[right], list[left]
+        loop {
+          next_place = (place + k) % nums.length
 
-        left += 1
-        right -= 1
+          nums[next_place], placing = placing, nums[next_place]
+          placed += 1
+
+          place = next_place
+          break if place == start
+        }
+
+        i += 1
       end
 
-      list
+      nil
     end
   end
 end

@@ -25,28 +25,19 @@ module LeetCode
     # @param {Integer} val
     # @return {Integer}
     def remove_element(nums, val)
-      return 0 if nums.empty?
-
       i = 0
-      j = nums.length - 1
+      j = 0
 
-      while i <= j
-        if nums[i] != val
+      while j < nums.length
+        if nums[j] != val
+          nums[i] = nums[j]
           i += 1
-          next
         end
 
-        if nums[j] == val || nums[j].nil?
-          nums[j] = nil
-          j -= 1
-          next
-        end
-
-        nums[i] = nums[j]
-        nums[j] = nil
+        j += 1
       end
 
-      (i - 1).clamp(0, nums.length)
+      i
     end
   end
 end

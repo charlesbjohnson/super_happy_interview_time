@@ -8,16 +8,17 @@ module LeetCode
     include(LC26)
 
     [
-      [[1, 1], [[1, nil], 1]],
-      [[1, 2], [[1, 2], 2]],
-      [[1, 1, 2], [[1, 2, nil], 2]],
-      [[1, 1, 1, 1, 2, 3, 4], [[1, 2, 3, 4, nil, nil, nil], 4]],
-      [[1, 2, 2, 2, 2, 3, 4], [[1, 2, 3, 4, nil, nil, nil], 4]],
-      [[1, 2, 3, 4, 4, 4, 4], [[1, 2, 3, 4, nil, nil, nil], 4]]
-    ].each.with_index { |(list, (expected, expected_length)), i|
+      [[1, 1], [1]],
+      [[1, 2], [1, 2]],
+      [[1, 1, 2], [1, 2]],
+      [[1, 1, 1, 1, 2, 3, 4], [1, 2, 3, 4]],
+      [[1, 2, 2, 2, 2, 3, 4], [1, 2, 3, 4]],
+      [[1, 2, 3, 4, 4, 4, 4], [1, 2, 3, 4]],
+      [[0, 0, 1, 1, 1, 2, 2, 3, 3, 4], [0, 1, 2, 3, 4]]
+    ].each.with_index { |(nums, expected), i|
       define_method(:"test_remove_duplicates_#{i}") {
-        assert_equal(expected_length, remove_duplicates(list))
-        assert_equal(expected, list)
+        assert_equal(expected.length, remove_duplicates(nums))
+        assert_equal(expected, nums[...expected.length])
       }
     }
   end

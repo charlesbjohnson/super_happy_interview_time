@@ -3,24 +3,42 @@
 module LeetCode
   # 14. Longest Common Prefix
   module LC14
-    def common_prefix(left, right)
-      cursor = 0
-
-      cursor += 1 while cursor < left.length && cursor < right.length && left[cursor] == right[cursor]
-
-      left[0...cursor]
-    end
-
     # Description:
     # Write a function to find the longest common prefix string amongst an array of strings.
     #
-    # @param list {Array<String>}
+    # If there is no common prefix, return an empty string "".
+    #
+    # Examples:
+    # Input: strs = ["flower", "flow", "flight"]
+    # Output: "fl"
+    #
+    # Input: strs = ["dog", "racecar", "car"]
+    # Output: ""
+    #
+    # @param {Array<String>} strs
     # @return {String}
-    def longest_common_prefix(list)
-      return "" if list.empty?
-      return list.first if list.length < 2
+    def longest_common_prefix(strs)
+      return strs[0] if strs.length == 1
 
-      (1...list.length).reduce(list[0]) { |prefix, i| common_prefix(prefix, list[i]) }
+      i = 1
+      j = 0
+
+      while i < strs.length && j < strs[i].length
+        while i < strs.length
+          if strs[i][j] != strs[i - 1][j]
+            break
+          else
+            i += 1
+          end
+        end
+
+        break if i < strs.length
+
+        i = 1
+        j += 1
+      end
+
+      strs[0][...j]
     end
   end
 end

@@ -8,13 +8,14 @@ module LeetCode
     include(LC344)
 
     [
-      %w[a a],
-      %w[ab ba],
-      %w[foobar raboof],
-      %w[hello olleh]
+      [%w[a], %w[a]],
+      [%w[a b], %w[b a]],
+      [%w[a b c], %w[c b a]],
+      [%w[H e l l o], %w[o l l e H]]
     ].each.with_index { |(s, expected), i|
       define_method(:"test_reverse_string_#{i}") {
-        assert_equal(expected, reverse_string(s))
+        reverse_string(s)
+        assert_equal(expected, s)
       }
     }
   end

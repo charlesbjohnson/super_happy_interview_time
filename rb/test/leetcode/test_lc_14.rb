@@ -8,7 +8,6 @@ module LeetCode
     include(LC14)
 
     [
-      [[], ""],
       [[""], ""],
       [["a"], "a"],
       [%w[a b], ""],

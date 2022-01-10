@@ -4,9 +4,21 @@ module LeetCode
   # 66. Plus One
   module LC66
     # Description:
-    # Given a non-negative integer represented as a non-empty array of digits, plus one to the integer.
-    # You may assume the integer do not contain any leading zero, except the number 0 itself.
-    # The digits are stored such that the most significant digit is at the head of the list.
+    # You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer.
+    # The digits are ordered from most significant to least significant in left-to-right order.
+    # The large integer does not contain any leading 0's.
+    #
+    # Increment the large integer by one and return the resulting array of digits.
+    #
+    # Examples:
+    # Input: digits = [1, 2, 3]
+    # Output: [1, 2, 4]
+    #
+    # Input: digits = [4, 3, 2, 1]
+    # Output: [4, 3, 2, 2]
+    #
+    # Input: digits = [9]
+    # Output: [1, 0]
     #
     # @param digits {Array<Integer>}
     # @return {Array>Integer>}
