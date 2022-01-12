@@ -37,15 +37,15 @@ describe(Algorithms::GraphProcessing::TopologicalOrder) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#acyclic?") {
-      it("returns true") do
+      it("returns true") {
         _(subject.acyclic?).must_equal(true)
-      end
+      }
     }
 
     describe("#order") {
-      it("returns a topologically ordered path") do
+      it("returns a topologically ordered path") {
         _(subject.order).must_equal([8, 7, 2, 3, 0, 6, 9, 11, 12, 10, 5, 4, 1])
-      end
+      }
     }
   }
 
@@ -74,15 +74,15 @@ describe(Algorithms::GraphProcessing::TopologicalOrder) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#acyclic?") {
-      it("returns false") do
+      it("returns false") {
         _(subject.acyclic?).must_equal(false)
-      end
+      }
     }
 
     describe("#order") {
-      it("returns nil") do
+      it("returns nil") {
         _(subject.order).must_be_nil
-      end
+      }
     }
   }
 }

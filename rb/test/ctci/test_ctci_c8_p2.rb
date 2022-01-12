@@ -14,7 +14,7 @@ module CTCI
 
         describe("#add_staff") {
           let(:respondent) { StaffMember.respondent }
-          it("adds the staff member as an available staff") do
+          it("adds the staff member as an available staff") {
             staff = subject.instance_variable_get(:@staff)
             _(staff.values.map(&:values).flatten).must_be_empty
 
@@ -23,13 +23,13 @@ module CTCI
             _(staff[respondent.support_role][:available]).must_include(respondent)
             _(staff[respondent.support_role][:unavailable]).wont_include(respondent)
             _(actual).must_equal(respondent)
-          end
+          }
 
-          it("adds the call center as an observer of the staff member") do
+          it("adds the call center as an observer of the staff member") {
             _(respondent.count_observers).must_equal(0)
             subject.add_staff(respondent)
             _(respondent.count_observers).must_equal(1)
-          end
+          }
         }
 
         describe("#dispatch_call") {
@@ -41,16 +41,16 @@ module CTCI
           }
 
           describe("if a respondent is available") {
-            it("connects the call with a staff member") do
+            it("connects the call with a staff member") {
               subject.dispatch_call(@call)
               _(@respondent.current_call).must_equal(@call)
-            end
+            }
 
-            it("connects the call with a staff member who is capable") do
+            it("connects the call with a staff member who is capable") {
               @call.escalate_issue
               subject.dispatch_call(@call)
               _(@manager.current_call).must_equal(@call)
-            end
+            }
 
             describe("the call requires respondent with higher support tier") {
               before {
@@ -61,18 +61,18 @@ module CTCI
                 subject.dispatch_call(director_call)
               }
 
-              it("the call is added to the waiting list") do
+              it("the call is added to the waiting list") {
                 @respondent.reassign_call
                 _(subject.instance_variable_get(:@wait_list)).must_include(@call)
-              end
+              }
 
-              it("returns the original respondent to the available staff") do
+              it("returns the original respondent to the available staff") {
                 @respondent.reassign_call
 
                 staff = subject.instance_variable_get(:@staff)
                 _(staff[@respondent.support_role][:unavailable]).wont_include(@respondent)
                 _(staff[@respondent.support_role][:available]).must_include(@respondent)
-              end
+              }
 
               describe("other calls waiting") {
                 before {
@@ -80,10 +80,10 @@ module CTCI
                   subject.dispatch_call(@other_call)
                 }
 
-                it("dispatches the first waiting call") do
+                it("dispatches the first waiting call") {
                   @respondent.reassign_call
                   _(@respondent.current_call).must_equal(@other_call)
-                end
+                }
               }
             }
           }
@@ -91,14 +91,14 @@ module CTCI
           describe("if no staff member is available") {
             before { subject.dispatch_call(@call) }
 
-            it("queues the call until a staff member is available") do
+            it("queues the call until a staff member is available") {
               other_call = Call.new
               subject.dispatch_call(other_call)
 
               _(other_call).wont_be(:connected?)
               _(other_call.respondent).must_be_nil
               _(subject.instance_variable_get(:@wait_list)).must_include(other_call)
-            end
+            }
           }
         }
       }
@@ -115,40 +115,40 @@ module CTCI
 
         let(:respondent) { StaffMember.respondent }
 
-        it("starts out disconnected") do
+        it("starts out disconnected") {
           _(subject).wont_be(:connected?)
           _(subject.respondent).must_be_nil
-        end
+        }
 
         describe("#connect") {
-          it("connects the call with a respondent") do
+          it("connects the call with a respondent") {
             subject.connect(respondent)
             _(subject).must_be(:connected?)
             _(subject.respondent).must_equal(respondent)
-          end
+          }
         }
 
         describe("#disconnect") {
           before { subject.connect(respondent) }
 
-          it("disconnects the call from the respondent") do
+          it("disconnects the call from the respondent") {
             subject.disconnect
             _(subject).wont_be(:connected?)
             _(subject.respondent).must_be_nil
-          end
+          }
         }
 
         describe("#escalate_issue") {
-          it("escalates the level of the call") do
+          it("escalates the level of the call") {
             _(subject.level).must_equal(0)
             subject.escalate_issue
             _(subject.level).must_equal(1)
-          end
+          }
 
-          it("does not escalate past level 2") do
+          it("does not escalate past level 2") {
             6.times { subject.escalate_issue }
             _(subject.level).must_equal(2)
-          end
+          }
         }
       }
 
@@ -159,21 +159,21 @@ module CTCI
         it { _(subject).must_respond_to(:reassign_call) }
         it { _(subject).must_respond_to(:current_call) }
 
-        it do
+        it {
           _(StaffMember.respondent.support_role).must_equal(:respondent)
           _(StaffMember.manager.support_role).must_equal(:manager)
           _(StaffMember.director.support_role).must_equal(:director)
-        end
+        }
 
         let(:call) { Call.new }
 
         describe("#assign_call") {
-          it do
+          it {
             subject.assign_call(call)
             _(subject.current_call).must_equal(call)
             _(call).must_be(:connected?)
             _(call.respondent).must_equal(subject)
-          end
+          }
         }
 
         describe("#reassign_call") {
@@ -181,7 +181,7 @@ module CTCI
             subject.assign_call(call)
           }
 
-          it("notifies observers") do
+          it("notifies observers") {
             call_center = Minitest::Mock.new
 
             def call_center.hash
@@ -193,19 +193,19 @@ module CTCI
             subject.reassign_call
 
             call_center.verify
-          end
+          }
 
-          it("escalates the call") do
+          it("escalates the call") {
             _(subject.current_call.level).must_equal(0)
             subject.reassign_call
             _(call.level).must_equal(1)
-          end
+          }
 
-          it("disconnects the call") do
+          it("disconnects the call") {
             subject.reassign_call
             _(call).wont_be(:connected?)
             _(subject.current_call).must_be_nil
-          end
+          }
         }
       }
     end

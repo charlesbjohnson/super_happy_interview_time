@@ -34,19 +34,19 @@ describe(Algorithms::GraphProcessing::DepthFirstSearch) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#marked?") {
-      it("returns true if the source is connected to the target") do
+      it("returns true if the source is connected to the target") {
         _(subject.marked?(3)).must_equal(true)
-      end
+      }
 
-      it("returns false if the source is not connected to the target") do
+      it("returns false if the source is not connected to the target") {
         _(subject.marked?(9)).must_equal(false)
-      end
+      }
     }
 
     describe("#count") {
-      it("returns the number of vertices connected to the source") do
+      it("returns the number of vertices connected to the source") {
         _(subject.count).must_equal(6)
-      end
+      }
     }
   }
 
@@ -81,19 +81,19 @@ describe(Algorithms::GraphProcessing::DepthFirstSearch) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#marked?") {
-      it("returns true if the source is connected to the target") do
+      it("returns true if the source is connected to the target") {
         _(subject.marked?(3)).must_equal(true)
-      end
+      }
 
-      it("returns false if the source is not connected to the target") do
+      it("returns false if the source is not connected to the target") {
         _(subject.marked?(9)).must_equal(false)
-      end
+      }
     }
 
     describe("#count") {
-      it("returns the number of vertices connected to the source") do
+      it("returns the number of vertices connected to the source") {
         _(subject.count).must_equal(5)
-      end
+      }
     }
   }
 }

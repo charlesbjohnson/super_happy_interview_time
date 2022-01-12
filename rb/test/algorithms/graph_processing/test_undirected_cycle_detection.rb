@@ -31,15 +31,15 @@ describe(Algorithms::GraphProcessing::UndirectedCycleDetection) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#cycle?") {
-      it("returns true") do
+      it("returns true") {
         _(subject.cycle?).must_equal(true)
-      end
+      }
     }
 
     describe("#cycle") {
-      it("returns the cycle") do
+      it("returns the cycle") {
         _(subject.cycle).must_equal([6, 7, 8, 6])
-      end
+      }
     }
   }
 
@@ -58,15 +58,15 @@ describe(Algorithms::GraphProcessing::UndirectedCycleDetection) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#cycle?") {
-      it("returns false") do
+      it("returns false") {
         _(subject.cycle?).must_equal(false)
-      end
+      }
     }
 
     describe("#cycle") {
-      it("returns nil") do
+      it("returns nil") {
         _(subject.cycle).must_be_nil
-      end
+      }
     }
   }
 }

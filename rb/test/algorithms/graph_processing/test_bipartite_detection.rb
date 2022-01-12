@@ -32,9 +32,9 @@ describe(Algorithms::GraphProcessing::BipartiteDetection) {
 
       before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-      it("returns true") do
+      it("returns true") {
         _(subject.bipartite?).must_equal(true)
-      end
+      }
     }
 
     describe("when the graph is not bipartite") {
@@ -51,9 +51,9 @@ describe(Algorithms::GraphProcessing::BipartiteDetection) {
 
       before { edges.each { |from, to| graph.add_edge(from, to) } }
 
-      it("returns false") do
+      it("returns false") {
         _(subject.bipartite?).must_equal(false)
-      end
+      }
     }
   }
 }

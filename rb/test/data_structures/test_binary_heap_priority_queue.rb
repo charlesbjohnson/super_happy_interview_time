@@ -17,49 +17,49 @@ describe(DataStructures::BinaryHeapPriorityQueue) {
   it { _(subject).must_respond_to(:pop) }
 
   describe("#size") {
-    it("starts out empty") do
+    it("starts out empty") {
       _(subject.size).must_equal(0)
-    end
+    }
 
-    it("is increased on a #push") do
+    it("is increased on a #push") {
       subject.push(1)
       _(subject.size).must_equal(1)
-    end
+    }
 
-    it("stays the same on a #peek") do
+    it("stays the same on a #peek") {
       subject.push(1)
       _(subject.size).must_equal(1)
 
       subject.peek
       _(subject.size).must_equal(1)
-    end
+    }
 
-    it("is decreased on a #pop") do
+    it("is decreased on a #pop") {
       subject.push(1)
       subject.pop
       _(subject.size).must_equal(0)
-    end
+    }
 
-    it("stays the same on #each") do
+    it("stays the same on #each") {
       [1, 2, 3, 4].each { |i| subject.push(i) }
       subject.each {}
       _(subject.size).must_equal(4)
-    end
+    }
   }
 
   describe("#push") {
-    it("adds to the priority queue") do
+    it("adds to the priority queue") {
       subject.push(1)
       _(subject.peek).must_equal(1)
-    end
+    }
 
     describe("when it already contains elements") {
       before { [1, 5, -3, 4, 6].each { |i| subject.push(i) } }
 
-      it("adds according to the priority") do
+      it("adds according to the priority") {
         subject.push(2)
         _(subject.peek).must_equal(6)
-      end
+      }
     }
 
     describe("with a comparable priority") {
@@ -67,79 +67,79 @@ describe(DataStructures::BinaryHeapPriorityQueue) {
 
       before { [1, 0, 1, 2, 1].each { |i| subject.push(i) } }
 
-      it("prioritizes the positive comparison") do
+      it("prioritizes the positive comparison") {
         _(subject.peek).must_equal(2)
-      end
+      }
     }
   }
 
   describe("#peek") {
     before { [-1, 5, 2].each { |i| subject.push(i) } }
 
-    it("returns the element with the highest priority") do
+    it("returns the element with the highest priority") {
       _(subject.peek).must_equal(5)
-    end
+    }
 
-    it("does not remove the element from the priority queue") do
+    it("does not remove the element from the priority queue") {
       _(subject.peek).must_equal(5)
       _(subject.peek).must_equal(5)
-    end
+    }
 
     describe("when empty") {
       let(:empty) { DataStructures::BinaryHeapPriorityQueue.new(priority) }
 
-      it("returns nil") do
+      it("returns nil") {
         _(empty.peek).must_be_nil
-      end
+      }
     }
   }
 
   describe("#pop") {
     before { [3, -1, 4, 9].each { |i| subject.push(i) } }
 
-    it("returns the element with the highest priority") do
+    it("returns the element with the highest priority") {
       _(subject.pop).must_equal(9)
-    end
+    }
 
-    it("removes the element from the priority queue") do
+    it("removes the element from the priority queue") {
       subject.pop
       _(subject.pop).wont_equal(9)
-    end
+    }
 
-    it("resolves the next highest priority element") do
+    it("resolves the next highest priority element") {
       _(subject.pop).must_equal(9)
       _(subject.pop).must_equal(4)
       _(subject.pop).must_equal(3)
-    end
+    }
 
     describe("when empty") {
       let(:empty) { DataStructures::BinaryHeapPriorityQueue.new(priority) }
 
-      it("returns nil") do
+      it("returns nil") {
         _(empty.pop).must_be_nil
-      end
+      }
     }
   }
 
   describe("#each") {
     before { [8, 3, -11, 10, 1].each { |i| subject.push(i) } }
 
-    it("yields each element by the highest priority") do
+    it("yields each element by the highest priority") {
       expected = [10, 8, 3, 1, -11]
       actual = []
       subject.each { |i| actual.push(i) }
       _(actual).must_equal(expected)
-    end
+    }
 
-    it("does not remove any elements") do
+    it("does not remove any elements") {
       subject.each {}
       _(subject.peek).must_equal(10)
-    end
+    }
 
     describe("without a block") {
-      it("returns the enumerator") do
+      it("returns the enumerator") {
         _(subject.each).must_be_kind_of(Enumerator)
-      end
+      }
     }
   }
 }

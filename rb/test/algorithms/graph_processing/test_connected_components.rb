@@ -34,27 +34,27 @@ describe(Algorithms::GraphProcessing::ConnectedComponents) {
 
   describe("#connected?") {
     describe("when the vertices are connected") {
-      it("returns true") do
+      it("returns true") {
         _(subject.connected?(3, 6)).must_equal(true)
-      end
+      }
     }
 
     describe("when the vertices are not connected") {
-      it("returns false") do
+      it("returns false") {
         _(subject.connected?(2, 8)).must_equal(false)
-      end
+      }
     }
   }
 
   describe("#count") {
-    it("returns the number of component groups for the graph") do
+    it("returns the number of component groups for the graph") {
       _(subject.count).must_equal(3)
-    end
+    }
   }
 
   describe("#id") {
-    it("returns the id of the component group for the target vertex") do
+    it("returns the id of the component group for the target vertex") {
       _(subject.id(12)).must_equal(2)
-    end
+    }
   }
 }

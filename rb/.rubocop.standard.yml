@@ -4,6 +4,7 @@ inherit_gem:
 
 Style/BlockDelimiters:
   EnforcedStyle: always_braces
+  IgnoredMethods: []
 
 Style/MethodCallWithArgsParentheses:
   Enabled: true

@@ -34,15 +34,15 @@ describe(Algorithms::GraphProcessing::DepthFirstOrder) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#pre") {
-      it("returns vertices in preorder") do
+      it("returns vertices in preorder") {
         _(subject.pre).must_equal([0, 1, 4, 3, 2, 5, 6])
-      end
+      }
     }
 
     describe("#post") {
-      it("returns vertices in postorder") do
+      it("returns vertices in postorder") {
         _(subject.post).must_equal([5, 2, 6, 3, 4, 1, 0])
-      end
+      }
     }
   }
 
@@ -67,15 +67,15 @@ describe(Algorithms::GraphProcessing::DepthFirstOrder) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#pre") {
-      it("returns vertices in preorder") do
+      it("returns vertices in preorder") {
         _(subject.pre).must_equal([0, 1, 4, 2, 5, 3, 6])
-      end
+      }
     }
 
     describe("#post") {
-      it("returns vertices in postorder") do
+      it("returns vertices in postorder") {
         _(subject.post).must_equal([4, 1, 2, 5, 0, 6, 3])
-      end
+      }
     }
   }
 }

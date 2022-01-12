@@ -12,33 +12,33 @@ module CTCI
         it { _(subject).must_respond_to(:size) }
         it { _(subject).must_respond_to(:draw) }
 
-        it("starts out with 52 cards") do
+        it("starts out with 52 cards") {
           _(subject.size).must_equal(52)
-        end
+        }
 
-        it("is shuffled") do
+        it("is shuffled") {
           other = Deck.new
           _(subject.draw(7)).wont_equal(other.draw(7))
-        end
+        }
 
         describe("#draw") {
-          it("reduces the size by the number of cards drawn") do
+          it("reduces the size by the number of cards drawn") {
             subject.draw(3)
             _(subject.size).must_equal(49)
-          end
+          }
 
-          it("returns as many cards drawn") do
+          it("returns as many cards drawn") {
             cards = subject.draw(3)
             cards.all? { |c| _(c).must_be_kind_of(Card) }
-          end
+          }
 
           describe("when out of cards") {
             before { subject.draw(52) }
 
-            it("returns nil") do
+            it("returns nil") {
               _(subject.draw).must_be_nil
               _(subject.size).must_equal(0)
-            end
+            }
           }
         }
       }
@@ -60,7 +60,7 @@ module CTCI
 
         describe("equality") {
           describe("equality compares rank by default") {
-            it do
+            it {
               other = Card.new(3, 1)
               _(subject).must_equal(other)
               _(subject).must_be(:>=, other)
@@ -69,11 +69,11 @@ module CTCI
               other = Card.new(1, 1)
               _(subject).must_be(:>, other)
               _(other).must_be(:<, subject)
-            end
+            }
           }
 
           describe("equality compares value if given") {
-            it do
+            it {
               subject = Card.new(3, 0, 50)
               other = Card.new(3, 0, 50)
               _(subject).must_equal(other)
@@ -83,22 +83,22 @@ module CTCI
               other = Card.new(3, 0, 40)
               _(subject).must_be(:>, other)
               _(other).must_be(:<, subject)
-            end
+            }
           }
         }
 
         describe("#rank_equal?") {
-          it("is true if ranks are equal") do
+          it("is true if ranks are equal") {
             other = Card.new(3, 0, 110)
             _(subject).must_be(:suit_equal?, other)
-          end
+          }
         }
 
         describe("#suit_equal?") {
-          it("is true if suits are equal") do
+          it("is true if suits are equal") {
             other = Card.new(5, 0)
             _(subject).must_be(:suit_equal?, other)
-          end
+          }
         }
       }
     end

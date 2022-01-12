@@ -17,13 +17,13 @@ module CTCI
         it { _(subject).must_respond_to(:place_token) }
 
         describe("::new") {
-          it("creates a board with 8 columns and rows by default") do
+          it("creates a board with 8 columns and rows by default") {
             _(subject.board.size).must_equal(8)
             _(subject.board.first.size).must_equal(8)
             _(subject.size).must_equal(8)
-          end
+          }
 
-          it("starts two white and two black tokens in an X at the center") do
+          it("starts two white and two black tokens in an X at the center") {
             black = subject.board[3][3], subject.board[4][4]
             white = subject.board[4][3], subject.board[3][4]
             _(black.all?(&:black?)).must_equal(true)
@@ -31,45 +31,45 @@ module CTCI
 
             _(subject.black).must_equal(2)
             _(subject.white).must_equal(2)
-          end
+          }
 
-          it("creates tokens for each position") do
+          it("creates tokens for each position") {
             positions = subject.board.flatten
             positions.each { |t| _(t).must_be_kind_of(Token) }
             _(positions.count(&:none?)).must_equal(60)
             _(subject.remaining).must_equal(60)
-          end
+          }
         }
 
         describe("#place_token") {
-          it("puts a token at a position on the board") do
+          it("puts a token at a position on the board") {
             _(subject.place_token(3, 5, :black)).must_equal(true)
             _(subject.board[3][5]).must_be(:black?)
 
             _(subject.place_token(4, 5, :white)).must_equal(true)
             _(subject.board[4][5]).must_be(:white?)
-          end
+          }
 
           describe("flips tokens") {
-            it("horizontally") do
+            it("horizontally") {
               _(subject.board[3][4]).must_be(:white?)
               _(subject.place_token(3, 5, :black)).must_equal(true)
 
               _(subject.board[3][4]).must_be(:black?)
               _(subject.black).must_equal(4)
               _(subject.white).must_equal(1)
-            end
+            }
 
-            it("vertically") do
+            it("vertically") {
               _(subject.board[3][3]).must_be(:black?)
               _(subject.place_token(2, 3, :white)).must_equal(true)
 
               _(subject.board[2][3]).must_be(:white?)
               _(subject.white).must_equal(4)
               _(subject.black).must_equal(1)
-            end
+            }
 
-            it("diagonally") do
+            it("diagonally") {
               _(subject.place_token(3, 2, :white)).must_equal(true)
               _(subject.board[3][3]).must_be(:white?)
 
@@ -77,16 +77,16 @@ module CTCI
               _(subject.board[3][3]).must_be(:black?)
               _(subject.black).must_equal(3)
               _(subject.white).must_equal(3)
-            end
+            }
           }
 
           describe("placement unavailable") {
             describe("at position specified") {
-              it("does nothing") do
+              it("does nothing") {
                 _(subject.place_token(5, 3, :white)).must_equal(false)
                 _(subject.board[5][3]).must_be(:none?)
                 _(subject.white).must_equal(2)
-              end
+              }
             }
 
             describe("out of tokens") {
@@ -95,22 +95,22 @@ module CTCI
                 subject.send(:count_tokens)
               }
 
-              it("does nothing") do
+              it("does nothing") {
                 _(subject.place_token(0, 0, :white)).must_equal(false)
                 _(subject.board[0][0]).must_be(:black?)
                 _(subject.black).must_equal(64)
                 _(subject.remaining).must_equal(0)
-              end
+              }
             }
           }
 
           describe("invalid") {
-            it("does nothing if position doesnt exist") do
+            it("does nothing if position doesnt exist") {
               _(subject.place_token(100, -100, :black)).must_equal(false)
               _(subject.remaining).must_equal(60)
               _(subject.black).must_equal(2)
               _(subject.white).must_equal(2)
-            end
+            }
           }
         }
       }
@@ -150,69 +150,69 @@ module CTCI
 
         describe("color checking") {
           describe("#color") {
-            it do
+            it {
               _(none.color).must_equal(:none)
               _(black.color).must_equal(:black)
               _(white.color).must_equal(:white)
-            end
+            }
           }
 
           describe("#none?") {
-            it do
+            it {
               _(none).must_be(:none?)
               _(black).wont_be(:none?)
               _(white).wont_be(:none?)
-            end
+            }
           }
 
           describe("#black?") {
-            it do
+            it {
               _(none).wont_be(:black?)
               _(black).must_be(:black?)
               _(white).wont_be(:black?)
-            end
+            }
           }
 
           describe("#white?") {
-            it do
+            it {
               _(none).wont_be(:white?)
               _(white).must_be(:white?)
               _(black).wont_be(:white?)
-            end
+            }
           }
         }
 
         describe("color changing") {
           describe("#none!") {
-            it do
+            it {
               _(none.none!).must_be(:none?)
               _(black.none!).must_be(:none?)
               _(white.none!).must_be(:none?)
-            end
+            }
           }
 
           describe("#black!") {
-            it do
+            it {
               _(none.black!).must_be(:black?)
               _(black.black!).must_be(:black?)
               _(white.black!).must_be(:black?)
-            end
+            }
           }
 
           describe("#white!") {
-            it do
+            it {
               _(none.white!).must_be(:white?)
               _(black.white!).must_be(:white?)
               _(white.white!).must_be(:white?)
-            end
+            }
           }
 
           describe("#flip!") {
-            it do
+            it {
               _(none.flip!).must_be(:none?)
               _(white.flip!).must_be(:black?)
               _(black.flip!).must_be(:white?)
-            end
+            }
           }
         }
       }

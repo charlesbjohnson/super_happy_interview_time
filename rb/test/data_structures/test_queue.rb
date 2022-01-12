@@ -14,75 +14,75 @@ describe(DataStructures::Queue) {
 
   let(:foo) { "foo" }
 
-  it("starts out empty") do
+  it("starts out empty") {
     _(subject.size).must_equal(0)
-  end
+  }
 
   describe("#enqueue") {
-    it("adds to the queue") do
+    it("adds to the queue") {
       subject.enqueue(foo)
       _(subject.peek).must_equal(foo)
       _(subject.size).must_equal(1)
-    end
+    }
 
-    it("adds to the back") do
+    it("adds to the back") {
       subject.enqueue(foo)
       subject.enqueue("bar")
       subject.enqueue("baz")
 
       _(subject.peek).must_equal(foo)
       _(subject.size).must_equal(3)
-    end
+    }
   }
 
   describe("#peek") {
-    it("returns the item at the front") do
+    it("returns the item at the front") {
       subject.enqueue(foo)
       subject.enqueue("bar")
 
       _(subject.peek).must_equal(foo)
-    end
+    }
 
-    it("does not remove the item") do
+    it("does not remove the item") {
       subject.enqueue(foo)
       subject.peek
 
       _(subject.size).must_equal(1)
-    end
+    }
 
-    it("returns nil if empty") do
+    it("returns nil if empty") {
       _(subject.peek).must_be_nil
-    end
+    }
   }
 
   describe("#dequeue") {
-    it("returns the item at the front") do
+    it("returns the item at the front") {
       subject.enqueue(foo)
       subject.enqueue("bar")
 
       _(subject.dequeue).must_equal(foo)
-    end
+    }
 
-    it("removes the item") do
+    it("removes the item") {
       subject.enqueue(foo)
       subject.dequeue
 
       _(subject.size).must_equal(0)
-    end
+    }
 
-    it("returns nil if empty") do
+    it("returns nil if empty") {
       _(subject.dequeue).must_be_nil
-    end
+    }
 
     describe("multiple") {
-      it("returns nil every time") do
+      it("returns nil every time") {
         3.times { _(subject.dequeue).must_be_nil }
-      end
+      }
     }
   }
 
   describe("#each") {
-    it("yields each item") do
+    it("yields each item") {
       expected = %w[foo bar baz]
       expected.each { |item| subject.enqueue(item) }
 
@@ -91,6 +91,6 @@ describe(DataStructures::Queue) {
       actual = []
       subject.each { |item| actual << item }
       _(actual).must_equal(expected)
-    end
+    }
   }
 }

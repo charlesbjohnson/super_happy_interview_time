@@ -15,28 +15,28 @@ describe(DataStructures::Graph) {
 
   let(:foo) { "foo" }
 
-  it("starts out with no vertices and no edges") do
+  it("starts out with no vertices and no edges") {
     _(subject.size_vertices).must_equal(0)
     _(subject.size_edges).must_equal(0)
-  end
+  }
 
   describe("#get") {
-    it("returns the data for a vertex index") do
+    it("returns the data for a vertex index") {
       subject.add_vertex(foo)
       _(subject.get(0)).must_equal(foo)
-    end
+    }
 
-    it("returns nil for nonexistent vertex") do
+    it("returns nil for nonexistent vertex") {
       _(subject.get(0)).must_be_nil
-    end
+    }
   }
 
   describe("#adjacent") {
-    it("returns nil for nonexistent vertex") do
+    it("returns nil for nonexistent vertex") {
       _(subject.adjacent(0)).must_be_nil
-    end
+    }
 
-    it("returns the vertices pointed to by a given vertex") do
+    it("returns the vertices pointed to by a given vertex") {
       subject.add_vertex(foo)
       subject.add_vertex("bar")
       subject.add_vertex("baz")
@@ -47,37 +47,37 @@ describe(DataStructures::Graph) {
       _(subject.adjacent(0)).must_equal([[1, "bar"]])
       _(subject.adjacent(1)).must_equal([[2, "baz"]])
       _(subject.adjacent(2)).must_equal([[0, foo]])
-    end
+    }
   }
 
   describe("#add_vertex") {
-    it("creates a vertex in the graph") do
+    it("creates a vertex in the graph") {
       subject.add_vertex(foo)
 
       _(subject.get(0)).must_equal(foo)
       _(subject.size_vertices).must_equal(1)
       _(subject.adjacent(0)).must_equal([])
-    end
+    }
   }
 
   describe("#add_edge") {
-    it("creates an edge in the graph between two vertices") do
+    it("creates an edge in the graph between two vertices") {
       subject.add_vertex("bar")
       subject.add_vertex(foo)
       subject.add_edge(0, 1)
 
       _(subject.size_edges).must_equal(1)
       _(subject.adjacent(0)).must_equal([[1, foo]])
-    end
+    }
 
     describe("with invalid vertices") {
-      it("doesnt create an edge on nonexistent vertices") do
+      it("doesnt create an edge on nonexistent vertices") {
         subject.add_vertex(foo)
         subject.add_edge(0, 1)
 
         _(subject.size_edges).must_equal(0)
         _(subject.adjacent(0)).must_equal([])
-      end
+      }
     }
   }
 }

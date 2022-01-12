@@ -15,46 +15,46 @@ describe(DataStructures::HashMap) {
   let(:key) { :key }
   let(:val) { "val" }
 
-  it("starts out empty") do
+  it("starts out empty") {
     _(subject.size).must_equal(0)
-  end
+  }
 
   describe("#get") {
-    it("returns nil for nonexistent key") do
+    it("returns nil for nonexistent key") {
       _(subject.get(key)).must_be_nil
-    end
+    }
   }
 
   describe("#put") {
-    it("sets the value for a key") do
+    it("sets the value for a key") {
       subject.put(key, val)
 
       _(subject.get(key)).must_equal(val)
       _(subject.size).must_equal(1)
-    end
+    }
 
     describe("existing key") {
-      it("changes the value for the key") do
+      it("changes the value for the key") {
         subject.put(key, "foo")
         subject.put(key, val)
 
         _(subject.get(key)).must_equal(val)
         _(subject.size).must_equal(1)
-      end
+      }
     }
 
     describe("multiple") {
-      it("sets the value for each key") do
+      it("sets the value for each key") {
         1000.times { |i| subject.put(i, i.to_s) }
 
         1000.times { |i| _(subject.get(i)).must_equal(i.to_s) }
         _(subject.size).must_equal(1000)
-      end
+      }
     }
   }
 
   describe("#delete") {
-    it("deletes the item with the matching key") do
+    it("deletes the item with the matching key") {
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -67,10 +67,10 @@ describe(DataStructures::HashMap) {
       _(subject.get(key)).must_equal(val)
       _(subject.get(a)).must_be_nil
       _(subject.size).must_equal(2)
-    end
+    }
 
     describe("multiple") {
-      it("deletes the items with the matching keys") do
+      it("deletes the items with the matching keys") {
         a = :a
         b = :b
         subject.put(b, b.to_s)
@@ -84,41 +84,41 @@ describe(DataStructures::HashMap) {
         _(subject.get(b)).must_be_nil
         _(subject.get(a)).must_be_nil
         _(subject.size).must_equal(1)
-      end
+      }
     }
 
     describe("with nonexistent key") {
-      it("does nothing") do
+      it("does nothing") {
         subject.delete(:a)
         _(subject.size).must_equal(0)
-      end
+      }
     }
 
     describe("empty") {
-      it("does nothing") do
+      it("does nothing") {
         subject.put(key, val)
 
         subject.delete(:a)
 
         _(subject.get(key)).must_equal(val)
         _(subject.size).must_equal(1)
-      end
+      }
     }
 
     describe("single") {
-      it("deletes the only item with the matching key") do
+      it("deletes the only item with the matching key") {
         subject.put(key, val)
 
         subject.delete(key)
 
         _(subject.get(key)).must_be_nil
         _(subject.size).must_equal(0)
-      end
+      }
     }
   }
 
   describe("#each") {
-    it("yields each key value pair") do
+    it("yields each key value pair") {
       expected = [[:a, 1], [:b, 2], [:c, 3]]
       expected.each { |key, value| subject.put(key, value) }
 
@@ -127,6 +127,6 @@ describe(DataStructures::HashMap) {
       actual = []
       subject.each { |pair| actual << pair }
       _(actual.sort).must_equal(expected.sort)
-    end
+    }
   }
 }

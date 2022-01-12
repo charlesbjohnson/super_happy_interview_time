@@ -34,23 +34,23 @@ describe(Algorithms::GraphProcessing::DepthFirstPaths) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#path_to?") {
-      it("returns true if there is a path to the target from the source") do
+      it("returns true if there is a path to the target from the source") {
         _(subject.path_to?(3)).must_equal(true)
-      end
+      }
 
-      it("returns false if there is no path to the target from the source") do
+      it("returns false if there is no path to the target from the source") {
         _(subject.path_to?(9)).must_equal(false)
-      end
+      }
     }
 
     describe("#path_to") {
-      it("returns a path to the target when there is one") do
+      it("returns a path to the target when there is one") {
         _([[0, 5, 3], [0, 6, 4, 3]].any?(subject.path_to(3))).must_equal(true)
-      end
+      }
 
-      it("returns nil when there is no path to the target") do
+      it("returns nil when there is no path to the target") {
         _(subject.path_to(9)).must_be_nil
-      end
+      }
     }
   }
 
@@ -85,23 +85,23 @@ describe(Algorithms::GraphProcessing::DepthFirstPaths) {
     before { edges.each { |from, to| graph.add_edge(from, to) } }
 
     describe("#path_to?") {
-      it("returns true if there is a path to the target from the source") do
+      it("returns true if there is a path to the target from the source") {
         _(subject.path_to?(3)).must_equal(true)
-      end
+      }
 
-      it("returns false if there is no path to the target from the source") do
+      it("returns false if there is no path to the target from the source") {
         _(subject.path_to?(9)).must_equal(false)
-      end
+      }
     }
 
     describe("#path_to") {
-      it("returns a path to the target when there is one") do
+      it("returns a path to the target when there is one") {
         _([[0, 5, 4, 3], [0, 5, 4, 2, 3]].any?(subject.path_to(3))).must_equal(true)
-      end
+      }
 
-      it("returns an empty array when there is no path to the target") do
+      it("returns an empty array when there is no path to the target") {
         _(subject.path_to(9)).must_be_nil
-      end
+      }
     }
   }
 }

@@ -14,80 +14,80 @@ describe(DataStructures::Stack) {
 
   let(:foo) { "foo" }
 
-  it("starts out empty") do
+  it("starts out empty") {
     _(subject.size).must_equal(0)
     _(subject).must_be(:empty?)
-  end
+  }
 
   describe("#push") {
-    it("adds to the stack") do
+    it("adds to the stack") {
       subject.push(foo)
       _(subject.peek).must_equal(foo)
       _(subject.size).must_equal(1)
-    end
+    }
 
-    it("adds to the top") do
+    it("adds to the top") {
       subject.push("baz")
       subject.push("bar")
       subject.push(foo)
 
       _(subject.peek).must_equal(foo)
       _(subject.size).must_equal(3)
-    end
+    }
 
-    it("returns what was pushed") do
+    it("returns what was pushed") {
       _(subject.push(foo)).must_equal(foo)
-    end
+    }
   }
 
   describe("#peek") {
-    it("returns the item at the top") do
+    it("returns the item at the top") {
       subject.push("bar")
       subject.push(foo)
 
       _(subject.peek).must_equal(foo)
-    end
+    }
 
-    it("does not remove the item") do
+    it("does not remove the item") {
       subject.push(foo)
       subject.peek
 
       _(subject.size).must_equal(1)
-    end
+    }
 
-    it("returns nil if empty") do
+    it("returns nil if empty") {
       _(subject.peek).must_be_nil
-    end
+    }
   }
 
   describe("#pop") {
-    it("returns the item at the top") do
+    it("returns the item at the top") {
       subject.push("bar")
       subject.push(foo)
 
       _(subject.pop).must_equal(foo)
-    end
+    }
 
-    it("removes the item") do
+    it("removes the item") {
       subject.push(foo)
       subject.pop
 
       _(subject.size).must_equal(0)
-    end
+    }
 
-    it("returns nil if empty") do
+    it("returns nil if empty") {
       _(subject.pop).must_be_nil
-    end
+    }
 
     describe("multiple") {
-      it("returns nil every time") do
+      it("returns nil every time") {
         3.times { _(subject.pop).must_be_nil }
-      end
+      }
     }
   }
 
   describe("#each") {
-    it("yields each item") do
+    it("yields each item") {
       expected = %w[foo bar baz]
       expected.reverse_each { |item| subject.push(item) }
 
@@ -96,6 +96,6 @@ describe(DataStructures::Stack) {
       actual = []
       subject.each { |item| actual << item }
       _(actual).must_equal(expected)
-    end
+    }
   }
 }

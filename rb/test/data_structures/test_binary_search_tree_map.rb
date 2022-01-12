@@ -19,18 +19,18 @@ describe(DataStructures::BinarySearchTreeMap) {
   let(:key) { :key }
   let(:val) { "val" }
 
-  it("starts out empty") do
+  it("starts out empty") {
     _(subject.size).must_equal(0)
-  end
+  }
 
   describe("#get") {
-    it("returns nil for nonexistent key") do
+    it("returns nil for nonexistent key") {
       _(subject.get(key)).must_be_nil
-    end
+    }
   }
 
   describe("#min") {
-    it("returns the key value pair with the smallest key") do
+    it("returns the key value pair with the smallest key") {
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -38,17 +38,17 @@ describe(DataStructures::BinarySearchTreeMap) {
       subject.put(key, val)
 
       _(subject.min).must_equal([a, a.to_s])
-    end
+    }
 
     describe("empty") {
-      it("returns nil") do
+      it("returns nil") {
         _(subject.min).must_be_nil
-      end
+      }
     }
   }
 
   describe("#max") {
-    it("returns the key value pair with the largest key") do
+    it("returns the key value pair with the largest key") {
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -56,35 +56,35 @@ describe(DataStructures::BinarySearchTreeMap) {
       subject.put(key, val)
 
       _(subject.max).must_equal([key, val])
-    end
+    }
 
     describe("empty") {
-      it("returns nil") do
+      it("returns nil") {
         _(subject.max).must_be_nil
-      end
+      }
     }
   }
 
   describe("#put") {
-    it("sets the value for a key") do
+    it("sets the value for a key") {
       subject.put(key, val)
 
       _(subject.get(key)).must_equal(val)
       _(subject.size).must_equal(1)
-    end
+    }
 
     describe("existing key") {
-      it("changes the value for the key") do
+      it("changes the value for the key") {
         subject.put(key, "foo")
         subject.put(key, val)
 
         _(subject.get(key)).must_equal(val)
         _(subject.size).must_equal(1)
-      end
+      }
     }
 
     describe("multiple") {
-      it("sets the value for each key") do
+      it("sets the value for each key") {
         a = :a
         b = :b
         subject.put(b, b.to_s)
@@ -95,12 +95,12 @@ describe(DataStructures::BinarySearchTreeMap) {
         _(subject.get(b)).must_equal(b.to_s)
         _(subject.get(key)).must_equal(val)
         _(subject.size).must_equal(3)
-      end
+      }
     }
   }
 
   describe("#delete_min") {
-    it("deletes the item with the smallest key") do
+    it("deletes the item with the smallest key") {
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -113,10 +113,10 @@ describe(DataStructures::BinarySearchTreeMap) {
       _(subject.get(key)).must_equal(val)
       _(subject.get(a)).must_be_nil
       _(subject.size).must_equal(2)
-    end
+    }
 
     describe("multiple") {
-      it("deletes the items with the smallest keys") do
+      it("deletes the items with the smallest keys") {
         a = :a
         b = :b
         subject.put(b, b.to_s)
@@ -130,29 +130,29 @@ describe(DataStructures::BinarySearchTreeMap) {
         _(subject.get(b)).must_be_nil
         _(subject.get(a)).must_be_nil
         _(subject.size).must_equal(1)
-      end
+      }
     }
 
     describe("empty") {
-      it("does nothing") do
+      it("does nothing") {
         subject.delete_min
         _(subject.size).must_equal(0)
-      end
+      }
     }
 
     describe("single") {
-      it("deletes the only item") do
+      it("deletes the only item") {
         subject.put(key, val)
 
         subject.delete_min
 
         _(subject.get(key)).must_be_nil
         _(subject.size).must_equal(0)
-      end
+      }
     }
 
     describe("unbalanced") {
-      it("deletes the item with the smallest key") do
+      it("deletes the item with the smallest key") {
         a = :a
         b = :b
         subject.put(a, a.to_s)
@@ -165,12 +165,12 @@ describe(DataStructures::BinarySearchTreeMap) {
         _(subject.get(key)).must_equal(val)
         _(subject.get(a)).must_be_nil
         _(subject.size).must_equal(2)
-      end
+      }
     }
   }
 
   describe("#delete_max") {
-    it("deletes the item with the largest key") do
+    it("deletes the item with the largest key") {
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -183,10 +183,10 @@ describe(DataStructures::BinarySearchTreeMap) {
       _(subject.get(b)).must_equal(b.to_s)
       _(subject.get(key)).must_be_nil
       _(subject.size).must_equal(2)
-    end
+    }
 
     describe("multiple") {
-      it("deletes the items with the largest keys") do
+      it("deletes the items with the largest keys") {
         a = :a
         b = :b
         subject.put(b, b.to_s)
@@ -200,29 +200,29 @@ describe(DataStructures::BinarySearchTreeMap) {
         _(subject.get(b)).must_be_nil
         _(subject.get(key)).must_be_nil
         _(subject.size).must_equal(1)
-      end
+      }
     }
 
     describe("empty") {
-      it("does nothing") do
+      it("does nothing") {
         subject.delete_max
         _(subject.size).must_equal(0)
-      end
+      }
     }
 
     describe("single") {
-      it("deletes the only item") do
+      it("deletes the only item") {
         subject.put(key, val)
 
         subject.delete_max
 
         _(subject.get(key)).must_be_nil
         _(subject.size).must_equal(0)
-      end
+      }
     }
 
     describe("unbalanced") {
-      it("deletes the item with the largest key") do
+      it("deletes the item with the largest key") {
         a = :a
         b = :b
         subject.put(a, a.to_s)
@@ -235,12 +235,12 @@ describe(DataStructures::BinarySearchTreeMap) {
         _(subject.get(b)).must_equal(b.to_s)
         _(subject.get(key)).must_be_nil
         _(subject.size).must_equal(2)
-      end
+      }
     }
   }
 
   describe("#delete") {
-    it("deletes the item with the matching key") do
+    it("deletes the item with the matching key") {
       a = :a
       b = :b
       subject.put(b, b.to_s)
@@ -253,10 +253,10 @@ describe(DataStructures::BinarySearchTreeMap) {
       _(subject.get(key)).must_equal(val)
       _(subject.get(a)).must_be_nil
       _(subject.size).must_equal(2)
-    end
+    }
 
     describe("multiple") {
-      it("deletes the items with the matching keys") do
+      it("deletes the items with the matching keys") {
         a = :a
         b = :b
         subject.put(b, b.to_s)
@@ -270,40 +270,40 @@ describe(DataStructures::BinarySearchTreeMap) {
         _(subject.get(b)).must_be_nil
         _(subject.get(a)).must_be_nil
         _(subject.size).must_equal(1)
-      end
+      }
     }
 
     describe("with nonexistent key") {
-      it("does nothing") do
+      it("does nothing") {
         subject.delete(:a)
         _(subject.size).must_equal(0)
-      end
+      }
     }
 
     describe("empty") {
-      it("does nothing") do
+      it("does nothing") {
         subject.put(key, val)
 
         subject.delete(:a)
 
         _(subject.get(key)).must_equal(val)
         _(subject.size).must_equal(1)
-      end
+      }
     }
 
     describe("single") {
-      it("deletes the only item with the matching key") do
+      it("deletes the only item with the matching key") {
         subject.put(key, val)
 
         subject.delete(key)
 
         _(subject.get(key)).must_be_nil
         _(subject.size).must_equal(0)
-      end
+      }
     }
 
     describe("unbalanced") {
-      it("deletes the item with the matching key") do
+      it("deletes the item with the matching key") {
         a = :a
         b = :b
         subject.put(a, a.to_s)
@@ -316,12 +316,12 @@ describe(DataStructures::BinarySearchTreeMap) {
         _(subject.get(key)).must_equal(val)
         _(subject.get(a)).must_be_nil
         _(subject.size).must_equal(2)
-      end
+      }
     }
   }
 
   describe("#each") {
-    it("yields each key value pair inorder by default") do
+    it("yields each key value pair inorder by default") {
       expected = [[:a, 1], [:b, 2], [:c, 3]].shuffle
       expected.each { |key, value| subject.put(key, value) }
 
@@ -330,9 +330,9 @@ describe(DataStructures::BinarySearchTreeMap) {
       actual = []
       subject.each { |pair| actual << pair }
       _(actual).must_equal(expected.sort)
-    end
+    }
 
-    it("yields each key value pair preorder") do
+    it("yields each key value pair preorder") {
       expected = [[:b, 2], [:a, 1], [:c, 3]]
       expected.each { |key, value| subject.put(key, value) }
 
@@ -341,9 +341,9 @@ describe(DataStructures::BinarySearchTreeMap) {
       actual = []
       subject.each(:pre) { |pair| actual << pair }
       _(actual).must_equal(expected)
-    end
+    }
 
-    it("yields each key value pair postorder") do
+    it("yields each key value pair postorder") {
       add = [[:b, 2], [:a, 1], [:c, 3]]
       add.each { |key, value| subject.put(key, value) }
 
@@ -352,6 +352,6 @@ describe(DataStructures::BinarySearchTreeMap) {
       actual = []
       subject.each(:post) { |pair| actual << pair }
       _(actual).must_equal([[:a, 1], [:c, 3], [:b, 2]])
-    end
+    }
   }
 }
