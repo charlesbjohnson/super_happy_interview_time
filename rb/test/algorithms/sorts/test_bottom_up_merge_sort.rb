@@ -7,10 +7,27 @@ require_relative("./shared_behavior")
 
 module Algorithms
   module Sorts
-    class TestBottomUpMergeSort < Minitest::Test
-      include(BottomUpMergeSort)
-      include(SharedBehavior::Immutable)
-      include(SharedBehavior::Mutable)
-    end
+    describe(BottomUpMergeSort) {
+      subject { BottomUpMergeSort }
+
+      it { _(subject).must_respond_to(:sort) }
+      it { _(subject).must_respond_to(:sort!) }
+
+      describe(".sort") {
+        def subject(a)
+          super().sort(a)
+        end
+
+        include(SharedBehavior::Immutable)
+      }
+
+      describe(".sort!") {
+        def subject(a)
+          super().sort!(a)
+        end
+
+        include(SharedBehavior::Mutable)
+      }
+    }
   end
 end

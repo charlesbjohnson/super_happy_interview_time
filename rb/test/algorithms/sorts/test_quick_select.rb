@@ -5,29 +5,37 @@ require("algorithms/sorts/quick_select")
 
 module Algorithms
   module Sorts
-    class TestQuickSelect < Minitest::Test
-      include(QuickSelect)
+    describe(QuickSelect) {
+      subject { QuickSelect }
 
-      def test_returns_ith_element_when_odd_length
-        assert_equal(-3, select(2, [56, 59, 94, 45, -11, -71, 15, 0, -3]))
-      end
+      it { _(subject).must_respond_to(:select) }
 
-      def test_returns_ith_element_when_even_length
-        assert_equal(93, select(8, [-45, -81, 55, 23, 96, 93, -57, 21, 41, -72]))
-      end
+      describe(".select") {
+        def subject(i, a)
+          super().select(i, a)
+        end
 
-      def test_returns_ith_largest_element_when_duplicates
-        assert_equal(16, select(6, [-75, -41, -4, -4, 0, 3, 16, 16, 33, 60, 60, 88]))
-      end
+        it("returns ith element when odd length") {
+          assert_equal(-3, subject(2, [56, 59, 94, 45, -11, -71, 15, 0, -3]))
+        }
 
-      def test_returns_nil_when_invalid
-        assert_nil(select(4, [9, -6, 2]))
-        assert_nil(select(-3, [9, 15, -3, 4]))
-      end
+        it("returns ith element when even length") {
+          assert_equal(93, subject(8, [-45, -81, 55, 23, 96, 93, -57, 21, 41, -72]))
+        }
 
-      def test_returns_nil_when_empty_array
-        assert_nil(select(3, []))
-      end
-    end
+        it("returns ith largest element when duplicates") {
+          assert_equal(16, subject(6, [-75, -41, -4, -4, 0, 3, 16, 16, 33, 60, 60, 88]))
+        }
+
+        it("returns nil when invalid") {
+          assert_nil(subject(4, [9, -6, 2]))
+          assert_nil(subject(-3, [9, 15, -3, 4]))
+        }
+
+        it("returns nil when empty array") {
+          assert_nil(subject(3, []))
+        }
+      }
+    }
   end
 end
