@@ -5,25 +5,23 @@ require("leetcode/lc_278")
 
 module LeetCode
   class TestLC278 < Minitest::Test
-    include(LC278)
-
-    def bad_version?(version)
-      version >= @bad_version
-    end
-
-    alias_method(:is_bad_version, :bad_version?)
-
     [
       [1, 1],
       [2, 1],
       [2, 2],
       [3, 1],
       [3, 2],
-      [3, 3]
-    ].each.with_index { |(versions, expected), i|
-      define_method(:"test_first_bad_version_#{i}") {
-        @bad_version = expected
-        assert_equal(expected, first_bad_version(versions))
+      [3, 3],
+      [5, 4]
+    ].each.with_index { |(n, bad), i|
+      Class.new(Minitest::Test) {
+        include(LC278)
+
+        define_method(:is_bad_version) { |v| v >= bad }
+
+        define_method(:"test_first_bad_version_#{i}") {
+          assert_equal(bad, first_bad_version(n))
+        }
       }
     }
   end

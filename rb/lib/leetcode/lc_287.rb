@@ -4,36 +4,42 @@ module LeetCode
   # 287. Find the Duplicate Number
   module LC287
     # Description:
-    # Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive), prove that at least one duplicate number must exist.
-    # Assume that there is only one duplicate number, find the duplicate one.
+    # Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+    # There is only one repeated number in nums, return this repeated number.
     #
-    # Notes:
-    # - You must not modify the array (assume the array is read only).
-    # - You must use only constant, O(1) extra space.
-    # - Your runtime complexity should be less than O(n^2).
-    # - There is only one duplicate number in the array, but it could be repeated more than once.
+    # You must solve the problem without modifying the array nums and uses only constant extra space.
     #
-    # @param list {Array<Integer>}
+    # Follow up:
+    # - How can we prove that at least one duplicate number must exist in nums?
+    # - Can you solve the problem in linear runtime complexity?
+    #
+    # Examples:
+    # Input: nums = [1, 3, 4, 2, 2]
+    # Output: 2
+    #
+    # Input: nums = [3, 1, 3, 4, 2]
+    # Output: 3
+    #
+    # @param {Array<Integer>} nums
     # @return {Integer}
-    def find_duplicate(list)
-      left = list[0]
-      right = list[0]
+    def find_duplicate(nums)
+      lo = 1
+      hi = nums.length - 1
 
-      loop {
-        left = list[left]
-        right = list[list[right]]
-        break if left == right
-      }
+      dup = nil
 
-      right = left
-      left = list[0]
+      while lo <= hi
+        mid = ((hi - lo) / 2) + lo
 
-      until left == right
-        left = list[left]
-        right = list[right]
+        if nums.count { |num| num <= mid } > mid
+          dup = mid
+          hi = mid - 1
+        else
+          lo = mid + 1
+        end
       end
 
-      left
+      dup
     end
   end
 end

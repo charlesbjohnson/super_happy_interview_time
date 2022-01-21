@@ -4,42 +4,45 @@ module LeetCode
   # 162. Find Peak Element
   module LC162
     # Description:
-    # A peak element is an element that is greater than its neighbors.
-    # Given an input array where num[i] != num[i + 1], find a peak element and return its index.
+    # A peak element is an element that is strictly greater than its neighbors.
+    # Given an integer array nums, find a peak element, and return its index.
+    # If the array contains multiple peaks, return the index to any of the peaks.
+    #
+    # You may imagine that nums[-1] = nums[n] = -∞.
+    #
+    # You must write an algorithm that runs in O(log n) time.
     #
     # Examples:
-    # Input: [1, 2, 3, 1]
+    # Input: nums = [1, 2, 3, 1]
     # Output: 2
     #
-    # Notes:
-    # - The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
-    # - You may assume that num[-1] == num[n] == -Infinity.
-    # - Your solution should be in logarithmic complexity.
+    # Input: nums = [1, 2, 1, 3, 5, 6, 4]
+    # Output: 5
     #
-    # @param list {Array<Integer>}
+    # @param {Array<Integer>} nums
     # @return {Integer}
-    def find_peak_element(list)
-      return if list.empty?
+    def find_peak_element(nums)
+      lo = 0
+      hi = nums.length - 1
 
-      low = 0
-      high = list.length - 1
+      while lo <= hi
+        mid = ((hi - lo) / 2) + lo
 
-      while low < high
-        mid = low + ((high - low) / 2)
+        l_mid = mid - 1 >= 0 ? nums[mid - 1] : -Float::INFINITY
+        r_mid = mid + 1 < nums.length ? nums[mid + 1] : -Float::INFINITY
 
-        greater_than_previous = mid.zero? || list[mid] > list[mid - 1]
-        greater_than_next = mid == list.length - 1 || list[mid] > list[mid + 1]
+        if nums[mid] > l_mid && nums[mid] > r_mid
+          return mid
+        end
 
-        return mid if greater_than_previous && greater_than_next
-
-        if greater_than_previous
-          low = mid + 1
-        else
-          high = mid
+        if l_mid > nums[mid]
+          hi = mid - 1
+        elsif r_mid > nums[mid]
+          lo = mid + 1
         end
       end
 
-      low
+      peak
     end
   end
 end

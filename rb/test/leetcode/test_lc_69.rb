@@ -8,14 +8,16 @@ module LeetCode
     include(LC69)
 
     [
+      [0, 0],
+      [3, 1],
       [4, 2],
-      [9, 3],
-      [16, 4],
       [8, 2],
-      [10, 3],
+      [9, 3],
       [15, 3],
-      [20, 4],
-      [30, 5]
+      [16, 4],
+      [24, 4],
+      [25, 5],
+      [100, 10]
     ].each.with_index { |(x, expected), i|
       define_method(:"test_my_sqrt_#{i}") {
         assert_equal(expected, my_sqrt(x))

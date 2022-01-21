@@ -1,72 +1,60 @@
 # frozen_string_literal: true
 
 module LeetCode
-  # 34. Search for a Range
+  # 34. Find First and Last Position of Element in Sorted Array
   module LC34
-    def binary_search(list, target, low, high)
-      while low <= high
-        mid = low + ((high - low) / 2)
+    # Description:
+    # Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+    # If target is not found in the array, return [-1, -1].
+    #
+    # You must write an algorithm with O(log n) runtime complexity.
+    #
+    # Examples:
+    # Input: nums = [5, 7, 7, 8, 8, 10], target = 8
+    # Output: [3, 4]
+    #
+    # Input: nums = [5, 7, 7, 8, 8, 10], target = 6
+    # Output: [-1, -1]
+    #
+    # Input: nums = [], target = 0
+    # Output: [-1,-1]
+    #
+    # @param {Array<Integer>} nums
+    # @param {Integer} target
+    # @return {Array(Integer, Integer)}
+    def search_range(nums, target)
+      range = [-1, -1]
 
-        return mid if list[mid] == target
+      lo = 0
+      hi = nums.length - 1
 
-        if list[mid] < target
-          low = mid + 1
+      while lo < hi
+        mid = ((hi - lo) / 2) + lo
+
+        if nums[mid] < target
+          lo = mid + 1
         else
-          high = mid - 1
+          hi = mid
         end
       end
 
-      nil
-    end
+      return range if nums[lo] != target
 
-    def left_search(list, target, found)
-      found_left = found
-      prev = nil
+      range[0] = lo
+      hi = nums.length - 1
 
-      while found_left
-        prev = found_left
-        found_left = binary_search(list, target, 0, found_left - 1)
+      while lo < hi
+        mid = ((hi - lo) / 2) + lo + 1
+
+        if nums[mid] > target
+          hi = mid - 1
+        else
+          lo = mid
+        end
       end
 
-      prev
-    end
-
-    def right_search(list, target, found)
-      found_right = found
-      prev = nil
-
-      while found_right
-        prev = found_right
-        found_right = binary_search(list, target, found_right + 1, list.length - 1)
-      end
-
-      prev
-    end
-
-    # Description:
-    # Given an array of integers sorted in ascending order, find the starting and ending position of a given target value.
-    #
-    # Examples:
-    # Input: list = [5, 7, 7, 8, 8, 10], target = 8
-    # Output: [3, 4]
-    #
-    # Input: list = [1, 2, 2, 3], target = 4
-    # Output: [-1, -1]
-    #
-    # Notes:
-    # - Your algorithm's runtime complexity must be in the order of O(log n).
-    #
-    # @param list {Array<Integer>}
-    # @param target {Array<Integer>}
-    # @return {Array<Integer>}
-    def search_range(list, target)
-      found = binary_search(list, target, 0, list.length - 1)
-      return [-1, -1] unless found
-
-      left_bound = left_search(list, target, found)
-      right_bound = right_search(list, target, found)
-
-      [left_bound, right_bound]
+      range[1] = lo
+      range
     end
   end
 end

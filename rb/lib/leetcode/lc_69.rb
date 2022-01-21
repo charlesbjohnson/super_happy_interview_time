@@ -4,43 +4,40 @@ module LeetCode
   # 69. Sqrt(x)
   module LC69
     # Description:
-    # Implement sqrt(x).
-    # Compute and return the square root of x.
+    # Given a non-negative integer x, compute and return the square root of x.
+    # Since the return type is an integer, the decimal digits are truncated, and only the integer part of the result is returned.
+    #
+    # Note: You are not allowed to use any built-in exponent function or operator, such as pow(x, 0.5) or x ** 0.5.
     #
     # Examples:
-    # - 1:
-    #   Input: 4
-    #   Output: 2
+    # Input: x = 4
+    # Output: 2
     #
-    # - 2:
-    #   Input: 8
-    #   Output: 2
+    # Input: x = 8
+    # Output: 2
     #
-    # Notes:
-    # - x is guaranteed to be a non-negative integer.
-    #
-    # # @param x {Integer}
-    # # @return {Integer}
+    # @param {Integer} x
+    # @return {Integer}
     def my_sqrt(x)
-      return x if (0..1).cover?(x)
+      lo = 0
+      hi = x
 
-      low = 1
-      high = x
+      while lo <= hi
+        sqrt = ((hi - lo) / 2) + lo
+        sqrd = sqrt * sqrt
 
-      while low <= high
-        mid = low + ((high - low) / 2)
-        result = x / mid
+        if sqrd == x || (sqrd < x && ((sqrt + 1) * (sqrt + 1)) > x)
+          return sqrt
+        end
 
-        return mid if result == mid
-
-        if mid > result
-          high = mid - 1
+        if sqrd > x
+          hi = sqrt - 1
         else
-          low = mid + 1
+          lo = sqrt + 1
         end
       end
 
-      low - 1
+      raise
     end
   end
 end

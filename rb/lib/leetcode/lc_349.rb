@@ -4,21 +4,21 @@ module LeetCode
   # 349. Intersection of Two Arrays
   module LC349
     # Description:
-    # Given two arrays, write a function to compute their intersection.
+    # Given two integer arrays nums1 and nums2, return an array of their intersection.
+    # Each element in the result must be unique and you may return the result in any order.
     #
     # Examples:
-    # Input: left = [1, 2, 2, 1], right = [2, 2]
+    # Input: nums1 = [1, 2, 2, 1], nums2 = [2, 2]
     # Output: [2]
     #
-    # Notes:
-    # - Each element in the result must be unique.
-    # - The result can be in any order.
+    # Input: nums1 = [4, 9, 5], nums2 = [9, 4, 9, 8, 4]
+    # Output: [9, 4]
     #
-    # @param left {Array<Integer>}
-    # @param right {Array<Integer>}
+    # @param {Array<Integer>} nums1
+    # @param {Array<Integer>} nums2
     # @param {Array<Integer>}
-    def intersection(left, right)
-      left & right
+    def intersection(nums1, nums2)
+      nums1 & nums2
     end
   end
 end

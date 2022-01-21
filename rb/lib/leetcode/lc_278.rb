@@ -12,29 +12,34 @@ module LeetCode
     #
     # You are given an API bool is_bad_version(version) which will return whether version is bad.
     # Implement a function to find the first bad version.
+    #
     # You should minimize the number of calls to the API.
     #
-    # @param {Integer}
+    # Examples:
+    # Input: n = 5, bad = 4
+    # Output: 4
+    #
+    # Input: n = 1, bad = 1
+    # Output: 1
+    #
+    # @param {Integer} n
     # @return {Integer}
-    def first_bad_version(versions)
-      low = 1
-      high = versions
+    def first_bad_version(n)
+      lo = 1
+      hi = n
 
-      loop {
-        return low if low == high
+      while lo < hi
+        mid = ((hi - lo) / 2) + lo
+        bad = is_bad_version(mid)
 
-        if high - low == 1
-          return is_bad_version(low) ? low : high
-        end
-
-        mid = ((high - low) / 2) + low
-
-        if is_bad_version(mid)
-          high = mid
+        if !bad
+          lo = mid + 1
         else
-          low = mid + 1
+          hi = mid
         end
-      }
+      end
+
+      lo
     end
   end
 end

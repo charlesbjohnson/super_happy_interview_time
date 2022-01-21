@@ -4,51 +4,62 @@ module LeetCode
   # 33. Search in Rotated Sorted Array
   module LC33
     # Description:
-    # Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
-    # You are given a target value to search. If found in the array return its index, otherwise return -1.
+    # There is an integer array nums sorted in ascending order (with distinct values).
+    # Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length)
+    # such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed).
+    #
+    # For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].
+    #
+    # Given the array nums after the possible rotation and an integer target,
+    # return the index of target if it is in nums, or -1 if it is not in nums.
+    #
+    # You must write an algorithm with O(log n) runtime complexity.
     #
     # Examples:
-    # Input: list = [4, 5, 6, 7, 0, 1, 2], target = 2
-    # Output: 6
+    # Input: nums = [4, 5, 6, 7, 0, 1, 2], target = 0
+    # Output: 4
     #
-    # Notes:
-    # - You may assume no duplicate exists in the array.
+    # Input: nums = [4, 5, 6, 7, 0, 1, 2], target = 3
+    # Output: -1
     #
-    # @param list {Array<Integer>}
-    # @param target {Integer}
+    # Input: nums = [1], target = 0
+    # Output: -1
+    #
+    # @param {Array<Integer>} nums
+    # @param {Integer} target
     # @return {Integer}
-    def search(list, target)
-      low = 0
-      high = list.length - 1
+    def search(nums, target)
+      lo = 0
+      hi = nums.length - 1
 
-      while low <= high
-        mid = low + ((high - low) / 2)
+      while lo < hi
+        mid = ((hi - lo) / 2) + lo
 
-        return mid if list[mid] == target
+        if nums[mid] > nums[hi]
+          lo = mid + 1
+        else
+          hi = mid
+        end
+      end
 
-        if list[mid] > target
-          # (normal: in left) or (rotated: in left ie. [5, 1, 2, 3, 4], 1)
-          if list[low] <= target || list[low] > list[mid]
-            high = mid - 1
-          else # rotated: normally left, in right ie. [3, 4, 5, 1, 2], 1
-            low = mid + 1
-          end
+      rotation = lo
 
-          next
+      lo = 0
+      hi = nums.length - 1
+
+      while lo <= hi
+        mid = ((hi - lo) / 2) + lo
+        mid_with_rotation = (mid + rotation) % nums.length
+
+        if nums[mid_with_rotation] == target
+          return mid_with_rotation
         end
 
-        if list[mid] < target
-          # (normal: in right) or (rotated: in right ie. [2, 3, 4, 5, 1], 5)
-          if list[high] >= target || list[high] < list[mid]
-            low = mid + 1
-          else # rotated: normally right, in left ie. [5, 4, 1, 2, 3], 4
-            high = mid - 1
-          end
-
-          next
+        if nums[mid_with_rotation] > target
+          hi = mid - 1
+        else
+          lo = mid + 1
         end
-
-        break
       end
 
       -1

@@ -4,34 +4,49 @@ module LeetCode
   # 50. Pow(x, n)
   module LC50
     # Description:
-    # Implement pow(x, n).
+    # Implement pow(x, n), which calculates x raised to the power n (i.e., xn).
     #
     # Examples:
-    # - 1:
-    #   Input: x = 2.0, n = 10
-    #   Output: 1024.0
+    # Input: x = 2.00000, n = 10
+    # Output: 1024.00000
     #
-    # - 2:
-    #   Input: x = 2.1, n = 3
-    #   Output: 9.261
+    # Input: x = 2.10000, n = 3
+    # Output: 9.26100
     #
-    # @param x {Float}
-    # @param n {Integer}
+    # Input: x = 2.00000, n = -2
+    # Output: 0.25000
+    #
+    # @param {Float} x
+    # @param {Integer} n
     # @return {Float}
     def my_pow(x, n)
-      return 1 if n.zero?
-
-      if n.negative?
-        n = n.abs
+      if n < 0
+        n = -n
         x = 1.0 / x
       end
 
-      if n.even?
-        sub = my_pow(x, n / 2)
-        return sub * sub
+      result = 1
+
+      while n > 0
+        exponent = 1
+        exponentiated = x
+
+        while exponent * 2 <= n
+          exponentiated *= exponentiated
+          exponent *= 2
+        end
+
+        n -= exponent
+
+        if n == 1
+          exponentiated *= x
+          n -= 1
+        end
+
+        result *= exponentiated
       end
 
-      x * my_pow(x, n - 1)
+      result
     end
   end
 end
