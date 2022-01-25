@@ -4,46 +4,28 @@ module LeetCode
   # 387. First Unique Character in a String
   module LC387
     # Description:
-    # Given a string, find the first non-repeating character in it and return its index. If it doesn't exist, return -1.
+    # Given a string s, find the first non-repeating character in it and return its index.
+    # If it does not exist, return -1.
     #
     # Examples:
-    # - 1:
-    #   Input: 'leetcode'
-    #   Output: 0
+    # Input: s = "leetcode"
+    # Output: 0
     #
-    # - 2:
-    #   Input: 'loveleetcode'
-    #   Output: 2
+    # Input: s = "loveleetcode"
+    # Output: 2
     #
-    # Notes:
-    # - You may assume the string contain only lowercase letters.
+    # Input: s = "aabb"
+    # Output: -1
     #
-    # @param s {String}
+    # @param {String} s
     # @return {Integer}
     def first_uniq_char(s)
-      return -1 if s.empty?
-      return 0 if s.length < 2
+      hash = Hash.new(0)
 
-      if s.length < 3
-        return s[0] == s[1] ? -1 : 0
-      end
+      s.each_char { |c| hash[c] += 1 }
+      s.each_char.with_index { |c, i| return i if hash[c] == 1 }
 
-      s = s.chars
-        .map.with_index { |c, i| [c, i] }
-        .sort_by { |c, _| c }
-
-      uniq = []
-
-      uniq.push(s[0].last) if s[0].first != s[1].first
-      uniq.push(s[s.length - 1].last) if s[s.length - 1].first != s[s.length - 2].first
-
-      (1...s.length - 1).each { |i|
-        uniq.push(s[i].last) if s[i].first != s[i - 1].first && s[i].first != s[i + 1].first
-      }
-
-      return -1 if uniq.empty?
-
-      uniq.min
+      -1
     end
   end
 end

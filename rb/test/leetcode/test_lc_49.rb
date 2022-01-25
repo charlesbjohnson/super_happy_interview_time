@@ -36,9 +36,9 @@ module LeetCode
           %w[bat]
         ]
       ]
-    ].each.with_index { |(list, expected), i|
+    ].each.with_index { |(strs, expected), i|
       define_method(:"test_group_anagrams_#{i}") {
-        assert_equal(expected.map(&:sort), group_anagrams(list).map(&:sort))
+        assert_equal(expected.map(&:sort), group_anagrams(strs).map(&:sort))
       }
     }
   end

@@ -1,72 +1,87 @@
 # frozen_string_literal: true
 
-require("set")
-
 module LeetCode
   # 36. Valid Sudoku
   module LC36
-    def valid_row?(board, row)
-      !((0...board[row].length).each.with_object(Set.new) { |col, set|
-        next set if board[row][col] == "."
-        return false unless set.add?(board[row][col])
-      }).nil?
-    end
-
-    def valid_column?(board, col)
-      !((0...board.length).each.with_object(Set.new) { |row, set|
-        next set if board[row][col] == "."
-        return false unless set.add?(board[row][col])
-      }).nil?
-    end
-
-    def valid_region?(board, start_row, start_col, size)
-      !((start_row...(start_row + size)).each.with_object(Set.new) { |row, set|
-        (start_col...(start_col + size)).each { |col|
-          next if board[row][col] == "."
-          return false unless set.add?(board[row][col])
-        }
-      }).nil?
-    end
-
     # Description:
-    # Determine if a Sudoku is valid, according to: [Sudoku Puzzles - The Rules](http://sudoku.com.au/TheRules.aspx).
-    # The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
+    # Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+    # 1. Each row must contain the digits 1-9 without repetition.
+    # 2. Each column must contain the digits 1-9 without repetition.
+    # 3. Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+    #
+    # Note:
+    # - A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+    # - Only the filled cells need to be validated according to the mentioned rules.
     #
     # Examples:
-    #   5 3 . | . 7 . | . . .
-    #   6 . . | 1 9 5 | . . .
-    #   . 9 8 | . . . | . 6 .
-    #   ---------------------
-    #   8 . . | . 6 . | . . 3
-    #   4 . . | 8 . 3 | . . 1
-    #   7 . . | . 2 . | . . 6
-    #   ---------------------
-    #   . 6 . | . . . | 2 8 .
-    #   . . . | 4 1 9 | . . 5
-    #   . . . | . 8 . | . 7 9
+    # Input: board =
+    #  [["5", "3", ".", ".", "7", ".", ".", ".", "."],
+    #   ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+    #   [".", "9", "8", ".", ".", ".", ".", "6", "."],
+    #   ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+    #   ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+    #   ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+    #   [".", "6", ".", ".", ".", ".", "2", "8", "."],
+    #   [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+    #   [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
+    # Output: true
     #
-    # Notes:
-    # - A valid Sudoku board (partially filled) is not necessarily solvable. Only the filled cells need to be validated.
-
-    # @param {Array<Array<String>>}
+    #
+    # Input: board =
+    #  [["8", "3", ".", ".", "7", ".", ".", ".", "."],
+    #   ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+    #   [".", "9", "8", ".", ".", ".", ".", "6", "."],
+    #   ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+    #   ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+    #   ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+    #   [".", "6", ".", ".", ".", ".", "2", "8", "."],
+    #   [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+    #   [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
+    # Output: false
+    #
+    # @param {Array<Array<String>} board
     # @return {Boolean}
-    def valid_sudoku?(board)
-      (0...board.length).each { |row|
-        return false unless valid_row?(board, row)
-      }
+    def is_valid_sudoku(board)
+      hash = Hash.new { |h, k| h[k] = Array.new(board.length, false) }
+      dim = Math.sqrt(board.length).to_i
 
-      (0...board[0].length).each { |col|
-        return false unless valid_column?(board, col)
-      }
+      (0...board.length).each { |i|
+        (i...board.length).each { |r|
+          c = i
+          q = ((r / dim) * dim) + (c / dim)
 
-      regions = (0...board.length).step(3).to_a
-      regions.product(regions).each { |(row, col)|
-        return false unless valid_region?(board, row, col, 3)
+          v = board[r][c]
+          next if v == "."
+
+          r_key = "r_#{r}"
+          c_key = "c_#{c}"
+          q_key = "q_#{q}"
+
+          v = v.to_i - 1
+
+          return false if hash[r_key][v] || hash[c_key][v] || hash[q_key][v]
+          hash[r_key][v] = hash[c_key][v] = hash[q_key][v] = true
+        }
+
+        ((i + 1)...board[i].length).each { |c|
+          r = i
+          q = ((r / dim) * dim) + (c / dim)
+
+          v = board[r][c]
+          next if v == "."
+
+          r_key = "r_#{r}"
+          c_key = "c_#{c}"
+          q_key = "q_#{q}"
+
+          v = v.to_i - 1
+
+          return false if hash[r_key][v] || hash[c_key][v] || hash[q_key][v]
+          hash[r_key][v] = hash[c_key][v] = hash[q_key][v] = true
+        }
       }
 
       true
     end
-
-    alias_method(:is_valid_sudoku, :valid_sudoku?)
   end
 end

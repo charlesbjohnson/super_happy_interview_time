@@ -4,41 +4,68 @@ module LeetCode
   # 347. Top K Frequent Elements
   module LC347
     # Description:
-    # Given a non-empty array of integers, return the k most frequent elements.
+    # Given an integer array nums and an integer k, return the k most frequent elements.
+    # You may return the answer in any order.
+    #
+    # Follow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
     #
     # Examples:
     # Input: list = [1, 1, 1, 2, 2, 3], k = 2
     # Output: [1, 2]
     #
-    # Notes:
-    # - You may assume k is always valid, 1 <= k <= number of unique elements.
-    # - Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
+    # Input: nums = [1], k = 1
+    # Output: [1]
     #
-    # @param list {Array<Integer}
-    # @param k {Integer}
+    # @param {Array<Integer>} nums
+    # @param {Integer} k
     # @return {Array<Integer>}
-    def top_k_frequent(list, k)
-      list = list.each.with_object(Hash.new { 0 }) { |n, counts| counts[n] += 1 }
-      list = list.each.with_object([]) { |(n, count), counts|
-        counts[count] = [] unless counts[count]
-        counts[count].push(n)
-      }
+    def top_k_frequent(nums, k)
+      tally = nums.tally
+      unique = tally.keys
 
-      result = []
+      k = unique.length - k
 
-      until list.empty?
-        groups = list.pop
-        next unless groups
+      lo = 0
+      hi = unique.length - 1
 
-        groups.each { |n|
-          return result if k.zero?
+      while lo <= hi
+        mid = partition(unique, tally, lo, hi)
 
-          result.push(n)
-          k -= 1
-        }
+        break if mid == k
+
+        if mid > k
+          hi = mid - 1
+        else
+          lo = mid + 1
+        end
       end
 
-      result
+      unique[k..].reverse
+    end
+
+    private
+
+    def partition(nums, tally, lo, hi)
+      i = lo + 1
+      j = hi
+
+      while i <= j
+        if tally[nums[i]] <= tally[nums[lo]]
+          i += 1
+          next
+        end
+
+        if tally[nums[j]] > tally[nums[lo]]
+          j -= 1
+          next
+        end
+
+        nums[i], nums[j] = nums[j], nums[i]
+      end
+
+      nums[lo], nums[j] = nums[j], nums[lo]
+
+      j
     end
   end
 end

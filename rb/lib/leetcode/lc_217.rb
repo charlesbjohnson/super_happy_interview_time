@@ -4,13 +4,29 @@ module LeetCode
   # 217. Contains Duplicate
   module LC217
     # Description:
-    # Given an array of integers, find if the array contains any duplicates.
-    # Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+    # Given an integer array nums, return true if any value appears at least twice in the array,
+    # and return false if every element is distinct.
     #
-    # @param list {Array<Integer>}
+    # Examples:
+    # Input: nums = [1, 2, 3, 1]
+    # Output: true
+    #
+    # Input: nums = [1, 2, 3, 4]
+    # Output: false
+    #
+    # Input: nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
+    # Output: true
+    #
+    # @param {Array<Integer>} nums
     # @return {Boolean}
-    def contains_duplicate(list)
-      list.length != list.uniq.length
+    def contains_duplicate(nums)
+      set = Set.new
+
+      nums.each { |num|
+        return true unless set.add?(num)
+      }
+
+      false
     end
   end
 end

@@ -8,15 +8,14 @@ module LeetCode
     include(LC347)
 
     [
-      [[], 1, []],
-      [[0], 1, [0]],
-      [[0, 1], 1, [0]],
-      [[0, 1], 2, [0, 1]],
-      [[0, 1, 1], 1, [1]],
-      [[1, 1, 1, 2, 2, 3], 2, [1, 2]]
-    ].each.with_index { |(list, k, expected), i|
+      [[[0], 1], [0]],
+      [[[0, 1], 2], [0, 1]],
+      [[[0, 1, 1], 1], [1]],
+      [[[0, 1, 1], 2], [1, 0]],
+      [[[1, 1, 1, 2, 2, 3], 2], [1, 2]]
+    ].each.with_index { |((nums, k), expected), i|
       define_method(:"test_top_k_frequent_#{i}") {
-        assert_equal(expected, top_k_frequent(list, k))
+        assert_equal(expected, top_k_frequent(nums, k))
       }
     }
   end

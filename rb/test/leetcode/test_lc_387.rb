@@ -11,6 +11,7 @@ module LeetCode
       ["", -1],
       ["a", 0],
       ["aa", -1],
+      ["aabb", -1],
       ["aabccd", 2],
       ["leetcode", 0],
       ["loveleetcode", 2]

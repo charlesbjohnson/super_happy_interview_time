@@ -9,28 +9,36 @@ module LeetCode
 
     [
       [[[:insert, 1]], [1], []],
+      [[[:remove, 1]], [], []],
       [[[:insert, 1], [:insert, 1]], [1], []],
       [[[:insert, 1], [:remove, 1]], [], []],
-      [[[:insert, 1], [:insert, 2], [:remove, 1]], [2], [1]]
-    ].each.with_index { |(methods, included, excluded), i|
-      define_method(:"test_insert_remove_#{i}") {
-        set = RandomizedSet.new
-        methods.each { |method, val| set.send(method, val) }
-        included.none? { |val| set.insert(val) }
-        excluded.none? { |val| set.remove(val) }
+      [[[:remove, 1], [:remove, 1]], [], []],
+      [[[:insert, 1], [:remove, 1], [:insert, 1], [:remove, 1]], [], []],
+      [[[:insert, 1], [:insert, 2], [:insert, 3], [:remove, 2]], [1, 3], [2]]
+    ].each.with_index { |(steps, included, excluded), i|
+      define_method(:"test_randomized_set_insert_remove_#{i}") {
+        subject = RandomizedSet.new
+
+        steps.each { |method, val| subject.send(method, val) }
+
+        assert(included.none? { |val| subject.insert(val) })
+        assert(excluded.none? { |val| subject.remove(val) })
       }
     }
 
     [
-      [[[:insert, 1]], 2],
-      [[[:insert, 1], [:insert, 2]], 3],
-      [[[:insert, 1], [:insert, 2], [:insert, 3]], 5],
-      [[[:insert, 1], [:insert, 2], [:remove, 1]], 2]
-    ].each.with_index { |(methods, times), i|
-      define_method(:"test_random_#{i}") {
-        set = RandomizedSet.new
-        methods.each { |method, val| set.send(method, val) }
-        times.times { refute(set.insert(set.random)) }
+      [[[:insert, 1]], 1],
+      [[[:insert, 1], [:insert, 2]], 2],
+      [[[:insert, 1], [:insert, 2], [:insert, 3]], 3],
+      [[[:insert, 1], [:insert, 2], [:remove, 1]], 1]
+    ].each.with_index { |(steps, times), i|
+      define_method(:"test_randomized_set_get_random_#{i}") {
+        subject = RandomizedSet.new
+
+        steps.each { |method, val| subject.send(method, val) }
+
+        assert(times.times.none? { subject.insert(subject.get_random) })
+        assert(times.times.all? { subject.remove(subject.get_random) })
       }
     }
   end

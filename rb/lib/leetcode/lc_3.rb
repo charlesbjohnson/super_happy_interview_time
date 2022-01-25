@@ -6,49 +6,36 @@ module LeetCode
   # 3. Longest Substring Without Repeating Characters
   module LC3
     # Description:
-    # Given a string, find the length of the longest substring without repeating characters.
+    # Given a string s, find the length of the longest substring without repeating characters.
     #
-    # Examples:
-    # - 1:
-    #   Input: "abcabcbb"
-    #   Output: 3
+    # Input: s = "abcabcbb"
+    # Output: 3
     #
-    # - 2:
-    #   Input: "bbbbb"
-    #   Output: 1
+    # Input: s = "bbbbb"
+    # Output: 1
     #
-    # - 3:
-    #   Input: "pwwkew"
-    #   Output: 3
+    # Input: s = "pwwkew"
+    # Output: 3
     #
-    # Notes:
-    # - Note that the answer must be a substring and not a subsequence.
-    #
-    # @param s {String}
+    # @param {String} s
     # @return {Integer}
     def length_of_longest_substring(s)
-      return 0 if s.empty?
-      return 1 if s.length == 1
+      set = Set.new
 
-      left = 0
-      right = 1
+      i = 0
+      j = 0
 
-      map = {s[left] => left}
-      max = map.length
+      max = 0
 
-      while left < s.length - 1 && right < s.length
-        v = s[right]
-
-        if map.key?(v)
-          new_left = map[v] + 1
-          (left...new_left).each { |i| map.delete(s[i]) }
-          left = new_left
+      while j < s.length
+        if !set.include?(s[j])
+          set.add(s[j])
+          j += 1
+          max = [max, j - i].max
         else
-          map[v] = right
-          right += 1
+          set.delete(s[i])
+          i += 1
         end
-
-        max = [map.length, max].max
       end
 
       max

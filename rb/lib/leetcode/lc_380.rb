@@ -4,49 +4,65 @@ module LeetCode
   # 380. Insert Delete GetRandom O(1)
   module LC380
     # Description:
-    # Design a data structure that supports all following operations in average O(1) time.
-    # - insert(val): Inserts an item val to the set if not already present.
-    # - remove(val): Removes an item val from the set if present.
-    # - getRandom: Returns a random element from current set of elements. Each element must have the same probability of being returned.
+    # Implement the RandomizedSet class:
+    # - RandomizedSet()      Initializes the RandomizedSet object.
+    # - bool insert(int val) Inserts an item val into the set if not present. Returns true if the item was not present, false otherwise.
+    # - bool remove(int val) Removes an item val from the set if present. Returns true if the item was present, false otherwise.
+    # - int getRandom()      Returns a random element from the current set of elements (it's guaranteed that at least one element exists when this method is called). Each element must have the same probability of being returned.
+    #
+    # You must implement the functions of the class such that each function works in average O(1) time complexity.
+    #
+    # Examples:
+    # Input:
+    # ["RandomizedSet", "insert", "remove", "insert", "getRandom", "remove", "insert", "getRandom"]
+    # [[], [1], [2], [2], [], [1], [2], []]
+    # Output:
+    # [null, true, false, true, 2, true, false, 2]
+    #
     class RandomizedSet
       def initialize
-        @map = {}
-        @list = []
-        @length = 0
+        self.hash = {}
+        self.list = []
       end
 
+      # @param {Integer} val
+      # @return {Boolean}
       def insert(val)
-        return false if @map[val]
+        return false if hash.key?(val)
 
-        @list[@length] = val
-        @map[val] = @length
-
-        @length += 1
+        hash[val] = list.length
+        list.push(val)
 
         true
       end
 
+      # @param {Integer} val
+      # @return {Boolean}
       def remove(val)
-        i = @map[val]
-        return false unless i
+        return false if !hash.key?(val)
 
-        if i != @length - 1
-          @list[i] = @list[@length - 1]
-          @map[@list[i]] = i
+        i = hash[val]
+        j = list.length - 1
+
+        if i < j
+          hash[list[j]] = i
+          list[i] = list[j]
         end
 
-        @list[@length - 1] = nil
-        @map.delete(val)
-        @length -= 1
+        hash.delete(val)
+        list.pop
 
         true
       end
 
-      def random
-        @list[rand(0...@length)]
+      # @return {Integer}
+      def get_random
+        list[Random.random_number(0...list.length)]
       end
 
-      alias_method(:get_random, :random)
+      private
+
+      attr_accessor(:hash, :list)
     end
   end
 end

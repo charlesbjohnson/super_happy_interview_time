@@ -4,17 +4,14 @@ module LeetCode
   # 136. Single Number
   module LC136
     # Description:
-    # Given an array of integers, every element appears twice except for one.
-    # Find the single one.
+    # Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
     #
-    # Notes:
-    # - Your algorithm should have a linear runtime complexity.
-    # - Could you implement it without using extra memory?
+    # You must implement a solution with a linear runtime complexity and use only constant extra space.
     #
-    # @param list {Array<Integer>}
+    # @param {Array<Integer>} nums
     # @return {Integer}
-    def single_number(list)
-      list.reduce(0) { |a, v| a ^ v }
+    def single_number(nums)
+      (nums.to_set.sum * 2) - nums.sum
     end
   end
 end

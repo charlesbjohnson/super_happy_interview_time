@@ -8,9 +8,9 @@ module LeetCode
     include(LC771)
 
     [
-      ["aA", "aAAbbbb", 3],
-      ["z", "ZZ", 0]
-    ].each.with_index { |(jewels, stones, expected), i|
+      [["aA", "aAAbbbb"], 3],
+      [["z", "ZZ"], 0]
+    ].each.with_index { |((jewels, stones), expected), i|
       define_method(:"test_num_jewels_in_stones_#{i}") {
         assert_equal(expected, num_jewels_in_stones(jewels, stones))
       }

@@ -11,13 +11,11 @@ module LeetCode
       [1, true],
       [2, false],
       [3, false],
-      [4, false],
-      [5, false],
       [19, true],
-      [5555, true]
+      [100, true]
     ].each.with_index { |(n, expected), i|
-      define_method(:"test_happy?_#{i}") {
-        assert_equal(expected, happy?(n))
+      define_method(:"test_is_happy_#{i}") {
+        assert_equal(expected, is_happy(n))
       }
     }
   end

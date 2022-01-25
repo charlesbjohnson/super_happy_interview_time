@@ -4,20 +4,26 @@ module LeetCode
   # 49. Group Anagrams
   module LC49
     # Description:
-    # Given an array of strings, group anagrams together.
+    # Given an array of strings strs, group the anagrams together.
+    # You can return the answer in any order.
+    #
+    # An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
+    # typically using all the original letters exactly once.
     #
     # Examples:
-    # Input: ["eat", "tea", "tan", "ate", "nat", "bat"]
-    # Output: [
-    #   ["ate", "eat", "tea"],
-    #   ["nat", "tan"],
-    #   ["bat"]
-    # ]
+    # Input: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    # Output: [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]]
     #
-    # @param list {Array<String>}
+    # Input: strs = [""]
+    # Output: [[""]]
+    #
+    # Input: strs = ["a"]
+    # Output: [["a"]]
+    #
+    # @param {Array<String>} strs
     # @return {Array<Array<String>>}
-    def group_anagrams(list)
-      list.group_by { |s| s.chars.sort }.values
+    def group_anagrams(strs)
+      strs.group_by { |str| str.chars.sort }.values
     end
   end
 end
