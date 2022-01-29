@@ -1,6 +1,6 @@
 ---
 inherit_gem:
-  standard: config/base.yml
+  standard: config/ruby-3.0.yml
 
 Style/BlockDelimiters:
   EnforcedStyle: always_braces

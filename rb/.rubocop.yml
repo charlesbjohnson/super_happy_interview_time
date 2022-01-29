@@ -11,9 +11,7 @@ inherit_from:
   - .rubocop.standard.yml
 
 AllCops:
-  DisabledByDefault: false
   NewCops: enable
-  TargetRubyVersion: 3.0
   Exclude:
     - bin/*
     - coverage/*
