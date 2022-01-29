@@ -3,8 +3,16 @@ inherit_gem:
   standard: config/ruby-3.0.yml
 
 Style/BlockDelimiters:
+  Enabled: true
   EnforcedStyle: always_braces
   IgnoredMethods: []
+  Exclude:
+    - bin/{bundle,rubocop}
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  Exclude:
+    - bin/{bundle,rubocop}
 
 Style/MethodCallWithArgsParentheses:
   Enabled: true
@@ -12,3 +20,5 @@ Style/MethodCallWithArgsParentheses:
   AllowParenthesesInChaining: true
   AllowParenthesesInMultilineCall: true
   IgnoreMacros: false
+  Exclude:
+    - bin/{bundle,rubocop}
