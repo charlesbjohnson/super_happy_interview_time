@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require("config")
+require("helpers/leetcode/heap")
+
 require("leetcode/lc_347")
 
 module LeetCode
@@ -15,7 +17,7 @@ module LeetCode
       [[[1, 1, 1, 2, 2, 3], 2], [1, 2]]
     ].each.with_index { |((nums, k), expected), i|
       define_method(:"test_top_k_frequent_#{i}") {
-        assert_equal(expected, top_k_frequent(nums, k))
+        assert_equal(expected.sort, top_k_frequent(nums, k).sort)
       }
     }
   end
