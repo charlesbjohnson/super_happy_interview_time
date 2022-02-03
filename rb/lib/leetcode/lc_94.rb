@@ -21,9 +21,9 @@ module LeetCode
     # @param {TreeNode} root
     # @return {Array<Integer>}
     def inorder_traversal(root)
-      stack = []
       result = []
 
+      stack = []
       stack.push([root, false]) if root
 
       until stack.empty?

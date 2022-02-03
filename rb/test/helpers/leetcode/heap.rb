@@ -23,6 +23,18 @@ module Helpers
       end
 
       # @return {Comparable}
+      def delete(v)
+        i = values.find_index(v)
+        return unless i
+
+        values[i], values[-1] = values[-1], values[i]
+        result = values.pop
+        sink(i)
+
+        result
+      end
+
+      # @return {Comparable}
       def pop
         return if values.empty?
 

@@ -3,39 +3,40 @@
 module LeetCode
   # 46. Permutations
   module LC46
-    def permute_recurse(result, current, list)
-      if list.length == 1
-        result.push(current + list)
-        return
-      end
-
-      list.each.with_index { |v, i|
-        permute_recurse(result, current + [v], list[0...i] + list[(i + 1)..])
-      }
-    end
-
     # Description:
-    # Given a collection of distinct numbers, return all possible permutations.
+    # Given an array nums of distinct integers, return all the possible permutations.
+    # You can return the answer in any order.
     #
     # Examples:
-    # Input: [1, 2, 3]
-    # Output: [
-    #   [1, 2, 3],
-    #   [1, 3, 2],
-    #   [2, 1, 3],
-    #   [2, 3, 1],
-    #   [3, 1, 2],
-    #   [3, 2, 1],
-    # ]
+    # Input: nums = [1, 2, 3]
+    # Output: [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
     #
-    # @param list {Array<Integer>}
+    # Input: nums = [0, 1]
+    # Output: [[0, 1], [1, 0]]
+    #
+    # Input: nums = [1]
+    # Output: [[1]]
+    #
+    # @param {Array<Integer>} nums
     # @return {Array<Array<Integer>>}
-    def permute(list)
-      return [[]] if list.empty?
+    def permute(nums)
+      result = []
+      stack = [[[], nums]]
 
-      [].tap { |result|
-        permute_recurse(result, [], list)
-      }
+      until stack.empty?
+        cur, rem = stack.pop
+
+        if rem.empty?
+          result.push(cur)
+          next
+        end
+
+        rem.each_index { |i|
+          stack.unshift([cur + [rem[i]], rem[...i] + rem[(i + 1)..]])
+        }
+      end
+
+      result
     end
   end
 end

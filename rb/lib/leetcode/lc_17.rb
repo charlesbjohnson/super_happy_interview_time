@@ -3,50 +3,60 @@
 module LeetCode
   # 17. Letter Combinations of a Phone Number
   module LC17
-    MAPPING = {
-      "0" => [],
-      "1" => [],
-      "2" => %w[a b c],
-      "3" => %w[d e f],
-      "4" => %w[g h i],
-      "5" => %w[j k l],
-      "6" => %w[m n o],
-      "7" => %w[p q r s],
-      "8" => %w[t u v],
-      "9" => %w[w x y z]
-    }.freeze
-
     # Description:
-    # Given a digit string, return all possible letter combinations that the number could represent.
-    # A mapping of digit to letters (just like on the telephone buttons) is given below.
+    # Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
+    # Return the answer in any order.
     #
-    # 1 => "",     2 => "abc", 3 => "def"
-    # 4 => "ghi",  5 => "jkl", 6 => "mno"
-    # 7 => "pqrs", 8 => "tuv"  9 => "wxyz"
-    #              0 => ""
+    # A mapping of digit to letters (just like on the telephone buttons) is given below.
+    # Note that 1 does not map to any letters.
+    #
+    # 1 =>      | 2 => abc | 3 => def
+    # 4 => ghi  | 5 => jkl | 6 => mno
+    # 7 => pqrs | 8 => tuv | 9 => wxyz
+    #             0 =>
     #
     # Examples:
-    # Input: "23"
+    # Input: digits = "23"
     # Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
     #
-    # Notes:
-    # - Although the above answer is in lexicographical order, your answer could be in any order you want.
+    # Input: digits = ""
+    # Output: []
     #
-    # @param digits {String}
+    # Input: digits = "2"
+    # Output: ["a", "b", "c"]
+    #
+    # @param {String} digits
     # @return {Array<String>}
     def letter_combinations(digits)
-      digits.chars.reduce([]) { |combinations, digit|
-        mapping = MAPPING[digit].clone
+      result = []
+      keypad = {
+        "2" => ["a", "b", "c"],
+        "3" => ["d", "e", "f"],
+        "4" => ["g", "h", "i"],
+        "5" => ["j", "k", "l"],
+        "6" => ["m", "n", "o"],
+        "7" => ["p", "q", "r", "s"],
+        "8" => ["t", "u", "v"],
+        "9" => ["w", "x", "y", "z"]
+      }
 
-        if combinations.empty?
-          combinations.concat(mapping)
-          next combinations
+      stack = []
+      stack.push([0, ""]) unless digits.empty?
+
+      until stack.empty?
+        i, s = stack.pop
+
+        if i >= digits.length
+          result.unshift(s)
+          next
         end
 
-        combinations.flat_map { |combination|
-          mapping.map { |character| combination + character }
+        keypad[digits[i]].each { |c|
+          stack.push([i + 1, s + c])
         }
-      }
+      end
+
+      result
     end
   end
 end

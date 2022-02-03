@@ -8,7 +8,7 @@ module LeetCode
     #
     # Examples:
     # Input: root = [3, 9, 20, null, null, 15, 7]
-    # Output: [[3],[9, 20],[15, 7]]
+    # Output: [[3], [9,  20], [15,  7]]
     #
     # Input: root = [1]
     # Output: [[1]]
@@ -19,24 +19,19 @@ module LeetCode
     # @param {TreeNode} root
     # @return {Array<Array<Integer>>}
     def level_order(root)
-      stack = []
       result = []
+      level = [root].compact
 
-      stack.push([root]) if root
+      until level.empty?
+        p_level, level = level, []
 
-      until stack.empty?
-        curr_level = stack.pop
-        next_level = []
-
-        curr_level.each_with_index { |node, i|
-          next_level.push(node.left) if node.left
-          next_level.push(node.right) if node.right
-
-          curr_level[i] = node.val
+        p_level.each_with_index { |node, i|
+          level.push(node.left) if node.left
+          level.push(node.right) if node.right
+          p_level[i] = node.val
         }
 
-        stack.push(next_level) if !next_level.empty?
-        result.push(curr_level)
+        result.push(p_level)
       end
 
       result

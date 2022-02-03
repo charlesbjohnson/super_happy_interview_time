@@ -3,52 +3,34 @@
 module LeetCode
   # 98. Validate Binary Search Tree
   module LC98
-    TreeNode = Struct.new(:val, :left, :right)
-
-    def valid_bst_recurse(node, items)
-      return true unless node
-
-      return false unless valid_bst_recurse(node.left, items)
-
-      return false if items.last && node.val <= items.last
-
-      items.push(node.val)
-
-      return false unless valid_bst_recurse(node.right, items)
-
-      true
-    end
-
     # Description:
-    # Given a binary tree, determine if it is a valid binary search tree (BST).
+    # Given the root of a binary tree, determine if it is a valid binary search tree (BST).
     #
-    # Assume a BST is defined as follows:
-    #
+    # A valid BST is defined as follows:
     # - The left subtree of a node contains only nodes with keys less than the node's key.
     # - The right subtree of a node contains only nodes with keys greater than the node's key.
     # - Both the left and right subtrees must also be binary search trees.
     #
     # Examples:
-    # - 1:
-    #   Input:
-    #     2
-    #    / \
-    #   1   3
-    #   Output: true
+    # Input: root = [2, 1, 3]
+    # Output: true
     #
-    # - 2:
-    #   Input:
-    #     1
-    #    / \
-    #   2   3
-    #   Output: false
+    # Input: root = [5, 1, 4, null, null, 3, 6]
+    # Output: false
     #
-    # @param tree {TreeNode}
+    # @param {TreeNode} root
     # @return {Boolean}
-    def valid_bst?(tree)
-      valid_bst_recurse(tree, [])
+    def is_valid_bst(root)
+      r_is_valid_bst(root, -Float::INFINITY, Float::INFINITY)
     end
 
-    alias_method(:is_valid_bst, :valid_bst?)
+    private
+
+    def r_is_valid_bst(root, min, max)
+      return true if !root
+      return false if root.val <= min || root.val >= max
+
+      r_is_valid_bst(root.left, min, [root.val, max].min) && r_is_valid_bst(root.right, [root.val, min].max, max)
+    end
   end
 end

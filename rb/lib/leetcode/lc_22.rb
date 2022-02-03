@@ -3,37 +3,36 @@
 module LeetCode
   # 22. Generate Parentheses
   module LC22
-    def generate_parenthesis_recurse(result, current, left, right, n)
-      if current.length == 2 * n
-        result.push(current)
-        return
-      end
-
-      generate_parenthesis_recurse(result, "#{current}(", left + 1, right, n) if left < n
-      generate_parenthesis_recurse(result, "#{current})", left, right + 1, n) if right < left
-    end
-
     # Description:
     # Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
     #
     # Examples:
-    # Input: 3
-    # Output: [
-    #   "((()))",
-    #   "(()())",
-    #   "(())()",
-    #   "()(())",
-    #   "()()()"
-    # ]
     #
-    # @param n {Integer}
+    # Input: n = 3
+    # Output: ["((()))", "(()())", "(())()", "()(())", "()()()"]
+    #
+    # Input: n = 1
+    # Output: ["()"]
+    #
+    # @param {Integer} n
     # @return {Array<String>}
     def generate_parenthesis(n)
-      return [] if n < 1
+      result = []
+      stack = [[0, 0, ""]]
 
-      [].tap { |result|
-        generate_parenthesis_recurse(result, "", 0, 0, n)
-      }
+      until stack.empty?
+        l, r, current = stack.pop
+
+        if current.length == n * 2
+          result.unshift(current)
+          next
+        end
+
+        stack.push([l + 1, r, current + "("]) if l < n
+        stack.push([l, r + 1, current + ")"]) if r < l
+      end
+
+      result
     end
   end
 end
