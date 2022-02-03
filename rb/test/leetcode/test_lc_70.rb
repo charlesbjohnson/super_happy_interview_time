@@ -11,7 +11,8 @@ module LeetCode
       [1, 1],
       [2, 2],
       [3, 3],
-      [4, 5]
+      [4, 5],
+      [5, 8]
     ].each.with_index { |(n, expected), i|
       define_method(:"test_climb_stairs_#{i}") {
         assert_equal(expected, climb_stairs(n))

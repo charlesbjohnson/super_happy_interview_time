@@ -18,14 +18,9 @@ module LeetCode
     # @param {Array<String>} s
     # @return {nil}
     def reverse_string(s)
-      i = 0
-      j = s.length - 1
-
-      while i < j
-        s[i], s[j] = s[j], s[i]
-        i += 1
-        j -= 1
-      end
+      (0...(s.length / 2)).each { |i|
+        s[i], s[s.length - 1 - i] = s[s.length - 1 - i], s[i]
+      }
 
       nil
     end

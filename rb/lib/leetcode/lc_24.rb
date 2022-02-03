@@ -20,30 +20,16 @@ module LeetCode
     # @param {ListNode} head
     # @return {ListNode}
     def swap_pairs(head)
-      return head if !head || !head.next
+      return unless head
+      return head unless head.next
 
-      before = nil
-      swap_l = head
-      swap_r = head.next
-      after = head.next.next
+      tmp = swap_pairs(head&.next&.next)
 
-      head = swap_r
+      new_head = head.next
+      head.next = tmp
 
-      while swap_l && swap_r
-        if before
-          before.next = swap_r
-        end
-
-        swap_l.next = after
-        swap_r.next = swap_l
-
-        before = swap_l
-        swap_l = after
-        swap_r = after ? after.next : nil
-        after = swap_r ? swap_r.next : nil
-      end
-
-      head
+      new_head.next = head
+      new_head
     end
   end
 end

@@ -26,37 +26,15 @@ module LeetCode
     def merge_two_lists(list1, list2)
       return if !list1 && !list2
 
-      head = nil
-      curr = nil
+      return list1 if !list2
+      return list2 if !list1
 
-      i = list1
-      j = list2
+      head = list1.val <= list2.val ? list1 : list2
 
-      while i || j
-        if !j || (i && j && i.val < j.val)
-          i_succ = i.next
-
-          if !head
-            head = i
-          else
-            curr.next = i
-          end
-
-          i = i_succ
-        elsif !i || (i && j && i.val >= j.val)
-          j_succ = j.next
-
-          if !head
-            head = j
-          else
-            curr.next = j
-          end
-
-          j = j_succ
-        end
-
-        curr = curr ? curr.next : head
-      end
+      head.next = merge_two_lists(
+        head.equal?(list1) ? list1.next : list1,
+        head.equal?(list2) ? list2.next : list2
+      )
 
       head
     end
