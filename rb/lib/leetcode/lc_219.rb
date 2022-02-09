@@ -20,14 +20,11 @@ module LeetCode
     # @param {Integer} k
     # @return {Boolean}
     def contains_nearby_duplicate(nums, k)
-      hash = Hash.new(0)
+      set = Set.new
 
       nums.each_with_index { |num, i|
-        if hash.key?(num)
-          return true if i - hash[num] <= k
-        end
-
-        hash[num] = i
+        return true if !set.add?(num)
+        set.delete(nums[i - k]) if set.size > k
       }
 
       false

@@ -3,39 +3,41 @@
 module LeetCode
   # 108. Convert Sorted Array to Binary Search Tree
   module LC108
-    TreeNode = Struct.new(:val, :left, :right)
+    TreeNode = Helpers::LeetCode::BinaryTree::TreeNode
 
     # Description:
-    # Given an array where elements are sorted in ascending order,
-    # convert it to a height balanced BST.
+    # Given an integer array nums where the elements are sorted in ascending order,
+    # convert it to a height-balanced binary search tree.
     #
-    # For this problem, a height-balanced binary tree is defined as a binary tree
-    # in which the depth of the two subtrees of every node never differ by more than 1.
+    # A height-balanced binary tree is a binary tree in which the depth of
+    # the two subtrees of every node never differs by more than one.
     #
     # Examples:
-    # Input: [-10, -3, 0, 5, 9]
-    # Output:
-    #        0
-    #       / \
-    #     -3   9
-    #     /   /
-    #   -10  5
+    # Input: nums = [-10, -3, 0, 5, 9]
+    # Output: [0, -3, 9, -10, null, 5]
     #
-    # @param list {Array<Integer>}
+    # Input: nums = [1, 3]
+    # Output: [3, 1]
+    #
+    # @param {Array<Integer>} nums
     # @return {TreeNode}
-    def sorted_array_to_bst(list)
-      return if list.empty?
+    def sorted_array_to_bst(nums)
+      r_sorted_array_to_bst(nums, 0, nums.length - 1)
+    end
 
-      mid = list.length / 2
+    private
 
-      left = list.take(mid)
-      right = list.drop(mid + 1)
+    def r_sorted_array_to_bst(nums, l, r)
+      return if l > r
+      return TreeNode.new(nums[l]) if l == r
 
-      node = TreeNode.new(list[mid])
-      node.left = sorted_array_to_bst(left)
-      node.right = sorted_array_to_bst(right)
+      m = ((r - l + 1) / 2) + l
 
-      node
+      TreeNode.new(
+        nums[m],
+        r_sorted_array_to_bst(nums, l, m - 1),
+        r_sorted_array_to_bst(nums, m + 1, r)
+      )
     end
   end
 end

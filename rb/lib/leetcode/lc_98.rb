@@ -30,7 +30,7 @@ module LeetCode
       return true if !root
       return false if root.val <= min || root.val >= max
 
-      r_is_valid_bst(root.left, min, [root.val, max].min) && r_is_valid_bst(root.right, [root.val, min].max, max)
+      r_is_valid_bst(root.left, min, root.val) && r_is_valid_bst(root.right, root.val, max)
     end
   end
 end
