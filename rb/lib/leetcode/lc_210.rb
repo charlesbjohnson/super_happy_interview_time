@@ -1,27 +1,33 @@
 # frozen_string_literal: true
 
 module LeetCode
-  # 207. Course Schedule
-  module LC207
+  # 210. Course Schedule II
+  module LC210
     # Description:
     # There are a total of num_courses courses you have to take, labeled from 0 to num_courses - 1.
     # You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
     #
     # For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
     #
-    # Return true if you can finish all courses. Otherwise, return false.
+    # Return the ordering of courses you should take to finish all courses.
+    # If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.
     #
     # Examples:
     # Input: num_courses = 2, prerequisites = [[1, 0]]
-    # Output: true
+    # Output: [0, 1]
     #
-    # Input: num_courses = 2, prerequisites = [[1, 0], [0, 1]]
-    # Output: false
+    # Input: num_courses = 4, prerequisites = [[1, 0], [2, 0], [3, 1], [3, 2]]
+    # Output: [0, 2, 1, 3]
+    #
+    # Input: num_courses = 1, prerequisites = []
+    # Output: [0]
     #
     # @param {Integer} num_courses
     # @param {Array<Array<(Integer, Integer)>>} prerequisites
-    # @return {Boolean}
-    def can_finish(num_courses, prerequisites)
+    # @return {Array<Integer>}
+    def find_order(num_courses, prerequisites)
+      result = []
+
       dependencies = {}
       dependents = {}
 
@@ -49,9 +55,10 @@ module LeetCode
         }
 
         dependencies.delete(node)
+        result.push(node)
       end
 
-      dependencies.empty?
+      dependencies.empty? ? result : []
     end
   end
 end

@@ -25,13 +25,19 @@ module LeetCode
     # @param {Node} root
     # @return {Node}
     def connect(root)
-      return root if !root || (!root.left && !root.right)
+      queue = [root]
 
-      root.left.next = root.right
-      root.right.next = root.next.left if root.next
+      until queue.empty?
+        node = queue.shift
 
-      connect(root.left)
-      connect(root.right)
+        next if !node || (!node.left && !node.right)
+
+        node.left.next = node.right
+        node.right.next = node.next.left if node.next
+
+        queue.push(node.left)
+        queue.push(node.right)
+      end
 
       root
     end

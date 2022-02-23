@@ -4,9 +4,8 @@ module Helpers
   module LeetCode
     module Graph
       Node = Struct.new(:val, :neighbors) {
-        def initialize(val, neighbors = nil)
-          self.val = val
-          self.neighbors = neighbors || []
+        def initialize(val, neighbors = [])
+          super
         end
       }
 

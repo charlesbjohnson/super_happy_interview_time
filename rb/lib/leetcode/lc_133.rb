@@ -12,26 +12,36 @@ module LeetCode
     # Each node in the graph contains a value (int) and a list (List[Node]) of its neighbors.
     #
     # Examples:
-    # Input: adjList = [[2, 4], [1, 3], [2, 4], [1, 3]]
+    # Input: adj_list = [[2, 4], [1, 3], [2, 4], [1, 3]]
     # Output: [[2, 4], [1, 3], [2, 4], [1, 3]]
     #
-    # Input: adjList = [[]]
+    # Input: adj_list = [[]]
     # Output: [[]]
     #
-    # Input: adjList = []
+    # Input: adj_list = []
     # Output: []
     #
     # @param {Node} node
     # @return {Node}
     def clone_graph(node)
-      r_clone_graph(node, {}) if node
-    end
+      stack = []
+      visited = {}
 
-    def r_clone_graph(node, visited)
-      return visited[node] if visited.key?(node)
+      stack.push(node) if node
 
-      visited[node] = Node.new(node.val)
-      visited[node].neighbors = node.neighbors.map { |neighbor| r_clone_graph(neighbor, visited) }
+      until stack.empty?
+        current = stack.pop
+
+        visited[current] ||= Node.new(current.val)
+        current.neighbors.each { |neighbor|
+          if !visited.key?(neighbor)
+            visited[neighbor] = Node.new(neighbor.val)
+            stack.push(neighbor)
+          end
+
+          visited[current].neighbors.push(visited[neighbor])
+        }
+      end
 
       visited[node]
     end
