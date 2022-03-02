@@ -8,17 +8,21 @@ module LeetCode
     include(LC300)
 
     [
-      [[], 0],
       [[1], 1],
       [[1, 2], 2],
       [[2, 1], 1],
-      [[1, 2, 3, 4, 5], 5],
-      [[3, 5, 4, 1, 2], 2],
-      [[2, 4, 3, 5, 1], 3],
-      [[3, 4, -1, 0, 6, 2, 3], 4]
-    ].each.with_index { |(list, expected), i|
+      [[1, 0, 2], 2],
+      [[2, 0, 1], 2],
+      [[2, 0, 1], 2],
+      [[0, 2, 1], 2],
+      [[0, 1, 2], 3],
+      [[0, 1, 0], 2],
+      [[10, 9, 2, 5, 3, 7, 101, 18], 4],
+      [[0, 1, 0, 3, 2, 3], 4],
+      [[7, 7, 7, 7, 7, 7, 7], 1]
+    ].each.with_index { |(nums, expected), i|
       define_method(:"test_length_of_lis_#{i}") {
-        assert_equal(expected, length_of_lis(list))
+        assert_equal(expected, length_of_lis(nums))
       }
     }
   end

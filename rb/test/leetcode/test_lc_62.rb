@@ -8,17 +8,16 @@ module LeetCode
     include(LC62)
 
     [
-      [0, 0, 0],
-      [1, 1, 1],
-      [1, 2, 1],
-      [2, 1, 1],
-      [2, 2, 2],
-      [3, 3, 6],
-      [4, 4, 20],
-      [5, 5, 70]
-    ].each.with_index { |(rows, columns, expected), i|
+      [[1, 1], 1],
+      [[1, 2], 1],
+      [[2, 1], 1],
+      [[2, 2], 2],
+      [[3, 3], 6],
+      [[4, 4], 20],
+      [[5, 5], 70]
+    ].each.with_index { |((m, n), expected), i|
       define_method(:"test_unique_paths_#{i}") {
-        assert_equal(expected, unique_paths(rows, columns))
+        assert_equal(expected, unique_paths(m, n))
       }
     }
   end

@@ -3,49 +3,60 @@
 module LeetCode
   # 322. Coin Change
   module LC322
-    def coin_change_recurse(coins, amount, cache)
-      return 0 if amount.zero?
-      return -1 if amount.negative?
-      return cache[amount] if cache[amount]
-
-      min = Float::INFINITY
-
-      coins.each { |coin|
-        result = coin_change_recurse(coins, amount - coin, cache)
-        min = result + 1 if (0...min).cover?(result)
-      }
-
-      cache[amount] = min.infinite? ? -1 : min
-      cache[amount]
-    end
-
     # Description:
-    # You are given coins of different denominations and a total amount of money amount.
-    # Write a function to compute the fewest number of coins that you need to make up that amount.
+    # You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+    #
+    # Return the fewest number of coins that you need to make up that amount.
     # If that amount of money cannot be made up by any combination of the coins, return -1.
     #
+    # You may assume that you have an infinite number of each kind of coin.
+    #
     # Examples:
-    # - 1:
-    #   Input: coins = [1, 2, 5], amount = 11
-    #   Output: 3
+    # Input: coins = [1, 2, 5], amount = 11
+    # Output: 3
     #
-    # - 2:
-    #   Input: coins = [2], amount = 3
-    #   Output: -1
+    # Input: coins = [2], amount = 3
+    # Output: -1
     #
-    # Notes:
-    # - You may assume that you have an infinite number of each kind of coin.
+    # Input: coins = [1], amount = 0
+    # Output: 0
     #
-    # @param coins {Array<Integer>}
-    # @param amount {Integer}
+    # @param {Array<Integer>} coins
+    # @param {Integer} amount
     # @return {Integer}
     def coin_change(coins, amount)
-      coins = coins.select(&:positive?).sort.reverse
+      result = private_methods.grep(/^coin_change_\d+$/).map { |m| send(m, coins, amount) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      return 0 if amount.zero?
-      return -1 if coins.empty?
+    private
 
-      coin_change_recurse(coins, amount, {})
+    def coin_change_1(coins, amount)
+      cache = {}
+
+      rec = ->(a) {
+        return 0 if a == 0
+
+        cache[a] ||= coins.map { |coin|
+          a >= coin ? 1 + rec.call(a - coin) : Float::INFINITY
+        }.min
+      }
+
+      result = rec.call(amount)
+      result.infinite? ? -1 : result
+    end
+
+    def coin_change_2(coins, amount)
+      result = Array.new(amount + 1, 0)
+
+      (1..amount).each { |a|
+        result[a] = coins.map { |coin|
+          a >= coin ? 1 + result[a - coin] : Float::INFINITY
+        }.min
+      }
+
+      result = result[amount]
+      result.infinite? ? -1 : result
     end
   end
 end

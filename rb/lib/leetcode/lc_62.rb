@@ -4,32 +4,34 @@ module LeetCode
   # 62. Unique Paths
   module LC62
     # Description:
-    # A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+    # There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]).
+    # The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]).
     # The robot can only move either down or right at any point in time.
-    # The robot is trying to reach the bottom-right corner of the grid.
-    # How many possible unique paths are there?
     #
-    # Notes:
-    # - rows and columns will be at most 100
+    # Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
     #
-    # @param rows {Integer}
-    # @param columns {Integer}
+    # The test cases are generated so that the answer will be less than or equal to 2 * 109.
+    #
+    # Examples:
+    # Input: m = 3, n = 7
+    # Output: 28
+    #
+    # Input: m = 3, n = 2
+    # Output: 3
+    #
+    # @param {Integer} m
+    # @param {Integer} n
     # @return {Integer}
-    def unique_paths(rows, columns)
-      return 0 if rows.zero? || columns.zero?
+    def unique_paths(m, n)
+      result = Array.new(m) { Array.new(n, 1) }
 
-      grid = Array.new(rows) { Array.new(columns) }
-
-      grid.each_index { |row| grid[row][0] = 1 }
-      grid[0].each_index { |col| grid[0][col] = 1 }
-
-      (1...grid.length).each { |row|
-        (1...grid[row].length).each { |col|
-          grid[row][col] = grid[row - 1][col] + grid[row][col - 1]
+      (1...m).each { |r|
+        (1...n).each { |c|
+          result[r][c] = result[r][c - 1] + result[r - 1][c]
         }
       }
 
-      grid[rows - 1][columns - 1]
+      result[-1][-1]
     end
   end
 end

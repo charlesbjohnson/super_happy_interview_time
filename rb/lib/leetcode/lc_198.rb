@@ -6,28 +6,55 @@ module LeetCode
     # Description:
     # You are a professional robber planning to rob houses along a street.
     #
-    # Each house has a certain amount of money stashed, the only constraint stopping
-    # you from robbing each of them is that adjacent houses have security system
-    # connected and it will automatically contact the police if two adjacent houses
-    # were broken into on the same night.
+    # Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them
+    # is that adjacent houses have security systems connected and it will automatically contact the police if
+    # two adjacent houses were broken into on the same night.
     #
-    # Given a list of non-negative integers representing the amount of money of each house,
-    # determine the maximum amount of money you can rob tonight without alerting the police.
+    # Given an integer array nums representing the amount of money of each house,
+    # return the maximum amount of money you can rob tonight without alerting the police.
     #
-    # @param list {Array<Integer>}
+    # Examples:
+    # Input: nums = [1, 2, 3, 1]
+    # Output: 4
+    #
+    # Input: nums = [2, 7, 9, 3, 1]
+    # Output: 12
+    #
+    # @param {Array<Integer>} nums
     # @return {Integer}
-    def rob(list)
-      return 0 if list.empty?
-      return list[0] if list.length == 1
-      return [list[0], list[1]].max if list.length == 2
+    def rob(nums)
+      result = private_methods.grep(/^rob_\d+$/).map { |m| send(m, nums) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      cache = [list[0], [list[0], list[1]].max]
+    private
 
-      (2...list.length).each { |i|
-        cache[i] = [list[i] + cache[i - 2], cache[i - 1]].max
+    def rob_1(nums)
+      cache = {}
+
+      rec = ->(i) {
+        return 0 if i == nums.length
+
+        cache[i] ||= [
+          nums[i] + (i + 2 < nums.length ? rec.call(i + 2) : 0),
+          rec.call(i + 1)
+        ].max
       }
 
-      cache[list.length - 1]
+      rec.call(0)
+    end
+
+    def rob_2(nums)
+      result = Array.new(nums.length + 1, 0)
+
+      (nums.length - 1).downto(0) { |i|
+        result[i] = [
+          nums[i] + (i + 2 < nums.length ? result[i + 2] : 0),
+          result[i + 1]
+        ].max
+      }
+
+      result[0]
     end
   end
 end
