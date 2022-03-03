@@ -17,28 +17,27 @@ module LeetCode
     # @param {Integer} n
     # @return {Integer}
     def total_n_queens(n)
-      r_total_queens(0, n, [])
-    end
+      rec = ->(r, queens) {
+        if queens.length > 1
+          defender = queens[-1]
 
-    private
+          (0...(queens.length - 1)).each { |i|
+            attacker = queens[i]
 
-    def r_total_queens(r, n, queens)
-      if queens.length > 1
-        defender = queens[-1]
+            return 0 if attacker[0] == defender[0]
+            return 0 if attacker[1] == defender[1]
+            return 0 if (attacker[0] - defender[0]).abs == (attacker[1] - defender[1]).abs
+          }
+        end
 
-        (0...(queens.length - 1)).each { |i|
-          attacker = queens[i]
+        return 1 if r >= n
 
-          return 0 if attacker[0] == defender[0] || attacker[1] == defender[1]
-          return 0 if ((attacker[0] - defender[0]).fdiv(attacker[1] - defender[1]).abs - 1.0).abs < Float::EPSILON
+        (0...n).sum { |c|
+          rec.call(r + 1, queens + [[r, c]])
         }
-      end
-
-      return 1 if r >= n
-
-      (0...n).sum { |c|
-        r_total_queens(r + 1, n, queens + [[r, c]])
       }
+
+      rec.call(0, [])
     end
   end
 end

@@ -51,14 +51,14 @@ module LeetCode
           end
         }
 
-        r_sum(cursor)
+        rec = ->(cursor) {
+          cursor.value + cursor.children.sum { |_, child| rec.call(child) }
+        }
+
+        rec.call(cursor)
       end
 
       private
-
-      def r_sum(node)
-        node.value + node.children.sum { |_, child| r_sum(child) }
-      end
 
       attr_accessor(:root)
 

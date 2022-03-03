@@ -22,18 +22,16 @@ module LeetCode
     # @param {TreeNode} root
     # @return {Boolean}
     def is_balanced(root)
-      r_is_balanced(root)[0]
-    end
+      rec = ->(root) {
+        return [true, 0] if !root
 
-    private
+        l_bal, l = rec.call(root.left)
+        r_bal, r = rec.call(root.right)
 
-    def r_is_balanced(root)
-      return [true, 0] if !root
+        [l_bal && r_bal && (l - r).abs <= 1, [l, r].max + 1]
+      }
 
-      l_bal, l = r_is_balanced(root.left)
-      r_bal, r = r_is_balanced(root.right)
-
-      [l_bal && r_bal && (l - r).abs <= 1, [l, r].max + 1]
+      rec.call(root)[0]
     end
   end
 end

@@ -43,25 +43,25 @@ module LeetCode
       # @param {String} word
       # @return {Boolean}
       def search(word)
-        r_search(root, 0, word)
+        rec = ->(cursor, i) {
+          return cursor.terminal if i == word.length
+          return false if cursor.max_depth < word.length - i
+
+          if word[i] == "."
+            cursor.children.any? { |_, child| rec.call(child, i + 1) }
+          elsif !cursor.children.key?(word[i])
+            false
+          else
+            rec.call(cursor.children[word[i]], i + 1)
+          end
+        }
+
+        rec.call(root, 0)
       end
 
       private
 
       attr_accessor(:root)
-
-      def r_search(node, i, word)
-        return node.terminal if i == word.length
-        return false if node.max_depth < word.length - i
-
-        if word[i] == "."
-          node.children.any? { |_, child| r_search(child, i + 1, word) }
-        elsif !node.children.key?(word[i])
-          false
-        else
-          r_search(node.children[word[i]], i + 1, word)
-        end
-      end
 
       TrieNode = Struct.new(:terminal, :max_depth, :children) {
         def initialize(terminal = false, max_depth = 1, children = Hash.new { |h, k| h[k] = TrieNode.new })

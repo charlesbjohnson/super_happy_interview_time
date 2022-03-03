@@ -19,20 +19,16 @@ module LeetCode
     # @param {Integer} n
     # @return {Integer}
     def climb_stairs(n)
-      r_climb_stairs(n, {})
-    end
+      result = Array.new(n)
 
-    private
+      result[0] = 1
+      result[1] = 2 if result.length > 1
 
-    def r_climb_stairs(n, cache)
-      return 0 if n < 0
-      return 1 if n == 0
+      (2...result.length).each { |i|
+        result[i] = result[(i - 2)...i].sum
+      }
 
-      if !cache.key?(n)
-        cache[n] = r_climb_stairs(n - 2, cache) + r_climb_stairs(n - 1, cache)
-      end
-
-      cache[n]
+      result[-1]
     end
   end
 end

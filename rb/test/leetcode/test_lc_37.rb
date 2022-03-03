@@ -36,7 +36,7 @@ module LeetCode
       ]
     ].each.with_index { |(board, expected), i|
       define_method(:"test_solve_sudoku_#{i}") {
-        assert_equal(expected, solve_sudoku(board))
+        assert_equal(expected, board.tap { solve_sudoku(board) })
       }
     }
   end

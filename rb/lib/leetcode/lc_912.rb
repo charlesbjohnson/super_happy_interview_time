@@ -16,21 +16,21 @@ module LeetCode
     # @param {Array<Integer>} nums
     # @return {Array<Integer>}
     def sort_array(nums)
-      r_sort_array(nums)
+      rec = ->(nums) {
+        return nums.clone if nums.empty? || nums.length == 1
+
+        mid = (nums.length / 2)
+
+        left = rec.call(nums[...mid])
+        right = rec.call(nums[mid..])
+
+        merge(left, right)
+      }
+
+      rec.call(nums)
     end
 
     private
-
-    def r_sort_array(nums)
-      return nums.clone if nums.empty? || nums.length == 1
-
-      mid = (nums.length / 2)
-
-      left = r_sort_array(nums[...mid])
-      right = r_sort_array(nums[mid..])
-
-      merge(left, right)
-    end
 
     def merge(left, right)
       result = Array.new(left.length + right.length)

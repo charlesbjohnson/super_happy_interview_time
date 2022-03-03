@@ -21,30 +21,36 @@ module LeetCode
     # @param {Integer} n
     # @return {Array<TreeNode>}
     def generate_trees(n)
-      r_generate_trees(1, n, {})
-    end
-
-    private
-
-    def r_generate_trees(l, r, cache)
-      return [nil] if l > r
-      return cache[[l, r]] if cache.key?([l, r])
-
-      result = []
-
-      (l..r).each { |i|
-        left_roots = r_generate_trees(l, i - 1, cache)
-        right_roots = r_generate_trees(i + 1, r, cache)
-
-        left_roots.each { |left_root|
-          right_roots.each { |right_root|
-            result.push(TreeNode.new(i, left_root, right_root))
-          }
+      result = Array.new(n + 2) { |l|
+        Array.new(n + 1) { |r|
+          if l > r
+            [nil]
+          elsif l == r
+            [TreeNode.new(l)]
+          end
         }
       }
 
-      cache[[l, r]] = result
-      result
+      (n - 1).downto(1) { |l|
+        (l + 1..n).each { |r|
+          roots = []
+
+          (l..r).each { |i|
+            roots_l = result[l][i - 1]
+            roots_r = result[i + 1][r]
+
+            roots_l.each { |root_l|
+              roots_r.each { |root_r|
+                roots.push(TreeNode.new(i, root_l, root_r))
+              }
+            }
+          }
+
+          result[l][r] = roots
+        }
+      }
+
+      result[1][n]
     end
   end
 end

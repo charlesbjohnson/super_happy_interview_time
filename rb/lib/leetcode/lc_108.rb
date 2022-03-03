@@ -22,22 +22,20 @@ module LeetCode
     # @param {Array<Integer>} nums
     # @return {TreeNode}
     def sorted_array_to_bst(nums)
-      r_sorted_array_to_bst(nums, 0, nums.length - 1)
-    end
+      rec = ->(l, r) {
+        return if l > r
+        return TreeNode.new(nums[l]) if l == r
 
-    private
+        m = ((r - l + 1) / 2) + l
 
-    def r_sorted_array_to_bst(nums, l, r)
-      return if l > r
-      return TreeNode.new(nums[l]) if l == r
+        TreeNode.new(
+          nums[m],
+          rec.call(l, m - 1),
+          rec.call(m + 1, r)
+        )
+      }
 
-      m = ((r - l + 1) / 2) + l
-
-      TreeNode.new(
-        nums[m],
-        r_sorted_array_to_bst(nums, l, m - 1),
-        r_sorted_array_to_bst(nums, m + 1, r)
-      )
+      rec.call(0, nums.length - 1)
     end
   end
 end

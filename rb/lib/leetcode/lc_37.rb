@@ -61,45 +61,43 @@ module LeetCode
         }
       }
 
-      r_solve_sudoku(board, 0, rows, cols, secs)
-      board
-    end
+      rec = ->(i) {
+        return true if i >= board.length**2
 
-    private
+        sqrt = Math.sqrt(board.length).to_i
 
-    def r_solve_sudoku(board, i, rows, cols, secs)
-      return true if i >= board.length**2
+        r = i / board.length
+        c = i % board.length
+        s = ((r / sqrt) * sqrt) + (c / sqrt)
 
-      sqrt = Math.sqrt(board.length).to_i
+        return rec.call(i + 1) if board[r][c] != "."
 
-      r = i / board.length
-      c = i % board.length
-      s = ((r / sqrt) * sqrt) + (c / sqrt)
+        candidates = rows[r] & cols[c] & secs[s]
+        return false if candidates.empty?
 
-      return r_solve_sudoku(board, i + 1, rows, cols, secs) if board[r][c] != "."
+        candidates.each { |candidate|
+          board[r][c] = candidate.to_s
 
-      candidates = rows[r] & cols[c] & secs[s]
-      return false if candidates.empty?
+          rows[r].delete(candidate)
+          cols[c].delete(candidate)
+          secs[s].delete(candidate)
 
-      candidates.each { |candidate|
-        board[r][c] = candidate.to_s
+          if rec.call(i + 1)
+            return true
+          else
+            board[r][c] = "."
 
-        rows[r].delete(candidate)
-        cols[c].delete(candidate)
-        secs[s].delete(candidate)
+            rows[r].add(candidate)
+            cols[c].add(candidate)
+            secs[s].add(candidate)
+          end
+        }
 
-        if r_solve_sudoku(board, i + 1, rows, cols, secs)
-          return true
-        else
-          board[r][c] = "."
-
-          rows[r].add(candidate)
-          cols[c].add(candidate)
-          secs[s].add(candidate)
-        end
+        false
       }
 
-      false
+      rec.call(0)
+      nil
     end
   end
 end

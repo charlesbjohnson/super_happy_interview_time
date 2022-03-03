@@ -21,65 +21,72 @@ module LeetCode
     # @param {Array<String>} words
     # @return {Array<Array<String>>}
     def word_squares(words)
-      [].tap { |result|
-        r_word_squares([], trie(words), result, words[0].length)
+      result = []
+
+      n = words[0].length
+      trie = Trie.new(words)
+
+      rec = ->(square) {
+        if square.length == n
+          result.push(square)
+          return
+        end
+
+        prefix = square.map { |w| w[square.length] }.join
+        words = trie.words_starting_with(prefix)
+
+        words.each { |word|
+          rec.call(square + [word])
+        }
       }
+
+      rec.call([])
+      result
     end
 
     private
 
-    def r_word_squares(square, root, result, n)
-      if square.length == n
-        result.push(square)
-        return
+    class Trie
+      def initialize(words)
+        self.root = TrieNode.new
+
+        words.each { |word|
+          cursor = root
+          word.each_char { |char| cursor = cursor.children[char] }
+          cursor.word = word
+        }
       end
 
-      prefix = square.map { |w| w[square.length] }.join
-      words = words_starting_with(root, prefix)
-
-      words.each { |word|
-        r_word_squares(square + [word], root, result, n)
-      }
-    end
-
-    def trie(words)
-      root = TrieNode.new
-
-      words.each { |word|
+      def words_starting_with(prefix)
+        result = []
         cursor = root
-        word.each_char { |char| cursor = cursor.children[char] }
-        cursor.word = word
-      }
 
-      root
-    end
+        prefix.each_char { |char|
+          if cursor.children.key?(char)
+            cursor = cursor.children[char]
+          else
+            return []
+          end
+        }
 
-    def words_starting_with(root, prefix)
-      prefix.each_char { |char|
-        if root.children.key?(char)
-          root = root.children[char]
-        else
-          return []
+        rec = ->(cursor) {
+          result.push(cursor.word) if cursor.word
+          cursor.children.each { |_, child| rec.call(child) }
+        }
+
+        rec.call(cursor)
+        result
+      end
+
+      private
+
+      attr_accessor(:root)
+
+      TrieNode = Struct.new(:word, :children) {
+        def initialize(word = nil, children = Hash.new { |h, k| h[k] = TrieNode.new })
+          super
         end
       }
-
-      [].tap { |result|
-        r_words_starting_with(root, result)
-      }
     end
-
-    def r_words_starting_with(root, result)
-      result.push(root.word) if root.word
-
-      root.children.each { |_, child|
-        r_words_starting_with(child, result)
-      }
-    end
-
-    TrieNode = Struct.new(:word, :children) {
-      def initialize(word = nil, children = Hash.new { |h, k| h[k] = TrieNode.new })
-        super
-      end
-    }
   end
 end
