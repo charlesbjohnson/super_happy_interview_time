@@ -4,6 +4,7 @@ ruby("~> 3.1")
 source("https://rubygems.org")
 
 gem("algorithms", "~> 1.0")
+gem("awesome_print", "~> 1.9")
 gem("debug", "~> 1.4")
 gem("minitest", "~> 5.15")
 gem("minitest-reporters", "~> 1.5")

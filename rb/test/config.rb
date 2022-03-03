@@ -9,6 +9,7 @@ SimpleCov.start {
 }
 
 require("debug")
+require("awesome_print")
 require("minitest/reporters")
 
 Minitest::Reporters.use!(Minitest::Reporters::DefaultReporter.new)
