@@ -7,9 +7,9 @@ gem("algorithms", "~> 1.0")
 gem("awesome_print", "~> 1.9")
 gem("debug", "~> 1.4")
 gem("parser", "~> 3.0", require: false)
-gem("rubocop", "~> 1.25", require: false)
-gem("rubocop-minitest", "~> 0.17", require: false)
-gem("standard", "~> 1.7", require: false)
+gem("rubocop", "~> 1.26", require: false)
+gem("rubocop-minitest", "~> 0.18", require: false)
+gem("standard", "~> 1.8", require: false)
 
 group(:test) {
   gem("minitest", "~> 5.15")
