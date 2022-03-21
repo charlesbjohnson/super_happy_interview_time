@@ -21,16 +21,34 @@ module LeetCode
     # @param {Integer} target_sum
     # @return {Boolean}
     def has_path_sum(root, target_sum)
-      stack = []
-      stack.push([root, target_sum]) if root
+      result = private_methods.grep(/^has_path_sum_\d+$/).map { |m| send(m, root, target_sum) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def has_path_sum_1(root, target_sum)
+      rec = ->(node, sum) {
+        return false if !node
+        return sum + node.val == target_sum if !node.left && !node.right
+
+        rec.call(node.left, sum + node.val) || rec.call(node.right, sum + node.val)
+      }
+
+      rec.call(root, 0)
+    end
+
+    def has_path_sum_2(root, target_sum)
+      stack = [[root, 0]].compact
 
       until stack.empty?
         node, sum = stack.pop
 
-        return true if !node.left && !node.right && node.val == sum
+        next if !node
+        return true if sum + node.val == target_sum && !node.left && !node.right
 
-        stack.push([node.right, sum - node.val]) if node.right
-        stack.push([node.left, sum - node.val]) if node.left
+        stack.push([node.right, sum + node.val]) if node.right
+        stack.push([node.left, sum + node.val]) if node.left
       end
 
       false

@@ -17,14 +17,17 @@ module LeetCode
     # @param {ListNode} head
     # @return {ListNode}
     def delete_duplicates(head)
-      cursor = head
+      i = head
+      j = i&.next
 
-      while cursor&.next
-        if cursor.val != cursor.next.val
-          cursor = cursor.next
+      while j
+        if i.val == j.val
+          i.next = j.next
         else
-          cursor.next = cursor.next.next
+          i = i.next
         end
+
+        j = j.next
       end
 
       head

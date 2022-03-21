@@ -30,14 +30,15 @@ module LeetCode
       while lo < hi
         mid = ((hi - lo) / 2) + lo
 
-        if letters[mid] > target
+        case target <=> letters[mid]
+        when -1
           hi = mid
-        else
+        when 0, 1
           lo = mid + 1
         end
       end
 
-      letters[lo] <= target ? letters[(lo + 1) % letters.length] : letters[lo]
+      letters[lo] <= target ? letters[0] : letters[lo]
     end
   end
 end

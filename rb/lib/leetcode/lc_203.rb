@@ -3,8 +3,11 @@
 module LeetCode
   # 203. Remove Linked List Elements
   module LC203
+    ListNode = Helpers::LeetCode::LinkedList::ListNode
+
     # Description:
-    # Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
+    # Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val,
+    # and return the new head.
     #
     # Examples:
     # Input: head = [1, 2, 6, 3, 4, 5, 6], val = 6
@@ -20,27 +23,22 @@ module LeetCode
     # @param {Integer} val
     # @return {ListNode}
     def remove_elements(head, val)
-      prev = nil
-      curr = head
+      s = ListNode.new(nil, head)
 
-      while curr
-        if curr.val != val
-          prev = curr
-          curr = curr.next
+      i = s
+      j = s.next
 
-          next
-        end
-
-        if prev
-          prev.next = curr.next
+      while j
+        if j.val == val
+          i.next = j.next
         else
-          head = curr.next
+          i = j
         end
 
-        curr = curr.next
+        j = j.next
       end
 
-      head
+      s.next
     end
   end
 end

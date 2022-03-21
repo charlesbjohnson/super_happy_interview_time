@@ -21,6 +21,24 @@ module LeetCode
     # @param {TreeNode} q
     # @return {Boolean}
     def is_same_tree(p, q)
+      result = private_methods.grep(/^is_same_tree_\d+$/).map { |m| send(m, p, q) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def is_same_tree_1(p, q)
+      rec = ->(l, r) {
+        return true if !l && !r
+        return false if l && !r || !l && r
+
+        l.val == r.val && rec.call(l.left, r.left) && rec.call(l.right, r.right)
+      }
+
+      rec.call(p, q)
+    end
+
+    def is_same_tree_2(p, q)
       stack = [[p, q]]
 
       until stack.empty?

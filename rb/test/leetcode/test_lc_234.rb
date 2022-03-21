@@ -11,7 +11,6 @@ module LeetCode
     include(LC234)
 
     [
-      [[], true],
       [[1], true],
       [[1, 1], true],
       [[1, 2], false],

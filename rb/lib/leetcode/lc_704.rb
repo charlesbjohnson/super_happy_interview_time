@@ -26,12 +26,13 @@ module LeetCode
       while lo <= hi
         mid = ((hi - lo) / 2) + lo
 
-        if nums[mid] > target
-          hi = mid - 1
-        elsif nums[mid] < target
-          lo = mid + 1
-        else
+        case target <=> nums[mid]
+        when 0
           return mid
+        when -1
+          hi = mid - 1
+        when 1
+          lo = mid + 1
         end
       end
 

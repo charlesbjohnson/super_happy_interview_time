@@ -19,16 +19,36 @@ module LeetCode
     # @param {Integer} n
     # @return {Integer}
     def climb_stairs(n)
-      result = Array.new(n)
+      result = private_methods.grep(/^climb_stairs_\d+$/).map { |m| send(m, n) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      result[0] = 1
-      result[1] = 2 if result.length > 1
+    private
 
-      (2...result.length).each { |i|
-        result[i] = result[(i - 2)...i].sum
+    def climb_stairs_1(n)
+      cache = {}
+
+      rec = ->(i) {
+        return 1 if i == n - 1
+        return 2 if i == n - 2
+
+        cache[i] ||= rec.call(i + 1) + rec.call(i + 2)
       }
 
-      result[-1]
+      rec.call(0)
+    end
+
+    def climb_stairs_2(n)
+      result = Array.new(n)
+
+      result[-1] = 1
+      result[-2] = 2 if n > 1
+
+      (n - 3).downto(0) { |i|
+        result[i] = result[i + 1] + result[i + 2]
+      }
+
+      result[0]
     end
   end
 end

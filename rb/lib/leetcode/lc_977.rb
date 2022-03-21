@@ -20,28 +20,28 @@ module LeetCode
     # @param {Array<Integer>} nums
     # @return {Array<Integer>}
     def sorted_squares(nums)
-      left_i = 0
-      right_i = nums.length - 1
+      result = Array.new(nums.length)
 
-      sorted = Array.new(nums.length)
-      i = sorted.length - 1
+      l = 0
+      r = nums.length - 1
+
+      i = result.length - 1
 
       while i >= 0
-        left_num = nums[left_i].abs
-        right_num = nums[right_i].abs
-
-        if right_num < left_num
-          sorted[i] = left_num**2
-          left_i += 1
-        elsif right_num >= left_num
-          sorted[i] = right_num**2
-          right_i -= 1
+        case nums[l].abs <=> nums[r].abs
+        when 1, 0
+          result[i] = nums[l]
+          l += 1
+        when -1
+          result[i] = nums[r]
+          r -= 1
         end
 
+        result[i] = result[i]**2
         i -= 1
       end
 
-      sorted
+      result
     end
   end
 end

@@ -6,7 +6,7 @@ module LeetCode
     # Description:
     # Given a singly linked list, determine if it is a palindrome.
     #
-    # Could you do it in O(n) time and O(1) space?
+    # Follow up: Could you do it in O(n) time and O(1) space?
     #
     # Examples:
     # Input: head = [1, 2, 2, 1]
@@ -21,30 +21,32 @@ module LeetCode
       i = head
       j = head
 
-      i_pred = nil
-
-      while j&.next
-        head = i
-        j = j.next.next
-
-        i_succ = i.next
-        i.next = i_pred
-        i_pred = i
-
-        i = i_succ
-      end
-
-      i = i.next if j
-      j = head
-
-      while i
-        return false if i.val != j.val
-
+      while i.next && j&.next
         i = i.next
-        j = j.next
+        j = j.next.next
       end
 
-      true
+      l = head
+      r = j.nil? ? i : i.next
+
+      i = r
+
+      while i&.next
+        p_head = r
+        n_head = i.next
+
+        i.next = n_head.next
+        n_head.next = p_head
+
+        r = n_head
+      end
+
+      while r && l.val == r.val
+        l = l.next
+        r = r.next
+      end
+
+      r.nil?
     end
   end
 end

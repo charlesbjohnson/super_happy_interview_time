@@ -4,7 +4,6 @@ module LeetCode
   # 448. Find All Numbers Disappeared in an Array
   module LC448
     # Description:
-    #
     # Given an array nums of n integers where nums[i] is in the range [1, n],
     # return an array of all the integers in the range [1, n] that do not appear in nums.
     #
@@ -15,35 +14,35 @@ module LeetCode
     # Input: [4, 3, 2, 7, 8, 2, 3, 1]
     # Output: [5, 6]
     #
-    # Input: nums = [1,1]
+    # Input: nums = [1, 1]
     # Output: [2]
     #
     # @param {Array<Integer>} nums
     # @return {Array<Integer>}
     def find_disappeared_numbers(nums)
-      i = 0
+      result = private_methods.grep(/^find_disappeared_numbers_\d+$/).map { |m| send(m, nums.clone) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      while i < nums.length
-        if !nums[i] || nums[i] == i + 1
-          i += 1
-          next
-        end
+    private
 
-        j = nums[i] - 1
-        if nums[i] == nums[j]
-          nums[i] = nil
-          i += 1
-          next
-        end
+    def find_disappeared_numbers_1(nums)
+      nums.reduce(Set.new(1..nums.length)) { |set, num| set.delete(num) }.to_a
+    end
 
-        tmp = nums[i]
-        nums[i] = nums[j]
-        nums[j] = tmp
-      end
+    def find_disappeared_numbers_2(nums)
+      result = []
 
-      nums.each_with_object([]).with_index { |(num, missing), i|
-        missing.push(i + 1) if num.nil?
+      nums.each_index { |i|
+        j = nums[i].abs - 1
+        nums[j] = -nums[j] if nums[j] > 0
       }
+
+      nums.each_index { |i|
+        result.push(i + 1) if nums[i] > 0
+      }
+
+      result
     end
   end
 end

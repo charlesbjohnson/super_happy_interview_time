@@ -8,14 +8,13 @@ module LeetCode
     include(LC268)
 
     [
-      [[], 0],
       [[0], 1],
       [[0, 2], 1],
       [[0, 1, 3], 2],
       [[9, 6, 4, 2, 3, 5, 7, 0, 1], 8]
-    ].each.with_index { |(list, expected), i|
+    ].each.with_index { |(nums, expected), i|
       define_method(:"test_missing_number_#{i}") {
-        assert_equal(expected, missing_number(list))
+        assert_equal(expected, missing_number(nums))
       }
     }
   end

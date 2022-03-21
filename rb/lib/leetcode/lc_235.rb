@@ -25,13 +25,45 @@ module LeetCode
     # @param {TreeNode} q
     # @return {TreeNode}
     def lowest_common_ancestor(root, p, q)
-      return root if root == p || root == q || (root.val > p.val && root.val < q.val) || (root.val > q.val && root.val < p.val)
+      result = private_methods.grep(/^lowest_common_ancestor_\d+$/).map { |m| send(m, root, p, q) }.uniq { |v| v.val }
+      result.length == 1 ? result[0] : raise
+    end
 
-      if p.val < root.val && q.val < root.val
-        lowest_common_ancestor(root.left, p, q)
-      elsif p.val > root.val && q.val > root.val
-        lowest_common_ancestor(root.right, p, q)
+    private
+
+    def lowest_common_ancestor_1(root, p, q)
+      range = Range.new(*[p.val, q.val].sort)
+
+      rec = ->(node) {
+        return node if range.cover?(node.val)
+
+        if node.left && node.val > range.end
+          rec.call(node.left)
+        elsif node.right && node.val < range.begin
+          rec.call(node.right)
+        end
+      }
+
+      rec.call(root)
+    end
+
+    def lowest_common_ancestor_2(root, p, q)
+      range = Range.new(*[p.val, q.val].sort)
+      stack = [root]
+
+      until stack.empty?
+        node = stack.pop
+
+        return node if range.cover?(node.val)
+
+        if node.val > range.end && node.left
+          stack.push(node.left)
+        elsif node.val < range.begin && node.right
+          stack.push(node.right)
+        end
       end
+
+      raise
     end
   end
 end
