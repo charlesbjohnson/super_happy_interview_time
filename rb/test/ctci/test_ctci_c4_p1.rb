@@ -22,7 +22,7 @@ module CTCI
         @tree.put(:b, 2)
         @tree.put(:d, 4)
 
-        assert(@tree.balanced?)
+        assert_predicate(@tree, :balanced?)
       end
 
       def test_returns_false_if_tree_is_not_balanced
@@ -32,11 +32,11 @@ module CTCI
         @tree.put(:d, 4)
         @tree.put(:e, 5)
 
-        refute(@tree.balanced?)
+        refute_predicate(@tree, :balanced?)
       end
 
       def test_returns_true_if_empty
-        assert(@tree.balanced?)
+        assert_predicate(@tree, :balanced?)
       end
     end
   end

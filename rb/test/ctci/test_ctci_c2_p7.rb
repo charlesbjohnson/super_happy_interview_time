@@ -18,26 +18,26 @@ module CTCI
 
       def test_palindrome_true
         "racecar".chars.each { |c| @list.append(c) }
-        assert(@list.palindrome?)
+        assert_predicate(@list, :palindrome?)
       end
 
       def test_palindrome_false
         "meh".chars.each { |c| @list.append(c) }
-        refute(@list.palindrome?)
+        refute_predicate(@list, :palindrome?)
       end
 
       def test_palindrome_numeric
         [1, 0, 1].each { |n| @list.append(n) }
-        assert(@list.palindrome?)
+        assert_predicate(@list, :palindrome?)
       end
 
       def test_palindrome_empty
-        assert(@list.palindrome?)
+        assert_predicate(@list, :palindrome?)
       end
 
       def test_palindrome_single
         @list.append("a")
-        assert(@list.palindrome?)
+        assert_predicate(@list, :palindrome?)
       end
     end
   end

@@ -21,8 +21,8 @@ module LeetCode
 
         steps.each { |method, val| subject.send(method, val) }
 
-        assert(included.none? { |val| subject.insert(val) })
-        assert(excluded.none? { |val| subject.remove(val) })
+        assert_predicate(included.map { |val| subject.insert(val) }, :none?)
+        assert_predicate(excluded.map { |val| subject.remove(val) }, :none?)
       }
     }
 
@@ -37,8 +37,8 @@ module LeetCode
 
         steps.each { |method, val| subject.send(method, val) }
 
-        assert(times.times.none? { subject.insert(subject.get_random) })
-        assert(times.times.all? { subject.remove(subject.get_random) })
+        assert_predicate(Array.new(times) { subject.insert(subject.get_random) }, :none?)
+        assert_predicate(Array.new(times) { subject.remove(subject.get_random) }, :all?)
       }
     }
   end

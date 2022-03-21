@@ -18,18 +18,18 @@ module CTCI
 
         dequeued = @animal_queue.dequeue_any
 
-        assert(dequeued.dog?)
+        assert_predicate(dequeued, :dog?)
         assert_equal(1, dequeued.order)
       end
 
       def test_dequeue_any_when_only_dog
         @animal_queue.enqueue(Animal.dog)
-        assert(@animal_queue.dequeue_any.dog?)
+        assert_predicate(@animal_queue.dequeue_any, :dog?)
       end
 
       def test_dequeue_any_when_only_cat
         @animal_queue.enqueue(Animal.cat)
-        assert(@animal_queue.dequeue_any.cat?)
+        assert_predicate(@animal_queue.dequeue_any, :cat?)
       end
 
       def test_dequeue_any_when_empty
@@ -42,7 +42,7 @@ module CTCI
 
         dequeued = @animal_queue.dequeue_dog
 
-        assert(dequeued.dog?)
+        assert_predicate(dequeued, :dog?)
         assert_equal(2, dequeued.order)
       end
 
@@ -57,7 +57,7 @@ module CTCI
 
         dequeued = @animal_queue.dequeue_cat
 
-        assert(dequeued.cat?)
+        assert_predicate(dequeued, :cat?)
         assert_equal(2, dequeued.order)
       end
 
