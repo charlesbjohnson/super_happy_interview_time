@@ -3,7 +3,21 @@
 module Helpers
   module LeetCode
     module BinaryTree
-      TreeNode = Struct.new(:val, :left, :right)
+      TreeNode = Struct.new(:val, :left, :right) {
+        # @param {TreeNode} original
+        def initialize_clone(original)
+          super
+          self.left = original.left.clone
+          self.right = original.right.clone
+        end
+
+        # @param {TreeNode} original
+        def initialize_dup(original)
+          super
+          self.left = original.left.dup
+          self.right = original.right.dup
+        end
+      }
 
       # @param {Array} values
       # @return {TreeNode}

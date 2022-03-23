@@ -4,8 +4,22 @@ module Helpers
   module LeetCode
     module Graph
       Node = Struct.new(:val, :neighbors) {
+        # @param {Integer} val
+        # @param {Array<Node>} neighbors
         def initialize(val, neighbors = [])
           super
+        end
+
+        # @param {Node} original
+        def initialize_clone(original)
+          super
+          self.neighbors = original.neighbors.map(&:clone)
+        end
+
+        # @param {Node} original
+        def initialize_dup(original)
+          super
+          self.neighbors = original.neighbors.map(&:dup)
         end
       }
 
