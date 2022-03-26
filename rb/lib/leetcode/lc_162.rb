@@ -28,21 +28,19 @@ module LeetCode
       while lo <= hi
         mid = ((hi - lo) / 2) + lo
 
-        l_mid = mid - 1 >= 0 ? nums[mid - 1] : -Float::INFINITY
-        r_mid = mid + 1 < nums.length ? nums[mid + 1] : -Float::INFINITY
+        l = mid - 1 >= 0 ? nums[mid - 1] : -Float::INFINITY
+        r = mid + 1 < nums.length ? nums[mid + 1] : -Float::INFINITY
 
-        if nums[mid] > l_mid && nums[mid] > r_mid
-          return mid
-        end
+        return mid if nums[mid] > l && nums[mid] > r
 
-        if l_mid > nums[mid]
+        if nums[mid] < l
           hi = mid - 1
-        elsif r_mid > nums[mid]
+        elsif nums[mid] < r
           lo = mid + 1
         end
       end
 
-      peak
+      raise
     end
   end
 end

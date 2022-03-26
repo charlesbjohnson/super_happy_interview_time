@@ -3,7 +3,7 @@
 module LeetCode
   # 215. Kth Largest Element in an Array
   module LC215
-    MinHeap = Helpers::LeetCode::MinHeap
+    Heap = Helpers::LeetCode::Heap
 
     # Description:
     # Given an integer array nums and an integer k, return the kth largest element in the array.
@@ -21,14 +21,32 @@ module LeetCode
     # @param {Integer} k
     # @return {Integer}
     def find_kth_largest(nums, k)
-      heap = MinHeap.new
+      result = private_methods.grep(/^find_kth_largest_\d+$/).map { |m| send(m, nums, k) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def find_kth_largest_1(nums, k)
+      nums.sort.reverse[k - 1]
+    end
+
+    def find_kth_largest_2(nums, k)
+      heap = Heap.new
 
       nums.each { |num|
-        heap.push(num)
-        heap.pop if heap.size > k
+        case heap.size
+        when ...k
+          heap.push(num)
+        when k
+          if num > heap.peek
+            heap.push(num)
+            heap.pop
+          end
+        end
       }
 
-      heap.min
+      heap.pop
     end
   end
 end

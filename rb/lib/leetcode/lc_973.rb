@@ -24,14 +24,33 @@ module LeetCode
     # @param {Integer} k
     # @return {Array<Array<Integer>>}
     def k_closest(points, k)
-      heap = Heap.new { |a, b| Math.sqrt(a[0]**2 + a[1]**2) <=> Math.sqrt(b[0]**2 + b[1]**2) }
+      result = private_methods.grep(/^k_closest_\d+$/).map { |m| send(m, points, k).sort }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def k_closest_1(points, k)
+      points.sort_by { |p| Math.sqrt(p[0]**2 + p[1]**2) }[...k]
+    end
+
+    def k_closest_2(points, k)
+      distance = ->(p) { Math.sqrt(p[0]**2 + p[1]**2) }
+      heap = Heap.new { |a, b| distance.call(b) <=> distance.call(a) }
 
       points.each { |point|
-        heap.push(point)
-        heap.pop if heap.size > k
+        case heap.size
+        when ...k
+          heap.push(point)
+        when k
+          if distance.call(point) < distance.call(heap.peek)
+            heap.pop
+            heap.push(point)
+          end
+        end
       }
 
-      heap.size.times.map { heap.pop }.reverse
+      heap.to_a
     end
   end
 end

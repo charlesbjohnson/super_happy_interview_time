@@ -13,6 +13,7 @@ module LeetCode
     [
       [[], []],
       [[1], [1]],
+      [[1, 2], [2, 1]],
       [[1, 2, 3], [2, 1, 3]],
       [[1, 2, 3, 4], [2, 1, 4, 3]]
     ].each.with_index { |(head, expected), i|
@@ -23,7 +24,7 @@ module LeetCode
         if expected
           assert_equal(expected, swap_pairs(head))
         else
-          assert_nil(head)
+          assert_nil(swap_pairs(head))
         end
       }
     }

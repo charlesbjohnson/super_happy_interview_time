@@ -22,19 +22,19 @@ module LeetCode
       m = matrix.length
       n = matrix[0].length
 
-      result = Array.new(m) { |r| Array.new(n) { |c| matrix[r][c] } }
+      cache = Array.new(m) { |r| Array.new(n) { |c| matrix[r][c] } }
 
       (1...m).each { |r|
         (0...n).each { |c|
-          result[r][c] += [
-            c > 0 ? result[r - 1][c - 1] : Float::INFINITY,
-            result[r - 1][c],
-            c < n - 1 ? result[r - 1][c + 1] : Float::INFINITY
+          cache[r][c] += [
+            c > 0 ? cache[r - 1][c - 1] : Float::INFINITY,
+            cache[r - 1][c],
+            c < n - 1 ? cache[r - 1][c + 1] : Float::INFINITY
           ].min
         }
       }
 
-      result[-1].min
+      cache[-1].min
     end
   end
 end

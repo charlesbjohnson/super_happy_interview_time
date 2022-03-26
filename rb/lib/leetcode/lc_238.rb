@@ -4,32 +4,35 @@ module LeetCode
   # 238. Product of Array Except Self
   module LC238
     # Description:
-    # Given an array of n integers where n > 1, list, return an array output such that
-    # output[i] is equal to the product of all the elements of list except list[i].
+    # Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+    # The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
     #
-    # Solve it without division and in O(n).
+    # You must write an algorithm that runs in O(n) time and without using the division operation.
+    #
+    # Follow up: Can you solve the problem in O(1) extra space complexity?
+    # (The output array does not count as extra space for space complexity analysis.)
     #
     # Examples:
-    # Input: [1, 2, 3, 4]
+    # Input: nums = [1, 2, 3, 4]
     # Output: [24, 12, 8, 6]
     #
-    # Notes:
-    # - Could you solve it with constant space complexity?
-    # - The output array does not count as extra space for the purpose of space complexity analysis.
+    # Input: nums = [-1, 1, 0, -3, 3]
+    # Output: [0, 0, 9, 0, 0]
     #
-    # @param list {Array<Integer>}
+    # @param {Array<Integer>} nums
     # @return {Array<Integer>}
-    def product_except_self(list)
-      result = Array.new(list.length)
+    def product_except_self(nums)
+      result = Array.new(nums.length, 1)
 
-      list.each.with_index.reduce(1) { |product, (v, i)|
-        result[i] = product
-        product * v
-      }
+      l_product = 1
+      r_product = 1
 
-      list.reverse_each.with_index.reduce(1) { |product, (v, i)|
-        result[list.length - i - 1] *= product
-        product * v
+      (0...nums.length).each { |i|
+        result[i] *= l_product
+        result[-(i + 1)] *= r_product
+
+        l_product *= nums[i]
+        r_product *= nums[-(i + 1)]
       }
 
       result

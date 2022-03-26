@@ -8,65 +8,97 @@ module LeetCode
     include(LC79)
 
     [
-      [[%w[A]], "", true],
-      [[], "A", false],
-      [[[]], "A", false],
-      [[%w[A]], "A", true],
-      [[%w[B]], "A", false],
       [
         [
-          %w[A B],
-          %w[D C]
+          [
+            %w[A]
+          ],
+          "A"
         ],
-        "ABCD",
         true
       ],
+
       [
         [
-          %w[A B],
-          %w[D C]
+          [
+            %w[B]
+          ],
+          "A"
         ],
-        "ABDC",
         false
       ],
+
       [
         [
-          %w[A B],
-          %w[D C]
+          [
+            %w[A B],
+            %w[D C]
+          ],
+          "ABCD"
         ],
-        "ABCDA",
+        true
+      ],
+
+      [
+        [
+          [
+            %w[A B],
+            %w[D C]
+          ],
+          "ABDC"
+        ],
         false
       ],
+
       [
         [
-          %w[A B C E],
-          %w[S F C S],
-          %w[A D E E]
+          [
+            %w[A B],
+            %w[D C]
+          ],
+          "ABCDA"
         ],
-        "ABCCED",
+        false
+      ],
+
+      [
+        [
+          [
+            %w[A B C E],
+            %w[S F C S],
+            %w[A D E E]
+          ],
+          "ABCCED"
+        ],
         true
       ],
+
       [
         [
-          %w[A B C E],
-          %w[S F C S],
-          %w[A D E E]
+          [
+            %w[A B C E],
+            %w[S F C S],
+            %w[A D E E]
+          ],
+          "SEE"
         ],
-        "SEE",
         true
       ],
+
       [
         [
-          %w[A B C E],
-          %w[S F C S],
-          %w[A D E E]
+          [
+            %w[A B C E],
+            %w[S F C S],
+            %w[A D E E]
+          ],
+          "ABCB"
         ],
-        "ABCB",
         false
       ]
-    ].each.with_index { |(board, word, expected), i|
-      define_method(:"test_word_exists?_#{i}") {
-        assert_equal(expected, word_exists?(board, word))
+    ].each.with_index { |((board, word), expected), i|
+      define_method(:"test_exist_#{i}") {
+        assert_equal(expected, exist(board, word))
       }
     }
   end

@@ -36,7 +36,7 @@ module LeetCode
         return true if i == s.length
 
         cache[i] ||= word_dict.any? { |word|
-          i + word.length <= s.length && s[i...(i + word.length)] == word && rec.call(i + word.length)
+          i + word.length <= s.length && rec.call(i + word.length) && s[i...(i + word.length)] == word
         }
       }
 
@@ -44,26 +44,26 @@ module LeetCode
     end
 
     def word_break_2(s, word_dict)
-      result = Array.new(s.length + 1) { |i| i == s.length }
+      cache = Array.new(s.length + 1) { |i| i == s.length }
 
       (s.length - 1).downto(0) { |i|
-        result[i] = word_dict.any? { |word|
-          i + word.length <= s.length && s[i...(i + word.length)] == word && result[i + word.length]
+        cache[i] = word_dict.any? { |word|
+          i + word.length <= s.length && cache[i + word.length] && s[i...(i + word.length)] == word
         }
       }
 
-      result[0]
+      cache[0]
     end
 
     def word_break_3(s, word_dict)
-      result = Array.new(s.length + 1) { |i| i == s.length }
+      cache = Array.new(s.length + 1) { |i| i == s.length }
       trie = Trie.new(word_dict)
 
       (s.length - 1).downto(0) { |i|
-        result[i] = trie.words(s[i..]).any? { |word| result[i + word.length] }
+        cache[i] = trie.words(s[i..]).any? { |word| cache[i + word.length] }
       }
 
-      result[0]
+      cache[0]
     end
 
     private

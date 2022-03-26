@@ -6,6 +6,14 @@ module LeetCode
     # Description:
     # You are given a perfect binary tree where all leaves are on the same level, and every parent has two children.
     #
+    # The binary tree has the following definition:
+    # struct Node {
+    #   int val;
+    #   Node *left;
+    #   Node *right;
+    #   Node *next;
+    # }
+    #
     # Populate each next pointer to point to its next right node.
     # If there is no next right node, the next pointer should be set to NULL.
     #
@@ -25,18 +33,45 @@ module LeetCode
     # @param {Node} root
     # @return {Node}
     def connect(root)
-      queue = [root]
+      result = private_methods.grep(/^connect_\d+$/).map { |m| send(m, root.clone) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def connect_1(root)
+      queue = [root].compact
 
       until queue.empty?
         node = queue.shift
 
-        next if !node || (!node.left && !node.right)
+        if node.left
+          node.left.next = node.right
+          queue.push(node.left)
+        end
 
-        node.left.next = node.right
-        node.right.next = node.next.left if node.next
+        if node.right
+          node.right.next = node.next&.left
+          queue.push(node.right)
+        end
+      end
 
-        queue.push(node.left)
-        queue.push(node.right)
+      root
+    end
+
+    def connect_2(root)
+      level = root
+
+      while level
+        node = level
+
+        while node
+          node.left.next = node.right if node.left
+          node.right.next = node.next&.left if node.right
+          node = node.next
+        end
+
+        level = level.left
       end
 
       root

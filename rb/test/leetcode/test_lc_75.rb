@@ -8,18 +8,14 @@ module LeetCode
     include(LC75)
 
     [
-      [0, 0, 0],
-      [1, 0, 0],
-      [0, 1, 0],
-      [0, 0, 1],
-      [1, 1, 0],
-      [1, 0, 1],
-      [0, 1, 1],
-      [5, 2, 9]
-    ].each.with_index { |(reds, whites, blues), i|
+      [2, 0, 1],
+      [2, 0, 2, 1, 1, 0],
+      Array.new(10) { Random.random_number(0..2) }
+    ].each.with_index { |nums, i|
       define_method(:"test_sort_colors_#{i}") {
-        list = Array.new(reds) { 0 } + Array.new(whites) { 1 } + Array.new(blues) { 2 }
-        assert_equal(list, sort_colors(list.shuffle))
+        expected = nums.sort
+        sort_colors(nums)
+        assert_equal(expected, nums)
       }
     }
   end

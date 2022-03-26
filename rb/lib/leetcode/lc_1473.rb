@@ -64,26 +64,26 @@ module LeetCode
     def min_cost_2(houses, cost, m, n, target)
       houses.each_index { |i| houses[i] -= 1 }
 
-      result = Array.new(m + 1) { Array.new(target + 2) { Array.new(n, Float::INFINITY) } }
+      cache = Array.new(m + 1) { Array.new(target + 2) { Array.new(n, Float::INFINITY) } }
       (0...n).each { |c|
-        result[m][target - 1][c] = 0
+        cache[m][target - 1][c] = 0
       }
 
       (m - 1).downto(0) { |i|
         ((i - 1).clamp(0, target - 1)).downto(0) { |t|
           (0...n).each { |c|
-            result[i][t][c] = if houses[i] == -1
+            cache[i][t][c] = if houses[i] == -1
               cost[i].each_with_index.map { |cost, color|
-                cost + result[i + 1][t + (c == color ? 0 : 1)][color]
+                cost + cache[i + 1][t + (c == color ? 0 : 1)][color]
               }.min
             else
-              result[i + 1][t + (c == houses[i] ? 0 : 1)][houses[i]]
+              cache[i + 1][t + (c == houses[i] ? 0 : 1)][houses[i]]
             end
           }
         }
       }
 
-      result = result[0][0].min
+      result = cache[0][0].min
       result.infinite? ? -1 : result
     end
   end

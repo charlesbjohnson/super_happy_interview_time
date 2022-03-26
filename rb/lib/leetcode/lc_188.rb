@@ -49,27 +49,27 @@ module LeetCode
     end
 
     def max_profit_2(k, prices)
-      result = Array.new(prices.length + 1) { Array.new(k + 1) { Array.new(2, 0) } }
+      cache = Array.new(prices.length + 1) { Array.new(k + 1) { Array.new(2, 0) } }
 
       (prices.length - 1).downto(0) { |i|
         (k - 1).downto(0) { |t|
           (0..1).each { |h|
-            result[i][t][h] = if h == 1
+            cache[i][t][h] = if h == 1
               [
-                prices[i] + result[i + 1][t + 1][0],
-                result[i + 1][t][1]
+                prices[i] + cache[i + 1][t + 1][0],
+                cache[i + 1][t][1]
               ].max
             else
               [
-                -prices[i] + result[i + 1][t][1],
-                result[i + 1][t][0]
+                -prices[i] + cache[i + 1][t][1],
+                cache[i + 1][t][0]
               ].max
             end
           }
         }
       }
 
-      result[0][0][0]
+      cache[0][0][0]
     end
   end
 end

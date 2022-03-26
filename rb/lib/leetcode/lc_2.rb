@@ -26,32 +26,23 @@ module LeetCode
     # @param {ListNode} l2
     # @return {ListNode}
     def add_two_numbers(l1, l2)
-      head = ListNode.new(nil)
+      head = ListNode.new(0)
+      node = head
 
-      sum = head
-      carry = 0
+      i = l1
+      j = l2
 
-      while l1 || l2 || carry.positive?
-        if sum.val
-          sum.next = ListNode.new(nil)
-          sum = sum.next
-        end
+      while i || j || node.val >= 10
+        node.next = ListNode.new(node.val / 10 + i&.val.to_i + j&.val.to_i)
+        node.val = node.val % 10
 
-        if l1
-          sum.val = (sum.val || 0) + l1.val
-          l1 = l1.next
-        end
+        i = i&.next
+        j = j&.next
 
-        if l2
-          sum.val = (sum.val || 0) + l2.val
-          l2 = l2.next
-        end
-
-        sum.val = (sum.val || 0) + carry
-        carry, sum.val = sum.val.divmod(10)
+        node = node.next
       end
 
-      head
+      head.next
     end
   end
 end

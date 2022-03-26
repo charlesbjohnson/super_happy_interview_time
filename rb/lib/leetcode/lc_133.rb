@@ -23,24 +23,41 @@ module LeetCode
     #
     # @param {Node} node
     # @return {Node}
-    def clone_graph(node)
-      stack = []
+    def cloneGraph(node)
       visited = {}
 
-      stack.push(node) if node
+      rec = ->(n) {
+        return if !n
+        return visited[n] if visited.key?(n)
+
+        visited[n] = Node.new(n.val)
+        visited[n].neighbors = n.neighbors.map { |neighbor| rec.call(neighbor) }
+
+        visited[n]
+      }
+
+      rec.call(node)
+    end
+
+    def clone_graph(node)
+      visited = {}
+      stack = [[node, false]]
 
       until stack.empty?
-        current = stack.pop
+        n, backtrack = stack.pop
 
-        visited[current] ||= Node.new(current.val)
-        current.neighbors.each { |neighbor|
-          if !visited.key?(neighbor)
-            visited[neighbor] = Node.new(neighbor.val)
-            stack.push(neighbor)
-          end
+        if backtrack
+          visited[n].neighbors = n.neighbors.map { |neighbor| visited[neighbor] }
+          next
+        end
 
-          visited[current].neighbors.push(visited[neighbor])
-        }
+        next if !n
+        next if visited.key?(n)
+
+        visited[n] = Node.new(n.val)
+
+        stack.push([n, true])
+        n.neighbors.each { |neighbor| stack.push([neighbor, false]) }
       end
 
       visited[node]

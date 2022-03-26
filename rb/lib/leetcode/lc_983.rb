@@ -62,7 +62,7 @@ module LeetCode
     end
 
     def mincost_tickets_2(days, costs)
-      result = Array.new(days.length + 1, 0)
+      cache = Array.new(days.length + 1, 0)
 
       (days.length - 1).downto(0) { |i|
         i_01 = i + 1
@@ -75,14 +75,14 @@ module LeetCode
           break if days[j] - days[i] >= 30
         }
 
-        result[i] = [
-          costs[0] + result[i_01],
-          costs[1] + result[i_07],
-          costs[2] + result[i_30]
+        cache[i] = [
+          costs[0] + cache[i_01],
+          costs[1] + cache[i_07],
+          costs[2] + cache[i_30]
         ].min
       }
 
-      result[0]
+      cache[0]
     end
   end
 end

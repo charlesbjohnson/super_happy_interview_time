@@ -35,10 +35,47 @@ module LeetCode
     # @param target {Integer}
     # @return {Boolean}
     def search_matrix(matrix, target)
-      row = 0
-      col = matrix[row].length - 1
+      result = private_methods.grep(/^search_matrix_\d+$/).map { |m| send(m, matrix, target) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      while (0...matrix.length).cover?(row) && (0...matrix[row].length).cover?(col)
+    private
+
+    def search_matrix_1(matrix, target)
+      search = ->(lo, hi) {
+        return false if lo[0] > hi[0] || lo[1] > hi[1]
+        return false if target < matrix[lo[0]][lo[1]] || target > matrix[hi[0]][hi[1]]
+
+        mid = [
+          ((hi[0] - lo[0]) / 2) + lo[0],
+          ((hi[1] - lo[1]) / 2) + lo[1]
+        ]
+
+        case target <=> matrix[mid[0]][mid[1]]
+        when 0
+          return true
+        when -1
+          search.call(lo, [mid[0] - 1, mid[1] - 1]) \
+          || search.call([mid[0], lo[1]], [hi[0], mid[1] - 1]) \
+          || search.call([lo[0], mid[1]], [mid[0] - 1, hi[1]])
+        when 1
+          search.call([mid[0] + 1, mid[1] + 1], hi) \
+          || search.call([mid[0] + 1, lo[1]], [hi[0], mid[1]]) \
+          || search.call([lo[0], mid[1] + 1], [mid[0], hi[1]])
+        end
+      }
+
+      search.call([0, 0], [matrix.length - 1, matrix[0].length - 1])
+    end
+
+    def search_matrix_2(matrix, target)
+      rows = matrix.length
+      cols = matrix[0].length
+
+      row = 0
+      col = cols - 1
+
+      while row >= 0 && row < rows && col >= 0 && col < cols
         case target <=> matrix[row][col]
         when 0
           return true

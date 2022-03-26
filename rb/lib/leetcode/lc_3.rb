@@ -20,25 +20,56 @@ module LeetCode
     # @param {String} s
     # @return {Integer}
     def length_of_longest_substring(s)
-      set = Set.new
+      result = private_methods.grep(/^length_of_longest_substring_\d+$/).map { |m| send(m, s) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def length_of_longest_substring_1(s)
+      result = 0
 
       i = 0
       j = 0
 
-      max = 0
+      letters = Set.new
 
       while j < s.length
-        if !set.include?(s[j])
-          set.add(s[j])
-          j += 1
-          max = [max, j - i].max
-        else
-          set.delete(s[i])
+        if letters.include?(s[j])
+          letters.delete(s[i])
           i += 1
+        else
+          letters.add(s[j])
+          j += 1
         end
+
+        result = [result, j - i].max
       end
 
-      max
+      result
+    end
+
+    def length_of_longest_substring_2(s)
+      result = 0
+
+      i = 0
+      j = 0
+
+      letters = Hash.new(0)
+
+      while j < s.length
+        letters[s[j]] += 1
+        j += 1
+
+        while letters[s[j - 1]] > 1
+          letters[s[i]] -= 1
+          i += 1
+        end
+
+        result = [result, j - i].max
+      end
+
+      result
     end
   end
 end

@@ -32,26 +32,40 @@ module LeetCode
       cache = {}
 
       rec = ->(i) {
-        return 0 if i == nums.length - 1
+        return 1 if i == nums.length - 1
 
         cache[i] ||= ((i + 1)...nums.length).map { |j|
-          i == -1 || nums[i] < nums[j] ? 1 + rec.call(j) : 0
+          nums[i] < nums[j] ? 1 + rec.call(j) : 1
         }.max
       }
 
-      rec.call(-1)
+      (0...nums.length).map { |i| rec.call(i) }.max
     end
 
     def length_of_lis_2(nums)
-      result = Array.new(nums.length + 2, 0)
+      cache = Array.new(nums.length, 1)
 
-      (nums.length - 1).downto(0) { |i|
-        result[i] = ((i + 1)..nums.length).map { |j|
-          i == 0 || nums[i - 1] < nums[j - 1] ? 1 + result[j] : 0
+      (nums.length - 2).downto(0) { |i|
+        cache[i] = ((i + 1)...nums.length).map { |j|
+          nums[i] < nums[j] ? 1 + cache[j] : 1
         }.max
       }
 
-      result[0]
+      cache.max
+    end
+
+    def length_of_lis_3(nums)
+      subsequence = [nums[0]]
+
+      (0...nums.length).each { |i|
+        if subsequence[-1] < nums[i]
+          subsequence.push(nums[i])
+        else
+          subsequence[subsequence.index { |v| v >= nums[i] }] = nums[i]
+        end
+      }
+
+      subsequence.length
     end
   end
 end

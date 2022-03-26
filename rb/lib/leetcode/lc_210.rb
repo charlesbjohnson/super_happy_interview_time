@@ -26,39 +26,110 @@ module LeetCode
     # @param {Array<Array<(Integer, Integer)>>} prerequisites
     # @return {Array<Integer>}
     def find_order(num_courses, prerequisites)
+      result = private_methods.grep(/^find_order_\d+$/).map { |m| send(m, num_courses, prerequisites) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def find_order_1(num_courses, prerequisites)
+      result = []
+
+      graph = (0...num_courses).each_with_object({}) { |i, h| h[i] = [] }
+      prerequisites.each { |a, b| graph[b].push(a) }
+
+      path = Set.new
+
+      rec = ->(node) {
+        return true if !graph.key?(node)
+
+        return false if !path.add?(node)
+        return false if !graph[node].reverse_each.all? { |neighbor| rec.call(neighbor) }
+
+        graph.delete(node)
+        path.delete(node)
+
+        result.unshift(node)
+
+        true
+      }
+
+      (0...num_courses).all? { |i| rec.call(i) }
+      result.length == num_courses ? result : []
+    end
+
+    def find_order_2(num_courses, prerequisites)
+      result = []
+
+      graph = (0...num_courses).each_with_object({}) { |i, h| h[i] = [] }
+      prerequisites.each { |a, b| graph[b].push(a) }
+
+      path = Set.new
+
+      search = ->(source) {
+        stack = [[source, false]]
+
+        until stack.empty?
+          node, backtrack = stack.pop
+
+          if backtrack
+            graph.delete(node)
+            path.delete(node)
+            result.unshift(node)
+            next
+          end
+
+          return false if !path.add?(node)
+
+          if !graph.key?(node)
+            path.delete(node)
+            next
+          end
+
+          stack.push([node, true])
+          graph[node].each { |neighbor|
+            stack.push([neighbor, false])
+          }
+        end
+
+        true
+      }
+
+      (0...num_courses).all? { |i| search.call(i) }
+      result.length == num_courses ? result : []
+    end
+
+    def find_order_3(num_courses, prerequisites)
       result = []
 
       dependencies = {}
       dependents = {}
 
-      (0...num_courses).each { |node|
-        dependencies[node] = Set.new
-        dependents[node] = []
+      (0...num_courses).each { |i|
+        dependencies[i] = Set.new
+        dependents[i] = []
       }
 
-      prerequisites.each { |course, depends_on|
-        dependencies[course].add(depends_on)
-        dependents[depends_on].push(course)
+      prerequisites.each { |a, b|
+        dependencies[a].add(b)
+        dependents[b].push(a)
       }
 
-      queue = []
-      dependencies.each { |node, deps|
-        queue.push(node) if deps.empty?
-      }
+      queue = dependencies.each_key.filter { |k| dependencies[k].empty? }
 
       until queue.empty?
         node = queue.shift
 
-        dependents[node].each { |dep|
-          dependencies[dep].delete(node)
-          queue.push(dep) if dependencies[dep].empty?
+        dependents[node].each { |dependent|
+          dependencies[dependent].delete(node)
+          queue.push(dependent) if dependencies[dependent].empty?
         }
 
         dependencies.delete(node)
         result.push(node)
       end
 
-      dependencies.empty? ? result : []
+      result.length == num_courses ? result : []
     end
   end
 end

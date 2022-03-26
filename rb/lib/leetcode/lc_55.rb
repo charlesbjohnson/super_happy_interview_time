@@ -4,37 +4,62 @@ module LeetCode
   # 55. Jump Game
   module LC55
     # Description:
-    # Given an array of non-negative integers, you are initially positioned at the first index of the array.
-    # Each element in the array represents your maximum jump length at that position.
-    # Determine if you are able to reach the last index.
+    # You are given an integer array nums. You are initially positioned at the array's first index,
+    # and each element in the array represents your maximum jump length at that position.
+    #
+    # Return true if you can reach the last index, or false otherwise.
     #
     # Examples:
-    # - 1:
-    #   Input: [2, 3, 1, 1, 4]
-    #   Output: true
+    # Input: nums = [2, 3, 1, 1, 4]
+    # Output: true
     #
-    # - 2:
-    #   Input: [3, 2, 1, 0, 4]
-    #   Output: false
+    # Input: nums = [3, 2, 1, 0, 4]
+    # Output: false
     #
-    # @param list {Array<Integer>}
+    # @param {Array<Integer>} nums
     # @return {Boolean}
-    def can_jump(list)
-      nearest = list.length - 1
+    def can_jump(nums)
+      result = private_methods.grep(/^can_jump_\d+$/).map { |m| send(m, nums) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      result = list.reverse_each.map.with_index { |v, i|
-        next true if i.zero?
+    private
 
-        i = (list.length - 1) - i
-        if v + i >= nearest
-          nearest = i
-          next true
-        end
+    def can_jump_1(nums)
+      cache = {}
 
-        false
+      rec = ->(i) {
+        return true if i >= nums.length - 1
+        return false if nums[i] == 0
+
+        cache[i] ||= nums[i].downto(1).any? { |j| rec.call(i + j) }
       }
 
-      result[result.length - 1]
+      rec.call(0)
+    end
+
+    def can_jump_2(nums)
+      cache = Array.new(nums.length) { |i| i == 0 }
+
+      (0...nums.length).each { |i|
+        next if !cache[i]
+
+        (1..nums[i]).each { |j|
+          cache[i + j] = true if i + j < cache.length
+        }
+      }
+
+      cache[-1]
+    end
+
+    def can_jump_3(nums)
+      closest = nums.length - 1
+
+      (nums.length - 1).downto(0).each { |i|
+        closest = i if i + nums[i] >= closest
+      }
+
+      closest == 0
     end
   end
 end

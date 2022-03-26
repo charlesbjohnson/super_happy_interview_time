@@ -34,10 +34,12 @@ module LeetCode
       while lo < hi
         mid = ((hi - lo) / 2) + lo
 
-        if nums[mid] > nums[hi]
+        if nums[mid] < nums[lo]
+          hi = mid
+        elsif nums[mid] > nums[hi]
           lo = mid + 1
         else
-          hi = mid
+          hi = mid - 1
         end
       end
 

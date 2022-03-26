@@ -38,7 +38,7 @@ module LeetCode
     # @return {Array<Integer>}
     def k_weakest_rows(mat, k)
       heap = Heap.new { |a, b|
-        a[0] != b[0] ? a[0] <=> b[0] : a[1] <=> b[1]
+        a[0] != b[0] ? b[0] <=> a[0] : b[1] <=> a[1]
       }
 
       mat.each_index { |r|

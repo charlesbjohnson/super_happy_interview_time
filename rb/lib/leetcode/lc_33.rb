@@ -5,6 +5,7 @@ module LeetCode
   module LC33
     # Description:
     # There is an integer array nums sorted in ascending order (with distinct values).
+    #
     # Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length)
     # such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed).
     #
@@ -32,33 +33,24 @@ module LeetCode
       lo = 0
       hi = nums.length - 1
 
-      while lo < hi
-        mid = ((hi - lo) / 2) + lo
-
-        if nums[mid] > nums[hi]
-          lo = mid + 1
-        else
-          hi = mid
-        end
-      end
-
-      rotation = lo
-
-      lo = 0
-      hi = nums.length - 1
-
       while lo <= hi
         mid = ((hi - lo) / 2) + lo
-        mid_with_rotation = (mid + rotation) % nums.length
 
-        if nums[mid_with_rotation] == target
-          return mid_with_rotation
-        end
-
-        if nums[mid_with_rotation] > target
-          hi = mid - 1
-        else
-          lo = mid + 1
+        case target <=> nums[mid]
+        when 0
+          return mid
+        when -1
+          if target >= nums[lo] || nums[mid] < nums[lo]
+            hi = mid - 1
+          else
+            lo = mid + 1
+          end
+        when 1
+          if target <= nums[hi] || nums[mid] > nums[hi]
+            lo = mid + 1
+          else
+            hi = mid - 1
+          end
         end
       end
 

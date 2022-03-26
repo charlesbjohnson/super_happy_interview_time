@@ -45,17 +45,17 @@ module LeetCode
     end
 
     def num_rolls_to_target_2(n, k, target)
-      result = Array.new(n + 1) { |i| Array.new(target + 1) { |t| i == n && t == target ? 1 : 0 } }
+      cache = Array.new(n + 1) { |i| Array.new(target + 1) { |t| i == n && t == target ? 1 : 0 } }
 
       (n - 1).downto(0) { |i|
         (i * k).downto(i) { |t|
-          result[i][t] = (1..[target - t, k].min).map { |v|
-            result[i + 1][t + v]
+          cache[i][t] = (1..[target - t, k].min).map { |v|
+            cache[i + 1][t + v]
           }.sum
         }
       }
 
-      result[0][0] % (10**9 + 7)
+      cache[0][0] % (10**9 + 7)
     end
   end
 end

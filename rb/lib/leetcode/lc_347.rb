@@ -9,6 +9,8 @@ module LeetCode
     # Given an integer array nums and an integer k, return the k most frequent elements.
     # You may return the answer in any order.
     #
+    # Follow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
+    #
     # Examples:
     # Input: nums = [1, 1, 1, 2, 2, 3], k = 2
     # Output: [1, 2]
@@ -20,16 +22,58 @@ module LeetCode
     # @param {Integer} k
     # @return {Array<Integer>}
     def top_k_frequent(nums, k)
-      hash = Hash.new(0)
-      queue = Heap.new { |a, b| b[0] <=> a[0] }
+      result = private_methods.grep(/^top_k_frequent_\d+$/).map { |m| send(m, nums, k).sort }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      nums.each { |num| hash[num] += 1 }
-      hash.each { |num, count|
-        queue.push([count, num])
-        queue.pop if queue.size > k
+    private
+
+    def top_k_frequent_1(nums, k)
+      hash = nums.tally
+      hash.each_key.sort { |a, b| hash[b] <=> hash[a] }[...k]
+    end
+
+    def top_k_frequent_2(nums, k)
+      hash = nums.tally
+      heap = Heap.new { |a, b| hash[a] <=> hash[b] }
+
+      hash.each_key { |num|
+        case heap.size
+        when ...k
+          heap.push(num)
+        when k
+          if hash[num] > hash[heap.peek]
+            heap.push(num)
+            heap.pop
+          end
+        end
       }
 
-      k.times.map { queue.pop[1] }
+      heap.to_a
+    end
+
+    def top_k_frequent_3(nums, k)
+      result = []
+
+      hash = nums.tally
+      buckets = Array.new(nums.length + 1) { [] }
+      hash.each { |num, frequency| buckets[frequency].push(num) }
+
+      i = buckets.length - 1
+      j = 0
+
+      while result.length < k
+        while j >= buckets[i].length
+          i -= 1
+          j = 0
+        end
+
+        result.push(buckets[i][j])
+
+        j += 1
+      end
+
+      result
     end
   end
 end

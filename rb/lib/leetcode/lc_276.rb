@@ -44,16 +44,16 @@ module LeetCode
     end
 
     def num_ways_2(n, k)
-      result = Array.new(n + 1)
+      cache = Array.new(n + 1)
 
-      result[1] = k
-      result[2] = k**2
+      cache[1] = k
+      cache[2] = k**2
 
       (3..n).each { |i|
-        result[i] = (k - 1) * (result[i - 1] + result[i - 2])
+        cache[i] = (k - 1) * (cache[i - 1] + cache[i - 2])
       }
 
-      result[n]
+      cache[n]
     end
   end
 end

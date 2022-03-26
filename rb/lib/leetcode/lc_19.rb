@@ -3,6 +3,8 @@
 module LeetCode
   # 19. Remove Nth Node From End of List
   module LC19
+    ListNode = Helpers::LeetCode::LinkedList::ListNode
+
     # Description:
     # Given a linked list, remove the nth node from the end of list and return its head.
     # Examples:
@@ -23,30 +25,23 @@ module LeetCode
     # @param {Integer} n
     # @return {ListNode}
     def remove_nth_from_end(head, n)
-      return if !head || !head.next
+      s = ListNode.new(nil, head)
 
-      i = head
-      j = head
+      i = s
+      j = s
 
-      distance = 0
+      while n >= 0
+        j = j.next
+        n -= 1
+      end
 
-      while i.next
+      while j
         i = i.next
-
-        if distance < n
-          distance += 1
-        else
-          j = j.next
-        end
+        j = j.next
       end
 
-      if j == head && distance < n
-        head = head.next
-      else
-        j.next = j.next.next
-      end
-
-      head
+      i.next = i.next.next
+      s.next
     end
   end
 end

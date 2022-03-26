@@ -23,7 +23,7 @@ module LeetCode
     def min_cost_connect_points(points)
       result = 0
 
-      heap = Heap.new([[0, 0]]) { |a, b| b[1] <=> a[1] }
+      heap = Heap.new([[0, 0]]) { |a, b| a[1] <=> b[1] }
       visited = Array.new(points.length, false)
       count = 0
 

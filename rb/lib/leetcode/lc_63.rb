@@ -25,19 +25,19 @@ module LeetCode
       m = obstacle_grid.length
       n = obstacle_grid[0].length
 
-      result = Array.new(m) { Array.new(n, 0) }
-      result[0][0] = obstacle_grid[0][0] == 0 ? 1 : 0
+      cache = Array.new(m) { Array.new(n, 0) }
+      cache[0][0] = obstacle_grid[0][0] == 0 ? 1 : 0
 
       (0...m).each { |r|
         (0...n).each { |c|
           next if obstacle_grid[r][c] == 1
 
-          result[r][c] += result[r - 1][c] if r > 0 && obstacle_grid[r - 1][c] == 0
-          result[r][c] += result[r][c - 1] if c > 0 && obstacle_grid[r][c - 1] == 0
+          cache[r][c] += cache[r - 1][c] if r > 0 && obstacle_grid[r - 1][c] == 0
+          cache[r][c] += cache[r][c - 1] if c > 0 && obstacle_grid[r][c - 1] == 0
         }
       }
 
-      result[-1][-1]
+      cache[-1][-1]
     end
   end
 end

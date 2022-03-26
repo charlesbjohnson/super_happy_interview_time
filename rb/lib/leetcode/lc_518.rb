@@ -50,21 +50,16 @@ module LeetCode
     def change_2(amount, coins)
       coins.sort!
 
-      result = Array.new(amount + 1) { Array.new(coins.length + 1, 0) }
-
-      (0...coins.length).each { |i|
-        result[0][i] = 1
-      }
+      cache = Array.new(amount + 1) { Array.new(coins.length + 1, 0) }
+      (0...coins.length).each { |i| cache[0][i] = 1 }
 
       (1..amount).each { |a|
         (coins.length - 1).downto(0) { |i|
-          if a >= coins[i]
-            result[a][i] += result[a - coins[i]][i] + result[a][i + 1]
-          end
+          cache[a][i] += cache[a - coins[i]][i] + cache[a][i + 1] if a >= coins[i]
         }
       }
 
-      result[amount][0]
+      cache[amount][0]
     end
   end
 end

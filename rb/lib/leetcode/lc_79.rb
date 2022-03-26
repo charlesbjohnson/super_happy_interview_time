@@ -3,71 +3,127 @@
 module LeetCode
   # 79. Word Search
   module LC79
-    def word_exists_recurse(board, row, col, word)
-      return true if word.empty?
-
-      return false unless (0...board.length).cover?(row)
-      return false unless (0...board[row].length).cover?(col)
-      return false if board[row][col] != word[0]
-
-      tmp = board[row][col]
-      board[row][col] = nil
-
-      next_word = word[1..]
-
-      return true if word_exists_recurse(board, row + 1, col, next_word)
-      return true if word_exists_recurse(board, row - 1, col, next_word)
-      return true if word_exists_recurse(board, row, col + 1, next_word)
-      return true if word_exists_recurse(board, row, col - 1, next_word)
-
-      board[row][col] = tmp
-
-      false
-    end
-
     # Description:
-    # Given a 2D board and a word, find if the word exists in the grid.
-    # The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring.
+    # Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+    #
+    # The word can be constructed from letters of sequentially adjacent cells,
+    # where adjacent cells are horizontally or vertically neighboring.
+    #
     # The same letter cell may not be used more than once.
     #
     # Examples:
-    # - 1:
-    #   Input: word = "ABCCED", board = [
-    #     ["A", "B", "C", "E"],
-    #     ["S", "F", "C", "S"],
-    #     ["A", "D", "E", "E"]
-    #   ]
-    #   Output: true
+    # Input: board = [
+    #   ["A", "B", "C", "E"],
+    #   ["S", "F", "C", "S"],
+    #   ["A", "D", "E", "E"]
+    # ],
+    # word = "ABCCED"
+    # Output: true
     #
-    # - 2:
-    #   Input: word = "SEE", board = [
-    #     ["A", "B", "C", "E"],
-    #     ["S", "F", "C", "S"],
-    #     ["A", "D", "E", "E"]
-    #   ]
-    #   Output: true
+    # Input: board = [
+    #   ["A", "B", "C", "E"],
+    #   ["S", "F", "C", "S"],
+    #   ["A", "D", "E", "E"]
+    # ],
+    # word = "SEE"
+    # Output: true
     #
-    # - 3:
-    #   Input: word = "ABCB", board = [
-    #     ["A", "B", "C", "E"],
-    #     ["S", "F", "C", "S"],
-    #     ["A", "D", "E", "E"]
-    #   ]
-    #   Output: false
+    # Input: board = [
+    #   ["A", "B", "C", "E"],
+    #   ["S", "F", "C", "S"],
+    #   ["A", "D", "E", "E"]
+    # ],
+    # word = "ABCB"
+    # Output: false
     #
-    # @param board {Array<Array<String>>}
-    # @param word {String}
+    # @param {Array<Array<String>>} board
+    # @param {String} word
     # @return {Boolean}
-    def word_exists?(board, word)
-      (0...board.length).each { |row|
-        (0...board[row].length).each { |col|
-          return true if word_exists_recurse(board, row, col, word)
-        }
-      }
+    def exist(board, word)
+      result = private_methods.grep(/^exist_\d+$/).map { |m|
+        send(m, Marshal.load(Marshal.dump(board)), word)
+      }.uniq
 
-      false
+      result.length == 1 ? result[0] : raise
     end
 
-    alias_method(:exist, :word_exists?)
+    private
+
+    def exist_1(board, word)
+      rows = board.length
+      cols = board[0].length
+
+      visited = Set.new
+
+      rec = ->(r, c, i) {
+        return true if i == word.length
+
+        key = [r, c]
+
+        return false if r < 0 || r >= rows
+        return false if c < 0 || c >= cols
+        return false if board[r][c] != word[i]
+        return false if visited.include?(key)
+
+        visited.add(key)
+
+        return true if rec.call(r - 1, c, i + 1)
+        return true if rec.call(r, c + 1, i + 1)
+        return true if rec.call(r + 1, c, i + 1)
+        return true if rec.call(r, c - 1, i + 1)
+
+        visited.delete(key)
+        false
+      }
+
+      (0...rows).any? { |r|
+        (0...cols).any? { |c|
+          rec.call(r, c, 0)
+        }
+      }
+    end
+
+    def exist_2(board, word)
+      rows = board.length
+      cols = board[0].length
+
+      visited = Set.new
+
+      iter = ->(stack) {
+        until stack.empty?
+          r, c, i, backtrack = stack.pop
+
+          key = [r, c]
+
+          if backtrack
+            visited.delete(key)
+            next
+          end
+
+          return true if i == word.length
+
+          next if r < 0 || r >= rows
+          next if c < 0 || c >= cols
+          next if board[r][c] != word[i]
+          next if visited.include?(key)
+
+          visited.add(key)
+
+          stack.push([r, c, i, true])
+          stack.push([r, c - 1, i + 1, false])
+          stack.push([r + 1, c, i + 1, false])
+          stack.push([r, c + 1, i + 1, false])
+          stack.push([r - 1, c, i + 1, false])
+        end
+
+        false
+      }
+
+      (0...rows).any? { |r|
+        (0...cols).any? { |c|
+          iter.call([[r, c, 0]])
+        }
+      }
+    end
   end
 end

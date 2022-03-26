@@ -33,13 +33,12 @@ module LeetCode
     def find_disappeared_numbers_2(nums)
       result = []
 
-      nums.each_index { |i|
-        j = nums[i].abs - 1
-        nums[j] = -nums[j] if nums[j] > 0
+      nums.each { |num|
+        nums[num.abs - 1] = -nums[num.abs - 1].abs
       }
 
-      nums.each_index { |i|
-        result.push(i + 1) if nums[i] > 0
+      nums.each_with_index { |num, i|
+        result.push(i + 1) if num > 0
       }
 
       result

@@ -44,35 +44,27 @@ module LeetCode
       cache = {}
 
       rec = ->(i) {
-        return 0 if i < s.length && s[i] == "0"
-
         return 1 if i == s.length
+        return 0 if s[i] == "0"
         return 1 if i == s.length - 1
 
-        cache[i] ||= [
-          rec.call(i + 1),
-          s.length - i >= 2 && s[i...(i + 2)].to_i <= 26 ? rec.call(i + 2) : 0
-        ].sum
+        cache[i] ||= rec.call(i + 1) + (s[i...(i + 2)].to_i <= 26 ? rec.call(i + 2) : 0)
       }
 
       rec.call(0)
     end
 
     def num_decodings_2(s)
-      result = Array.new(s.length + 1, 1)
+      cache = Array.new(s.length + 1, 0)
 
-      (s.length - 1).downto(0) { |i|
-        result[i] = if s[i] != "0"
-          [
-            result[i + 1],
-            s.length - i >= 2 && s[i...(i + 2)].to_i <= 26 ? result[i + 2] : 0
-          ].sum
-        else
-          0
-        end
+      cache[s.length] = 1
+      cache[s.length - 1] = 1 if s[-1] != "0"
+
+      (s.length - 2).downto(0) { |i|
+        cache[i] = cache[i + 1] + (s[i...(i + 2)].to_i <= 26 ? cache[i + 2] : 0) if s[i] != "0"
       }
 
-      result[0]
+      cache[0]
     end
   end
 end

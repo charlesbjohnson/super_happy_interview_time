@@ -22,20 +22,20 @@ module LeetCode
       m = grid.length
       n = grid[0].length
 
-      result = Array.new(m) { |r| Array.new(n) { |c| grid[r][c] } }
+      cache = Array.new(m) { |r| Array.new(n) { |c| grid[r][c] } }
 
       (0...m).each { |r|
         (0...n).each { |c|
           next if r == 0 && c == 0
 
-          result[r][c] += [
-            r > 0 ? result[r - 1][c] : Float::INFINITY,
-            c > 0 ? result[r][c - 1] : Float::INFINITY
+          cache[r][c] += [
+            r > 0 ? cache[r - 1][c] : Float::INFINITY,
+            c > 0 ? cache[r][c - 1] : Float::INFINITY
           ].min
         }
       }
 
-      result[-1][-1]
+      cache[-1][-1]
     end
   end
 end

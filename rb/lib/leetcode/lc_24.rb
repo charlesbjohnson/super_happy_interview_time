@@ -3,6 +3,8 @@
 module LeetCode
   # 24. Swap Nodes in Pairs
   module LC24
+    ListNode = Helpers::LeetCode::LinkedList::ListNode
+
     # Description:
     # Given a linked list, swap every two adjacent nodes and return its head.
     # You must solve the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)
@@ -20,16 +22,21 @@ module LeetCode
     # @param {ListNode} head
     # @return {ListNode}
     def swap_pairs(head)
-      return unless head
-      return head unless head.next
+      s = ListNode.new(nil, head)
+      i = s
 
-      tmp = swap_pairs(head&.next&.next)
+      while i&.next&.next
+        j = i.next
+        k = j.next
 
-      new_head = head.next
-      head.next = tmp
+        i.next = k
+        j.next = k.next
+        k.next = j
 
-      new_head.next = head
-      new_head
+        i = j
+      end
+
+      s.next
     end
   end
 end

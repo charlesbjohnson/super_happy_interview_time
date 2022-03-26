@@ -12,55 +12,56 @@ module LeetCode
     #
     # Examples:
     # Input: grid = [
-    #   ["1","1","1","1","0"],
-    #   ["1","1","0","1","0"],
-    #   ["1","1","0","0","0"],
-    #   ["0","0","0","0","0"]
+    #   ["1", "1", "1", "1", "0"],
+    #   ["1", "1", "0", "1", "0"],
+    #   ["1", "1", "0", "0", "0"],
+    #   ["0", "0", "0", "0", "0"]
     # ]
     # Output: 1
     #
     # Input: grid = [
-    #   ["1","1","0","0","0"],
-    #   ["1","1","0","0","0"],
-    #   ["0","0","1","0","0"],
-    #   ["0","0","0","1","1"]
+    #   ["1", "1", "0", "0", "0"],
+    #   ["1", "1", "0", "0", "0"],
+    #   ["0", "0", "1", "0", "0"],
+    #   ["0", "0", "0", "1", "1"]
     # ]
     # Output: 3
     #
     # @param {Array<Array<String>>} grid
     # @return {Integer}
     def num_islands(grid)
-      islands = 0
+      result = 0
 
-      (0...grid.length).each { |row|
-        (0...grid[row].length).each { |col|
-          if grid[row][col] == "1"
-            sink_island(grid, row, col)
-            islands += 1
-          end
+      rows = grid.length
+      cols = grid[0].length
+
+      sink = ->(r, c) {
+        return false if grid[r][c] == "0"
+
+        queue = [[r, c]]
+
+        until queue.empty?
+          r, c = queue.shift
+
+          next if grid[r][c] == "0"
+          grid[r][c] = "0"
+
+          queue.push([r - 1, c]) if r - 1 >= 0 && grid[r - 1][c] == "1"
+          queue.push([r, c + 1]) if c + 1 < cols && grid[r][c + 1] == "1"
+          queue.push([r + 1, c]) if r + 1 < rows && grid[r + 1][c] == "1"
+          queue.push([r, c - 1]) if c - 1 >= 0 && grid[r][c - 1] == "1"
+        end
+
+        true
+      }
+
+      (0...rows).each { |r|
+        (0...cols).each { |c|
+          result += 1 if sink.call(r, c)
         }
       }
 
-      islands
-    end
-
-    private
-
-    def sink_island(grid, row, col)
-      stack = [[row, col]]
-
-      until stack.empty?
-        row, col = stack.pop
-
-        if (0...grid.length).cover?(row) && (0...grid[row].length).cover?(col) && grid[row][col] == "1"
-          grid[row][col] = "0"
-
-          stack.push([row - 1, col])
-          stack.push([row + 1, col])
-          stack.push([row, col + 1])
-          stack.push([row, col - 1])
-        end
-      end
+      result
     end
   end
 end

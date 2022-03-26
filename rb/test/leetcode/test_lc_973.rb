@@ -14,7 +14,7 @@ module LeetCode
       [[[[3, 3], [5, -1], [-2, 4]], 2], [[3, 3], [-2, 4]]]
     ].each.with_index { |((points, k), expected), i|
       define_method(:"test_k_closest_#{i}") {
-        assert_equal(expected, k_closest(points, k))
+        assert_equal(expected.sort, k_closest(points, k).sort)
       }
     }
   end

@@ -5,6 +5,7 @@ module LeetCode
   module LC309
     # Description:
     # You are given an array prices where prices[i] is the price of a given stock on the ith day.
+    #
     # Find the maximum profit you can achieve. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:
     # - After you sell your stock, you cannot buy stock on the next day (i.e., cooldown one day).
     #
@@ -29,53 +30,110 @@ module LeetCode
     def max_profit_1(prices)
       cache = {}
 
-      rec = ->(i, c, h) {
-        return 0 if i == prices.length
+      rec = ->(i, h) {
+        return 0 if i >= prices.length
 
-        cache[[i, c, h]] ||= if c
-          rec.call(i + 1, false, false)
-        elsif h
+        cache[[i, h]] ||= if h
           [
-            prices[i] + rec.call(i + 1, true, false),
-            rec.call(i + 1, false, true)
+            prices[i] + rec.call(i + 2, false),
+            rec.call(i + 1, true)
           ].max
         else
           [
-            -prices[i] + rec.call(i + 1, false, true),
-            rec.call(i + 1, false, false)
+            -prices[i] + rec.call(i + 1, true),
+            rec.call(i + 1, false)
           ].max
         end
       }
 
-      rec.call(0, false, false)
+      rec.call(0, false)
     end
 
     def max_profit_2(prices)
-      result = Array.new(prices.length + 1) { Array.new(2) { Array.new(2, 0) } }
+      cache = {}
+
+      rec = ->(i, state) {
+        return 0 if i == prices.length
+
+        cache[[i, state]] ||= case state
+        when :buy
+          [
+            -prices[i] + rec.call(i + 1, :sell),
+            rec.call(i + 1, :buy)
+          ].max
+        when :sell
+          [
+            prices[i] + rec.call(i + 1, :cooldown),
+            rec.call(i + 1, :sell)
+          ].max
+        when :cooldown
+          rec.call(i + 1, :buy)
+        end
+      }
+
+      rec.call(0, :buy)
+    end
+
+    def max_profit_3(prices)
+      cache = Array.new(prices.length + 2) { Array.new(2, 0) }
 
       (prices.length - 1).downto(0) { |i|
-        (0..1).each { |c|
-          (0..1).each { |h|
-            if c == 1 && h == 1
-              next
-            elsif c == 1
-              result[i][c][h] = result[i + 1][0][0]
-            elsif h == 1
-              result[i][c][h] = [
-                prices[i] + result[i + 1][1][0],
-                result[i + 1][0][1]
-              ].max
-            else
-              result[i][c][h] = [
-                -prices[i] + result[i + 1][0][1],
-                result[i + 1][0][0]
-              ].max
-            end
-          }
+        (0..1).each { |h|
+          cache[i][h] = if h == 1
+            [
+              prices[i] + cache[i + 2][0],
+              cache[i + 1][1]
+            ].max
+          else
+            [
+              -prices[i] + cache[i + 1][1],
+              cache[i + 1][0]
+            ].max
+          end
         }
       }
 
-      result[0][0][0]
+      cache[0][0]
+    end
+
+    def max_profit_4(prices)
+      cache = Array.new(prices.length + 1) { Hash.new(0) }
+      states = [:buy, :sell, :cooldown]
+
+      (prices.length - 1).downto(0) { |i|
+        states.each { |state|
+          cache[i][state] = case state
+          when :buy
+            [
+              -prices[i] + cache[i + 1][:sell],
+              cache[i + 1][:buy]
+            ].max
+          when :sell
+            [
+              prices[i] + cache[i + 1][:cooldown],
+              cache[i + 1][:sell]
+            ].max
+          when :cooldown
+            cache[i + 1][:buy]
+          end
+        }
+      }
+
+      cache[0][:buy]
+    end
+
+    def max_profit_5(prices)
+      buy = 0
+      sell = 0
+      cooldown = 0
+
+      (prices.length - 1).downto(0) { |i|
+        buy, p_buy = [-prices[i] + sell, buy].max, buy
+        sell = [prices[i] + cooldown, sell].max
+        cooldown = p_buy
+      }
+
+      buy
     end
   end
 end

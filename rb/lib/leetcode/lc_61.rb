@@ -3,6 +3,8 @@
 module LeetCode
   # 61. Rotate List
   module LC61
+    ListNode = Helpers::LeetCode::LinkedList::ListNode
+
     # Description:
     # Given the head of a linked list, rotate the list to the right by k places.
     #
@@ -17,39 +19,44 @@ module LeetCode
     # @param {Integer} k
     # @return {ListNode}
     def rotate_right(head, k)
-      return if !head || !head.next
+      return head if !head || !head.next || k == 0
+
+      s = ListNode.new(nil, head)
+
+      i = s
+      j = s
 
       size = 0
-      i = head
 
-      while i
+      while k > 0 && j.next
+        j = j.next
+        k -= 1
         size += 1
-        i = i.next
       end
 
-      i = head
-      j = head
-
       k %= size
-      return head if k == 0
 
-      distance = 0
+      if !j.next
+        j = s
+
+        while k > 0
+          j = j.next
+          k -= 1
+        end
+      end
+
+      return head if i == j
 
       while j.next
-        if distance < k
-          distance += 1
-        else
-          i = i.next
-        end
-
+        i = i.next
         j = j.next
       end
 
-      j.next = head
-      head = i.next
+      j.next = s.next
+      s.next = i.next
       i.next = nil
 
-      head
+      s.next
     end
   end
 end

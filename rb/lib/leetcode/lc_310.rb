@@ -28,33 +28,27 @@ module LeetCode
     # @param {Array<Array<(Integer, Integer)>>} edges
     # @return {Array<Integer>}
     def find_min_height_trees(n, edges)
-      graph = {}
-
-      (0...n).each { |node|
-        graph[node] = Set.new
-      }
-
+      graph = (0...n).each_with_object({}) { |node, h| h[node] = Set.new }
       edges.each { |a, b|
         graph[a].add(b)
         graph[b].add(a)
       }
 
-      nodes = []
-      graph.each { |node, edges|
-        nodes.push(node) if edges.size == 1
-      }
+      p_queue = graph.each_key.filter { |node| graph[node].length == 1 }
+      n_queue = []
 
-      while graph.size > 2
-        p_nodes, nodes = nodes, []
-
-        p_nodes.each { |node|
+      while graph.length > 2
+        p_queue.each { |node|
           graph[node].each { |neighbor|
             graph[neighbor].delete(node)
-            nodes.push(neighbor) if graph[neighbor].size == 1
+            n_queue.push(neighbor) if graph[neighbor].length == 1
           }
 
           graph.delete(node)
         }
+
+        p_queue = n_queue
+        n_queue = []
       end
 
       graph.keys

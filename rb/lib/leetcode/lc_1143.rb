@@ -53,22 +53,22 @@ module LeetCode
     end
 
     def longest_common_subsequence_2(text1, text2)
-      result = Array.new(text1.length + 1) { Array.new(text2.length + 1, 0) }
+      cache = Array.new(text1.length + 1) { Array.new(text2.length + 1, 0) }
 
       (text1.length - 1).downto(0) { |i|
         (text2.length - 1).downto(0) { |j|
-          result[i][j] = if text1[i] == text2[j]
-            1 + result[i + 1][j + 1]
+          cache[i][j] = if text1[i] == text2[j]
+            1 + cache[i + 1][j + 1]
           else
             [
-              result[i + 1][j],
-              result[i][j + 1]
+              cache[i + 1][j],
+              cache[i][j + 1]
             ].max
           end
         }
       }
 
-      result[0][0]
+      cache[0][0]
     end
   end
 end

@@ -48,20 +48,20 @@ module LeetCode
     end
 
     def maximum_score_2(nums, multipliers)
-      result = Array.new(multipliers.length + 1) { Array.new(multipliers.length + 1, 0) }
+      cache = Array.new(multipliers.length + 1) { Array.new(multipliers.length + 1, 0) }
 
       (multipliers.length - 1).downto(0) { |i|
         i.downto(0) { |l|
           r = (nums.length - 1) - (i - l)
 
-          result[i][l] = [
-            (multipliers[i] * nums[l]) + result[i + 1][l + 1],
-            (multipliers[i] * nums[r]) + result[i + 1][l]
+          cache[i][l] = [
+            (multipliers[i] * nums[l]) + cache[i + 1][l + 1],
+            (multipliers[i] * nums[r]) + cache[i + 1][l]
           ].max
         }
       }
 
-      result[0][0]
+      cache[0][0]
     end
   end
 end

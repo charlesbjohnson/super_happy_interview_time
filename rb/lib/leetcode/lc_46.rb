@@ -20,22 +20,61 @@ module LeetCode
     # @param {Array<Integer>} nums
     # @return {Array<Array<Integer>>}
     def permute(nums)
+      result = private_methods.grep(/^permute_\d+$/).map { |m| send(m, nums).sort }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def permute_1(nums)
+      rec = ->(remaining, permutation) {
+        return [permutation] if remaining.empty?
+
+        remaining.each_index.flat_map { |i|
+          rec.call(remaining[...i] + remaining[i + 1...], permutation + [remaining[i]])
+        }
+      }
+
+      rec.call(nums, [])
+    end
+
+    def permute_2(nums)
       result = []
-      stack = [[[], nums]]
+      stack = [[nums, []]]
 
       until stack.empty?
-        cur, rem = stack.pop
+        remaining, permutation = stack.pop
 
-        if rem.empty?
-          result.push(cur)
+        if remaining.empty?
+          result.push(permutation)
           next
         end
 
-        rem.each_index { |i|
-          stack.unshift([cur + [rem[i]], rem[...i] + rem[(i + 1)..]])
+        remaining.each_index { |i|
+          stack.push([remaining[...i] + remaining[i + 1...], permutation + [remaining[i]]])
         }
       end
 
+      result
+    end
+
+    def permute_3(nums)
+      result = []
+
+      rec = ->(i) {
+        if i == nums.length
+          result.push(nums.clone)
+          return
+        end
+
+        (i...nums.length).each { |j|
+          nums[i], nums[j] = nums[j], nums[i]
+          rec.call(i + 1)
+          nums[i], nums[j] = nums[j], nums[i]
+        }
+      }
+
+      rec.call(0)
       result
     end
   end

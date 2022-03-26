@@ -45,13 +45,13 @@ module LeetCode
     end
 
     def max_sub_array_2(nums)
-      result = Array.new(nums.length + 1, -Float::INFINITY)
+      cache = Array.new(nums.length + 1, -Float::INFINITY)
 
       (nums.length - 1).downto(0) { |i|
-        result[i] = [nums[i], nums[i] + result[i + 1]].max
+        cache[i] = [nums[i], nums[i] + cache[i + 1]].max
       }
 
-      result.max
+      cache.max
     end
 
     def max_sub_array_3(nums)

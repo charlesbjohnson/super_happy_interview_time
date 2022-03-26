@@ -66,19 +66,19 @@ module LeetCode
       rows = matrix.length
       cols = matrix[0].length
 
-      result = Array.new(rows + 1) { Array.new(cols + 1, 0) }
+      cache = Array.new(rows + 1) { Array.new(cols + 1, 0) }
       max = 0
 
       (rows - 1).downto(0) { |r|
         (cols - 1).downto(0) { |c|
           if matrix[r][c] == "1"
-            result[r][c] = 1 + [
-              result[r][c + 1],
-              result[r + 1][c + 1],
-              result[r + 1][c]
+            cache[r][c] = 1 + [
+              cache[r][c + 1],
+              cache[r + 1][c + 1],
+              cache[r + 1][c]
             ].min
 
-            max = [max, result[r][c]].max
+            max = [max, cache[r][c]].max
           end
         }
       }

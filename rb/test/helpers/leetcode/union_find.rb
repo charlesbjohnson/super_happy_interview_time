@@ -52,7 +52,7 @@ module Helpers
           roots[j] = i
         when 0
           roots[j] = i
-          ranks[j] += 1
+          ranks[i] += 1
         end
 
         true

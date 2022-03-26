@@ -3,48 +3,67 @@
 module LeetCode
   # 5. Longest Palindromic Substring
   module LC5
-    def longest_palindrome_length_around(s, left, right)
-      while left >= 0 && right < s.length && s[left] == s[right]
-        left -= 1
-        right += 1
-      end
-
-      (right - left) - 1
-    end
-
     # Description:
-    # Given a string s, find the longest palindromic substring in s.
-    # You may assume that the maximum length of s is 1000.
+    # Given a string s, return the longest palindromic substring in s.
     #
     # Examples:
-    # - 1:
-    #   Input: "babad"
-    #   Output: "bab"
-    #   Note: "aba" is also a valid answer.
+    # Input: s = "babad"
+    # Output: "bab"
     #
-    # - 2:
-    #   Input: "cbbd"
-    #   Output: "bb"
+    # Input: s = "cbbd"
+    # Output: "bb"
     #
-    # @param s {String}
+    # @param {String} s
     # @return {String}
     def longest_palindrome(s)
-      left_bound = 0
-      right_bound = 0
+      result = private_methods.grep(/^longest_palindrome_\d+$/).map { |m| send(m, s) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      (0...s.length).each { |i|
-        len_on = longest_palindrome_length_around(s, i, i)
-        len_between = longest_palindrome_length_around(s, i, i + 1)
+    private
 
-        longest = [len_on, len_between].max
+    def longest_palindrome_1(s)
+      result = 0..0
+      cache = Array.new(s.length) { |i| Array.new(s.length) { |j| i == j } }
 
-        if longest > (right_bound - left_bound)
-          left_bound = i - ((longest - 1) / 2)
-          right_bound = i + (longest / 2)
-        end
+      (2..s.length).each { |size|
+        (0..(s.length - size)).each { |i|
+          j = i + size - 1
+
+          next if s[i] != s[j]
+
+          if size == 2 || cache[i + 1][j - 1]
+            cache[i][j] = true
+            result = [result, i..j].max_by(&:size)
+          end
+        }
       }
 
-      s[left_bound..right_bound]
+      s[result]
+    end
+
+    def longest_palindrome_2(s)
+      result = 0..0
+
+      (0...s.length).each { |i|
+        l, r = i, i
+        while l >= 0 && r < s.length && s[l] == s[r]
+          l -= 1
+          r += 1
+        end
+
+        result = (l + 1)..(r - 1) if r - l - 1 > result.size
+
+        l, r = i, i + 1
+        while l >= 0 && r < s.length && s[l] == s[r]
+          l -= 1
+          r += 1
+        end
+
+        result = (l + 1)..(r - 1) if r - l - 1 > result.size
+      }
+
+      s[result]
     end
   end
 end

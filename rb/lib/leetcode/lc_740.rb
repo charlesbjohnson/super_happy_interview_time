@@ -49,16 +49,16 @@ module LeetCode
       nums.sort!
       counts = nums.tally
 
-      result = Array.new(nums[-1] + 2, 0)
+      cache = Array.new(nums[-1] + 2, 0)
 
       nums[-1].downto(nums[0]) { |i|
-        result[i] = [
-          (i * counts.fetch(i, 0)) + (i + 2 <= nums[-1] ? result[i + 2] : 0),
-          result[i + 1]
+        cache[i] = [
+          (i * counts.fetch(i, 0)) + (i + 2 <= nums[-1] ? cache[i + 2] : 0),
+          cache[i + 1]
         ].max
       }
 
-      result[nums[0]]
+      cache[nums[0]]
     end
   end
 end

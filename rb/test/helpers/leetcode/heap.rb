@@ -3,11 +3,13 @@
 module Helpers
   module LeetCode
     class Heap
+      include(Enumerable)
+
       # @param {Array<Comparable>} values
       # @yield [Array(Comparable, Comparable)]
       def initialize(values = [], &priority)
         self.values = values.clone
-        self.priority = priority || ->(a, b) { b <=> a }
+        self.priority = priority || ->(a, b) { a <=> b }
 
         heapify
       end
@@ -15,6 +17,12 @@ module Helpers
       # @return {Boolean}
       def empty?
         size == 0
+      end
+
+      # @yield [v]
+      # @yieldparam {Comparable} v
+      def each(&block)
+        values.each(&block)
       end
 
       # @return {Comparable}
@@ -65,9 +73,11 @@ module Helpers
       def sink(i)
         while i < (size / 2)
           l, r = children(i)
-          swap = r && priority.call(values[r], values[l]) == 1 ? r : l
 
-          if priority.call(values[swap], values[i]) == 1
+          swap = l
+          swap = r if r && priority.call(values[l], values[r]) > 0
+
+          if priority.call(values[i], values[swap]) > 0
             values[i], values[swap] = values[swap], values[i]
             i = swap
           else
@@ -80,7 +90,7 @@ module Helpers
         while i > 0
           p = parent(i)
 
-          if priority.call(values[i], values[p]) == 1
+          if priority.call(values[i], values[p]) < 0
             values[i], values[p] = values[p], values[i]
             i = p
           else
@@ -114,7 +124,7 @@ module Helpers
 
     class MaxHeap < Heap
       def initialize(*)
-        super { |a, b| a <=> b }
+        super { |a, b| b <=> a }
       end
 
       def max
@@ -124,7 +134,7 @@ module Helpers
 
     class MinHeap < Heap
       def initialize(*)
-        super { |a, b| b <=> a }
+        super { |a, b| a <=> b }
       end
 
       def min

@@ -16,53 +16,42 @@ module LeetCode
     # @param {Array<Array<Integer>>} matrix
     # @return {Array<Integer>}
     def spiral_order(matrix)
+      result = []
+
       rows = matrix.length
       cols = matrix[0].length
-
-      result = Array.new(rows * cols)
-      i = 0
 
       r = 0
       c = 0
 
-      r_dir = 0
-      c_dir = 1
+      dir = [0, 1]
 
-      r_bound_top = 0
-      r_bound_bottom = rows
+      r_bound = [-1, rows]
+      c_bound = [-1, cols]
 
-      c_bound_left = -1
-      c_bound_right = cols
-
-      while i < result.length
-        result[i] = matrix[r][c]
+      while result.length < rows * cols
+        result.push(matrix[r][c])
 
         # Right
-        if c + 1 == c_bound_right && c_dir == 1
-          c_dir = 0
-          r_dir = 1
-          c_bound_right -= 1
+        if dir == [0, 1] && c + 1 == c_bound[1]
+          dir = [1, 0]
+          r_bound[0] += 1
         # Down
-        elsif r + 1 == r_bound_bottom && r_dir == 1
-          c_dir = -1
-          r_dir = 0
-          r_bound_bottom -= 1
+        elsif dir == [1, 0] && r + 1 == r_bound[1]
+          dir = [0, -1]
+          c_bound[1] -= 1
         # Left
-        elsif c - 1 == c_bound_left && c_dir == -1
-          c_dir = 0
-          r_dir = -1
-          c_bound_left += 1
+        elsif dir == [0, -1] && c - 1 == c_bound[0]
+          dir = [-1, 0]
+          r_bound[1] -= 1
         # Up
-        elsif r - 1 == r_bound_top && r_dir == -1
-          r_dir = 0
-          c_dir = 1
-          r_bound_top += 1
+        elsif dir == [-1, 0] && r - 1 == r_bound[0]
+          dir = [0, 1]
+          c_bound[0] += 1
         end
 
-        r += r_dir
-        c += c_dir
-
-        i += 1
+        r += dir[0]
+        c += dir[1]
       end
 
       result

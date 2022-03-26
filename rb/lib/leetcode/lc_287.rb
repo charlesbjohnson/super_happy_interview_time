@@ -23,23 +23,51 @@ module LeetCode
     # @param {Array<Integer>} nums
     # @return {Integer}
     def find_duplicate(nums)
+      result = private_methods.grep(/^find_duplicate_\d+$/).map { |m| send(m, nums) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def find_duplicate_1(nums)
       lo = 1
       hi = nums.length - 1
 
-      dup = nil
+      result = nil
 
       while lo <= hi
         mid = ((hi - lo) / 2) + lo
 
-        if nums.count { |num| num <= mid } > mid
-          dup = mid
+        case mid <=> nums.count { |num| num <= mid }
+        when -1
+          result = mid
           hi = mid - 1
-        else
+        when 0, 1
           lo = mid + 1
         end
       end
 
-      dup
+      result
+    end
+
+    def find_duplicate_2(nums)
+      i = nums[0]
+      j = nums[0]
+
+      loop {
+        i = nums[i]
+        j = nums[nums[j]]
+        break if i == j
+      }
+
+      i = nums[0]
+
+      while i != j
+        i = nums[i]
+        j = nums[j]
+      end
+
+      j
     end
   end
 end

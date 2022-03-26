@@ -15,7 +15,7 @@ module LeetCode
       [[4, 2], [[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]]
     ].each.with_index { |((n, k), expected), i|
       define_method(:"test_combine_#{i}") {
-        assert_equal(expected, combine(n, k))
+        assert_equal(expected.sort, combine(n, k).sort)
       }
     }
   end

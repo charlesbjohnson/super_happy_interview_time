@@ -15,47 +15,55 @@ module LeetCode
     #   ["e", "t", "a", "e"],
     #   ["i", "h", "k", "r"],
     #   ["i", "f", "l", "v"]
-    # ], words = ["oath", "pea", "eat", "rain"]
+    # ],
+    # words = ["oath", "pea", "eat", "rain"]
     # Output: ["eat","oath"]
     #
     # Input: board = [
     #   ["a", "b"],
     #   ["c", "d"]
-    # ], words = ["abcb"]
+    # ],
+    # words = ["abcb"]
     # Output: []
     #
     # @param {Array<Array<String>>} board
     # @param {Array<String>} words
     # @return {Array<String>}
     def find_words(board, words)
+      rows = board.length
+      cols = board[0].length
+
       result = Set.new
 
       visited = Set.new
       words = words.to_set
       root = trie(words)
 
-      rec = ->(row, col, node) {
-        key = "r#{row}c#{col}"
+      rec = ->(r, c, node) {
+        key = [r, c]
 
-        return [] if row < 0 || row >= board.length || col < 0 || col >= board[row].length
+        return [] if r < 0 || r >= rows
+        return [] if c < 0 || c >= cols
         return [] if visited.include?(key)
-        return [] if !node.children.key?(board[row][col])
+        return [] if !node.children.key?(board[r][c])
 
-        node = node.children[board[row][col]]
+        node = node.children[board[r][c]]
         visited.add(key)
 
-        d = rec.call(row + 1, col, node)
-        r = rec.call(row, col + 1, node)
-        u = rec.call(row - 1, col, node)
-        l = rec.call(row, col - 1, node)
+        dirs = [
+          rec.call(r - 1, c, node),
+          rec.call(r, c + 1, node),
+          rec.call(r + 1, c, node),
+          rec.call(r, c - 1, node)
+        ].flatten
 
         visited.delete(key)
-        ([node.word].compact + d + r + u + l)
+        ([node.word].compact + dirs)
       }
 
-      (0...board.length).each { |row|
-        (0...board[row].length).each { |col|
-          found = rec.call(row, col, root)
+      (0...rows).each { |r|
+        (0...cols).each { |c|
+          found = rec.call(r, c, root)
           if !found.empty?
             result += found
             words -= found

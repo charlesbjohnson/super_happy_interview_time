@@ -46,19 +46,19 @@ module LeetCode
     end
 
     def min_cost_2(costs)
-      result = Array.new(costs.length + 1) { |i| Array.new(3) { i == costs.length ? 0 : Float::INFINITY } }
+      cache = Array.new(costs.length + 1) { |i| Array.new(3) { i == costs.length ? 0 : Float::INFINITY } }
 
       (costs.length - 1).downto(0) { |i|
         (0..2).each { |c|
-          result[i][c] = [
-            c != 0 ? costs[i][0] + result[i + 1][0] : Float::INFINITY,
-            c != 1 ? costs[i][1] + result[i + 1][1] : Float::INFINITY,
-            c != 2 ? costs[i][2] + result[i + 1][2] : Float::INFINITY
+          cache[i][c] = [
+            c != 0 ? costs[i][0] + cache[i + 1][0] : Float::INFINITY,
+            c != 1 ? costs[i][1] + cache[i + 1][1] : Float::INFINITY,
+            c != 2 ? costs[i][2] + cache[i + 1][2] : Float::INFINITY
           ].min
         }
       }
 
-      result[0].min
+      cache[0].min
     end
   end
 end

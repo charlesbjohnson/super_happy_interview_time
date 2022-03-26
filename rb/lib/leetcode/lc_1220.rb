@@ -61,26 +61,26 @@ module LeetCode
     end
 
     def count_vowel_permutation_2(n)
-      result = Array.new(n) { |i| Array.new(5) { i == n - 1 ? 1 : 0 } }
+      cache = Array.new(n) { |i| Array.new(5) { i == n - 1 ? 1 : 0 } }
 
       (n - 2).downto(0) { |i|
         # a -> 3
-        result[i][0] = result[i + 1][1]
+        cache[i][0] = cache[i + 1][1]
 
         # e -> a, i
-        result[i][1] = result[i + 1][0] + result[i + 1][2]
+        cache[i][1] = cache[i + 1][0] + cache[i + 1][2]
 
         # i -> a, e, o, u
-        result[i][2] = result[i + 1][0] + result[i + 1][1] + result[i + 1][3] + result[i + 1][4]
+        cache[i][2] = cache[i + 1][0] + cache[i + 1][1] + cache[i + 1][3] + cache[i + 1][4]
 
         # o -> i, u
-        result[i][3] = result[i + 1][2] + result[i + 1][4]
+        cache[i][3] = cache[i + 1][2] + cache[i + 1][4]
 
         # u -> a
-        result[i][4] = result[i + 1][0]
+        cache[i][4] = cache[i + 1][0]
       }
 
-      result[0].sum % (10**9 + 7)
+      cache[0].sum % (10**9 + 7)
     end
   end
 end

@@ -23,15 +23,15 @@ module LeetCode
     # @param {Integer} n
     # @return {Integer}
     def unique_paths(m, n)
-      result = Array.new(m) { Array.new(n, 1) }
+      cache = Array.new(m) { Array.new(n, 1) }
 
       (1...m).each { |r|
         (1...n).each { |c|
-          result[r][c] = result[r][c - 1] + result[r - 1][c]
+          cache[r][c] = cache[r][c - 1] + cache[r - 1][c]
         }
       }
 
-      result[-1][-1]
+      cache[-1][-1]
     end
   end
 end

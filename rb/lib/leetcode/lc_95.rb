@@ -21,7 +21,7 @@ module LeetCode
     # @param {Integer} n
     # @return {Array<TreeNode>}
     def generate_trees(n)
-      result = Array.new(n + 2) { |l|
+      cache = Array.new(n + 2) { |l|
         Array.new(n + 1) { |r|
           if l > r
             [nil]
@@ -36,8 +36,8 @@ module LeetCode
           roots = []
 
           (l..r).each { |i|
-            roots_l = result[l][i - 1]
-            roots_r = result[i + 1][r]
+            roots_l = cache[l][i - 1]
+            roots_r = cache[i + 1][r]
 
             roots_l.each { |root_l|
               roots_r.each { |root_r|
@@ -46,11 +46,11 @@ module LeetCode
             }
           }
 
-          result[l][r] = roots
+          cache[l][r] = roots
         }
       }
 
-      result[1][n]
+      cache[1][n]
     end
   end
 end

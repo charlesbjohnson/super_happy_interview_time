@@ -4,82 +4,78 @@ module LeetCode
   # 15. 3Sum
   module LC15
     # Description:
-    # Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0?
-    # Find all unique triplets in the array which gives the sum of zero.
+    # Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k,
+    # and nums[i] + nums[j] + nums[k] == 0.
+    #
+    # Notice that the solution set must not contain duplicate triplets.
     #
     # Examples:
-    # Input: [-1, 0, 1, 2, -1, -4],
-    # Output: [[-1, 0, 1], [-1, -1, 2]]
+    # Input: nums = [-1, 0, 1, 2, -1, -4]
+    # Output: [[-1, -1, 2], [-1, 0, 1]]
     #
-    # Notes:
-    # - The solution set must not contain duplicate triplets.
+    # Input: nums = []
+    # Output: []
     #
-    # @param list {Array<Integer>}
-    # @return {Array<Array<Integer>>}
-    def three_sum(list)
-      list = list.sort
-      sets = []
+    # Input: nums = [0]
+    # Output: []
+    #
+    # @param {Array<Integer>} nums
+    # @return {Array<Array<(Integer, Integer, Integer)>}
+    def three_sum(nums)
+      result = private_methods.grep(/^three_sum_\d+$/).map { |m| send(m, nums.clone) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      left_bound = 0
-      right_bound = list.length - 1
+    private
 
-      # exclude large numbers that cannot be counterbalanced by
-      # numbers on the other side of the spectrum
-      while left_bound < right_bound
-        if list[left_bound].abs > (list[right_bound] * 2)
-          left_bound += 1
-          next
-        end
+    def three_sum_1(nums)
+      nums.sort!
 
-        if list[right_bound] > (list[left_bound].abs * 2)
-          right_bound -= 1
-          next
-        end
+      result = []
 
-        break
-      end
+      (0...nums.length).each { |i|
+        next if i - 1 >= 0 && nums[i - 1] == nums[i]
 
-      return sets if (right_bound - left_bound) < 2
-      return sets if list[left_bound].positive?
+        ((i + 1)...nums.length).each { |j|
+          next if j - 1 > i && nums[j - 1] == nums[j]
 
-      left = left_bound
-      while left < (right_bound - 1)
-        # exclude number that was seen before
-        if left > left_bound && list[left] == list[left - 1]
-          left += 1
-          next
-        end
+          ((j + 1)...nums.length).each { |k|
+            next if k - 1 > j && nums[k - 1] == nums[k]
 
-        center = left + 1
-        right = right_bound
+            result.push([nums[i], nums[j], nums[k]]) if nums[i] + nums[j] + nums[k] == 0
+          }
+        }
+      }
 
-        while center < right
-          # exclude number that was seen before
-          if center > left + 1 && list[center] == list[center - 1]
-            center += 1
-            next
-          end
+      result
+    end
 
-          # exclude number that was seen before
-          if right < right_bound && list[right] == list[right + 1]
-            right -= 1
-            next
-          end
+    def three_sum_2(nums)
+      nums.sort!
 
-          sum = list[left] + list[center] + list[right]
-          sets.push([list[left], list[center], list[right]]) if sum.zero?
+      result = []
 
-          if sum <= 0
-            center += 1
-          else
-            right -= 1
+      (0...nums.length).each { |i|
+        next if i - 1 >= 0 && nums[i - 1] == nums[i]
+
+        l = i + 1
+        r = nums.length - 1
+
+        while l < r
+          case nums[l] + nums[r] <=> -nums[i]
+          when 0
+            result.push([nums[i], nums[l], nums[r]])
+            l += 1
+            l += 1 while l < r && nums[l - 1] == nums[l]
+          when -1
+            l += 1
+          when 1
+            r -= 1
           end
         end
+      }
 
-        left += 1
-      end
-
-      sets
+      result
     end
   end
 end

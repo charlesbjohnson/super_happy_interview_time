@@ -4,7 +4,8 @@ module LeetCode
   # 322. Coin Change
   module LC322
     # Description:
-    # You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+    # You are given an integer array coins representing coins of different denominations
+    # and an integer amount representing a total amount of money.
     #
     # Return the fewest number of coins that you need to make up that amount.
     # If that amount of money cannot be made up by any combination of the coins, return -1.
@@ -34,28 +35,28 @@ module LeetCode
     def coin_change_1(coins, amount)
       cache = {}
 
-      rec = ->(a) {
-        return 0 if a == 0
+      rec = ->(total) {
+        return 0 if total == amount
 
-        cache[a] ||= coins.map { |coin|
-          a >= coin ? 1 + rec.call(a - coin) : Float::INFINITY
+        cache[total] ||= (0...coins.length).map { |i|
+          total + coins[i] <= amount ? 1 + rec.call(total + coins[i]) : Float::INFINITY
         }.min
       }
 
-      result = rec.call(amount)
+      result = rec.call(0)
       result.infinite? ? -1 : result
     end
 
     def coin_change_2(coins, amount)
-      result = Array.new(amount + 1, 0)
+      cache = Array.new(amount + 1) { |total| total == amount ? 0 : Float::INFINITY }
 
-      (1..amount).each { |a|
-        result[a] = coins.map { |coin|
-          a >= coin ? 1 + result[a - coin] : Float::INFINITY
+      (amount - 1).downto(0) { |total|
+        cache[total] = (0...coins.length).map { |i|
+          total + coins[i] <= amount ? 1 + cache[total + coins[i]] : Float::INFINITY
         }.min
       }
 
-      result = result[amount]
+      result = cache[0]
       result.infinite? ? -1 : result
     end
   end

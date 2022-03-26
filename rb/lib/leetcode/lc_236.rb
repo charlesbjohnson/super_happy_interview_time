@@ -25,12 +25,61 @@ module LeetCode
     # @param {TreeNode} q
     # @return {TreeNode}
     def lowest_common_ancestor(root, p, q)
-      return root if !root || root == p || root == q
+      result = private_methods.grep(/^lowest_common_ancestor_\d+$/).map { |m| send(m, root, p, q) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      left = lowest_common_ancestor(root.left, p, q)
-      right = lowest_common_ancestor(root.right, p, q)
+    private
 
-      left && right ? root : left || right
+    def lowest_common_ancestor_1(root, p, q)
+      rec = ->(node) {
+        return if !node
+        return node if node == p || node == q
+
+        l = rec.call(node.left)
+        r = rec.call(node.right)
+
+        l && r ? node : l || r
+      }
+
+      rec.call(root)
+    end
+
+    def lowest_common_ancestor_2(root, p, q)
+      hash = {root => nil}
+      stack = [root]
+
+      while !hash.key?(p) || !hash.key?(q)
+        node = stack.pop
+
+        if node.left
+          hash[node.left] = node
+          stack.push(node.left)
+        end
+
+        if node.right
+          hash[node.right] = node
+          stack.push(node.right)
+        end
+      end
+
+      p_path = Set.new
+      p_cursor = p
+
+      while p_cursor
+        p_path.add(p_cursor)
+        p_cursor = hash[p_cursor]
+      end
+
+      q_path = Set.new
+      q_cursor = q
+
+      while q_cursor
+        q_path.add(q_cursor)
+        q_cursor = hash[q_cursor]
+      end
+
+      (p_path & q_path).first
     end
   end
 end

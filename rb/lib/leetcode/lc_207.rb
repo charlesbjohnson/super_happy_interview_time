@@ -22,30 +22,95 @@ module LeetCode
     # @param {Array<Array<(Integer, Integer)>>} prerequisites
     # @return {Boolean}
     def can_finish(num_courses, prerequisites)
+      result = private_methods.grep(/^can_finish_\d+$/).map { |m| send(m, num_courses, prerequisites) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def can_finish_1(num_courses, prerequisites)
+      graph = (0...num_courses).each_with_object({}) { |i, h| h[i] = [] }
+      prerequisites.each { |a, b|
+        graph[b].push(a)
+      }
+
+      path = Set.new
+
+      rec = ->(node) {
+        return false if !path.add?(node)
+        return true if !graph.key?(node)
+        return false if !graph[node].all? { |neighbor| rec.call(neighbor) }
+
+        graph.delete(node)
+        path.delete(node)
+
+        true
+      }
+
+      (0...num_courses).all? { |i| rec.call(i) }
+    end
+
+    def can_finish_2(num_courses, prerequisites)
+      graph = (0...num_courses).each_with_object({}) { |i, h| h[i] = [] }
+      prerequisites.each { |a, b|
+        graph[b].push(a)
+      }
+
+      path = Set.new
+
+      search = ->(source) {
+        stack = [[source, false]]
+
+        until stack.empty?
+          node, backtrack = stack.pop
+
+          if backtrack
+            graph.delete(node)
+            path.delete(node)
+            next
+          end
+
+          return false if !path.add?(node)
+
+          if !graph.key?(node)
+            path.delete(node)
+            next
+          end
+
+          stack.push([node, true])
+          graph[node].each { |neighbor|
+            stack.push([neighbor, false])
+          }
+        end
+
+        true
+      }
+
+      (0...num_courses).all? { |i| search.call(i) }
+    end
+
+    def can_finish_3(num_courses, prerequisites)
       dependencies = {}
       dependents = {}
 
-      (0...num_courses).each { |node|
-        dependencies[node] = Set.new
-        dependents[node] = []
+      (0...num_courses).each { |i|
+        dependencies[i] = Set.new
+        dependents[i] = []
       }
 
-      prerequisites.each { |course, depends_on|
-        dependencies[course].add(depends_on)
-        dependents[depends_on].push(course)
+      prerequisites.each { |a, b|
+        dependencies[a].add(b)
+        dependents[b].push(a)
       }
 
-      queue = []
-      dependencies.each { |node, deps|
-        queue.push(node) if deps.empty?
-      }
+      queue = dependencies.each_key.filter { |k| dependencies[k].empty? }
 
       until queue.empty?
         node = queue.shift
 
-        dependents[node].each { |dep|
-          dependencies[dep].delete(node)
-          queue.push(dep) if dependencies[dep].empty?
+        dependents[node].each { |dependent|
+          dependencies[dependent].delete(node)
+          queue.push(dependent) if dependencies[dependent].empty?
         }
 
         dependencies.delete(node)

@@ -43,16 +43,16 @@ module LeetCode
     end
 
     def min_cost_climbing_stairs_2(cost)
-      result = Array.new(cost.length + 1, 0)
+      cache = Array.new(cost.length + 1, 0)
 
       (2..cost.length).each { |i|
-        result[i] = [
-          cost[i - 1] + result[i - 1],
-          cost[i - 2] + result[i - 2]
+        cache[i] = [
+          cost[i - 1] + cache[i - 1],
+          cost[i - 2] + cache[i - 2]
         ].min
       }
 
-      result[cost.length]
+      cache[cost.length]
     end
   end
 end

@@ -4,7 +4,13 @@ module LeetCode
   # 117. Populating Next Right Pointers in Each Node II
   module LC117
     # Description:
-    # Given a binary tree
+    # Given a binary tree:
+    # struct Node {
+    #   int val;
+    #   Node *left;
+    #   Node *right;
+    #   Node *next;
+    # }
     #
     # Populate each next pointer to point to its next right node.
     # If there is no next right node, the next pointer should be set to NULL.
@@ -25,23 +31,52 @@ module LeetCode
     # @param {Node} root
     # @return {Node}
     def connect(root)
-      return root if !root || (!root.left && !root.right)
+      result = private_methods.grep(/^connect_\d+$/).map { |m| send(m, root.clone) }.uniq
+      result.length == 1 ? result[0] : raise
+    end
 
-      cursor = root.next
+    private
 
-      while cursor
-        if cursor.left || cursor.right
-          (root.right || root.left).next = cursor.left || cursor.right
-          break
-        end
+    def connect_1(root)
+      queue = [root].compact
 
-        cursor = cursor.next
+      until queue.empty?
+        p_node = queue.shift
+
+        n_node = p_node.next
+        n_node = n_node.next while n_node && (!n_node.left && !n_node.right)
+
+        p_node.left.next = p_node.right || n_node&.left || n_node&.right if p_node.left
+        p_node.right.next = n_node&.left || n_node&.right if p_node.right
+
+        queue.push(p_node.left) if p_node.left
+        queue.push(p_node.right) if p_node.right
       end
 
-      root.left.next = root.right if root.left && !root.left.next
+      root
+    end
 
-      connect(root.right)
-      connect(root.left)
+    def connect_2(root)
+      p_level = root
+      n_level = nil
+
+      while p_level
+        p_node = p_level
+
+        while p_node
+          n_node = p_node.next
+          n_node = n_node.next while n_node && (!n_node.left && !n_node.right)
+
+          p_node.left.next = p_node.right || n_node&.left || n_node&.right if p_node.left
+          p_node.right.next = n_node&.left || n_node&.right if p_node.right
+
+          n_level ||= p_node.left || p_node.right
+          p_node = n_node
+        end
+
+        p_level = n_level
+        n_level = nil
+      end
 
       root
     end

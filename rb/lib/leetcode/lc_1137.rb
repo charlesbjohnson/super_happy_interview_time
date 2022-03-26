@@ -39,13 +39,13 @@ module LeetCode
     end
 
     def tribonacci_2(n)
-      result = Array.new(n + 1, 0)
+      cache = Array.new(n + 1, 0)
 
       (1..n).each { |i|
-        result[i] = i < 3 ? 1 : result[i - 3] + result[i - 2] + result[i - 1]
+        cache[i] = i < 3 ? 1 : cache[i - 3] + cache[i - 2] + cache[i - 1]
       }
 
-      result[n]
+      cache[n]
     end
   end
 end

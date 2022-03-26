@@ -23,24 +23,26 @@ module LeetCode
     # @param {ListNode} head
     # @return {ListNode}
     def odd_even_list(head)
-      return if !head
+      return head if !head || !head.next
 
-      head_odd = head
-      head_even = head.next
+      h_odd = head
+      h_even = head.next
 
-      curr_odd = head_odd
-      curr_even = head_even
+      t_odd = h_odd
+      t_even = h_even
 
-      while curr_odd.next && curr_even.next
-        curr_odd.next = curr_even.next
-        curr_odd = curr_odd.next
+      while t_odd.next
+        t_odd.next = t_even.next
+        t_even.next = t_even.next.next if t_even.next
 
-        curr_even.next = curr_odd.next
-        curr_even = curr_even.next
+        t_odd = t_odd.next if t_odd.next
+        t_even = t_even.next if t_even.next
       end
 
-      curr_odd.next = head_even
-      head_odd
+      t_odd.next = h_even
+      t_even.next = nil
+
+      h_odd
     end
   end
 end

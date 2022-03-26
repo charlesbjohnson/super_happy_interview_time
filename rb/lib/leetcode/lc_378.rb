@@ -24,19 +24,19 @@ module LeetCode
     # @param {Integer} k
     # @return {Integer}
     def kth_smallest(matrix, k)
-      heap = Heap.new { |a, b| b[0] <=> a[0] }
-
+      heap = Heap.new { |a, b| matrix[a[0]][a[1]] <=> matrix[b[0]][b[1]] }
       matrix.each_index { |r|
-        heap.push([matrix[r][0], [r, 0]])
+        heap.push([r, 0])
       }
 
       while k > 1
-        _, (r, c) = heap.pop
-        heap.push([matrix[r][c + 1], [r, c + 1]]) if c + 1 < matrix[r].length
+        r, c = heap.pop
+        heap.push([r, c + 1]) if c + 1 < matrix[r].length
         k -= 1
       end
 
-      heap.pop[0]
+      result = heap.pop
+      matrix[result[0]][result[1]]
     end
   end
 end

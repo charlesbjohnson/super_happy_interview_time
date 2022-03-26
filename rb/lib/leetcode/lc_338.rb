@@ -42,13 +42,13 @@ module LeetCode
     end
 
     def count_bits_2(n)
-      result = Array.new(n + 1, 0)
+      cache = Array.new(n + 1, 0)
 
       (1..n).each { |i|
-        result[i] = result[i >> 1] + (i & 1)
+        cache[i] = cache[i >> 1] + (i & 1)
       }
 
-      result
+      cache
     end
   end
 end

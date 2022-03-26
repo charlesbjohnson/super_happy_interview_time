@@ -60,19 +60,19 @@ module LeetCode
     def is_interleave_2(s1, s2, s3)
       return false if s3.length != (s1.length + s2.length)
 
-      result = Array.new(s3.length + 1) { |i| Array.new(s1.length + 1) { |l| i == s3.length && l == s1.length } }
+      cache = Array.new(s3.length + 1) { |i| Array.new(s1.length + 1) { |l| i == s3.length && l == s1.length } }
 
       (s3.length - 1).downto(0) { |i|
         ([s1.length, i].min).downto([i - s2.length, 0].max) { |l|
           r = i - l
 
-          result[i][l] = \
-            l < s1.length && s3[i] == s1[l] && result[i + 1][l + 1] ||
-            r < s2.length && s3[i] == s2[r] && result[i + 1][l]
+          cache[i][l] = \
+            l < s1.length && s3[i] == s1[l] && cache[i + 1][l + 1] ||
+            r < s2.length && s3[i] == s2[r] && cache[i + 1][l]
         }
       }
 
-      result[0][0]
+      cache[0][0]
     end
   end
 end

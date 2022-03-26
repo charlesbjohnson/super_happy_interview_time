@@ -24,8 +24,8 @@ module LeetCode
     private
 
     def find_length_1(nums1, nums2)
+      result = 0
       cache = {}
-      max = 0
 
       rec = ->(i, j) {
         return 0 if i == nums1.length || j == nums2.length
@@ -38,28 +38,28 @@ module LeetCode
 
         cache[key] ||= nums1[i] == nums2[j] ? 1 + rec.call(i + 1, j + 1) : 0
 
-        max = [max, cache[key]].max
+        result = [result, cache[key]].max
         cache[key]
       }
 
       rec.call(0, 0)
-      max
+      result
     end
 
     def find_length_2(nums1, nums2)
-      result = Array.new(nums1.length + 1) { Array.new(nums2.length + 1, 0) }
-      max = 0
+      result = 0
+      cache = Array.new(nums1.length + 1) { Array.new(nums2.length + 1, 0) }
 
       (nums1.length - 1).downto(0) { |i|
         (nums2.length - 1).downto(0) { |j|
           if nums1[i] == nums2[j]
-            result[i][j] = result[i + 1][j + 1] + 1
-            max = [max, result[i][j]].max
+            cache[i][j] = cache[i + 1][j + 1] + 1
+            result = [result, cache[i][j]].max
           end
         }
       }
 
-      max
+      result
     end
   end
 end

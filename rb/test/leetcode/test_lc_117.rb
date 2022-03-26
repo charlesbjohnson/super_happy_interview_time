@@ -10,7 +10,19 @@ module LeetCode
     include(Helpers::LeetCode::BinaryTree)
     include(LC117)
 
-    Node = Struct.new(*Helpers::LeetCode::BinaryTree::TreeNode.members, :next)
+    class Node < Helpers::LeetCode::BinaryTree::TreeNode
+      attr_accessor(:next)
+
+      # @param {Object} other
+      # @return {Boolean}
+      def ==(other)
+        super && self.next == other.next
+      end
+
+      # @param {Object} other
+      # @return {Boolean}
+      alias_method(:eql?, :==)
+    end
 
     [
       [],
@@ -19,25 +31,25 @@ module LeetCode
       [1, 2, 3],
       [1, 2, 3, 4, 5, nil, 6],
       [1, 2, 3, 4, 5, nil, 6, nil, 7],
-      [1, 2, 3, 4, 5, nil, 6, nil, 7, nil, nil, 8]
+      [1, 2, 3, 4, 5, nil, 6, nil, 7, nil, nil, 8],
+      [3, 9, 20, nil, nil, 15, 7]
     ].each.with_index { |root, i|
       define_method(:"test_connect_#{i}") {
-        if root.empty?
-          assert_nil(connect(build_binary_tree(root, klass: Node)))
-          next
-        end
+        root = build_binary_tree(root, klass: Node)
 
-        root = connect(build_binary_tree(root, klass: Node))
-
-        levels_binary_tree(root).each { |level|
-          (0...level.length).each { |i|
-            if i < level.length - 1
-              assert_equal(level[i].next, level[i + 1])
-            else
-              assert_nil(level[i].next)
-            end
+        if !root
+          assert_nil(connect(root))
+        else
+          levels_binary_tree(connect(root)).each { |level|
+            (0...level.length).each { |i|
+              if i < level.length - 1
+                assert_equal(level[i].next, level[i + 1])
+              else
+                assert_nil(level[i].next)
+              end
+            }
           }
-        }
+        end
       }
     }
   end

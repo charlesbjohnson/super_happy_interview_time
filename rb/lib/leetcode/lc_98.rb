@@ -21,10 +21,13 @@ module LeetCode
     # @param {TreeNode} root
     # @return {Boolean}
     def is_valid_bst(root)
-      rec = ->(root, min, max) {
-        return true if !root
-        return false if root.val <= min || root.val >= max
-        rec.call(root.left, min, root.val) && rec.call(root.right, root.val, max)
+      rec = ->(node, min, max) {
+        return true if !node
+
+        return false if node.val <= min
+        return false if node.val >= max
+
+        rec.call(node.left, min, node.val) && rec.call(node.right, node.val, max)
       }
 
       rec.call(root, -Float::INFINITY, Float::INFINITY)

@@ -28,8 +28,16 @@ module LeetCode
     # @param {String} digits
     # @return {Array<String>}
     def letter_combinations(digits)
-      result = []
-      keypad = {
+      result = private_methods.grep(/^letter_combinations_\d+$/).map { |m| send(m, digits).sort }.uniq
+      result.length == 1 ? result[0] : raise
+    end
+
+    private
+
+    def letter_combinations_1(digits)
+      return [] if digits.empty?
+
+      mapping = {
         "2" => ["a", "b", "c"],
         "3" => ["d", "e", "f"],
         "4" => ["g", "h", "i"],
@@ -40,22 +48,81 @@ module LeetCode
         "9" => ["w", "x", "y", "z"]
       }
 
-      stack = []
-      stack.push([0, ""]) unless digits.empty?
+      rec = ->(i, combination) {
+        return [combination] if i == digits.length
+
+        mapping[digits[i]].flat_map { |c|
+          rec.call(i + 1, combination + c)
+        }
+      }
+
+      rec.call(0, "")
+    end
+
+    def letter_combinations_2(digits)
+      result = []
+
+      return result if digits.empty?
+
+      stack = [[0, ""]]
+      mapping = {
+        "2" => ["a", "b", "c"],
+        "3" => ["d", "e", "f"],
+        "4" => ["g", "h", "i"],
+        "5" => ["j", "k", "l"],
+        "6" => ["m", "n", "o"],
+        "7" => ["p", "q", "r", "s"],
+        "8" => ["t", "u", "v"],
+        "9" => ["w", "x", "y", "z"]
+      }
 
       until stack.empty?
-        i, s = stack.pop
+        i, combination = stack.pop
 
-        if i >= digits.length
-          result.unshift(s)
+        if i == digits.length
+          result.push(combination)
           next
         end
 
-        keypad[digits[i]].each { |c|
-          stack.push([i + 1, s + c])
+        mapping[digits[i]].reverse_each { |c|
+          stack.push([i + 1, combination + c])
         }
       end
 
+      result
+    end
+
+    def letter_combinations_3(digits)
+      result = []
+      combination = []
+
+      return result if digits.empty?
+
+      mapping = {
+        "2" => ["a", "b", "c"],
+        "3" => ["d", "e", "f"],
+        "4" => ["g", "h", "i"],
+        "5" => ["j", "k", "l"],
+        "6" => ["m", "n", "o"],
+        "7" => ["p", "q", "r", "s"],
+        "8" => ["t", "u", "v"],
+        "9" => ["w", "x", "y", "z"]
+      }
+
+      rec = ->(i) {
+        if i == digits.length
+          result.push(combination.join)
+          return
+        end
+
+        mapping[digits[i]].each { |c|
+          combination.push(c)
+          rec.call(i + 1)
+          combination.pop
+        }
+      }
+
+      rec.call(0)
       result
     end
   end

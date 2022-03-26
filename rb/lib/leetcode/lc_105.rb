@@ -20,16 +20,23 @@ module LeetCode
     # @param {Array<Integer>} inorder
     # @return {TreeNode}
     def build_tree(preorder, inorder)
-      return if preorder.empty? || inorder.empty?
+      i = 0
+      hash = inorder.each_index.with_object({}) { |i, h| h[inorder[i]] = i }
 
-      root_value = preorder.shift
-      root_index = inorder.find_index(root_value)
+      rec = ->(lo, hi) {
+        return if lo > hi
 
-      root = TreeNode.new(root_value)
-      root.left = build_tree(preorder, inorder[...root_index])
-      root.right = build_tree(preorder, inorder[(root_index + 1)..])
+        mid = hash[preorder[i]]
+        i += 1
 
-      root
+        TreeNode.new(
+          preorder[i - 1],
+          rec.call(lo, mid - 1),
+          rec.call(mid + 1, hi)
+        )
+      }
+
+      rec.call(0, inorder.length - 1)
     end
   end
 end

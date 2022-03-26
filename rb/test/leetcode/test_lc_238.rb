@@ -11,9 +11,9 @@ module LeetCode
       [[1, 2], [2, 1]],
       [[1, 2, 3], [6, 3, 2]],
       [[1, 2, 3, 4], [24, 12, 8, 6]]
-    ].each.with_index { |(list, expected), i|
+    ].each.with_index { |(nums, expected), i|
       define_method(:"test_product_except_self_#{i}") {
-        assert_equal(expected, product_except_self(list))
+        assert_equal(expected, product_except_self(nums))
       }
     }
   end

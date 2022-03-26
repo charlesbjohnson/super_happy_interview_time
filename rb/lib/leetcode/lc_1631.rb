@@ -41,7 +41,7 @@ module LeetCode
       visited = Array.new(n, false)
 
       differences = Array.new(n) { |i| i == 0 ? 0 : Float::INFINITY }
-      heap = Heap.new([[0, differences[0]]]) { |a, b| b[1] <=> a[1] }
+      heap = Heap.new([[0, differences[0]]]) { |a, b| a[1] <=> b[1] }
 
       until heap.empty?
         node, difference = heap.pop

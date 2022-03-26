@@ -34,9 +34,10 @@ module LeetCode
 
       rec = ->(i) {
         return 0 if i == nums.length
+        return nums[i] if i == nums.length - 1
 
         cache[i] ||= [
-          nums[i] + (i + 2 < nums.length ? rec.call(i + 2) : 0),
+          nums[i] + rec.call(i + 2),
           rec.call(i + 1)
         ].max
       }
@@ -45,16 +46,16 @@ module LeetCode
     end
 
     def rob_2(nums)
-      result = Array.new(nums.length + 1, 0)
+      cache = Array.new(nums.length + 1) { |i| i == nums.length - 1 ? nums[i] : 0 }
 
-      (nums.length - 1).downto(0) { |i|
-        result[i] = [
-          nums[i] + (i + 2 < nums.length ? result[i + 2] : 0),
-          result[i + 1]
+      (nums.length - 2).downto(0) { |i|
+        cache[i] = [
+          nums[i] + cache[i + 2],
+          cache[i + 1]
         ].max
       }
 
-      result[0]
+      cache[0]
     end
   end
 end

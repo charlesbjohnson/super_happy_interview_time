@@ -57,11 +57,11 @@ module LeetCode
     def min_difficulty_2(jobs, days)
       return -1 if jobs.length < days
 
-      result = Array.new(days + 1) { Array.new(jobs.length + 1, Float::INFINITY) }
+      cache = Array.new(days + 1) { Array.new(jobs.length + 1, Float::INFINITY) }
 
-      result[days - 1][jobs.length - 1] = jobs[-1]
+      cache[days - 1][jobs.length - 1] = jobs[-1]
       (jobs.length - 2).downto(days - 1) { |j|
-        result[days - 1][j] = [jobs[j], result[days - 1][j + 1]].max
+        cache[days - 1][j] = [jobs[j], cache[days - 1][j + 1]].max
       }
 
       (days - 2).downto(0) { |d|
@@ -72,13 +72,13 @@ module LeetCode
         (d...last_job_today).each { |j|
           max_jobs_today = last_job_today - j
 
-          result[d][j] = (1..max_jobs_today).map { |i|
-            jobs[j...(j + i)].max + result[d + 1][j + i]
+          cache[d][j] = (1..max_jobs_today).map { |i|
+            jobs[j...(j + i)].max + cache[d + 1][j + i]
           }.min
         }
       }
 
-      result[0][0]
+      cache[0][0]
     end
   end
 end

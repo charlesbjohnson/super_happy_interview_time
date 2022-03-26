@@ -12,7 +12,6 @@ module LeetCode
     # Return the number of connected components in the graph.
     #
     # Examples:
-    #
     # Input: n = 5, edges = [[0, 1], [1, 2], [3, 4]]
     # Output: 2
     #
