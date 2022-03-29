@@ -8,7 +8,7 @@ gem("awesome_print", "~> 1.9")
 gem("debug", "~> 1.4")
 gem("rubocop", "~> 1.26", require: false)
 gem("rubocop-minitest", "~> 0.18", require: false)
-gem("standard", "~> 1.8", require: false)
+gem("standard", "~> 1.9", require: false)
 
 group(:refactor) {
   gem("parser", "~> 3.1")
@@ -17,5 +17,5 @@ group(:refactor) {
 group(:test) {
   gem("minitest", "~> 5.15")
   gem("minitest-reporters", "~> 1.5")
-  gem("simplecov", "~> 0.18")
+  gem("simplecov", "~> 0.21")
 }
