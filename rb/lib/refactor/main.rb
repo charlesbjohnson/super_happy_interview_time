@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative("./code_structure")
-require_relative("./file_structure")
-
 module Refactor
   class Main
     def self.run(args)
@@ -18,4 +15,14 @@ module Refactor
   end
 end
 
-Refactor::Main.run(ARGV) if __FILE__ == $PROGRAM_NAME
+if __FILE__ == $PROGRAM_NAME
+  $LOAD_PATH.unshift(File.expand_path("../../lib", __dir__))
+
+  require("rubygems")
+  require("bundler/setup")
+
+  Bundler.require(:default, :refactor)
+  require("refactor")
+
+  Refactor::Main.run(ARGV)
+end

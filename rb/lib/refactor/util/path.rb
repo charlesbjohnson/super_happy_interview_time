@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require("pathname")
-
-require_relative("./slug")
-
 module Refactor
   module Util
     class Path

@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-require("parser")
-require("parser/runner/ruby_rewrite")
-
-require_relative("./code_structure/call_method_on_problem")
-require_relative("./code_structure/declare_chapter")
-require_relative("./code_structure/declare_problem")
-require_relative("./code_structure/include_problem")
-require_relative("./code_structure/require_problem")
+require("refactor/code_structure/base")
+require("refactor/code_structure/call_method_on_problem")
+require("refactor/code_structure/declare_chapter")
+require("refactor/code_structure/declare_problem")
+require("refactor/code_structure/include_problem")
+require("refactor/code_structure/require_problem")
 
 module Refactor
   module CodeStructure

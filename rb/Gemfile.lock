@@ -64,7 +64,7 @@ DEPENDENCIES
   debug (~> 1.4)
   minitest (~> 5.15)
   minitest-reporters (~> 1.5)
-  parser (~> 3.0)
+  parser (~> 3.1)
   rubocop (~> 1.26)
   rubocop-minitest (~> 0.18)
   simplecov (~> 0.18)

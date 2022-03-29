@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative("./word")
-
 module Refactor
   module Util
     class Slug
